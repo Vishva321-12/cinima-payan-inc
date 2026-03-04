@@ -1,130 +1,689 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Images, VideoAssets } from "./assets/assets"; 
-import './App.css';
+import { Images, VideoAssets } from './assets/assets';
 
 const Comic: React.FC = () => {
-    const comicPages = [
-        Images.ComicPag0, Images.ComicPag1, Images.ComicPag2, Images.ComicPag3, 
-        Images.ComicPag4, Images.ComicPag5, Images.ComicPag6, Images.ComicPag7,
-    ];
-    
-    const [currentPage, setCurrentPage] = useState(0);
+  const comicPages = [
+    Images.ComicPag0, Images.ComicPag1, Images.ComicPag2, Images.ComicPag3,
+    Images.ComicPag4, Images.ComicPag5, Images.ComicPag6, Images.ComicPag7,
+  ];
 
-    const paginate = (newDirection: number) => {
-        if (currentPage + newDirection >= 0 && currentPage + newDirection < comicPages.length) {
-            setCurrentPage(currentPage + newDirection);
+  const [currentPage, setCurrentPage] = useState(0);
+
+  const paginate = (dir: number) => {
+    const next = currentPage + dir;
+    if (next >= 0 && next < comicPages.length) setCurrentPage(next);
+  };
+
+  return (
+    <>
+      <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;0,800;1,600;1,700;1,800&display=swap');
+
+        /* ═══════════════════════════════════════════
+           SECTION
+        ═══════════════════════════════════════════ */
+        .cp-comic-section {
+          background: #000;
+          color: #fff;
+          padding: 100px 0 120px;
+          overflow-x: hidden;
+          position: relative;
         }
-    };
+        .cp-comic-section::before {
+          content: '';
+          position: absolute;
+          top: 0; left: 8%; right: 8%;
+          height: 1px;
+          background: linear-gradient(90deg, transparent, rgba(255,255,255,0.06) 50%, transparent);
+          pointer-events: none;
+        }
+        /* kanji watermark */
+        .cp-comic-section::after {
+          content: '物';
+          position: absolute;
+          right: 3%; bottom: -20px;
+          font-size: 22rem;
+          color: rgba(255,255,255,0.012);
+          font-family: serif;
+          line-height: 1;
+          pointer-events: none;
+          user-select: none;
+          z-index: 0;
+        }
 
-    return (
-        <section className="comic-page-wrapper">
-            <header className="comic-main-header">
-                <motion.h1 
-                    initial={{ opacity: 0, y: -20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    className="bebas-font main-title"
-                >
-                    RETRO <span className="cyan-text">BTS</span> <span className="yellow-text">COMIC</span>
-                </motion.h1>
-                <div className="brand-line-glow"></div>
-            </header>
+        /* ═══════════════════════════════════════════
+           HEADER
+        ═══════════════════════════════════════════ */
+        .cp-comic-header {
+          text-align: center;
+          margin-bottom: 65px;
+          position: relative;
+          z-index: 5;
+        }
 
-            {/* 1. STYLIZED BTS IMAGE SECTION */}
-            <div className="bts-featured-section">
-                <div className="bts-cinematic-container">
-                    {/* Glassmorphism Overlay for Stylized Look */}
-                    <div className="bts-glass-overlay">
-                        <span className="bebas-font">BEHIND THE SCENES</span>
-                    </div>
-                    <div className="bts-image-holder-stylized">
-                        <img src={Images.ComicCOverimg} alt="BTS" className="bts-img" />
-                        <div className="vignette-effect"></div>
-                    </div>
-                    {/* Retro Corner Accents */}
-                    <div className="corner-accent top-left"></div>
-                    <div className="corner-accent bottom-right"></div>
-                </div>
+        .cp-comic-pre {
+          display: inline-flex;
+          align-items: center;
+          gap: 12px;
+          margin-bottom: 16px;
+        }
+        .cp-comic-pre-line {
+          width: 32px; height: 1px;
+          background: #fde047; opacity: 0.5;
+        }
+        .cp-comic-pre-text {
+          font-family: 'Courier New', monospace;
+          font-size: 0.44rem;
+          letter-spacing: 6px;
+          color: rgba(253,224,71,0.55);
+          text-transform: uppercase;
+        }
+
+        .cp-comic-title {
+          font-family: 'Cormorant Garamond', Georgia, serif;
+          font-size: clamp(2.4rem, 7.5vw, 5rem);
+          font-weight: 800;
+          font-style: italic;
+          color: #fff;
+          line-height: 0.95;
+          letter-spacing: -1px;
+          margin: 0 0 18px;
+        }
+        .cp-comic-title-cyan   { color: #32c5f4; font-style: normal; }
+        .cp-comic-title-yellow { color: #fde047; font-style: normal; }
+
+        .cp-comic-rule {
+          width: 80px; height: 1px;
+          background: linear-gradient(90deg, #32c5f4, #fde047);
+          margin: 0 auto;
+          opacity: 0.7;
+        }
+
+        /* ═══════════════════════════════════════════
+           BTS IMAGE
+        ═══════════════════════════════════════════ */
+        .cp-bts-wrap {
+          max-width: 900px;
+          margin: 0 auto 90px;
+          padding: 0 clamp(20px, 5%, 40px);
+          position: relative;
+          z-index: 5;
+        }
+
+        .cp-bts-container {
+          position: relative;
+          border: 1px solid rgba(255,255,255,0.06);
+          background: #050505;
+          overflow: hidden;
+          transition: border-color 0.5s, box-shadow 0.5s;
+        }
+        .cp-bts-container:hover {
+          border-color: rgba(253,224,71,0.15);
+          box-shadow: 0 30px 80px rgba(0,0,0,0.65);
+        }
+
+        /* BTS badge — cp-insta-btn style */
+        .cp-bts-badge {
+          position: absolute;
+          top: 18px; left: 18px;
+          display: flex; align-items: center; gap: 8px;
+          font-family: 'Courier New', monospace;
+          font-size: 0.42rem; letter-spacing: 3px;
+          color: rgba(255,255,255,0.55);
+          background: rgba(0,0,0,0.65);
+          backdrop-filter: blur(10px);
+          border: 1px solid rgba(255,255,255,0.08);
+          padding: 7px 14px;
+          z-index: 10;
+          text-transform: uppercase;
+          transition: border-color 0.3s, color 0.3s;
+        }
+        .cp-bts-container:hover .cp-bts-badge {
+          border-color: #fde047; color: #fde047;
+        }
+        .cp-bts-badge-dot {
+          width: 6px; height: 6px;
+          background: #32c5f4;
+          border-radius: 50%;
+          flex-shrink: 0;
+        }
+
+        .cp-bts-img-wrap {
+          width: 100%;
+          aspect-ratio: 16/7;
+          overflow: hidden;
+          position: relative;
+        }
+        .cp-bts-img {
+          width: 100%; height: 100%;
+          object-fit: cover;
+          object-position: center 20%;
+          filter: contrast(1.06) brightness(0.88);
+          transition: transform 0.6s ease;
+          display: block;
+        }
+        .cp-bts-container:hover .cp-bts-img { transform: scale(1.03); }
+
+        .cp-bts-vignette {
+          position: absolute; inset: 0;
+          background: radial-gradient(circle, transparent 30%, rgba(0,0,0,0.7) 100%);
+          pointer-events: none;
+        }
+
+        /* corner marks — cp-corner style */
+        .cp-bts-corner-tl,
+        .cp-bts-corner-br {
+          position: absolute; z-index: 11;
+          width: 22px; height: 22px;
+          pointer-events: none;
+        }
+        .cp-bts-corner-tl::before, .cp-bts-corner-tl::after,
+        .cp-bts-corner-br::before, .cp-bts-corner-br::after {
+          content: '';
+          position: absolute;
+          background: rgba(253,224,71,0.45);
+        }
+        .cp-bts-corner-tl::before { width:100%; height:1px; top:0; left:0; }
+        .cp-bts-corner-tl::after  { width:1px; height:100%; top:0; left:0; }
+        .cp-bts-corner-tl { top: 0; left: 0; }
+
+        .cp-bts-corner-br::before { width:100%; height:1px; bottom:0; right:0; }
+        .cp-bts-corner-br::after  { width:1px; height:100%; bottom:0; right:0; }
+        .cp-bts-corner-br { bottom: 0; right: 0; }
+
+        /* ═══════════════════════════════════════════
+           COMIC GRID
+        ═══════════════════════════════════════════ */
+        .cp-comic-grid {
+          display: grid;
+          grid-template-columns: 1fr 1.25fr;
+          gap: 65px;
+          max-width: 1180px;
+          margin: 0 auto;
+          padding: 0 clamp(20px, 5%, 50px);
+          align-items: center;
+          position: relative;
+          z-index: 5;
+        }
+
+        /* ── Book viewer ── */
+        .cp-book-wrap { max-width: 340px; margin: 0 auto; }
+
+        .cp-comic-sheet {
+          aspect-ratio: 3/4.2;
+          border: 1px solid rgba(255,255,255,0.08);
+          position: relative;
+          background: #080808;
+          box-shadow: 0 20px 60px rgba(0,0,0,0.7);
+          overflow: hidden;
+        }
+        .cp-comic-sheet-img {
+          width: 100%; height: 100%;
+          object-fit: contain;
+          display: block;
+        }
+
+        /* issue tag — cp-yt-tag style */
+        .cp-issue-tag {
+          position: absolute;
+          top: 12px; left: 12px;
+          font-family: 'Courier New', monospace;
+          font-size: 0.4rem; letter-spacing: 3px;
+          color: #000; background: #fde047;
+          padding: 4px 10px; z-index: 4;
+          text-transform: uppercase;
+          font-weight: 700;
+        }
+
+        /* navigation bar */
+        .cp-nav-bar {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin-top: 20px;
+          padding: 13px 18px;
+          background: rgba(255,255,255,0.02);
+          border: 1px solid rgba(255,255,255,0.06);
+        }
+
+        /* nav buttons — cp-cta mini style */
+        .cp-nav-btn {
+          position: relative;
+          overflow: hidden;
+          padding: 8px 20px;
+          border: 1px solid #32c5f4;
+          color: #32c5f4;
+          background: transparent;
+          font-family: 'Courier New', monospace;
+          font-size: 0.46rem;
+          letter-spacing: 3px;
+          text-transform: uppercase;
+          cursor: pointer;
+          transition: color 0.35s;
+        }
+        .cp-nav-btn::before {
+          content: '';
+          position: absolute; inset: 0;
+          background: #32c5f4;
+          transform: scaleX(0); transform-origin: left;
+          z-index: 0;
+          transition: transform 0.35s cubic-bezier(0.77,0,0.18,1);
+        }
+        .cp-nav-btn:hover:not(:disabled)::before { transform: scaleX(1); }
+        .cp-nav-btn:hover:not(:disabled) { color: #000; }
+        .cp-nav-btn span { position: relative; z-index: 1; }
+        .cp-nav-btn:disabled { opacity: 0.22; cursor: not-allowed; }
+
+        /* dots */
+        .cp-dots-row { display: flex; gap: 8px; align-items: center; }
+        .cp-dot {
+          width: 6px; height: 6px; border-radius: 50%;
+          background: rgba(255,255,255,0.12);
+          transition: background 0.3s, width 0.3s, border-radius 0.3s;
+        }
+        .cp-dot.active { background: #fde047; width: 18px; border-radius: 3px; }
+
+        /* ── Vision card ── */
+        .cp-vision-card {
+          padding: 42px;
+          background: rgba(255,255,255,0.015);
+          border: 1px solid rgba(255,255,255,0.06);
+          border-left: 1px solid rgba(253,224,71,0.25);
+          position: relative;
+          overflow: hidden;
+          transition: border-color 0.4s;
+        }
+        .cp-vision-card:hover {
+          border-color: rgba(253,224,71,0.18);
+          box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+        }
+        /* watermark */
+        .cp-vision-card::before {
+          content: '制';
+          position: absolute;
+          right: -10px; bottom: -30px;
+          font-size: 14rem;
+          color: rgba(255,255,255,0.015);
+          font-family: serif; line-height: 1;
+          pointer-events: none; user-select: none;
+        }
+
+        .cp-vision-pre {
+          display: flex; align-items: center; gap: 12px;
+          margin-bottom: 14px;
+        }
+        .cp-vision-pre-line {
+          width: 28px; height: 1px;
+          background: #fde047; opacity: 0.5;
+        }
+        .cp-vision-pre-text {
+          font-family: 'Courier New', monospace;
+          font-size: 0.44rem; letter-spacing: 5px;
+          color: rgba(253,224,71,0.55); text-transform: uppercase;
+        }
+
+        .cp-vision-title {
+          font-family: 'Cormorant Garamond', Georgia, serif;
+          font-size: clamp(2rem, 3.5vw, 3rem);
+          font-weight: 800; font-style: italic;
+          color: #fde047;
+          margin: 0 0 14px;
+          letter-spacing: -0.5px; line-height: 1;
+        }
+
+        .cp-vision-rule {
+          width: 100%; height: 1px;
+          background: linear-gradient(90deg, rgba(253,224,71,0.25), rgba(50,197,244,0.2), transparent);
+          margin-bottom: 24px;
+        }
+
+        .cp-vision-lead {
+          font-family: 'Cormorant Garamond', Georgia, serif;
+          font-size: clamp(1rem, 1.5vw, 1.2rem);
+          color: rgba(255,255,255,0.85);
+          line-height: 1.75;
+          margin-bottom: 18px;
+        }
+
+        .cp-vision-body {
+          font-family: 'Cormorant Garamond', Georgia, serif;
+          font-size: clamp(0.9rem, 1.2vw, 1rem);
+          color: rgba(255,255,255,0.4);
+          line-height: 1.85;
+          margin-bottom: 28px;
+        }
+        .cp-vision-body strong { color: rgba(253,224,71,0.8); font-weight: 700; }
+
+        /* release badge */
+        .cp-release-badge {
+          display: block;
+          font-family: 'Courier New', monospace;
+          font-size: 0.42rem; letter-spacing: 4px;
+          color: rgba(50,197,244,0.7);
+          text-transform: uppercase;
+          padding: 12px 18px;
+          border: 1px solid rgba(50,197,244,0.12);
+          background: rgba(50,197,244,0.03);
+          text-align: center;
+          margin-bottom: 30px;
+        }
+
+        /* CTA — cp-cta fill sweep */
+        .cp-vision-cta {
+          position: relative; overflow: hidden;
+          display: block; width: 100%;
+          padding: 15px;
+          border: 1px solid #fde047;
+          color: #fde047;
+          text-decoration: none;
+          text-align: center;
+          font-family: 'Courier New', monospace;
+          font-size: 0.56rem; letter-spacing: 4px;
+          text-transform: uppercase;
+          transition: color 0.4s;
+        }
+        .cp-vision-cta::before {
+          content: '';
+          position: absolute; inset: 0;
+          background: #fde047;
+          transform: scaleX(0); transform-origin: left;
+          z-index: 0;
+          transition: transform 0.4s cubic-bezier(0.77,0,0.18,1);
+        }
+        .cp-vision-cta:hover::before { transform: scaleX(1); }
+        .cp-vision-cta:hover { color: #000; }
+        .cp-vision-cta span { position: relative; z-index: 1; }
+
+        /* ═══════════════════════════════════════════
+           REEL FOOTER
+        ═══════════════════════════════════════════ */
+        .cp-reel-footer {
+          text-align: center;
+          padding-top: 100px;
+          position: relative;
+          z-index: 5;
+        }
+        .cp-reel-footer::before {
+          content: '';
+          position: absolute;
+          top: 40px; left: 8%; right: 8%;
+          height: 1px;
+          background: linear-gradient(90deg, transparent, rgba(255,255,255,0.06) 50%, transparent);
+          pointer-events: none;
+        }
+
+        .cp-reel-pre {
+          display: inline-flex; align-items: center; gap: 12px;
+          margin-bottom: 14px;
+        }
+        .cp-reel-pre-line {
+          width: 32px; height: 1px;
+          background: #fde047; opacity: 0.5;
+        }
+        .cp-reel-pre-text {
+          font-family: 'Courier New', monospace;
+          font-size: 0.44rem; letter-spacing: 6px;
+          color: rgba(253,224,71,0.55); text-transform: uppercase;
+        }
+
+        .cp-reel-title {
+          font-family: 'Cormorant Garamond', Georgia, serif;
+          font-size: clamp(2rem, 5vw, 3.5rem);
+          font-weight: 800; font-style: italic;
+          color: #fde047; margin: 0 0 48px;
+          letter-spacing: -0.5px;
+        }
+        .cp-reel-title span { color: #fff; font-style: normal; }
+
+        .cp-reel-layout {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+        /* side panels */
+        .cp-reel-side {
+          flex: 1;
+          height: 390px;
+          background: #060606;
+          border-top: 1px solid rgba(255,255,255,0.04);
+          border-bottom: 1px solid rgba(255,255,255,0.04);
+        }
+        .cp-reel-side--left {
+          background: linear-gradient(to right, #060606, #000);
+        }
+        .cp-reel-side--right {
+          background: linear-gradient(to left, #060606, #000);
+        }
+
+        /* video frame */
+        .cp-video-frame {
+          width: 270px;
+          aspect-ratio: 9/16;
+          position: relative;
+          border: 1px solid rgba(255,255,255,0.08);
+          z-index: 10;
+          background: #000;
+          box-shadow:
+            0 0 60px rgba(0,0,0,1),
+            0 0 30px rgba(50,197,244,0.06);
+          flex-shrink: 0;
+          overflow: hidden;
+          transition: border-color 0.4s, box-shadow 0.4s;
+        }
+        .cp-video-frame:hover {
+          border-color: rgba(253,224,71,0.2);
+          box-shadow:
+            0 0 60px rgba(0,0,0,1),
+            0 0 40px rgba(253,224,71,0.1);
+        }
+
+        /* corner marks on video */
+        .cp-video-corner-tl,
+        .cp-video-corner-br {
+          position: absolute; z-index: 5;
+          width: 12px; height: 12px;
+          pointer-events: none;
+        }
+        .cp-video-corner-tl::before, .cp-video-corner-tl::after,
+        .cp-video-corner-br::before, .cp-video-corner-br::after {
+          content: '';
+          position: absolute;
+          background: rgba(253,224,71,0.4);
+        }
+        .cp-video-corner-tl::before { width:100%; height:1px; top:0; left:0; }
+        .cp-video-corner-tl::after  { width:1px; height:100%; top:0; left:0; }
+        .cp-video-corner-tl { top:8px; left:8px; }
+
+        .cp-video-corner-br::before { width:100%; height:1px; bottom:0; right:0; }
+        .cp-video-corner-br::after  { width:1px; height:100%; bottom:0; right:0; }
+        .cp-video-corner-br { bottom:8px; right:8px; }
+
+        .cp-video-el {
+          width: 100%; height: 100%;
+          object-fit: cover; display: block;
+        }
+        .cp-video-inner-vignette {
+          position: absolute; inset: 0;
+          box-shadow: inset 0 0 35px rgba(0,0,0,0.9);
+          pointer-events: none;
+        }
+
+        /* label tab */
+        .cp-video-tag {
+          position: absolute;
+          bottom: -1px; left: 50%;
+          transform: translateX(-50%);
+          font-family: 'Courier New', monospace;
+          font-size: 0.4rem; letter-spacing: 3px;
+          color: #000; background: #32c5f4;
+          padding: 5px 20px;
+          white-space: nowrap;
+          text-transform: uppercase;
+          z-index: 6;
+        }
+
+        /* ═══════════════════════════════════════════
+           RESPONSIVE
+        ═══════════════════════════════════════════ */
+        @media (max-width: 960px) {
+          .cp-comic-grid { grid-template-columns: 1fr; gap: 40px; }
+          .cp-book-wrap  { max-width: 300px; }
+          .cp-vision-card { padding: 30px 24px; }
+        }
+        @media (max-width: 600px) {
+          .cp-comic-section { padding: 70px 0 80px; }
+          .cp-reel-side { display: none; }
+          .cp-bts-img-wrap { aspect-ratio: 16/9; }
+          .cp-video-frame { width: 220px; }
+          .cp-vision-card { padding: 24px 18px; }
+          .cp-vision-card::before { display: none; }
+        }
+      `}</style>
+
+      <section className="cp-comic-section">
+
+        {/* ── HEADER ──────────────────────────────── */}
+        <header className="cp-comic-header">
+          <div className="cp-comic-pre">
+            <div className="cp-comic-pre-line" />
+            <span className="cp-comic-pre-text">CINEMAPAYYAN ORIGINALS</span>
+            <div className="cp-comic-pre-line" />
+          </div>
+          <motion.h1
+            className="cp-comic-title"
+            initial={{ opacity: 0, y: -20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            RETRO{' '}
+            <span className="cp-comic-title-cyan">BTS</span>{' '}
+            <span className="cp-comic-title-yellow">COMIC</span>
+          </motion.h1>
+          <div className="cp-comic-rule" />
+        </header>
+
+        {/* ── BTS IMAGE ───────────────────────────── */}
+        <div className="cp-bts-wrap">
+          <div className="cp-bts-container">
+            <div className="cp-bts-badge">
+              <div className="cp-bts-badge-dot" />
+              <span>BEHIND THE SCENES</span>
+            </div>
+            <div className="cp-bts-img-wrap">
+              <img src={Images.ComicCOverimg} alt="BTS" className="cp-bts-img" />
+              <div className="cp-bts-vignette" />
+            </div>
+            <div className="cp-bts-corner-tl" />
+            <div className="cp-bts-corner-br" />
+          </div>
+        </div>
+
+        {/* ── COMIC GRID ──────────────────────────── */}
+        <div className="cp-comic-grid">
+
+          {/* Book viewer */}
+          <div className="cp-book-wrap">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={currentPage}
+                className="cp-comic-sheet"
+                initial={{ opacity: 0, scale: 0.98 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 1.02 }}
+                transition={{ duration: 0.25 }}
+              >
+                <img src={comicPages[currentPage]} alt="Comic Page" className="cp-comic-sheet-img" />
+                <div className="cp-issue-tag">ISSUE.{currentPage + 1}</div>
+              </motion.div>
+            </AnimatePresence>
+
+            {/* Nav bar */}
+            <div className="cp-nav-bar">
+              <button className="cp-nav-btn" onClick={() => paginate(-1)} disabled={currentPage === 0}>
+                <span>PREV</span>
+              </button>
+
+              <div className="cp-dots-row">
+                {comicPages.map((_, i) => (
+                  <span key={i} className={`cp-dot ${i === currentPage ? 'active' : ''}`} />
+                ))}
+              </div>
+
+              <button className="cp-nav-btn" onClick={() => paginate(1)} disabled={currentPage === comicPages.length - 1}>
+                <span>NEXT</span>
+              </button>
+            </div>
+          </div>
+
+          {/* Vision card */}
+          <aside className="cp-vision-card">
+            <div className="cp-vision-pre">
+              <div className="cp-vision-pre-line" />
+              <span className="cp-vision-pre-text">CREATIVE VISION</span>
             </div>
 
-            {/* 2. INTERACTIVE COMIC SECTION */}
-            <div className="comic-grid-container">
-                <div className="book-section">
-                    <div className="book-viewport medium-size">
-                        <AnimatePresence mode="wait">
-                            <motion.div
-                                key={currentPage}
-                                initial={{ opacity: 0, scale: 0.98 }}
-                                animate={{ opacity: 1, scale: 1 }}
-                                exit={{ opacity: 0, scale: 1.02 }}
-                                className="comic-paper-sheet"
-                            >
-                                <img src={comicPages[currentPage]} alt="Comic Page" className="page-img" />
-                                <div className="page-tag-fixed bebas-font">ISSUE.{currentPage + 1}</div>
-                            </motion.div>
-                        </AnimatePresence>
-                        
-                        {/* Dots Positioned Between Buttons */}
-                        <div className="book-navigation-bar">
-                            <button className="nav-btn-styled" onClick={() => paginate(-1)} disabled={currentPage === 0}>PREV</button>
-                            
-                            <div className="dot-indicator-inline">
-                                {comicPages.map((_, i) => (
-                                    <span key={i} className={`dot-item ${i === currentPage ? 'active' : ''}`} />
-                                ))}
-                            </div>
+            <h2 className="cp-vision-title">THE VISION</h2>
+            <div className="cp-vision-rule" />
 
-                            <button className="nav-btn-styled" onClick={() => paginate(1)} disabled={currentPage === 7}>NEXT</button>
-                        </div>
-                    </div>
-                </div>
+            <p className="cp-vision-lead">
+              A tribute to the golden era of storytelling, where the meticulous craft of cinema
+              converges with the bold, high-contrast aesthetic of classic graphic novels.
+            </p>
+            <p className="cp-vision-body">
+              Brought to life by the visionary artistry of <strong>Santhosh Narayanan</strong>,
+              every hand-crafted frame celebrates the creative synergy and raw energy of the{' '}
+              <strong>Cinema Payyan</strong> collective. This initiative is more than a promotion;
+              it is a serialized visual chronicle of the passion behind the lens.
+            </p>
 
-                <aside className="strategy-content">
-                    <div className="strategy-glass-card">
-                        <h2 className="bebas-font yellow-text section-label">THE VISION</h2>
-                        <div className="accent-divider"></div>
-                        <div className="narrative-text inter-font">
-                            <p className="lead-para">
-                                A tribute to the golden era of storytelling, where the meticulous craft of cinema 
-                                converges with the bold, high-contrast aesthetic of classic graphic novels. 
-                            </p>
-                            <p className="body-para">
-                                Brought to life by the visionary artistry of <strong>Santhosh Narayanan</strong>, 
-                                every hand-crafted frame celebrates the creative synergy and raw energy of the 
-                                <strong> Cinema Payyan</strong> collective. This initiative is more than a promotion; 
-                                it is a serialized visual chronicle of the passion behind the lens.
-                            </p>
-                            <div className="release-badge bebas-font">
-                                <span className="cyan-text">NEW CHRONICLES RELEASED EVERY MONDAY</span>
-                            </div>
-                        </div>
-                        <a href="https://www.instagram.com/cinemapayyan.inc/" target="_blank" rel="noreferrer" className="modern-action-btn">
-                            <span className="bebas-font">VIEW FULL ARCHIVE</span>
-                        </a>
-                    </div>
-                </aside>
+            <span className="cp-release-badge">
+              NEW CHRONICLES RELEASED EVERY MONDAY
+            </span>
+
+            <a
+              href="https://www.instagram.com/cinemapayyan.inc/"
+              target="_blank"
+              rel="noreferrer"
+              className="cp-vision-cta"
+            >
+              <span>VIEW FULL ARCHIVE</span>
+            </a>
+          </aside>
+        </div>
+
+        {/* ── REEL FOOTER ─────────────────────────── */}
+        <footer className="cp-reel-footer">
+          <div className="cp-reel-pre">
+            <div className="cp-reel-pre-line" />
+            <span className="cp-reel-pre-text">VISUAL CHRONICLE</span>
+            <div className="cp-reel-pre-line" />
+          </div>
+          <h3 className="cp-reel-title">
+            <span>EPISODE </span>PREVIEW
+          </h3>
+
+          <div className="cp-reel-layout">
+            <div className="cp-reel-side cp-reel-side--left" />
+
+            <div className="cp-video-frame">
+              <video className="cp-video-el" autoPlay muted loop playsInline>
+                <source src={VideoAssets.vjPreviews[22]} type="video/mp4" />
+              </video>
+              <div className="cp-video-inner-vignette" />
+              <div className="cp-video-corner-tl" />
+              <div className="cp-video-corner-br" />
+              <div className="cp-video-tag">COMIC_REEL</div>
             </div>
 
-            {/* 3. CENTERED REEL PREVIEW */}
-            <footer className="comic-reel-section">
-                <h3 className="bebas-font yellow-text">EPISODE PREVIEW</h3>
-                
-                <div className="reel-layout-centered">
-                    <div className="side-panel left-panel hide-mobile"></div>
+            <div className="cp-reel-side cp-reel-side--right" />
+          </div>
+        </footer>
 
-                    <div className="video-preview-frame">
-                        <video className="reel-video-element" autoPlay muted loop playsInline>
-                            <source src={VideoAssets.vjPreviews[22]} type="video/mp4" />
-                        </video>
-                        <div className="video-border-glow"></div>
-                        <div className="tag-box-corner bebas-font">COMIC_REEL</div>
-                    </div>
-
-                    <div className="side-panel right-panel hide-mobile"></div>
-                </div>
-            </footer>
-        </section>
-    );
+      </section>
+    </>
+  );
 };
 
 export default Comic;

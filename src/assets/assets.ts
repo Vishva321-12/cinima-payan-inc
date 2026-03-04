@@ -76,6 +76,16 @@ import ComicPag5 from './ComicPag5.jpg';
 import ComicPag6 from './ComicPag6.jpg';
 import ComicPag7 from './ComicPag7.jpg';
 import JaamJaam from './JaamJaam.Director.jpg';
+import ScreenshotVP from './Screenshot VP.png';
+import ScreenshotAR from './ScreenshotAR.png';
+import ScreenshotKH from './ScreenshotKH.png';
+import ScreenshotAS from './ScreenshotAS.png';
+import ScreenshotAD from './ScreenshotAD.png';
+import ScreenshotVJS from './ScreenshotVJS.png';
+import ScreenshotGVM from './ScreenshotGVM.png';
+import ScreenshotSTR from './ScreenshotSTR.png';
+import ScreenshotTK from './ScreenshotTK.png';
+import ScreenshotDQ from './ScreenshotDQ.png';
 
 
 
@@ -137,7 +147,8 @@ export const Images: AssetStore = {
   CreativePr4,CreativePr5,FilmroleAbishake,AbishakeWhite,Thalivar,Vp,Vijay,Nani,
   Danush,Str,Tyagaraja,Keerthi,AnirutRavi,Prabas,Lokash,Bannerrr2,Angammal,Kumki2,
   Gevi,RetroImg,KadalReset,SnakeAndLader,Adipurshan,Ragut,Adiya,ComicCOverimg,ComicPag0,
-  ComicPag1,ComicPag2,ComicPag3,ComicPag4,ComicPag5,ComicPag6,ComicPag7,
+  ComicPag1,ComicPag2,ComicPag3,ComicPag4,ComicPag5,ComicPag6,ComicPag7,ScreenshotVP,ScreenshotAR,
+  ScreenshotKH,ScreenshotAS,ScreenshotAD,ScreenshotVJS,ScreenshotGVM,ScreenshotSTR,ScreenshotTK,ScreenshotDQ,
 };
 
 export const VideoAssets = {
