@@ -1,26 +1,25 @@
 import { useEffect, useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
-import { Play, Mic2, Tv, ExternalLink, ChevronLeft, ChevronRight } from "lucide-react";
+import { Play, Mic2, Tv, ExternalLink } from "lucide-react";
 import { Images, VideoAssets } from "./assets/assets";
 
 /* ─── Data ─────────────────────────────────── */
 const vjVideos = [
-  { id: 1,  title: "Anirudh Ravichander", role: "Composer · Producer",       link: "https://youtu.be/dESRRC-uVME",                     preview: VideoAssets.vjPreviews[0], thumb: Images.ScreenshotAR  },
-  { id: 2,  title: "Venkat Prabhu",       role: "Director · Actor",          link: "https://youtu.be/lAH_99cCcos",                     preview: VideoAssets.vjPreviews[1], thumb: Images.ScreenshotVP  },
-  { id: 3,  title: "Silambarasan TR",     role: "Actor",                     link: "https://youtu.be/GKHk7d_bQh0",                    preview: VideoAssets.vjPreviews[2], thumb: Images.ScreenshotSTR },
-  { id: 4,  title: "Vijay Sethupathi",    role: "Actor · Producer",          link: "https://youtu.be/77oGSFHYzSY",                    preview: VideoAssets.vjPreviews[3], thumb: Images.ScreenshotVJS },
-  { id: 5,  title: "Arjun DAS",           role: "Actor",                     link: "https://youtu.be/fEpt5b794ys",                    preview: VideoAssets.vjPreviews[4], thumb: Images.ScreenshotAD  },
-  { id: 6,  title: "T. Kumararaja",       role: "Director · Writer",         link: "https://youtu.be/BBnY5tE7-Wo",                    preview: VideoAssets.vjPreviews[5], thumb: Images.ScreenshotTK  },
-  { id: 7,  title: "Kamal Haasan",        role: "Actor · Director · Legend", link: "https://youtube.com/link7",                       preview: VideoAssets.vjPreviews[6], thumb: Images.ScreenshotKH  },
-  { id: 8,  title: "Dulquer Salmaan",     role: "Actor · Producer",          link: "https://youtu.be/JzsDo_hf5cg",                    preview: VideoAssets.vjPreviews[7], thumb: Images.ScreenshotDQ  },
-  { id: 9,  title: "GVM",                 role: "Director · Visionary",      link: "https://youtu.be/hKbP91H0_Do",                    preview: VideoAssets.vjPreviews[8], thumb: Images.ScreenshotGVM },
-  { id: 10, title: "Ashok Selvan",        role: "Actor",                     link: "https://youtu.be/uXQOlL7EjzA",                    preview: VideoAssets.vjPreviews[9], thumb: Images.ScreenshotAS  },
+  { id: 1,  title: "Anirudh Ravichander", role: "Composer · Producer",       link: "https://youtu.be/dESRRC-uVME",  preview: VideoAssets.vjPreviews[0], thumb: Images.ScreenshotAR  },
+  { id: 2,  title: "Venkat Prabhu",       role: "Director · Actor",          link: "https://youtu.be/lAH_99cCcos", preview: VideoAssets.vjPreviews[1], thumb: Images.ScreenshotVP  },
+  { id: 3,  title: "Silambarasan TR",     role: "Actor",                     link: "https://youtu.be/GKHk7d_bQh0", preview: VideoAssets.vjPreviews[2], thumb: Images.ScreenshotSTR },
+  { id: 4,  title: "Vijay Sethupathi",    role: "Actor · Producer",          link: "https://youtu.be/77oGSFHYzSY", preview: VideoAssets.vjPreviews[3], thumb: Images.ScreenshotVJS },
+  { id: 5,  title: "Arjun DAS",           role: "Actor",                     link: "https://youtu.be/fEpt5b794ys", preview: VideoAssets.vjPreviews[4], thumb: Images.ScreenshotAD  },
+  { id: 6,  title: "T. Kumararaja",       role: "Director · Writer",         link: "https://youtu.be/BBnY5tE7-Wo", preview: VideoAssets.vjPreviews[5], thumb: Images.ScreenshotTK  },
+  { id: 7,  title: "Kamal Haasan",        role: "Actor · Director · Legend", link: "https://youtube.com/link7",    preview: VideoAssets.vjPreviews[6], thumb: Images.ScreenshotKH  },
+  { id: 8,  title: "Dulquer Salmaan",     role: "Actor · Producer",          link: "https://youtu.be/JzsDo_hf5cg", preview: VideoAssets.vjPreviews[7], thumb: Images.ScreenshotDQ  },
+  { id: 9,  title: "GVM",                 role: "Director · Visionary",      link: "https://youtu.be/hKbP91H0_Do", preview: VideoAssets.vjPreviews[8], thumb: Images.ScreenshotGVM },
+  { id: 10, title: "Ashok Selvan",        role: "Actor",                     link: "https://youtu.be/uXQOlL7EjzA", preview: VideoAssets.vjPreviews[9], thumb: Images.ScreenshotAS  },
 ];
 
 /* ─── Single Card ───────────────────────────── */
 function VJCard({
   video,
-  index,
   isActive,
   onActivate,
 }: {
@@ -53,7 +52,6 @@ function VJCard({
       onMouseLeave={() => setHovered(false)}
       onClick={onActivate}
     >
-      {/* media */}
       <div className="vjl-media">
         <img
           src={video.thumb}
@@ -64,18 +62,10 @@ function VJCard({
           ref={videoRef}
           src={video.preview}
           className={`vjl-video ${showVideo ? "vjl-video--show" : ""}`}
-          muted loop playsInline
+          muted loop playsInline preload="none"
         />
-
-        {/* overlay gradient */}
         <div className="vjl-overlay" />
-
-        {/* session number tag */}
-        <div className="vjl-num-tag">
-          {String(video.id).padStart(2, "0")}
-        </div>
-
-        {/* play button — shows on hover/active */}
+        <div className="vjl-num-tag">{String(video.id).padStart(2, "0")}</div>
         <a
           href={video.link}
           target="_blank"
@@ -85,12 +75,9 @@ function VJCard({
         >
           <Play fill="black" size={16} />
         </a>
-
-        {/* active accent line at bottom of media */}
         <div className={`vjl-active-bar ${isActive ? "vjl-active-bar--on" : ""}`} />
       </div>
 
-      {/* info bar */}
       <div className="vjl-info">
         <div className="vjl-info-row">
           <span className="vjl-session-lbl">SESSION {String(video.id).padStart(2, "0")}</span>
@@ -114,43 +101,27 @@ const AboutWork = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [isPaused,    setIsPaused]    = useState(false);
 
-  /* ── INFINITE LOOP LOGIC ──────────────────────
-     We render 3 clones of the list side-by-side.
-     When the scroll hits the 2nd clone boundary,
-     we silently jump back to the same visual
-     position in clone 1 — user never sees a seam.
-  ─────────────────────────────────────────────── */
-  const CARD_W    = 400; // px — keep in sync with CSS
-  const CARD_GAP  = 20; // px gap between cards
+  const CARD_W    = 400;
+  const CARD_GAP  = 20;
   const CARD_STEP = CARD_W + CARD_GAP;
   const TOTAL     = vjVideos.length;
   const SET_W     = TOTAL * CARD_STEP;
 
-  // tripled list
-  const loopList  = [...vjVideos, ...vjVideos, ...vjVideos];
+  const loopList = [...vjVideos, ...vjVideos, ...vjVideos];
 
-  /* auto-scroll */
   useEffect(() => {
     const track = trackRef.current;
     if (!track) return;
-    // start at middle set
     track.scrollLeft = SET_W;
 
     let raf: number;
-    const speed = 0.7; // px per frame
+    const speed = 0.7;
 
     const tick = () => {
       if (!isPaused && track) {
         track.scrollLeft += speed;
-        // seamless jump: if we've scrolled past the 2nd set, teleport back
-        if (track.scrollLeft >= SET_W * 2) {
-          track.scrollLeft -= SET_W;
-        }
-        // if somehow scrolled before set 1, jump forward
-        if (track.scrollLeft < SET_W) {
-          track.scrollLeft += SET_W;
-        }
-        // derive activeIndex from scroll within middle set
+        if (track.scrollLeft >= SET_W * 2) track.scrollLeft -= SET_W;
+        if (track.scrollLeft < SET_W)      track.scrollLeft += SET_W;
         const posInSet = (track.scrollLeft - SET_W) % SET_W;
         const idx = Math.round(posInSet / CARD_STEP) % TOTAL;
         setActiveIndex(idx);
@@ -160,23 +131,6 @@ const AboutWork = () => {
     raf = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(raf);
   }, [isPaused, SET_W, CARD_STEP, TOTAL]);
-
-  /* manual arrow scroll */
-  const arrowScroll = (dir: 1 | -1) => {
-    const track = trackRef.current;
-    if (!track) return;
-    track.scrollBy({ left: dir * CARD_STEP, behavior: "smooth" });
-  };
-
-  /* manual dot jump */
-  const jumpTo = (i: number) => {
-    const track = trackRef.current;
-    if (!track) return;
-    // target is middle set card i
-    const target = SET_W + i * CARD_STEP;
-    track.scrollTo({ left: target, behavior: "smooth" });
-    setActiveIndex(i);
-  };
 
   return (
     <>
@@ -253,8 +207,8 @@ const AboutWork = () => {
         .vjl-ep-lbl {
           display: block;
           font-family: 'Courier New', monospace;
-          font-size: clamp(0.44rem, 1.2vw, 0.54rem);
-          letter-spacing: 4px; color: rgba(255,255,255,0.3);
+          font-size: clamp(0.55rem, 1.2vw, 0.65rem);
+          letter-spacing: 4px; color: rgba(255,255,255,0.45);
           text-transform: uppercase;
         }
 
@@ -263,7 +217,6 @@ const AboutWork = () => {
         ══════════════════════════════════════════ */
         .vjl-track-wrap {
           position: relative;
-          /* fade edges */
         }
         .vjl-track-wrap::before,
         .vjl-track-wrap::after {
@@ -286,7 +239,6 @@ const AboutWork = () => {
           overflow-x: scroll;
           scrollbar-width: none;
           padding: 20px 140px 24px;
-          /* no snap — auto-scroll handles position */
         }
         .vjl-track::-webkit-scrollbar { display: none; }
 
@@ -308,7 +260,6 @@ const AboutWork = () => {
           box-shadow: 0 20px 50px rgba(0,0,0,0.7);
         }
 
-        /* media */
         .vjl-media {
           position: relative;
           width: 100%; aspect-ratio: 16/9;
@@ -324,7 +275,6 @@ const AboutWork = () => {
         .vjl-video { opacity: 0; transition: opacity 0.4s; }
         .vjl-video--show { opacity: 1; }
 
-        /* overlay */
         .vjl-overlay {
           position: absolute; inset: 0;
           background: linear-gradient(
@@ -336,7 +286,6 @@ const AboutWork = () => {
           z-index: 2; pointer-events: none;
         }
 
-        /* session number */
         .vjl-num-tag {
           position: absolute; top: 8px; left: 10px; z-index: 4;
           font-family: 'Cormorant Garamond', Georgia, serif;
@@ -345,7 +294,6 @@ const AboutWork = () => {
           user-select: none;
         }
 
-        /* play btn */
         .vjl-play {
           position: absolute; bottom: 12px; right: 12px; z-index: 5;
           width: 42px; height: 42px; border-radius: 50%;
@@ -355,11 +303,8 @@ const AboutWork = () => {
           opacity: 0; transform: scale(0.7);
           transition: opacity 0.3s, transform 0.3s;
         }
-        .vjl-play--show {
-          opacity: 1; transform: scale(1);
-        }
+        .vjl-play--show { opacity: 1; transform: scale(1); }
 
-        /* active bottom bar */
         .vjl-active-bar {
           position: absolute; bottom: 0; left: 0; right: 0; z-index: 6;
           height: 2px;
@@ -369,7 +314,6 @@ const AboutWork = () => {
         }
         .vjl-active-bar--on { transform: scaleX(1); }
 
-        /* ── INFO BAR ── */
         .vjl-info {
           padding: 14px 16px 16px;
           background: rgba(0,0,0,0.9);
@@ -386,8 +330,7 @@ const AboutWork = () => {
           text-transform: uppercase;
         }
         .vjl-ext {
-          color: rgba(255,255,255,0.25);
-          flex-shrink: 0;
+          color: rgba(255,255,255,0.25); flex-shrink: 0;
           transition: color 0.3s;
         }
         .vjl-card:hover .vjl-ext { color: #32c5f4; }
@@ -407,58 +350,167 @@ const AboutWork = () => {
         .vjl-card:hover .vjl-role { color: rgba(50,197,244,0.75); }
 
         /* ══════════════════════════════════════════
-           CONTROLS ROW (arrows + dots)
+           DESKTOP INDICATOR
+           Filmstrip ticker bar — name + dual progress.
+           No arrows. No dots.
         ══════════════════════════════════════════ */
-        .vjl-controls {
-          display: flex; align-items: center;
-          justify-content: center; gap: 20px;
-          margin-top: 28px;
-          padding: 0 24px;
+        .vjl-ticker {
+          display: flex;
+          align-items: center;
+          gap: 0;
+          margin-top: 32px;
+          padding: 0 clamp(20px,6%,60px);
         }
 
-        .vjl-arrow {
-          width: 40px; height: 40px;
-          border: 1px solid rgba(255,255,255,0.1);
-          background: rgba(255,255,255,0.03);
-          display: flex; align-items: center; justify-content: center;
-          cursor: pointer; color: rgba(255,255,255,0.5);
-          transition: border-color 0.3s, color 0.3s, background 0.3s;
+        .vjl-ticker-bar {
+          flex: 1; height: 2px;
+          background: rgba(255,255,255,0.06);
+          position: relative; overflow: hidden;
+        }
+        .vjl-ticker-bar-fill {
+          position: absolute; top: 0; left: 0; height: 100%;
+          background: linear-gradient(90deg, #32c5f4, #fde047);
+          transition: width 0.5s cubic-bezier(0.77,0,0.18,1);
+        }
+
+        .vjl-ticker-panel {
           flex-shrink: 0;
+          display: flex; align-items: center; gap: 16px;
+          padding: 0 28px;
+          border-left: 1px solid rgba(255,255,255,0.08);
+          border-right: 1px solid rgba(255,255,255,0.08);
         }
-        .vjl-arrow:hover {
-          border-color: #fde047; color: #fde047;
-          background: rgba(253,224,71,0.05);
+        .vjl-ticker-idx {
+          font-family: 'Cormorant Garamond', Georgia, serif;
+          font-size: 2.8rem; font-weight: 800; font-style: italic;
+          color: rgba(253,224,71,0.9); line-height: 1;
+          min-width: 52px; text-align: right;
+        }
+        .vjl-ticker-divider {
+          width: 1px; height: 36px;
+          background: rgba(255,255,255,0.1);
+        }
+        .vjl-ticker-info {
+          display: flex; flex-direction: column; gap: 4px;
+        }
+        .vjl-ticker-name {
+          font-family: 'Cormorant Garamond', Georgia, serif;
+          font-size: 1.05rem; font-weight: 800; font-style: italic;
+          color: #fff; line-height: 1;
+        }
+        .vjl-ticker-role {
+          font-family: 'Courier New', monospace;
+          font-size: 0.55rem; letter-spacing: 3px;
+          color: rgba(50,197,244,0.8); text-transform: uppercase;
+        }
+        .vjl-ticker-total {
+          font-family: 'Courier New', monospace;
+          font-size: 0.6rem; letter-spacing: 3px;
+          color: rgba(255,255,255,0.22); text-transform: uppercase;
+          flex-shrink: 0; padding-left: 16px;
+          align-self: center;
         }
 
-        /* dots */
-        .vjl-dots {
-          display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
-          justify-content: center;
-        }
-        .vjl-dot {
-          width: 20px; height: 4px;
-          background: rgba(255,255,255,0.15);
-          border: none; border-radius: 2px;
-          cursor: pointer; padding: 0;
-          transition: width 0.35s cubic-bezier(0.77,0,0.18,1),
-                      background 0.35s, box-shadow 0.35s;
-          flex-shrink: 0;
-        }
-        .vjl-dot:hover { background: rgba(253,224,71,0.45); }
-        .vjl-dot--active {
-          width: 44px; background: #fde047;
-          box-shadow: 0 0 10px rgba(253,224,71,0.5);
+        .vjl-ticker-bar--r .vjl-ticker-bar-fill {
+          background: linear-gradient(90deg, #fde047, transparent);
         }
 
-        /* pause indicator */
         .vjl-pause-hint {
           font-family: 'Courier New', monospace;
-          font-size: 0.5rem; letter-spacing: 4px;
+          font-size: 0.6rem; letter-spacing: 4px;
           color: rgba(255,255,255,0.2); text-transform: uppercase;
-          text-align: center; margin-top: 12px;
+          text-align: center; margin-top: 14px;
           transition: color 0.3s;
         }
-        .vjl-pause-hint.paused { color: rgba(253,224,71,0.5); }
+        .vjl-pause-hint.paused { color: rgba(253,224,71,0.6); }
+
+        /* ══════════════════════════════════════════
+           MOBILE INDICATOR
+           Vertical filmstrip reel with sprocket holes.
+           Shown only on ≤640px.
+        ══════════════════════════════════════════ */
+        .vjl-mobile-reel {
+          display: none;
+          margin-top: 28px;
+          padding: 0 20px;
+        }
+
+        .vjl-reel-strip {
+          border: 1px solid rgba(255,255,255,0.07);
+          background: rgba(8,8,8,0.95);
+          overflow: hidden;
+        }
+
+        /* sprocket hole rows top/bottom */
+        .vjl-reel-holes {
+          height: 16px;
+          background-image: radial-gradient(circle, rgba(253,224,71,0.4) 38%, transparent 42%);
+          background-size: 30px 16px;
+          background-repeat: repeat-x;
+          background-position: 6px center;
+          border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+        .vjl-reel-holes--bot {
+          border-bottom: none;
+          border-top: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .vjl-reel-list { padding: 2px 0; }
+
+        .vjl-reel-row {
+          display: flex; align-items: center; gap: 12px;
+          padding: 10px 14px;
+          border-bottom: 1px solid rgba(255,255,255,0.04);
+          position: relative;
+          transition: background 0.25s;
+        }
+        .vjl-reel-row:last-child { border-bottom: none; }
+        .vjl-reel-row--active {
+          background: rgba(253,224,71,0.04);
+        }
+
+        /* yellow left accent on active */
+        .vjl-reel-row--active::before {
+          content: '';
+          position: absolute; left: 0; top: 0; bottom: 0;
+          width: 2px;
+          background: linear-gradient(to bottom, #fde047, #32c5f4);
+        }
+
+        /* film frame number box */
+        .vjl-reel-frame {
+          width: 30px; height: 20px; flex-shrink: 0;
+          border: 1px solid rgba(255,255,255,0.1);
+          display: flex; align-items: center; justify-content: center;
+          font-family: 'Courier New', monospace;
+          font-size: 0.5rem; letter-spacing: 1px;
+          color: rgba(255,255,255,0.2);
+          transition: border-color 0.3s, color 0.3s;
+        }
+        .vjl-reel-row--active .vjl-reel-frame {
+          border-color: rgba(253,224,71,0.5);
+          color: #fde047;
+        }
+
+        .vjl-reel-name {
+          font-family: 'Cormorant Garamond', Georgia, serif;
+          font-size: 0.95rem; font-weight: 800; font-style: italic;
+          color: rgba(255,255,255,0.3); flex: 1; line-height: 1;
+          transition: color 0.3s;
+        }
+        .vjl-reel-row--active .vjl-reel-name { color: #fff; }
+
+        /* blinking REC dot on active row */
+        .vjl-reel-rec {
+          width: 6px; height: 6px; border-radius: 50%;
+          background: #ff3333;
+          box-shadow: 0 0 6px rgba(255,51,51,0.8);
+          flex-shrink: 0;
+          opacity: 0;
+          animation: vjlRecBlink 1s step-end infinite;
+        }
+        .vjl-reel-row--active .vjl-reel-rec { opacity: 1; }
+        @keyframes vjlRecBlink { 0%,100%{opacity:1} 50%{opacity:0} }
 
         /* ══════════════════════════════════════════
            RJ BLOCK
@@ -475,7 +527,6 @@ const AboutWork = () => {
           margin-top: 48px;
         }
 
-        /* rj card */
         .vjl-rj-card {
           position: relative; overflow: hidden;
           display: block; text-decoration: none;
@@ -494,7 +545,6 @@ const AboutWork = () => {
           transform: scale(1.05); filter: grayscale(0);
         }
 
-        /* strip */
         .vjl-rj-strip {
           position: absolute; bottom: 0; left: 0; right: 0;
           display: flex; align-items: center; gap: 12px;
@@ -514,20 +564,17 @@ const AboutWork = () => {
         .vjl-rj-dot {
           width: 7px; height: 7px; border-radius: 50%;
           background: #ff3333;
-          box-shadow: 0 0 8px rgba(255,51,51,0.8);
-          flex-shrink: 0;
+          box-shadow: 0 0 8px rgba(255,51,51,0.8); flex-shrink: 0;
           animation: vjlRec 1s step-end infinite;
         }
         @keyframes vjlRec { 0%,100%{opacity:1} 50%{opacity:0} }
         .vjl-rj-strip-title {
           font-family: 'Courier New', monospace;
           font-size: 0.6rem; letter-spacing: 4px;
-          color: rgba(255,255,255,0.75); text-transform: uppercase;
-          flex: 1;
+          color: rgba(255,255,255,0.75); text-transform: uppercase; flex: 1;
         }
         .vjl-rj-strip-icon { color: rgba(255,255,255,0.3); flex-shrink: 0; }
 
-        /* hover overlay */
         .vjl-rj-hover {
           position: absolute; inset: 0; z-index: 5;
           background: rgba(0,0,0,0.78);
@@ -552,7 +599,6 @@ const AboutWork = () => {
           color: rgba(255,255,255,0.45); text-transform: uppercase;
         }
 
-        /* waveform */
         .vjl-rj-wave {
           display: flex; align-items: center; gap: 3px;
           position: absolute; bottom: 52px; left: 16px; z-index: 3;
@@ -563,11 +609,8 @@ const AboutWork = () => {
           background: rgba(50,197,244,0.5);
           animation: vjlWave 1.1s ease-in-out infinite;
         }
-        @keyframes vjlWave {
-          0%,100% { height: 4px; } 50% { height: 20px; }
-        }
+        @keyframes vjlWave { 0%,100%{height:4px} 50%{height:20px} }
 
-        /* rj meta */
         .vjl-rj-meta {
           display: flex; flex-direction: column;
           gap: 0;
@@ -591,8 +634,7 @@ const AboutWork = () => {
         .vjl-rj-meta-lbl {
           font-family: 'Courier New', monospace;
           font-size: 0.58rem; letter-spacing: 4px;
-          color: rgba(255,255,255,0.45);
-          text-transform: uppercase;
+          color: rgba(255,255,255,0.45); text-transform: uppercase;
         }
 
         /* ══════════════════════════════════════════
@@ -604,6 +646,7 @@ const AboutWork = () => {
           .vjl-rj-meta-item { border-bottom: none; border-right: 1px solid rgba(255,255,255,0.07); }
           .vjl-rj-meta-item:last-child { border-right: none; }
         }
+
         @media (max-width: 640px) {
           .vjl-section  { padding: 70px 0 80px; }
           .vjl-header   { flex-direction: column; align-items: flex-start; gap: 10px; }
@@ -616,8 +659,13 @@ const AboutWork = () => {
           .vjl-rj-meta  { flex-direction: column; }
           .vjl-rj-meta-item { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.07); }
           .vjl-rj-meta-item:last-child { border-bottom: none; }
-          .vjl-dot      { width: 14px; }
-          .vjl-dot--active { width: 32px; }
+
+          /* hide desktop ticker on mobile */
+          .vjl-ticker     { display: none; }
+          .vjl-pause-hint { display: none; }
+
+          /* show mobile reel */
+          .vjl-mobile-reel { display: block; }
         }
       `}</style>
 
@@ -625,7 +673,6 @@ const AboutWork = () => {
 
         {/* ══ VJ SESSIONS ═══════════════════════ */}
         <div>
-          {/* header */}
           <div className="vjl-header" ref={vjHeaderRef}>
             <motion.div className="vjl-header-rule"
               initial={{ scaleX: 0 }}
@@ -678,36 +725,62 @@ const AboutWork = () => {
             </div>
           </div>
 
-          {/* ── CONTROLS ── */}
-          <div className="vjl-controls">
-            <button className="vjl-arrow" onClick={() => arrowScroll(-1)}>
-              <ChevronLeft size={18} />
-            </button>
-
-            <div className="vjl-dots">
-              {vjVideos.map((_, i) => (
-                <button
-                  key={i}
-                  className={`vjl-dot ${i === activeIndex ? "vjl-dot--active" : ""}`}
-                  onClick={() => jumpTo(i)}
-                  aria-label={`Jump to session ${i + 1}`}
-                />
-              ))}
+          {/* ── DESKTOP: ticker only, no arrows/dots ── */}
+          <div className="vjl-ticker">
+            <div className="vjl-ticker-bar">
+              <div
+                className="vjl-ticker-bar-fill"
+                style={{ width: `${((activeIndex + 1) / TOTAL) * 100}%` }}
+              />
             </div>
 
-            <button className="vjl-arrow" onClick={() => arrowScroll(1)}>
-              <ChevronRight size={18} />
-            </button>
+            <div className="vjl-ticker-panel">
+              <span className="vjl-ticker-idx">
+                {String(activeIndex + 1).padStart(2, "0")}
+              </span>
+              <div className="vjl-ticker-divider" />
+              <div className="vjl-ticker-info">
+                <span className="vjl-ticker-name">{vjVideos[activeIndex].title}</span>
+                <span className="vjl-ticker-role">{vjVideos[activeIndex].role}</span>
+              </div>
+              <span className="vjl-ticker-total">/ {String(TOTAL).padStart(2, "0")}</span>
+            </div>
+
+            <div className="vjl-ticker-bar vjl-ticker-bar--r">
+              <div
+                className="vjl-ticker-bar-fill"
+                style={{ width: `${((TOTAL - activeIndex - 1) / TOTAL) * 100}%` }}
+              />
+            </div>
           </div>
 
           <p className={`vjl-pause-hint ${isPaused ? "paused" : ""}`}>
             {isPaused ? "● PAUSED — HOVER TO PREVIEW" : "● AUTO SCROLLING — HOVER TO PAUSE"}
           </p>
+
+          {/* ── MOBILE: vertical filmstrip reel ── */}
+          <div className="vjl-mobile-reel">
+            <div className="vjl-reel-strip">
+              <div className="vjl-reel-holes" />
+              <div className="vjl-reel-list">
+                {vjVideos.map((v, i) => (
+                  <div
+                    key={v.id}
+                    className={`vjl-reel-row ${i === activeIndex ? "vjl-reel-row--active" : ""}`}
+                  >
+                    <div className="vjl-reel-frame">{String(v.id).padStart(2, "0")}</div>
+                    <span className="vjl-reel-name">{v.title}</span>
+                    <div className="vjl-reel-rec" />
+                  </div>
+                ))}
+              </div>
+              <div className="vjl-reel-holes vjl-reel-holes--bot" />
+            </div>
+          </div>
         </div>
 
         {/* ══ RJ ARCHIVES ═══════════════════════ */}
         <div className="vjl-rj-block">
-          {/* header */}
           <div className="vjl-header" ref={rjHeaderRef}>
             <motion.div className="vjl-header-rule"
               initial={{ scaleX: 0 }}
@@ -734,14 +807,12 @@ const AboutWork = () => {
             />
           </div>
 
-          {/* rj stage */}
           <motion.div className="vjl-rj-stage"
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.8, ease: [0.16,1,0.3,1] }}
           >
-            {/* card */}
             <a href="https://soundcloud.com/rj-abishek" target="_blank" rel="noreferrer" className="vjl-rj-card">
               <img src={Images.AbishakeAudio} alt="RJ Archive" className="vjl-rj-img" />
               <div className="vjl-rj-strip">
@@ -766,7 +837,6 @@ const AboutWork = () => {
               </div>
             </a>
 
-            {/* meta */}
             <div className="vjl-rj-meta">
               <div className="vjl-rj-meta-item">
                 <span className="vjl-rj-meta-num">100<span className="vjl-rj-meta-plus">+</span></span>

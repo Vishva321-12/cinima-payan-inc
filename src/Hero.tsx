@@ -32,7 +32,6 @@ const BRANCHES = [
 const TICKER_WORDS = ['CINEMA','PRODUCTION','STORYTELLING','DIRECTION','PROMOTIONS','COMEDY','DRAMA','SHORTS','ORIGINALS'];
 
 export default function Hero({ onScrollRequest }: HeroProps) {
-  /* gate state */
   const [gatePhase, setGatePhase] = useState<'visible'|'exit'|'gone'>('visible');
   const [ready,     setReady]     = useState(false);
   const [countOn,   setCountOn]   = useState(false);
@@ -40,7 +39,6 @@ export default function Hero({ onScrollRequest }: HeroProps) {
   const canvasRef  = useRef<HTMLCanvasElement>(null);
   const rafRef     = useRef<number>(0);
 
-  /* magnetic cursor (desktop only) */
   const mx = useMotionValue(0);
   const my = useMotionValue(0);
   const sx = useSpring(mx, { stiffness: 80, damping: 20 });
@@ -49,14 +47,12 @@ export default function Hero({ onScrollRequest }: HeroProps) {
   const years     = useCounter(10, 1500, countOn);
   const followers = useCounter(44, 1800, countOn);
 
-  /* ── gate auto-dismiss ── */
   useEffect(() => {
     const t1 = setTimeout(() => setGatePhase('exit'),    2400);
     const t2 = setTimeout(() => { setGatePhase('gone'); setReady(true); setCountOn(true); }, 3100);
     return () => { clearTimeout(t1); clearTimeout(t2); };
   }, []);
 
-  /* ── canvas: dual-layer effect (grid + particles) ── */
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -82,7 +78,6 @@ export default function Hero({ onScrollRequest }: HeroProps) {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       t += 0.008;
 
-      /* faint grid pulse */
       const gridAlpha = 0.022 + Math.sin(t) * 0.008;
       ctx.strokeStyle = `rgba(253,224,71,${gridAlpha})`;
       ctx.lineWidth = 0.5;
@@ -95,7 +90,6 @@ export default function Hero({ onScrollRequest }: HeroProps) {
         ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(canvas.width, y); ctx.stroke();
       }
 
-      /* particles */
       particles.forEach(p => {
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
@@ -117,7 +111,6 @@ export default function Hero({ onScrollRequest }: HeroProps) {
     };
   }, []);
 
-  /* magnetic follow */
   const onMouseMove = useCallback((e: React.MouseEvent) => {
     const cx = window.innerWidth  / 2;
     const cy = window.innerHeight / 2;
@@ -128,7 +121,11 @@ export default function Hero({ onScrollRequest }: HeroProps) {
   return (
     <>
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,700;0,800;1,700;1,800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,700;0,800;1,700;1,800&family=Bebas+Neue&family=Inter:wght@300;400;700;900&display=swap');
+
+        /* ─── font utility classes ─────────────── */
+        .bebas-font { font-family: 'Bebas Neue', sans-serif; }
+        .inter-font  { font-family: 'Inter', sans-serif; }
 
         /* ─── reset ─────────────────────────────── */
         *, *::before, *::after { box-sizing: border-box; }
@@ -137,16 +134,15 @@ export default function Hero({ onScrollRequest }: HeroProps) {
         .h3-root {
           position: relative;
           width: 100%;
-          height: 100svh;          /* svh = small viewport height — mobile safe */
+          height: 100svh;
           min-height: 560px;
           background: #000;
           display: grid;
-          grid-template-rows: auto 1fr auto;  /* ticker | main | footer */
+          grid-template-rows: auto 1fr auto;
           align-items: stretch;
           overflow: hidden;
         }
 
-        /* scanlines */
         .h3-root::after {
           content: '';
           position: absolute; inset: 0;
@@ -157,20 +153,17 @@ export default function Hero({ onScrollRequest }: HeroProps) {
           pointer-events: none; z-index: 5;
         }
 
-        /* vignette */
         .h3-vig {
           position: absolute; inset: 0;
           background: radial-gradient(ellipse at 50% 35%, transparent 20%, rgba(0,0,0,0.85) 80%);
           pointer-events: none; z-index: 2;
         }
 
-        /* canvas */
         .h3-canvas {
           position: absolute; inset: 0;
           pointer-events: none; z-index: 1;
         }
 
-        /* ── corner marks ── */
         .h3-corner {
           position: absolute; width: 22px; height: 22px; z-index: 8; pointer-events: none;
         }
@@ -179,7 +172,6 @@ export default function Hero({ onScrollRequest }: HeroProps) {
         .h3-bl { bottom: 14px; left: 16px; border-bottom: 1px solid rgba(50,197,244,0.3); border-left: 1px solid rgba(50,197,244,0.3); }
         .h3-br { bottom: 14px; right: 16px; border-bottom: 1px solid rgba(50,197,244,0.3); border-right: 1px solid rgba(50,197,244,0.3); }
 
-        /* ── REC ── */
         .h3-rec {
           position: absolute; top: 54px; right: 48px;
           display: flex; align-items: center; gap: 5px;
@@ -193,8 +185,9 @@ export default function Hero({ onScrollRequest }: HeroProps) {
         }
         @keyframes h3Rec { 0%,100%{opacity:1} 50%{opacity:0} }
         .h3-rec-txt {
-          font-family: 'Courier New', monospace;
-          font-size: 0.52rem; letter-spacing: 2px;
+          /* Inter — UI label */
+          font-family: 'Inter', sans-serif;
+          font-size: 0.52rem; letter-spacing: 2px; font-weight: 700;
           color: rgba(255,60,60,0.8);
         }
 
@@ -208,8 +201,6 @@ export default function Hero({ onScrollRequest }: HeroProps) {
           flex-direction: column; gap: 0;
           padding: 24px;
         }
-
-        /* diagonal slash behind gate text */
         .h3-gate::before {
           content: '';
           position: absolute;
@@ -220,19 +211,22 @@ export default function Hero({ onScrollRequest }: HeroProps) {
         }
 
         .h3-gate-pre {
-          font-family: 'Courier New', monospace;
+          /* Inter light — small label */
+          font-family: 'Inter', sans-serif;
           font-size: clamp(0.6rem, 2.5vw, 0.78rem);
-          letter-spacing: 8px; color: rgba(253,224,71,0.55);
+          font-weight: 300;
+          letter-spacing: 10px; color: rgba(253,224,71,0.65);
           text-transform: uppercase; margin: 0 0 16px;
           text-align: center;
         }
 
         .h3-gate-word {
           display: block;
-          font-family: 'Cormorant Garamond', Georgia, serif;
-          font-size: clamp(3rem, 14vw, 10rem);
-          font-weight: 800; font-style: italic;
-          line-height: 0.88; letter-spacing: -3px;
+          /* Bebas Neue — giant display */
+          font-family: 'Bebas Neue', sans-serif;
+          font-size: clamp(3.5rem, 16vw, 11rem);
+          font-weight: 400;
+          line-height: 0.9; letter-spacing: 4px;
           text-align: center;
         }
         .h3-gate-w1 { color: #fff; }
@@ -247,9 +241,11 @@ export default function Hero({ onScrollRequest }: HeroProps) {
         @keyframes h3BarGrow { to { width: min(220px, 60vw); } }
 
         .h3-gate-sub {
-          font-family: 'Courier New', monospace;
+          /* Inter — small sub label */
+          font-family: 'Inter', sans-serif;
           font-size: clamp(0.55rem, 2vw, 0.7rem);
-          letter-spacing: 7px; color: rgba(255,255,255,0.25);
+          font-weight: 300;
+          letter-spacing: 7px; color: rgba(255,255,255,0.3);
           text-transform: uppercase; text-align: center;
         }
 
@@ -271,15 +267,16 @@ export default function Hero({ onScrollRequest }: HeroProps) {
         }
         @keyframes h3Tick { to { transform: translateX(-50%); } }
         .h3-ticker-item {
-          font-family: 'Courier New', monospace;
-          font-size: clamp(0.5rem, 1.6vw, 0.62rem);
-          letter-spacing: 5px; color: rgba(253,224,71,0.6);
+          /* Bebas Neue — ticker strip */
+          font-family: 'Bebas Neue', sans-serif;
+          font-size: clamp(0.85rem, 1.8vw, 1rem);
+          letter-spacing: 6px; color: rgba(253,224,71,0.7);
           text-transform: uppercase; padding: 0 28px; flex-shrink: 0;
         }
         .h3-ticker-sep { color: #32c5f4; margin: 0 4px; }
 
         /* ════════════════════════════════════════════
-           MAIN AREA  (fills 1fr)
+           MAIN AREA
         ════════════════════════════════════════════ */
         .h3-main {
           position: relative; z-index: 10;
@@ -299,8 +296,10 @@ export default function Hero({ onScrollRequest }: HeroProps) {
           background: rgba(253,224,71,0.5);
         }
         .h3-pre-txt {
-          font-family: 'Courier New', monospace;
-          font-size: clamp(0.52rem, 1.8vw, 0.68rem);
+          /* Inter — small label */
+          font-family: 'Inter', sans-serif;
+          font-size: clamp(0.52rem, 1.8vw, 0.66rem);
+          font-weight: 400;
           letter-spacing: clamp(4px,1vw,7px);
           color: rgba(253,224,71,0.8);
           text-transform: uppercase; white-space: nowrap;
@@ -313,19 +312,21 @@ export default function Hero({ onScrollRequest }: HeroProps) {
           flex-wrap: wrap; text-align: center;
         }
         .h3-name {
-          font-family: 'Cormorant Garamond', Georgia, serif;
+          /* Bebas Neue — hero title */
+          font-family: 'Bebas Neue', sans-serif;
           font-size: clamp(38px, 10.5vw, 120px);
-          font-weight: 800; font-style: italic;
+          font-weight: 400;
           color: #fde047; line-height: 0.9;
-          letter-spacing: clamp(-2px,-0.5vw,-1px);
+          letter-spacing: clamp(4px, 1vw, 10px);
           text-shadow:
             0 0 50px rgba(253,224,71,0.28),
             0 0 120px rgba(253,224,71,0.1);
         }
         .h3-inc {
-          font-family: 'Courier New', monospace;
+          /* Bebas Neue — INC tag */
+          font-family: 'Bebas Neue', sans-serif;
           font-size: clamp(14px, 2.8vw, 30px);
-          color: #32c5f4; letter-spacing: 6px;
+          color: #32c5f4; letter-spacing: 8px;
           text-shadow: 0 0 16px rgba(50,197,244,0.7);
           align-self: flex-end; padding-bottom: 0.06em;
         }
@@ -339,17 +340,18 @@ export default function Hero({ onScrollRequest }: HeroProps) {
 
         /* ── tagline ── */
         .h3-tagline {
-          font-family: 'Cormorant Garamond', Georgia, serif;
-          font-size: clamp(0.88rem, 2.2vw, 1.25rem);
-          font-style: italic; font-weight: 600;
-          color: rgba(255,255,255,0.55);
-          text-align: center; line-height: 1.65;
+          /* Inter — body tagline */
+          font-family: 'Inter', sans-serif;
+          font-size: clamp(0.82rem, 2vw, 1.05rem);
+          font-weight: 300;
+          color: rgba(255,255,255,0.5);
+          text-align: center; line-height: 1.75;
           max-width: 520px;
           margin: 0;
         }
         .h3-tagline b {
           color: rgba(255,255,255,0.88);
-          font-style: normal;
+          font-weight: 700;
           border-bottom: 1px solid rgba(253,224,71,0.4);
           padding-bottom: 1px;
         }
@@ -368,7 +370,6 @@ export default function Hero({ onScrollRequest }: HeroProps) {
           flex-wrap: wrap; row-gap: 12px;
         }
 
-        /* horizontal bridge — desktop only */
         .h3-hbridge {
           display: flex; width: 100%;
           justify-content: space-between; align-items: flex-start;
@@ -406,11 +407,9 @@ export default function Hero({ onScrollRequest }: HeroProps) {
           padding: clamp(10px,1.8vw,14px) clamp(16px,3.5vw,32px);
           border: 1px solid rgba(255,255,255,0.1);
           background: rgba(6,6,6,0.82);
-          backdrop-filter: blur(14px);
           cursor: pointer;
           transition: border-color 0.35s, transform 0.35s, box-shadow 0.35s;
         }
-        /* fill sweep */
         .h3-box::before {
           content: ''; position: absolute; inset: 0;
           background: rgba(50,197,244,0.08);
@@ -423,7 +422,6 @@ export default function Hero({ onScrollRequest }: HeroProps) {
           transform: translateY(5px);
           box-shadow: 0 8px 24px rgba(50,197,244,0.07);
         }
-        /* corner mark */
         .h3-box::after {
           content: '';
           position: absolute; top: 0; left: 0;
@@ -434,10 +432,11 @@ export default function Hero({ onScrollRequest }: HeroProps) {
         }
 
         .h3-link {
-          font-family: 'Courier New', monospace;
-          font-size: clamp(0.56rem, 1.5vw, 0.72rem);
-          letter-spacing: clamp(3px,0.8vw,5px);
-          color: rgba(255,255,255,0.65);
+          /* Bebas Neue — nav labels */
+          font-family: 'Bebas Neue', sans-serif;
+          font-size: clamp(0.9rem, 2vw, 1.1rem);
+          letter-spacing: clamp(4px, 0.8vw, 7px);
+          color: rgba(255,255,255,0.7);
           text-decoration: none; text-transform: uppercase;
           display: block; position: relative; z-index: 1;
           text-align: center; cursor: pointer;
@@ -462,20 +461,24 @@ export default function Hero({ onScrollRequest }: HeroProps) {
         }
         .h3-stat + .h3-stat { border-left: 1px solid rgba(255,255,255,0.07); }
         .h3-stat-num {
-          font-family: 'Cormorant Garamond', Georgia, serif;
-          font-size: clamp(1.4rem,4.5vw,2.4rem);
-          font-weight: 800; color: #32c5f4; line-height: 1;
+          /* Bebas Neue — stat numbers */
+          font-family: 'Bebas Neue', sans-serif;
+          font-size: clamp(1.8rem, 4.5vw, 2.8rem);
+          font-weight: 400; color: #32c5f4; line-height: 1;
+          letter-spacing: 2px;
         }
         .h3-stat-sup { font-size: 0.55em; vertical-align: super; color: #fde047; }
         .h3-stat-lbl {
-          font-family: 'Courier New', monospace;
-          font-size: clamp(0.38rem,1vw,0.48rem);
+          /* Inter — stat labels */
+          font-family: 'Inter', sans-serif;
+          font-size: clamp(0.44rem,1vw,0.52rem);
+          font-weight: 400;
           letter-spacing: 3px; color: rgba(255,255,255,0.4);
           text-transform: uppercase; text-align: center; line-height: 1.5;
         }
 
         /* ════════════════════════════════════════════
-           FOOTER ROW  (grid row 3)
+           FOOTER ROW
         ════════════════════════════════════════════ */
         .h3-footer {
           position: relative; z-index: 10;
@@ -484,31 +487,34 @@ export default function Hero({ onScrollRequest }: HeroProps) {
           gap: 12px;
         }
 
-        /* director byline */
         .h3-byline { flex: 1; }
         .h3-byline-lbl {
-          font-family: 'Courier New', monospace;
+          /* Inter — small eyebrow */
+          font-family: 'Inter', sans-serif;
           font-size: clamp(0.44rem,1.4vw,0.56rem);
-          letter-spacing: 5px; color: rgba(255,255,255,0.3);
+          font-weight: 400;
+          letter-spacing: 5px; color: rgba(255,255,255,0.35);
           text-transform: uppercase; display: block; margin-bottom: 4px;
         }
         .h3-byline-name {
-          font-family: 'Cormorant Garamond', Georgia, serif;
-          font-size: clamp(1rem,3vw,1.85rem);
-          font-weight: 700; font-style: italic;
-          color: rgba(255,255,255,0.62); letter-spacing: 2px; margin: 0;
+          /* Bebas Neue — name display */
+          font-family: 'Bebas Neue', sans-serif;
+          font-size: clamp(1.2rem, 3vw, 2.1rem);
+          font-weight: 400;
+          color: rgba(255,255,255,0.7); letter-spacing: 4px; margin: 0;
           line-height: 1;
         }
 
-        /* centre scroll indicator */
         .h3-scroll {
           display: flex; flex-direction: column;
           align-items: center; gap: 0;
           flex-shrink: 0;
         }
         .h3-scroll-lbl {
-          font-family: 'Courier New', monospace;
+          /* Inter — scroll label */
+          font-family: 'Inter', sans-serif;
           font-size: clamp(0.44rem,1.3vw,0.54rem);
+          font-weight: 300;
           letter-spacing: 5px; color: rgba(255,255,255,0.28);
           text-transform: uppercase; margin-bottom: 8px;
         }
@@ -528,23 +534,23 @@ export default function Hero({ onScrollRequest }: HeroProps) {
         }
         @keyframes h3SL { 0%,100%{opacity:.28} 50%{opacity:1} }
 
-        /* right: seq tag */
         .h3-seq {
           flex: 1; text-align: right;
-          font-family: 'Courier New', monospace;
+          /* Inter — seq tag */
+          font-family: 'Inter', sans-serif;
           font-size: clamp(0.44rem,1.4vw,0.56rem);
-          letter-spacing: 3px; color: rgba(255,255,255,0.18);
+          font-weight: 300;
+          letter-spacing: 3px; color: rgba(255,255,255,0.2);
           text-transform: uppercase;
           line-height: 1.6;
         }
         .h3-seq span { display: block; }
-        .h3-seq strong { color: rgba(253,224,71,0.45); font-weight: normal; }
+        .h3-seq strong { color: rgba(253,224,71,0.5); font-weight: 700; }
 
         /* ════════════════════════════════════════════
            RESPONSIVE
         ════════════════════════════════════════════ */
         @media (max-width: 640px) {
-          /* nav: stack vertically, no tree */
           .h3-hbridge::before { display: none; }
           .h3-hbridge {
             flex-direction: column; align-items: center;
@@ -555,12 +561,9 @@ export default function Hero({ onScrollRequest }: HeroProps) {
           .h3-box    { width: 100%; text-align: center; }
           .h3-hbridge:hover .h3-node:not(:hover) { opacity: 1; filter: none; }
 
-          /* footer: stack */
           .h3-footer { flex-direction: column; align-items: center; text-align: center; gap: 8px; }
           .h3-byline { text-align: center; }
           .h3-seq    { text-align: center; }
-
-          /* rec tag hide on very small */
           .h3-rec    { display: none; }
         }
 
@@ -571,13 +574,12 @@ export default function Hero({ onScrollRequest }: HeroProps) {
           .h3-main   { gap: 8px; }
         }
 
-        /* landscape phones */
         @media (max-height: 520px) and (orientation: landscape) {
-          .h3-root   { height: auto; min-height: 100svh; }
-          .h3-spine  { display: none; }
-          .h3-stats  { display: none; }
+          .h3-root    { height: auto; min-height: 100svh; }
+          .h3-spine   { display: none; }
+          .h3-stats   { display: none; }
           .h3-tagline { display: none; }
-          .h3-main   { justify-content: flex-start; padding-top: 12px; }
+          .h3-main    { justify-content: flex-start; padding-top: 12px; }
         }
       `}</style>
 
@@ -645,13 +647,11 @@ export default function Hero({ onScrollRequest }: HeroProps) {
         <canvas className="h3-canvas" ref={canvasRef} />
         <div className="h3-vig" />
 
-        {/* frame corners */}
         <div className="h3-corner h3-tl" />
         <div className="h3-corner h3-tr" />
         <div className="h3-corner h3-bl" />
         <div className="h3-corner h3-br" />
 
-        {/* REC */}
         <div className="h3-rec">
           <div className="h3-rec-dot" />
           <span className="h3-rec-txt">REC</span>
@@ -671,7 +671,6 @@ export default function Hero({ onScrollRequest }: HeroProps) {
         {/* ── MAIN ── */}
         <div className="h3-main">
 
-          {/* pre label */}
           <motion.div className="h3-pre"
             initial={{ opacity:0, y:14 }}
             animate={{ opacity: ready?1:0, y: ready?0:14 }}
@@ -682,7 +681,6 @@ export default function Hero({ onScrollRequest }: HeroProps) {
             <div className="h3-pre-line" />
           </motion.div>
 
-          {/* brand name */}
           <motion.div className="h3-brand"
             initial={{ opacity:0, y:20 }}
             animate={{ opacity: ready?1:0, y: ready?0:20 }}
@@ -695,7 +693,6 @@ export default function Hero({ onScrollRequest }: HeroProps) {
             >INC</motion.span>
           </motion.div>
 
-          {/* rule */}
           <motion.div className="h3-rule"
             initial={{ scaleX:0 }}
             animate={{ scaleX: ready?1:0 }}
@@ -703,7 +700,6 @@ export default function Hero({ onScrollRequest }: HeroProps) {
             style={{ transformOrigin:'center' }}
           />
 
-          {/* tagline */}
           <motion.p className="h3-tagline"
             initial={{ opacity:0 }}
             animate={{ opacity: ready?1:0 }}
@@ -713,14 +709,12 @@ export default function Hero({ onScrollRequest }: HeroProps) {
             where every frame is a declaration.
           </motion.p>
 
-          {/* spine */}
           <motion.div className="h3-spine"
             initial={{ height:0 }}
             animate={{ height: ready?36:0 }}
             transition={{ delay:0.35, duration:0.6 }}
           />
 
-          {/* branches */}
           <motion.div
             initial={{ opacity:0 }}
             animate={{ opacity: ready?1:0 }}
@@ -748,7 +742,6 @@ export default function Hero({ onScrollRequest }: HeroProps) {
             </div>
           </motion.div>
 
-          {/* stats */}
           <motion.div className="h3-stats"
             initial={{ opacity:0, y:14 }}
             animate={{ opacity: ready?1:0, y: ready?0:14 }}

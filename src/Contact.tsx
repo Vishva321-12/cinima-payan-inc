@@ -10,7 +10,7 @@ const BookingContact: React.FC = () => {
   const filmStrip = " • CINEMA PAYYAN • NOW BOOKING • ".repeat(20);
 
   // ── REPLACE THE VALUE BELOW WITH YOUR WEB3FORMS ACCESS KEY ──
-  const WEB3FORMS_KEY = "0a0de93d-ef93-4e5a-93cb-c33ad78dfb75";
+  const WEB3FORMS_KEY = "eb4aabc2-f58b-4521-a027-7295fa2c22e0";
 
   const sendEmail = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
