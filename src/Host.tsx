@@ -56,18 +56,10 @@ function HostCard({ project, index }: { project: typeof projects[0]; index: numb
       <div className="hst-media">
         <video ref={videoRef} src={project.video} className="hst-video" muted loop playsInline />
         <div className="hst-media-gradient" />
-
-        {/* corner marks — exact cpcp-corner */}
         <div className="hst-c hst-c--tl" /><div className="hst-c hst-c--tr" />
         <div className="hst-c hst-c--bl" /><div className="hst-c hst-c--br" />
-
-        {/* tag — exact cpcp-yt-tag */}
         <div className="hst-tag">{project.tag}</div>
-
-        {/* watermark index */}
         <div className="hst-index">{project.index}</div>
-
-        {/* play/link button */}
         <motion.a
           href={project.link} target="_blank" rel="noreferrer"
           className="hst-play"
@@ -77,8 +69,6 @@ function HostCard({ project, index }: { project: typeof projects[0]; index: numb
         >
           <ExternalLink size={18} />
         </motion.a>
-
-        {/* scan line — exact cpcp-yt-scan */}
         <motion.div
           className="hst-scan"
           animate={{ scaleX: hovered ? 1 : 0 }}
@@ -88,10 +78,7 @@ function HostCard({ project, index }: { project: typeof projects[0]; index: numb
 
       {/* ── TEXT SIDE ── */}
       <div className="hst-body">
-
-        {/* title block */}
         <div className="hst-titles">
-          {/* pre-label — exact cpcp-pre-text */}
           <span className="hst-subtitle">{project.subtitle}</span>
           <h4 className="hst-title">{project.title}</h4>
           <motion.div
@@ -100,11 +87,7 @@ function HostCard({ project, index }: { project: typeof projects[0]; index: numb
             transition={{ duration: 0.4 }}
           />
         </div>
-
-        {/* description — exact cpcp-desc */}
         <p className="hst-desc">{project.body}</p>
-
-        {/* credits strip — exact cpcp-stats */}
         <div className="hst-credits">
           <div className="hst-credit-item">
             <span className="hst-credit-label">HOSTED BY</span>
@@ -116,8 +99,6 @@ function HostCard({ project, index }: { project: typeof projects[0]; index: numb
             <span className="hst-credit-value">{project.feature}</span>
           </div>
         </div>
-
-        {/* CTA — exact cpcp-cta fill-sweep */}
         <a href={project.link} target="_blank" rel="noreferrer" className="hst-cta">
           <div className="hst-cta-bg" />
           <span>WATCH NOW</span>
@@ -137,10 +118,10 @@ const Host = () => {
   return (
     <>
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;0,800;1,600;1,700;1,800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;700;900&display=swap');
 
         /* ══════════════════════════════════════════
-           SECTION — exact cpcp-section
+           SECTION
         ══════════════════════════════════════════ */
         .hst-section {
           background: #000;
@@ -170,7 +151,7 @@ const Host = () => {
         }
 
         /* ══════════════════════════════════════════
-           HEADER — exact cpcp-header
+           HEADER
         ══════════════════════════════════════════ */
         .hst-header {
           display: flex; align-items: center; gap: 20px;
@@ -190,45 +171,50 @@ const Host = () => {
         .hst-header-content {
           display: flex; align-items: center; gap: 14px; flex-shrink: 0;
         }
-        /* icon — exact cpcp-header-icon */
         .hst-header-icon {
           width: 36px; height: 36px;
           border: 1px solid rgba(253,224,71,0.3);
           display: flex; align-items: center; justify-content: center;
           color: #fde047; flex-shrink: 0;
         }
-        /* overline — was invisible, now 0.62rem / 0.55 opacity */
+
+        /* Inter — overline */
         .hst-overline {
-          font-family: 'Courier New', monospace;
-          font-size: 0.62rem; letter-spacing: 5px;
+          font-family: 'Inter', sans-serif;
+          font-size: clamp(0.48rem, 1.5vw, 0.6rem);
+          font-weight: 400;
+          letter-spacing: 6px;
           color: rgba(255,255,255,0.55);
           text-transform: uppercase;
-          display: block; margin-bottom: 4px;
+          display: block; margin-bottom: 5px;
         }
-        /* heading — exact cpcp-heading */
-        .hst-heading {
-          font-family: 'Cormorant Garamond', Georgia, serif;
-          font-size: clamp(1.6rem, 3.5vw, 2.8rem);
-          font-weight: 800; font-style: italic;
-          color: #fff; line-height: 1; margin: 0;
-          letter-spacing: -0.5px;
-        }
-        .hst-heading-yellow { color: #fde047; font-style: normal; }
 
-        /* count */
+        /* Bebas Neue — section heading */
+        .hst-heading {
+          font-family: 'Bebas Neue', sans-serif;
+          font-size: clamp(1.8rem, 4.5vw, 3.2rem);
+          font-weight: 400; letter-spacing: 3px;
+          color: #fff; line-height: 1; margin: 0;
+        }
+        .hst-heading-yellow { color: #fde047; }
+
+        /* Bebas Neue — count number */
         .hst-count {
           display: flex; flex-direction: column;
           align-items: center; margin-left: 14px; flex-shrink: 0;
         }
         .hst-count-num {
-          font-family: 'Cormorant Garamond', Georgia, serif;
-          font-size: clamp(1.8rem, 4vw, 2.6rem);
-          font-weight: 800; color: rgba(253,224,71,0.28); line-height: 1;
+          font-family: 'Bebas Neue', sans-serif;
+          font-size: clamp(1.8rem, 4vw, 2.8rem);
+          font-weight: 400; color: rgba(253,224,71,0.28);
+          line-height: 1; letter-spacing: 2px;
         }
-        /* count label — was tiny invisible */
+        /* Inter — count label */
         .hst-count-lbl {
-          font-family: 'Courier New', monospace;
-          font-size: 0.56rem; letter-spacing: 4px;
+          font-family: 'Inter', sans-serif;
+          font-size: clamp(0.44rem, 1vw, 0.54rem);
+          font-weight: 400;
+          letter-spacing: 4px;
           color: rgba(255,255,255,0.45); text-transform: uppercase;
         }
 
@@ -254,8 +240,6 @@ const Host = () => {
           background: linear-gradient(to bottom, transparent 30%, rgba(0,0,0,0.75) 100%);
           pointer-events: none; z-index: 2;
         }
-
-        /* hero corner marks */
         .hst-hero-c {
           position: absolute; width: 16px; height: 16px; z-index: 4; pointer-events: none;
         }
@@ -264,7 +248,6 @@ const Host = () => {
         .hst-hero-bl { bottom:44px; left:10px; border-bottom:1px solid rgba(50,197,244,0.4); border-left:1px solid rgba(50,197,244,0.4); }
         .hst-hero-br { bottom:44px; right:10px; border-bottom:1px solid rgba(50,197,244,0.4); border-right:1px solid rgba(50,197,244,0.4); }
 
-        /* hero bar */
         .hst-hero-bar {
           position: absolute; bottom: 0; left: 0; right: 0; z-index: 5;
           display: flex; align-items: center; justify-content: space-between;
@@ -279,27 +262,28 @@ const Host = () => {
           background: #ff3333; flex-shrink: 0;
           box-shadow: 0 0 8px rgba(255,51,51,0.8);
         }
-        /* "FEATURED EVENT" — was invisible, now 0.62rem */
+        /* Inter — FEATURED EVENT label */
         .hst-hero-live {
-          font-family: 'Courier New', monospace;
-          font-size: 0.62rem; letter-spacing: 4px;
+          font-family: 'Inter', sans-serif;
+          font-size: clamp(0.44rem, 1.2vw, 0.56rem);
+          font-weight: 400; letter-spacing: 4px;
           color: rgba(255,255,255,0.75); text-transform: uppercase;
         }
-        /* centre title */
+        /* Bebas Neue — hero bar centre title */
         .hst-hero-title {
-          font-family: 'Cormorant Garamond', Georgia, serif;
-          font-size: clamp(1rem, 2.5vw, 1.7rem);
-          font-weight: 800; font-style: italic;
-          color: #fff; letter-spacing: 2px; flex: 1; text-align: center;
+          font-family: 'Bebas Neue', sans-serif;
+          font-size: clamp(1rem, 2.8vw, 1.8rem);
+          font-weight: 400; letter-spacing: 4px;
+          color: #fff; flex: 1; text-align: center;
         }
-        /* right tag — exact cpcp-yt-tag */
+        /* Inter — right tag badge */
         .hst-hero-tag {
-          font-family: 'Courier New', monospace;
-          font-size: 0.6rem; letter-spacing: 3px;
+          font-family: 'Inter', sans-serif;
+          font-size: clamp(0.44rem, 1vw, 0.54rem);
+          font-weight: 700; letter-spacing: 3px;
           color: #000; background: #fde047;
-          padding: 4px 12px; text-transform: uppercase; flex-shrink: 0;
+          padding: 5px 12px; text-transform: uppercase; flex-shrink: 0;
         }
-        /* hover scan */
         .hst-hero-scan {
           position: absolute; bottom: 42px; left: 0; right: 0; z-index: 6;
           height: 2px;
@@ -314,7 +298,6 @@ const Host = () => {
           display: flex; flex-direction: column; gap: 32px;
         }
 
-        /* ── CARD — horizontal split layout ── */
         .hst-card {
           display: grid;
           grid-template-columns: 1fr 1.3fr;
@@ -329,7 +312,7 @@ const Host = () => {
           box-shadow: 0 16px 50px rgba(0,0,0,0.65);
         }
 
-        /* ── MEDIA SIDE — 16:9 ── */
+        /* ── MEDIA SIDE ── */
         .hst-media {
           position: relative;
           width: 100%; aspect-ratio: 16/9;
@@ -344,33 +327,32 @@ const Host = () => {
           background: linear-gradient(to bottom, transparent 40%, rgba(0,0,0,0.55) 100%);
           z-index: 2; pointer-events: none;
         }
-
-        /* corner marks — exact cpcp-corner */
         .hst-c { position: absolute; width: 14px; height: 14px; pointer-events: none; z-index: 5; }
         .hst-c--tl { top:8px; left:8px; border-top:1px solid rgba(253,224,71,0.5); border-left:1px solid rgba(253,224,71,0.5); }
         .hst-c--tr { top:8px; right:8px; border-top:1px solid rgba(253,224,71,0.5); border-right:1px solid rgba(253,224,71,0.5); }
         .hst-c--bl { bottom:8px; left:8px; border-bottom:1px solid rgba(50,197,244,0.4); border-left:1px solid rgba(50,197,244,0.4); }
         .hst-c--br { bottom:8px; right:8px; border-bottom:1px solid rgba(50,197,244,0.4); border-right:1px solid rgba(50,197,244,0.4); }
 
-        /* tag — exact cpcp-yt-tag */
+        /* Inter — card tag badge */
         .hst-tag {
           position: absolute; top: 10px; left: 10px; z-index: 6;
-          font-family: 'Courier New', monospace;
-          font-size: 0.58rem; letter-spacing: 3px;
+          font-family: 'Inter', sans-serif;
+          font-size: clamp(0.42rem, 1vw, 0.52rem);
+          font-weight: 700; letter-spacing: 3px;
           color: #000; background: #fde047;
           padding: 3px 10px; text-transform: uppercase;
         }
 
-        /* index watermark */
+        /* Bebas Neue — ghost index number */
         .hst-index {
           position: absolute; bottom: 10px; left: 14px; z-index: 4;
-          font-family: 'Cormorant Garamond', Georgia, serif;
-          font-size: 3.5rem; font-weight: 800; font-style: italic;
+          font-family: 'Bebas Neue', sans-serif;
+          font-size: clamp(2.5rem, 5vw, 3.8rem);
+          font-weight: 400; letter-spacing: 4px;
           color: rgba(253,224,71,0.12); line-height: 1;
           user-select: none; pointer-events: none;
         }
 
-        /* play/link btn — exact cpcp-yt-play */
         .hst-play {
           position: absolute; bottom: 12px; right: 12px; z-index: 7;
           width: 38px; height: 38px; border-radius: 50%;
@@ -381,7 +363,6 @@ const Host = () => {
         }
         .hst-play:hover { transform: scale(1.1); }
 
-        /* scan line — exact cpcp-yt-scan */
         .hst-scan {
           position: absolute; bottom: 0; left: 0; right: 0; z-index: 8;
           height: 2px;
@@ -396,22 +377,23 @@ const Host = () => {
           border-left: 1px solid rgba(255,255,255,0.05);
         }
 
-        /* title block */
         .hst-titles { display: flex; flex-direction: column; gap: 6px; }
 
-        /* subtitle — "Chiyaan Vikram" — exact cpcp-overline */
+        /* Inter — subtitle label */
         .hst-subtitle {
-          font-family: 'Courier New', monospace;
-          font-size: 0.6rem; letter-spacing: 5px;
+          font-family: 'Inter', sans-serif;
+          font-size: clamp(0.48rem, 1.2vw, 0.6rem);
+          font-weight: 400; letter-spacing: 6px;
           color: rgba(253,224,71,0.7);
           text-transform: uppercase; display: block;
         }
-        /* main title — exact cpcp-title */
+
+        /* Bebas Neue — card main title */
         .hst-title {
-          font-family: 'Cormorant Garamond', Georgia, serif;
-          font-size: clamp(1.3rem, 2.8vw, 2rem);
-          font-weight: 800; font-style: italic;
-          color: #fff; margin: 0; line-height: 1.1;
+          font-family: 'Bebas Neue', sans-serif;
+          font-size: clamp(1.4rem, 3vw, 2.2rem);
+          font-weight: 400; letter-spacing: 3px;
+          color: #fff; margin: 0; line-height: 1.05;
         }
         .hst-title-rule {
           height: 1px; width: 100%;
@@ -419,16 +401,17 @@ const Host = () => {
           transform-origin: left;
         }
 
-        /* description — exact cpcp-desc */
+        /* Inter — description body text */
         .hst-desc {
-          font-family: 'Cormorant Garamond', Georgia, serif;
-          font-size: clamp(0.92rem, 1.3vw, 1.05rem);
+          font-family: 'Inter', sans-serif;
+          font-size: clamp(0.82rem, 1.2vw, 0.95rem);
+          font-weight: 300;
           color: rgba(255,255,255,0.58);
           line-height: 1.85; margin: 0;
           flex: 1;
         }
 
-        /* credits strip — exact cpcp-stats */
+        /* credits strip */
         .hst-credits {
           display: flex; align-items: stretch;
           border: 1px solid rgba(255,255,255,0.07);
@@ -441,29 +424,32 @@ const Host = () => {
         .hst-credit-div {
           width: 1px; background: rgba(255,255,255,0.08); margin: 0 16px;
         }
-        /* credit label — was invisible, now 0.56rem / 0.5 opacity */
+        /* Inter — credit label */
         .hst-credit-label {
-          font-family: 'Courier New', monospace;
-          font-size: 0.56rem; letter-spacing: 4px;
+          font-family: 'Inter', sans-serif;
+          font-size: clamp(0.42rem, 1vw, 0.52rem);
+          font-weight: 400; letter-spacing: 4px;
           color: rgba(255,255,255,0.5);
           text-transform: uppercase;
         }
-        /* credit value — was invisible */
+        /* Bebas Neue — credit value */
         .hst-credit-value {
-          font-family: 'Cormorant Garamond', Georgia, serif;
-          font-size: clamp(0.95rem, 1.6vw, 1.1rem);
-          font-weight: 700; color: #fff; line-height: 1.2;
+          font-family: 'Bebas Neue', sans-serif;
+          font-size: clamp(1rem, 1.8vw, 1.2rem);
+          font-weight: 400; letter-spacing: 2px;
+          color: #fff; line-height: 1.2;
         }
 
-        /* CTA — exact cpcp-cta fill sweep */
+        /* Inter — CTA button */
         .hst-cta {
           position: relative; overflow: hidden;
           display: inline-flex; align-items: center; gap: 10px;
           padding: 12px 24px;
           border: 1px solid #fde047;
           color: #fde047; text-decoration: none;
-          font-family: 'Courier New', monospace;
-          font-size: 0.54rem; letter-spacing: 4px; text-transform: uppercase;
+          font-family: 'Inter', sans-serif;
+          font-size: clamp(0.44rem, 1.2vw, 0.56rem);
+          font-weight: 700; letter-spacing: 4px; text-transform: uppercase;
           transition: color 0.4s;
           align-self: flex-start;
         }
@@ -492,7 +478,6 @@ const Host = () => {
             margin-bottom: 40px;
           }
           .hst-header-rule { display: none; }
-          /* heading LEFT, count RIGHT — space-between */
           .hst-header-content {
             flex-direction: row; align-items: center;
             justify-content: space-between; gap: 0; width: 100%;
@@ -513,7 +498,6 @@ const Host = () => {
         }
         @media (max-width: 400px) {
           .hst-grid { gap: 20px; }
-          .hst-title { font-size: 1.3rem; }
         }
       `}</style>
 
@@ -533,7 +517,6 @@ const Host = () => {
             animate={{ opacity: inView ? 1 : 0, y: inView ? 0 : 20 }}
             transition={{ delay: 0.3, duration: 0.6 }}
           >
-            {/* LEFT — icon + text */}
             <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
               <div className="hst-header-icon"><Mic2 size={18} /></div>
               <div>
@@ -544,7 +527,6 @@ const Host = () => {
               </div>
             </div>
 
-            {/* RIGHT — count on opposite side */}
             <div className="hst-count">
               <span className="hst-count-num">04</span>
               <span className="hst-count-lbl">EVENTS</span>
@@ -576,14 +558,10 @@ const Host = () => {
               transition={{ duration: 0.7, ease: [0.16,1,0.3,1] }}
             />
             <div className="hst-hero-vig" />
-
-            {/* corner marks */}
             <div className="hst-hero-c hst-hero-tl" />
             <div className="hst-hero-c hst-hero-tr" />
             <div className="hst-hero-c hst-hero-bl" />
             <div className="hst-hero-c hst-hero-br" />
-
-            {/* bar */}
             <div className="hst-hero-bar">
               <div className="hst-hero-bar-left">
                 <motion.div
@@ -596,7 +574,6 @@ const Host = () => {
               <span className="hst-hero-title">NEEYE OLI 2024</span>
               <span className="hst-hero-tag">LIVE HOST</span>
             </div>
-
             <motion.div className="hst-hero-scan"
               animate={{ scaleX: bannerHover ? 1 : 0 }}
               transition={{ duration: 0.5, ease: [0.16,1,0.3,1] }}

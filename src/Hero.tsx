@@ -23,10 +23,16 @@ function useCounter(target: number, ms = 1600, active = false) {
   return v;
 }
 
+// ─────────────────────────────────────────────
+//  FIX: all three branches now use Link routing
+//  PROMOTIONS  → /work      (work hub)
+//  PRODUCTIONS → /services  (services hub)
+//  MUNAI       → /munai     (unchanged)
+// ─────────────────────────────────────────────
 const BRANCHES = [
-  { title: 'PROMOTIONS',  isScroll: true,  key: 'workRef',       path: '#work'       },
-  { title: 'PRODUCTIONS', isScroll: true,  key: 'promotionsRef', path: '#promotions' },
-  { title: 'MUNAI',       isScroll: false, key: '',              path: '/munai'       },
+  { title: 'PROMOTIONS',  path: '/work'     },
+  { title: 'PRODUCTIONS', path: '/services' },
+  { title: 'MUNAI',       path: '/munai'    },
 ];
 
 const TICKER_WORDS = ['CINEMA','PRODUCTION','STORYTELLING','DIRECTION','PROMOTIONS','COMEDY','DRAMA','SHORTS','ORIGINALS'];
@@ -36,8 +42,8 @@ export default function Hero({ onScrollRequest }: HeroProps) {
   const [ready,     setReady]     = useState(false);
   const [countOn,   setCountOn]   = useState(false);
 
-  const canvasRef  = useRef<HTMLCanvasElement>(null);
-  const rafRef     = useRef<number>(0);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const rafRef    = useRef<number>(0);
 
   const mx = useMotionValue(0);
   const my = useMotionValue(0);
@@ -53,6 +59,7 @@ export default function Hero({ onScrollRequest }: HeroProps) {
     return () => { clearTimeout(t1); clearTimeout(t2); };
   }, []);
 
+  /* ── canvas: particles + grid ── */
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -63,32 +70,42 @@ export default function Hero({ onScrollRequest }: HeroProps) {
     window.addEventListener('resize', resize);
 
     type P = { x: number; y: number; vy: number; vx: number; op: number; r: number; c: string };
-    const particles: P[] = Array.from({ length: 60 }, () => ({
+    const particles: P[] = Array.from({ length: 70 }, () => ({
       x:  Math.random() * window.innerWidth,
       y:  Math.random() * window.innerHeight,
-      vy: 0.25 + Math.random() * 0.55,
-      vx: (Math.random() - 0.5) * 0.15,
-      op: 0.06 + Math.random() * 0.2,
-      r:  Math.random() > 0.65 ? 1.4 : 0.7,
-      c:  Math.random() > 0.5 ? '#fde047' : '#32c5f4',
+      vy: 0.3 + Math.random() * 0.6,
+      vx: (Math.random() - 0.5) * 0.2,
+      op: 0.06 + Math.random() * 0.22,
+      r:  Math.random() > 0.6 ? 1.5 : 0.7,
+      // cyan dominant, gold accent
+      c:  Math.random() > 0.38 ? '#32c5f4' : '#fde047',
     }));
 
     let t = 0;
     const draw = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      t += 0.008;
+      t += 0.007;
 
-      const gridAlpha = 0.022 + Math.sin(t) * 0.008;
-      ctx.strokeStyle = `rgba(253,224,71,${gridAlpha})`;
+      /* perspective grid — cyan tint */
+      const gridAlpha = 0.018 + Math.sin(t) * 0.007;
+      ctx.strokeStyle = `rgba(50,197,244,${gridAlpha})`;
       ctx.lineWidth = 0.5;
-      const gridW = Math.max(canvas.width, 1);
-      const step  = 80;
-      for (let x = 0; x < gridW; x += step) {
+      const step = 80;
+      for (let x = 0; x < canvas.width + step; x += step) {
         ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, canvas.height); ctx.stroke();
       }
-      for (let y = 0; y < canvas.height; y += step) {
+      for (let y = 0; y < canvas.height + step; y += step) {
         ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(canvas.width, y); ctx.stroke();
       }
+
+      /* diagonal scan line */
+      const scanY = ((t * 60) % (canvas.height + 120)) - 60;
+      const scanGrad = ctx.createLinearGradient(0, scanY - 40, 0, scanY + 40);
+      scanGrad.addColorStop(0,   'rgba(50,197,244,0)');
+      scanGrad.addColorStop(0.5, 'rgba(50,197,244,0.025)');
+      scanGrad.addColorStop(1,   'rgba(50,197,244,0)');
+      ctx.fillStyle = scanGrad;
+      ctx.fillRect(0, scanY - 40, canvas.width, 80);
 
       particles.forEach(p => {
         ctx.beginPath();
@@ -114,344 +131,328 @@ export default function Hero({ onScrollRequest }: HeroProps) {
   const onMouseMove = useCallback((e: React.MouseEvent) => {
     const cx = window.innerWidth  / 2;
     const cy = window.innerHeight / 2;
-    mx.set((e.clientX - cx) * 0.018);
-    my.set((e.clientY - cy) * 0.018);
+    mx.set((e.clientX - cx) * 0.015);
+    my.set((e.clientY - cy) * 0.015);
   }, [mx, my]);
 
   return (
     <>
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,700;0,800;1,700;1,800&family=Bebas+Neue&family=Inter:wght@300;400;700;900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:wght@300;400&display=swap');
 
-        /* ─── font utility classes ─────────────── */
-        .bebas-font { font-family: 'Bebas Neue', sans-serif; }
-        .inter-font  { font-family: 'Inter', sans-serif; }
+        /* ── design tokens ── */
+        :root {
+          --cyan:    #32c5f4;
+          --yellow:  #fde047;
+          --black:   #000000;
+          --white:   #ffffff;
+          --cyan-dim:  rgba(50,197,244,0.12);
+          --cyan-mid:  rgba(50,197,244,0.35);
+          --yellow-dim: rgba(253,224,71,0.12);
+          --yellow-mid: rgba(253,224,71,0.40);
+        }
 
-        /* ─── reset ─────────────────────────────── */
         *, *::before, *::after { box-sizing: border-box; }
 
-        /* ─── ROOT ──────────────────────────────── */
+        /* ════ ROOT ════ */
         .h3-root {
           position: relative;
           width: 100%;
           height: 100svh;
-          min-height: 560px;
+          min-height: 580px;
           background: #000;
           display: grid;
           grid-template-rows: auto 1fr auto;
           align-items: stretch;
           overflow: hidden;
+          /* CRT scanline overlay */
+          --scanline: repeating-linear-gradient(
+            0deg, transparent, transparent 3px,
+            rgba(0,0,0,0.07) 3px, rgba(0,0,0,0.07) 4px
+          );
         }
-
         .h3-root::after {
           content: '';
           position: absolute; inset: 0;
-          background-image: repeating-linear-gradient(
-            0deg, transparent, transparent 3px,
-            rgba(0,0,0,0.055) 3px, rgba(0,0,0,0.055) 4px
-          );
+          background-image: var(--scanline);
           pointer-events: none; z-index: 5;
         }
 
+        /* vignette */
         .h3-vig {
           position: absolute; inset: 0;
-          background: radial-gradient(ellipse at 50% 35%, transparent 20%, rgba(0,0,0,0.85) 80%);
+          background: radial-gradient(ellipse at 50% 40%, transparent 20%, rgba(0,0,0,0.9) 80%);
           pointer-events: none; z-index: 2;
         }
 
-        .h3-canvas {
-          position: absolute; inset: 0;
-          pointer-events: none; z-index: 1;
-        }
+        .h3-canvas { position: absolute; inset: 0; pointer-events: none; z-index: 1; }
 
-        .h3-corner {
-          position: absolute; width: 22px; height: 22px; z-index: 8; pointer-events: none;
-        }
-        .h3-tl { top: 48px; left: 16px; border-top: 1px solid rgba(253,224,71,0.4); border-left: 1px solid rgba(253,224,71,0.4); }
-        .h3-tr { top: 48px; right: 16px; border-top: 1px solid rgba(253,224,71,0.4); border-right: 1px solid rgba(253,224,71,0.4); }
-        .h3-bl { bottom: 14px; left: 16px; border-bottom: 1px solid rgba(50,197,244,0.3); border-left: 1px solid rgba(50,197,244,0.3); }
-        .h3-br { bottom: 14px; right: 16px; border-bottom: 1px solid rgba(50,197,244,0.3); border-right: 1px solid rgba(50,197,244,0.3); }
+        /* corner brackets */
+        .h3-corner { position: absolute; width: 24px; height: 24px; z-index: 8; pointer-events: none; }
+        .h3-tl { top: 50px; left: 18px; border-top: 1.5px solid rgba(50,197,244,0.5); border-left: 1.5px solid rgba(50,197,244,0.5); }
+        .h3-tr { top: 50px; right: 18px; border-top: 1.5px solid rgba(50,197,244,0.5); border-right: 1.5px solid rgba(50,197,244,0.5); }
+        .h3-bl { bottom: 16px; left: 18px; border-bottom: 1.5px solid rgba(253,224,71,0.35); border-left: 1.5px solid rgba(253,224,71,0.35); }
+        .h3-br { bottom: 16px; right: 18px; border-bottom: 1.5px solid rgba(253,224,71,0.35); border-right: 1.5px solid rgba(253,224,71,0.35); }
 
-        .h3-rec {
-          position: absolute; top: 54px; right: 48px;
-          display: flex; align-items: center; gap: 5px;
-          z-index: 9; pointer-events: none;
-        }
-        .h3-rec-dot {
-          width: 7px; height: 7px; border-radius: 50%;
-          background: #ff3333;
-          box-shadow: 0 0 8px rgba(255,51,51,0.8);
-          animation: h3Rec 1s step-end infinite;
-        }
+        /* REC indicator */
+        .h3-rec { position: absolute; top: 56px; right: 52px; display: flex; align-items: center; gap: 6px; z-index: 9; pointer-events: none; }
+        .h3-rec-dot { width: 7px; height: 7px; border-radius: 50%; background: #ff3333; box-shadow: 0 0 8px rgba(255,51,51,0.9); animation: h3Rec 1s step-end infinite; }
         @keyframes h3Rec { 0%,100%{opacity:1} 50%{opacity:0} }
-        .h3-rec-txt {
-          /* Inter — UI label */
-          font-family: 'Inter', sans-serif;
-          font-size: 0.52rem; letter-spacing: 2px; font-weight: 700;
-          color: rgba(255,60,60,0.8);
-        }
+        .h3-rec-txt { font-family:'DM Mono',monospace; font-size:0.52rem; letter-spacing:3px; color:rgba(255,60,60,0.85); }
 
-        /* ════════════════════════════════════════════
-           GATE
-        ════════════════════════════════════════════ */
+        /* ════ GATE ════ */
         .h3-gate {
           position: fixed; inset: 0; z-index: 200;
           background: #000;
-          display: flex; align-items: center; justify-content: center;
-          flex-direction: column; gap: 0;
-          padding: 24px;
+          display: flex; align-items: center; justify-content: center; flex-direction: column;
+          gap: 0; padding: 24px;
         }
+        /* diagonal accent strip */
         .h3-gate::before {
           content: '';
-          position: absolute;
-          top: -40%; left: -20%; width: 60%; height: 200%;
-          background: rgba(253,224,71,0.025);
-          transform: rotate(-12deg);
-          pointer-events: none;
+          position: absolute; top: -40%; left: -20%; width: 55%; height: 200%;
+          background: rgba(50,197,244,0.03);
+          transform: rotate(-12deg); pointer-events: none;
         }
-
         .h3-gate-pre {
-          /* Inter light — small label */
-          font-family: 'Inter', sans-serif;
-          font-size: clamp(0.6rem, 2.5vw, 0.78rem);
-          font-weight: 300;
-          letter-spacing: 10px; color: rgba(253,224,71,0.65);
-          text-transform: uppercase; margin: 0 0 16px;
-          text-align: center;
+          font-family: 'DM Mono', monospace;
+          font-size: clamp(0.58rem,2.5vw,0.76rem);
+          font-weight: 300; letter-spacing: 10px;
+          color: rgba(50,197,244,0.7);
+          text-transform: uppercase; margin: 0 0 14px; text-align: center;
         }
-
         .h3-gate-word {
           display: block;
-          /* Bebas Neue — giant display */
           font-family: 'Bebas Neue', sans-serif;
-          font-size: clamp(3.5rem, 16vw, 11rem);
-          font-weight: 400;
-          line-height: 0.9; letter-spacing: 4px;
-          text-align: center;
+          font-size: clamp(3.5rem,16vw,11rem);
+          line-height: 0.9; letter-spacing: 4px; text-align: center;
         }
         .h3-gate-w1 { color: #fff; }
-        .h3-gate-w2 { color: #fde047; }
+        .h3-gate-w2 { color: var(--cyan); text-shadow: 0 0 60px rgba(50,197,244,0.45); }
 
         .h3-gate-bar {
           width: 0; height: 2px;
-          background: linear-gradient(90deg, #fde047, #32c5f4);
-          margin: 20px auto;
+          background: linear-gradient(90deg, var(--cyan), var(--yellow));
+          margin: 22px auto;
           animation: h3BarGrow 0.8s ease forwards 0.5s;
         }
-        @keyframes h3BarGrow { to { width: min(220px, 60vw); } }
+        @keyframes h3BarGrow { to { width: min(240px, 60vw); } }
 
         .h3-gate-sub {
-          /* Inter — small sub label */
-          font-family: 'Inter', sans-serif;
-          font-size: clamp(0.55rem, 2vw, 0.7rem);
-          font-weight: 300;
-          letter-spacing: 7px; color: rgba(255,255,255,0.3);
+          font-family: 'DM Mono', monospace;
+          font-size: clamp(0.52rem,2vw,0.68rem);
+          font-weight: 300; letter-spacing: 7px;
+          color: rgba(255,255,255,0.28);
           text-transform: uppercase; text-align: center;
         }
 
-        /* ════════════════════════════════════════════
-           TICKER
-        ════════════════════════════════════════════ */
+        /* ════ TICKER ════ */
         .h3-ticker {
-          position: relative; z-index: 10;
-          width: 100%;
-          background: rgba(253,224,71,0.05);
-          border-bottom: 1px solid rgba(253,224,71,0.2);
-          overflow: hidden;
-          height: 34px;
+          position: relative; z-index: 10; width: 100%;
+          background: rgba(50,197,244,0.04);
+          border-bottom: 1px solid rgba(50,197,244,0.18);
+          overflow: hidden; height: 36px;
           display: flex; align-items: center;
         }
         .h3-ticker-track {
           display: flex; white-space: nowrap;
-          animation: h3Tick 24s linear infinite;
+          animation: h3Tick 28s linear infinite;
         }
         @keyframes h3Tick { to { transform: translateX(-50%); } }
         .h3-ticker-item {
-          /* Bebas Neue — ticker strip */
           font-family: 'Bebas Neue', sans-serif;
-          font-size: clamp(0.85rem, 1.8vw, 1rem);
-          letter-spacing: 6px; color: rgba(253,224,71,0.7);
+          font-size: clamp(0.85rem,1.8vw,1rem);
+          letter-spacing: 6px; color: rgba(50,197,244,0.65);
           text-transform: uppercase; padding: 0 28px; flex-shrink: 0;
         }
-        .h3-ticker-sep { color: #32c5f4; margin: 0 4px; }
+        .h3-ticker-sep { color: var(--yellow); margin: 0 4px; }
 
-        /* ════════════════════════════════════════════
-           MAIN AREA
-        ════════════════════════════════════════════ */
+        /* ════ MAIN ════ */
         .h3-main {
           position: relative; z-index: 10;
           display: flex; flex-direction: column;
           align-items: center; justify-content: center;
           padding: clamp(20px,4vh,40px) clamp(16px,5vw,48px);
-          gap: clamp(10px,2vh,20px);
-          overflow: hidden;
+          gap: clamp(10px,2vh,18px);
         }
 
-        /* ── pre label ── */
-        .h3-pre {
-          display: flex; align-items: center; gap: 12px;
-        }
-        .h3-pre-line {
-          width: clamp(24px,5vw,44px); height: 1px;
-          background: rgba(253,224,71,0.5);
-        }
+        /* pre label */
+        .h3-pre { display: flex; align-items: center; gap: 12px; }
+        .h3-pre-line { width: clamp(24px,5vw,44px); height: 1px; background: rgba(50,197,244,0.4); }
         .h3-pre-txt {
-          /* Inter — small label */
-          font-family: 'Inter', sans-serif;
-          font-size: clamp(0.52rem, 1.8vw, 0.66rem);
-          font-weight: 400;
+          font-family: 'DM Mono', monospace;
+          font-size: clamp(0.5rem,1.8vw,0.64rem); font-weight: 300;
           letter-spacing: clamp(4px,1vw,7px);
-          color: rgba(253,224,71,0.8);
+          color: rgba(50,197,244,0.75);
           text-transform: uppercase; white-space: nowrap;
         }
 
-        /* ── brand ── */
+        /* brand */
         .h3-brand {
           display: flex; align-items: baseline;
           justify-content: center; gap: clamp(8px,2vw,16px);
           flex-wrap: wrap; text-align: center;
         }
         .h3-name {
-          /* Bebas Neue — hero title */
           font-family: 'Bebas Neue', sans-serif;
-          font-size: clamp(38px, 10.5vw, 120px);
-          font-weight: 400;
-          color: #fde047; line-height: 0.9;
-          letter-spacing: clamp(4px, 1vw, 10px);
-          text-shadow:
-            0 0 50px rgba(253,224,71,0.28),
-            0 0 120px rgba(253,224,71,0.1);
+          font-size: clamp(38px,10.5vw,120px);
+          color: var(--yellow); line-height: 0.9;
+          letter-spacing: clamp(4px,1vw,10px);
+          text-shadow: 0 0 50px rgba(253,224,71,0.3), 0 0 120px rgba(253,224,71,0.12);
         }
         .h3-inc {
-          /* Bebas Neue — INC tag */
           font-family: 'Bebas Neue', sans-serif;
-          font-size: clamp(14px, 2.8vw, 30px);
-          color: #32c5f4; letter-spacing: 8px;
-          text-shadow: 0 0 16px rgba(50,197,244,0.7);
+          font-size: clamp(14px,2.8vw,30px);
+          color: var(--cyan); letter-spacing: 8px;
+          text-shadow: 0 0 20px rgba(50,197,244,0.8);
           align-self: flex-end; padding-bottom: 0.06em;
         }
 
-        /* ── gradient rule ── */
+        /* gradient rule */
         .h3-rule {
           width: clamp(100px,35%,260px); height: 1px;
-          background: linear-gradient(90deg, transparent, #fde047 40%, #32c5f4 70%, transparent);
-          opacity: 0.55;
+          background: linear-gradient(90deg, transparent, var(--cyan) 30%, var(--yellow) 70%, transparent);
+          opacity: 0.6;
         }
 
-        /* ── tagline ── */
+        /* tagline */
         .h3-tagline {
-          /* Inter — body tagline */
-          font-family: 'Inter', sans-serif;
-          font-size: clamp(0.82rem, 2vw, 1.05rem);
+          font-family: 'DM Mono', monospace;
+          font-size: clamp(0.72rem,1.8vw,0.92rem);
           font-weight: 300;
-          color: rgba(255,255,255,0.5);
-          text-align: center; line-height: 1.75;
-          max-width: 520px;
-          margin: 0;
+          color: rgba(255,255,255,0.4);
+          text-align: center; line-height: 1.85; max-width: 480px;
         }
         .h3-tagline b {
-          color: rgba(255,255,255,0.88);
-          font-weight: 700;
-          border-bottom: 1px solid rgba(253,224,71,0.4);
-          padding-bottom: 1px;
+          color: rgba(255,255,255,0.85); font-weight: 400;
+          border-bottom: 1px solid rgba(253,224,71,0.45); padding-bottom: 1px;
         }
 
-        /* ── spine ── */
+        /* spine connector */
         .h3-spine {
           width: 1px;
-          background: linear-gradient(to bottom, rgba(253,224,71,0.6), rgba(50,197,244,0.3));
+          background: linear-gradient(to bottom, rgba(253,224,71,0.5), rgba(50,197,244,0.25));
         }
 
-        /* ── nav branches ── */
+        /* ════ TREE BRANCHES ════ */
         .h3-branches {
           display: flex; justify-content: center;
           align-items: flex-start;
-          gap: 0; width: 100%; max-width: 720px;
-          flex-wrap: wrap; row-gap: 12px;
+          width: 100%; max-width: 680px;
         }
-
         .h3-hbridge {
           display: flex; width: 100%;
           justify-content: space-between; align-items: flex-start;
           position: relative;
         }
+        /* horizontal connector line */
         .h3-hbridge::before {
           content: '';
           position: absolute; top: 0; left: 16.5%; right: 16.5%;
           height: 1px;
-          background: linear-gradient(90deg, transparent, rgba(253,224,71,0.3), transparent);
+          background: linear-gradient(90deg,
+            transparent,
+            rgba(50,197,244,0.25) 20%,
+            rgba(253,224,71,0.30) 50%,
+            rgba(50,197,244,0.25) 80%,
+            transparent
+          );
+        }
+        /* dim siblings on hover */
+        .h3-hbridge:hover .h3-node:not(:hover) {
+          opacity: 0.15; filter: blur(1.5px);
         }
 
         .h3-node {
           display: flex; flex-direction: column;
           align-items: center; flex: 1;
-          transition: opacity 0.4s, filter 0.4s;
-          min-width: 120px;
-        }
-        .h3-hbridge:hover .h3-node:not(:hover) {
-          opacity: 0.18; filter: blur(1.5px);
+          transition: opacity 0.35s, filter 0.35s;
+          min-width: 110px;
         }
 
+        /* vertical stem */
         .h3-stem {
           width: 1px; height: 30px;
-          background: rgba(253,224,71,0.35);
-          transition: background 0.4s, box-shadow 0.35s;
+          background: rgba(50,197,244,0.3);
+          transition: background 0.35s, box-shadow 0.35s;
         }
         .h3-node:hover .h3-stem {
-          background: #32c5f4;
-          box-shadow: 0 0 12px rgba(50,197,244,0.6);
+          background: var(--yellow);
+          box-shadow: 0 0 14px rgba(253,224,71,0.5);
         }
 
+        /* node box */
         .h3-box {
           position: relative; overflow: hidden;
-          padding: clamp(10px,1.8vw,14px) clamp(16px,3.5vw,32px);
-          border: 1px solid rgba(255,255,255,0.1);
-          background: rgba(6,6,6,0.82);
+          padding: clamp(10px,1.8vw,14px) clamp(16px,3.5vw,30px);
+          border: 1px solid rgba(50,197,244,0.15);
+          background: rgba(0,0,0,0.85);
           cursor: pointer;
           transition: border-color 0.35s, transform 0.35s, box-shadow 0.35s;
         }
+        /* fill sweep on hover */
         .h3-box::before {
           content: ''; position: absolute; inset: 0;
-          background: rgba(50,197,244,0.08);
+          background: rgba(253,224,71,0.07);
           transform: scaleX(0); transform-origin: left; z-index: 0;
           transition: transform 0.4s cubic-bezier(0.77,0,0.18,1);
         }
         .h3-node:hover .h3-box::before { transform: scaleX(1); }
         .h3-node:hover .h3-box {
-          border-color: rgba(50,197,244,0.35);
-          transform: translateY(5px);
-          box-shadow: 0 8px 24px rgba(50,197,244,0.07);
+          border-color: rgba(253,224,71,0.5);
+          transform: translateY(6px);
+          box-shadow: 0 8px 28px rgba(253,224,71,0.1), 0 0 0 1px rgba(253,224,71,0.08);
         }
+        /* corner accent */
         .h3-box::after {
           content: '';
           position: absolute; top: 0; left: 0;
           width: 10px; height: 10px;
-          border-top: 1px solid rgba(253,224,71,0.5);
-          border-left: 1px solid rgba(253,224,71,0.5);
+          border-top: 1px solid rgba(50,197,244,0.5);
+          border-left: 1px solid rgba(50,197,244,0.5);
           z-index: 5;
         }
+        /* bottom-right corner */
+        .h3-box-br {
+          position: absolute; bottom: 0; right: 0;
+          width: 10px; height: 10px;
+          border-bottom: 1px solid rgba(253,224,71,0.35);
+          border-right: 1px solid rgba(253,224,71,0.35);
+          pointer-events: none; z-index: 5;
+        }
 
+        /* link label inside box */
         .h3-link {
-          /* Bebas Neue — nav labels */
           font-family: 'Bebas Neue', sans-serif;
-          font-size: clamp(0.9rem, 2vw, 1.1rem);
-          letter-spacing: clamp(4px, 0.8vw, 7px);
-          color: rgba(255,255,255,0.7);
+          font-size: clamp(0.9rem,2vw,1.1rem);
+          letter-spacing: clamp(4px,0.8vw,7px);
+          color: rgba(255,255,255,0.65);
           text-decoration: none; text-transform: uppercase;
           display: block; position: relative; z-index: 1;
-          text-align: center; cursor: pointer;
+          text-align: center;
           transition: color 0.3s;
         }
         .h3-node:hover .h3-link {
-          color: #fff;
-          text-shadow: 0 0 10px rgba(50,197,244,0.5);
+          color: var(--yellow);
+          text-shadow: 0 0 12px rgba(253,224,71,0.45);
         }
 
-        /* ── stats strip ── */
+        /* sub-label under title */
+        .h3-link-sub {
+          font-family: 'DM Mono', monospace;
+          font-size: 0.48rem; letter-spacing: 3px;
+          color: rgba(50,197,244,0.45);
+          text-align: center; margin-top: 3px;
+          text-transform: uppercase; display: block;
+          transition: color 0.3s;
+        }
+        .h3-node:hover .h3-link-sub { color: rgba(253,224,71,0.55); }
+
+        /* ════ STATS ════ */
         .h3-stats {
           display: flex;
-          border: 1px solid rgba(255,255,255,0.07);
-          background: rgba(255,255,255,0.02);
+          border: 1px solid rgba(50,197,244,0.1);
+          background: rgba(50,197,244,0.02);
           width: 100%; max-width: 560px;
         }
         .h3-stat {
@@ -459,121 +460,87 @@ export default function Hero({ onScrollRequest }: HeroProps) {
           display: flex; flex-direction: column;
           align-items: center; gap: 4px;
         }
-        .h3-stat + .h3-stat { border-left: 1px solid rgba(255,255,255,0.07); }
+        .h3-stat + .h3-stat { border-left: 1px solid rgba(50,197,244,0.1); }
         .h3-stat-num {
-          /* Bebas Neue — stat numbers */
           font-family: 'Bebas Neue', sans-serif;
-          font-size: clamp(1.8rem, 4.5vw, 2.8rem);
-          font-weight: 400; color: #32c5f4; line-height: 1;
-          letter-spacing: 2px;
+          font-size: clamp(1.8rem,4.5vw,2.8rem);
+          color: var(--cyan); line-height: 1; letter-spacing: 2px;
         }
-        .h3-stat-sup { font-size: 0.55em; vertical-align: super; color: #fde047; }
+        .h3-stat-sup { font-size: 0.55em; vertical-align: super; color: var(--yellow); }
         .h3-stat-lbl {
-          /* Inter — stat labels */
-          font-family: 'Inter', sans-serif;
-          font-size: clamp(0.44rem,1vw,0.52rem);
-          font-weight: 400;
-          letter-spacing: 3px; color: rgba(255,255,255,0.4);
-          text-transform: uppercase; text-align: center; line-height: 1.5;
+          font-family: 'DM Mono', monospace;
+          font-size: clamp(0.42rem,1vw,0.5rem); font-weight: 300;
+          letter-spacing: 3px; color: rgba(255,255,255,0.35);
+          text-transform: uppercase; text-align: center; line-height: 1.6;
         }
 
-        /* ════════════════════════════════════════════
-           FOOTER ROW
-        ════════════════════════════════════════════ */
+        /* ════ FOOTER ROW ════ */
         .h3-footer {
           position: relative; z-index: 10;
           display: flex; align-items: center; justify-content: space-between;
           padding: 0 clamp(16px,5vw,48px) clamp(14px,3vh,28px);
           gap: 12px;
         }
-
         .h3-byline { flex: 1; }
         .h3-byline-lbl {
-          /* Inter — small eyebrow */
-          font-family: 'Inter', sans-serif;
-          font-size: clamp(0.44rem,1.4vw,0.56rem);
-          font-weight: 400;
-          letter-spacing: 5px; color: rgba(255,255,255,0.35);
+          font-family: 'DM Mono', monospace;
+          font-size: clamp(0.42rem,1.4vw,0.54rem); font-weight: 300;
+          letter-spacing: 5px; color: rgba(50,197,244,0.45);
           text-transform: uppercase; display: block; margin-bottom: 4px;
         }
         .h3-byline-name {
-          /* Bebas Neue — name display */
           font-family: 'Bebas Neue', sans-serif;
-          font-size: clamp(1.2rem, 3vw, 2.1rem);
-          font-weight: 400;
-          color: rgba(255,255,255,0.7); letter-spacing: 4px; margin: 0;
-          line-height: 1;
+          font-size: clamp(1.2rem,3vw,2.1rem);
+          color: rgba(255,255,255,0.7); letter-spacing: 4px; line-height: 1;
         }
 
-        .h3-scroll {
-          display: flex; flex-direction: column;
-          align-items: center; gap: 0;
-          flex-shrink: 0;
-        }
+        /* scroll indicator */
+        .h3-scroll { display: flex; flex-direction: column; align-items: center; gap: 0; flex-shrink: 0; }
         .h3-scroll-lbl {
-          /* Inter — scroll label */
-          font-family: 'Inter', sans-serif;
-          font-size: clamp(0.44rem,1.3vw,0.54rem);
-          font-weight: 300;
-          letter-spacing: 5px; color: rgba(255,255,255,0.28);
+          font-family: 'DM Mono', monospace;
+          font-size: clamp(0.42rem,1.3vw,0.52rem); font-weight: 300;
+          letter-spacing: 5px; color: rgba(255,255,255,0.22);
           text-transform: uppercase; margin-bottom: 8px;
         }
         .h3-mouse {
           width: 20px; height: 30px;
-          border: 1px solid rgba(255,255,255,0.18); border-radius: 10px;
+          border: 1px solid rgba(50,197,244,0.25); border-radius: 10px;
           display: flex; justify-content: center;
         }
-        .h3-wheel {
-          width: 2px; height: 6px; margin-top: 5px;
-          background: #32c5f4; border-radius: 2px;
-        }
+        .h3-wheel { width: 2px; height: 6px; margin-top: 5px; background: var(--cyan); border-radius: 2px; }
         .h3-scroll-line {
           width: 1px; height: 22px; margin-top: 7px;
-          background: linear-gradient(to bottom, #32c5f4, transparent);
+          background: linear-gradient(to bottom, var(--cyan), transparent);
           animation: h3SL 2s ease-in-out infinite;
         }
-        @keyframes h3SL { 0%,100%{opacity:.28} 50%{opacity:1} }
+        @keyframes h3SL { 0%,100%{opacity:.25} 50%{opacity:1} }
 
         .h3-seq {
           flex: 1; text-align: right;
-          /* Inter — seq tag */
-          font-family: 'Inter', sans-serif;
-          font-size: clamp(0.44rem,1.4vw,0.56rem);
-          font-weight: 300;
-          letter-spacing: 3px; color: rgba(255,255,255,0.2);
-          text-transform: uppercase;
-          line-height: 1.6;
+          font-family: 'DM Mono', monospace;
+          font-size: clamp(0.42rem,1.4vw,0.54rem); font-weight: 300;
+          letter-spacing: 3px; color: rgba(255,255,255,0.18);
+          text-transform: uppercase; line-height: 1.7;
         }
         .h3-seq span { display: block; }
-        .h3-seq strong { color: rgba(253,224,71,0.5); font-weight: 700; }
+        .h3-seq strong { color: rgba(50,197,244,0.55); font-weight: 400; }
 
-        /* ════════════════════════════════════════════
-           RESPONSIVE
-        ════════════════════════════════════════════ */
+        /* ════ RESPONSIVE ════ */
         @media (max-width: 640px) {
-          .h3-hbridge::before { display: none; }
-          .h3-hbridge {
-            flex-direction: column; align-items: center;
-            gap: 10px; width: 100%;
-          }
-          .h3-stem   { display: none; }
-          .h3-node   { min-width: 0; width: 100%; max-width: 230px; }
-          .h3-box    { width: 100%; text-align: center; }
-          .h3-hbridge:hover .h3-node:not(:hover) { opacity: 1; filter: none; }
-
+          .h3-node   { min-width: 80px; }
+          .h3-box    { padding: 8px 12px; }
+          .h3-link   { font-size: 0.8rem; letter-spacing: 2px; }
+          .h3-stem   { height: 20px; }
           .h3-footer { flex-direction: column; align-items: center; text-align: center; gap: 8px; }
           .h3-byline { text-align: center; }
           .h3-seq    { text-align: center; }
           .h3-rec    { display: none; }
         }
-
         @media (max-width: 380px) {
-          .h3-name   { font-size: 34px; }
-          .h3-box    { padding: 10px 14px; }
-          .h3-stats  { max-width: 100%; }
-          .h3-main   { gap: 8px; }
+          .h3-name  { font-size: 34px; }
+          .h3-stats { max-width: 100%; }
+          .h3-main  { gap: 8px; }
         }
-
         @media (max-height: 520px) and (orientation: landscape) {
           .h3-root    { height: auto; min-height: 100svh; }
           .h3-spine   { display: none; }
@@ -599,9 +566,7 @@ export default function Hero({ onScrollRequest }: HeroProps) {
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1 }}
-            >
-              WELCOME TO
-            </motion.p>
+            >WELCOME TO</motion.p>
 
             <div style={{ overflow: 'hidden' }}>
               <motion.span
@@ -609,9 +574,7 @@ export default function Hero({ onScrollRequest }: HeroProps) {
                 initial={{ y: '100%' }}
                 animate={{ y: 0 }}
                 transition={{ delay: 0.18, duration: 0.7, ease: [0.16,1,0.3,1] }}
-              >
-                CINEMA
-              </motion.span>
+              >CINEMA</motion.span>
             </div>
             <div style={{ overflow: 'hidden' }}>
               <motion.span
@@ -619,26 +582,21 @@ export default function Hero({ onScrollRequest }: HeroProps) {
                 initial={{ y: '100%' }}
                 animate={{ y: 0 }}
                 transition={{ delay: 0.3, duration: 0.7, ease: [0.16,1,0.3,1] }}
-              >
-                PAYYAN
-              </motion.span>
+              >PAYYAN</motion.span>
             </div>
 
             <div className="h3-gate-bar" />
-
             <motion.p
               className="h3-gate-sub"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.7 }}
-            >
-              PRODUCTIONS · INC · EST. 2014
-            </motion.p>
+            >PRODUCTIONS · INC · EST. 2014</motion.p>
           </motion.div>
         )}
       </AnimatePresence>
 
-      {/* ════ HERO ════ */}
+      {/* ════ HERO SCENE ════ */}
       <motion.div
         className="h3-root"
         onMouseMove={onMouseMove}
@@ -662,13 +620,13 @@ export default function Hero({ onScrollRequest }: HeroProps) {
           <div className="h3-ticker-track">
             {[0,1].map(r => TICKER_WORDS.map((w,i) => (
               <span key={`${r}-${i}`} className="h3-ticker-item">
-                {w}<span className="h3-ticker-sep">•</span>
+                {w}<span className="h3-ticker-sep">◆</span>
               </span>
             )))}
           </div>
         </div>
 
-        {/* ── MAIN ── */}
+        {/* ── MAIN CONTENT ── */}
         <div className="h3-main">
 
           <motion.div className="h3-pre"
@@ -715,6 +673,7 @@ export default function Hero({ onScrollRequest }: HeroProps) {
             transition={{ delay:0.35, duration:0.6 }}
           />
 
+          {/* ════ TREE BRANCHES — all three use <Link> now ════ */}
           <motion.div
             initial={{ opacity:0 }}
             animate={{ opacity: ready?1:0 }}
@@ -725,16 +684,20 @@ export default function Hero({ onScrollRequest }: HeroProps) {
               <div className="h3-hbridge">
                 {BRANCHES.map((b, i) => (
                   <motion.div key={i} className="h3-node"
-                    initial={{ opacity:0, y:14 }}
-                    animate={{ opacity: ready?1:0, y: ready?0:14 }}
-                    transition={{ delay: 0.5 + i*0.1, duration:0.5 }}
+                    initial={{ opacity:0, y:16 }}
+                    animate={{ opacity: ready?1:0, y: ready?0:16 }}
+                    transition={{ delay: 0.48 + i*0.1, duration:0.55 }}
                   >
                     <div className="h3-stem" />
                     <div className="h3-box">
-                      {b.isScroll
-                        ? <div className="h3-link" onClick={() => onScrollRequest?.(b.key)}>{b.title}</div>
-                        : <Link to={b.path} className="h3-link">{b.title}</Link>
-                      }
+                      {/* ── FIX: all branches now use <Link to={path}> ── */}
+                      <Link to={b.path} className="h3-link">{b.title}</Link>
+                      <span className="h3-link-sub">
+                        {b.path === '/work'     && 'VIEW PROJECTS →'}
+                        {b.path === '/services' && 'VIEW SERVICES →'}
+                        {b.path === '/munai'    && 'OPEN PORTAL →'}
+                      </span>
+                      <span className="h3-box-br" />
                     </div>
                   </motion.div>
                 ))}
@@ -742,6 +705,7 @@ export default function Hero({ onScrollRequest }: HeroProps) {
             </div>
           </motion.div>
 
+          {/* ── STATS ── */}
           <motion.div className="h3-stats"
             initial={{ opacity:0, y:14 }}
             animate={{ opacity: ready?1:0, y: ready?0:14 }}
@@ -763,7 +727,7 @@ export default function Hero({ onScrollRequest }: HeroProps) {
 
         </div>
 
-        {/* ── FOOTER ── */}
+        {/* ── FOOTER ROW ── */}
         <motion.div className="h3-footer"
           initial={{ opacity:0 }}
           animate={{ opacity: ready?1:0 }}

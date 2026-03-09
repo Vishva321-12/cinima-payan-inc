@@ -93,7 +93,6 @@ const CreativeProducer = () => {
     activeTab === "images"  ? imagesList  :
     activeTab === "reels"   ? reelsList   : youtubeList;
 
-  /* Dot sync — finds which card centre is closest to scroll container centre */
   const handleScroll = () => {
     const container = scrollRef.current;
     if (!container) return;
@@ -115,7 +114,6 @@ const CreativeProducer = () => {
     setScrollIndex(0);
   }, [activeTab]);
 
-  /* Dot click → scroll so card centre aligns to container centre */
   const scrollToCard = (i: number) => {
     setScrollIndex(i);
     const container = scrollRef.current;
@@ -135,7 +133,7 @@ const CreativeProducer = () => {
   return (
     <>
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;0,800;1,600;1,700;1,800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;700;900&display=swap');
 
         .cpcp-section {
           background: #000;
@@ -181,20 +179,24 @@ const CreativeProducer = () => {
           display: flex; align-items: center; justify-content: center;
           color: #fde047; flex-shrink: 0;
         }
+
+        /* Inter — overline */
         .cpcp-overline {
-          font-family: 'Courier New', monospace;
-          font-size: 0.7rem; letter-spacing: 4px;
-          color: rgba(255,255,255,0.65); text-transform: uppercase;
-          display: block; margin-bottom: 4px;
+          font-family: 'Inter', sans-serif;
+          font-size: clamp(0.48rem, 1.5vw, 0.6rem);
+          font-weight: 400; letter-spacing: 6px;
+          color: rgba(255,255,255,0.55); text-transform: uppercase;
+          display: block; margin-bottom: 5px;
         }
+
+        /* Bebas Neue — section heading */
         .cpcp-heading {
-          font-family: 'Cormorant Garamond', Georgia, serif;
-          font-size: clamp(1.6rem, 3.5vw, 2.8rem);
-          font-weight: 800; font-style: italic;
+          font-family: 'Bebas Neue', sans-serif;
+          font-size: clamp(1.8rem, 4.5vw, 3.2rem);
+          font-weight: 400; letter-spacing: 3px;
           color: #fff; line-height: 1; margin: 0;
-          letter-spacing: -0.5px;
         }
-        .cpcp-heading-yellow { color: #fde047; font-style: normal; }
+        .cpcp-heading-yellow { color: #fde047; }
 
         /* ── FEATURE CARD ── */
         .cpcp-feature {
@@ -205,59 +207,90 @@ const CreativeProducer = () => {
           margin-bottom: 100px;
         }
 
+        /* Image side — extra bottom padding to give room for insta btn */
         .cpcp-img-side {
           position: relative;
           display: flex; align-items: center; justify-content: center;
-          padding-bottom: 32px;
+          padding-bottom: 56px;
         }
         .cpcp-corner { position: absolute; width: 20px; height: 20px; pointer-events: none; z-index: 5; }
         .cpcp-corner--tl { top:-8px; left:-8px; border-top:1px solid rgba(253,224,71,0.5); border-left:1px solid rgba(253,224,71,0.5); }
         .cpcp-corner--tr { top:-8px; right:-8px; border-top:1px solid rgba(253,224,71,0.5); border-right:1px solid rgba(253,224,71,0.5); }
-        .cpcp-corner--bl { bottom:32px; left:-8px; border-bottom:1px solid rgba(50,197,244,0.4); border-left:1px solid rgba(50,197,244,0.4); }
-        .cpcp-corner--br { bottom:32px; right:-8px; border-bottom:1px solid rgba(50,197,244,0.4); border-right:1px solid rgba(50,197,244,0.4); }
+        .cpcp-corner--bl { bottom:56px; left:-8px; border-bottom:1px solid rgba(50,197,244,0.4); border-left:1px solid rgba(50,197,244,0.4); }
+        .cpcp-corner--br { bottom:56px; right:-8px; border-bottom:1px solid rgba(50,197,244,0.4); border-right:1px solid rgba(50,197,244,0.4); }
 
         .cpcp-img {
           max-width: 100%; height: auto; display: block;
           filter: drop-shadow(0 20px 50px rgba(0,0,0,0.85));
-          transition: transform 0.6s ease;
         }
-        .cpcp-img-side:hover .cpcp-img { transform: scale(1.04) rotate(-1deg); }
         .cpcp-img-glow {
           position: absolute; inset: 0;
           background: radial-gradient(circle at center, rgba(50,197,244,0.07) 0%, transparent 65%);
           pointer-events: none; z-index: 0;
         }
-           {
-          position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
-          display: flex; align-items: center; gap: 8px;
-          font-family: 'Courier New', monospace;
-          font-size: 0.65rem; letter-spacing: 3px; text-transform: uppercase;
-          color: rgba(255,255,255,0.8);
-          background: rgba(0,0,0,0.75); backdrop-filter: blur(10px);
-          border: 1px solid rgba(255,255,255,0.18);
-          padding: 9px 18px; text-decoration: none; white-space: nowrap;
-          transition: border-color 0.3s, color 0.3s; z-index: 6;
+
+        /* ── Instagram button — fixed bottom of image side ── */
+        .cpcp-insta-btn {
+          position: absolute;
+          bottom: 0; left: 50%;
+          transform: translateX(-50%);
+          display: inline-flex; align-items: center; gap: 9px;
+          /* Inter */
+          font-family: 'Inter', sans-serif;
+          font-size: clamp(0.44rem, 1.2vw, 0.56rem);
+          font-weight: 700; letter-spacing: 4px;
+          text-transform: uppercase; text-decoration: none;
+          white-space: nowrap;
+          /* pill style */
+          color: rgba(255,255,255,0.85);
+          background: rgba(0,0,0,0.78);
+          backdrop-filter: blur(14px);
+          border: 1px solid rgba(253,224,71,0.35);
+          padding: 10px 22px;
+          z-index: 8;
+          transition: border-color 0.3s, color 0.3s, background 0.3s;
+          overflow: hidden;
+          position: absolute;
         }
-        .cpcp-insta-btn:hover { border-color: #fde047; color: #fde047; }
+        /* fill sweep on hover */
+        .cpcp-insta-btn::before {
+          content: '';
+          position: absolute; inset: 0;
+          background: #fde047;
+          transform: scaleX(0); transform-origin: left; z-index: 0;
+          transition: transform 0.38s cubic-bezier(0.77,0,0.18,1);
+        }
+        .cpcp-insta-btn:hover::before { transform: scaleX(1); }
+        .cpcp-insta-btn:hover { color: #000; border-color: #fde047; }
+        .cpcp-insta-btn svg,
+        .cpcp-insta-btn span { position: relative; z-index: 1; }
 
         /* content side */
         .cpcp-pre { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
         .cpcp-pre-line { width: 28px; height: 1px; background: #fde047; opacity: 0.5; }
+
+        /* Inter — pre-label */
         .cpcp-pre-text {
-          font-family: 'Courier New', monospace;
-          font-size: 0.7rem; letter-spacing: 4px;
+          font-family: 'Inter', sans-serif;
+          font-size: clamp(0.48rem, 1.2vw, 0.6rem);
+          font-weight: 400; letter-spacing: 6px;
           color: rgba(253,224,71,0.8); text-transform: uppercase;
         }
+
+        /* Bebas Neue — feature title */
         .cpcp-title {
-          font-family: 'Cormorant Garamond', Georgia, serif;
-          font-size: clamp(2.2rem, 5vw, 4rem);
-          font-weight: 800; font-style: italic;
-          color: #fff; line-height: 0.92; letter-spacing: -1px; margin: 0 0 10px;
+          font-family: 'Bebas Neue', sans-serif;
+          font-size: clamp(2.4rem, 5.5vw, 4.5rem);
+          font-weight: 400; letter-spacing: 4px;
+          color: #fff; line-height: 0.95; margin: 0 0 10px;
         }
-        .cpcp-title-yellow { color: #fde047; font-style: normal; }
+        .cpcp-title-yellow { color: #fde047; }
+
+        /* Inter — tagline */
         .cpcp-tagline {
-          font-family: 'Courier New', monospace;
-          font-size: 0.68rem; letter-spacing: 3px;
+          font-family: 'Inter', sans-serif;
+          font-size: clamp(0.48rem, 1.2vw, 0.6rem);
+          font-weight: 400; letter-spacing: 4px;
           color: rgba(50,197,244,0.9); text-transform: uppercase; margin: 0 0 18px;
         }
         .cpcp-rule {
@@ -265,9 +298,12 @@ const CreativeProducer = () => {
           background: linear-gradient(90deg, rgba(253,224,71,0.3), rgba(50,197,244,0.2), transparent);
           margin-bottom: 20px;
         }
+
+        /* Inter — description */
         .cpcp-desc {
-          font-family: 'Cormorant Garamond', Georgia, serif;
-          font-size: clamp(1rem, 1.4vw, 1.1rem);
+          font-family: 'Inter', sans-serif;
+          font-size: clamp(0.82rem, 1.2vw, 0.95rem);
+          font-weight: 300;
           color: rgba(255,255,255,0.65); line-height: 1.85; margin: 0 0 28px;
         }
         .cpcp-highlight { color: #fff; font-weight: 700; border-bottom: 1px solid rgba(253,224,71,0.4); }
@@ -281,25 +317,33 @@ const CreativeProducer = () => {
         }
         .cpcp-stat { display: flex; flex-direction: column; gap: 5px; flex: 1; }
         .cpcp-stat-divider { width: 1px; flex-shrink: 0; background: rgba(255,255,255,0.08); margin: 0 20px; }
+
+        /* Bebas Neue — stat numbers */
         .cpcp-stat-num {
-          font-family: 'Cormorant Garamond', Georgia, serif;
-          font-size: clamp(1.8rem, 3vw, 2.6rem);
-          font-weight: 700; color: #32c5f4; line-height: 1;
+          font-family: 'Bebas Neue', sans-serif;
+          font-size: clamp(2rem, 3vw, 2.8rem);
+          font-weight: 400; color: #32c5f4; line-height: 1;
+          letter-spacing: 2px;
         }
         .cpcp-stat-plus { font-size: 0.6em; vertical-align: super; }
+
+        /* Inter — stat labels */
         .cpcp-stat-label {
-          font-family: 'Courier New', monospace;
-          font-size: 0.62rem; letter-spacing: 3px;
+          font-family: 'Inter', sans-serif;
+          font-size: clamp(0.42rem, 1vw, 0.52rem);
+          font-weight: 400; letter-spacing: 3px;
           color: rgba(255,255,255,0.5); text-transform: uppercase;
         }
 
+        /* Inter — CTA */
         .cpcp-cta {
           position: relative; overflow: hidden;
           display: inline-flex; align-items: center; gap: 10px;
           padding: 14px 28px; border: 1px solid #fde047;
           color: #fde047; text-decoration: none;
-          font-family: 'Courier New', monospace;
-          font-size: 0.65rem; letter-spacing: 4px; text-transform: uppercase;
+          font-family: 'Inter', sans-serif;
+          font-size: clamp(0.44rem, 1.2vw, 0.56rem);
+          font-weight: 700; letter-spacing: 4px; text-transform: uppercase;
           transition: color 0.4s;
         }
         .cpcp-cta-bg {
@@ -321,8 +365,9 @@ const CreativeProducer = () => {
         .cpcp-tab {
           position: relative; display: flex; align-items: center; gap: 8px;
           padding: 12px 28px; background: transparent; border: none; cursor: pointer;
-          font-family: 'Courier New', monospace;
-          font-size: 0.65rem; letter-spacing: 3px; text-transform: uppercase;
+          font-family: 'Inter', sans-serif;
+          font-size: clamp(0.44rem, 1.2vw, 0.58rem);
+          font-weight: 700; letter-spacing: 3px; text-transform: uppercase;
           color: rgba(255,255,255,0.45); transition: color 0.3s;
           border-right: 1px solid rgba(255,255,255,0.08);
         }
@@ -365,14 +410,17 @@ const CreativeProducer = () => {
         .cpcp-reel-card:hover { border-color: rgba(50,197,244,0.25); transform: translateY(-6px); }
         .cpcp-reel-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
         .cpcp-reel-gradient { position: absolute; inset:0; background: linear-gradient(to bottom, transparent 55%, rgba(0,0,0,0.65) 100%); pointer-events:none; }
+
+        /* Inter — reel tag */
         .cpcp-reel-tag {
           position: absolute; bottom:10px; left:10px; right:10px;
           display: flex; justify-content: space-between; align-items: center;
-          font-family: 'Courier New', monospace;
-          font-size: 0.6rem; letter-spacing: 3px; text-transform: uppercase;
+          font-family: 'Inter', sans-serif;
+          font-size: clamp(0.42rem, 1vw, 0.52rem);
+          font-weight: 400; letter-spacing: 3px; text-transform: uppercase;
           color: rgba(255,255,255,0.85); z-index:3;
         }
-        .cpcp-reel-num { color: #fde047; }
+        .cpcp-reel-num { color: #fde047; font-weight: 700; }
 
         /* YT CARD */
         .cpcp-yt-card {
@@ -384,9 +432,13 @@ const CreativeProducer = () => {
         .cpcp-yt-media { position: relative; width: 100%; aspect-ratio: 16/9; background: #0a0a0a; overflow: hidden; }
         .cpcp-yt-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
         .cpcp-yt-gradient { position:absolute; inset:0; background: linear-gradient(to bottom, transparent 40%, rgba(0,0,0,0.6) 100%); pointer-events:none; }
+
+        /* Inter — yt tag */
         .cpcp-yt-tag {
           position:absolute; top:10px; left:10px;
-          font-family:'Courier New',monospace; font-size:0.6rem; letter-spacing:3px;
+          font-family: 'Inter', sans-serif;
+          font-size: clamp(0.42rem, 1vw, 0.52rem);
+          font-weight: 700; letter-spacing: 3px;
           color:#000; background:#fde047; padding:4px 10px; z-index:5; text-transform:uppercase;
         }
         .cpcp-yt-play {
@@ -396,8 +448,22 @@ const CreativeProducer = () => {
         }
         .cpcp-yt-scan { position:absolute; bottom:0; left:0; right:0; height:2px; background:linear-gradient(90deg,#32c5f4,#fde047); transform-origin:left; z-index:6; }
         .cpcp-yt-info { padding: 18px 20px; }
-        .cpcp-yt-title { font-family: 'Cormorant Garamond', Georgia, serif; font-size: 1.15rem; font-weight: 700; color: #fff; margin: 0 0 8px; line-height: 1.3; }
-        .cpcp-yt-desc { font-family: 'Courier New', monospace; font-size: 0.64rem; letter-spacing: 1.5px; color: rgba(255,255,255,0.6); line-height: 1.9; margin: 0; }
+
+        /* Bebas Neue — yt card title */
+        .cpcp-yt-title {
+          font-family: 'Bebas Neue', sans-serif;
+          font-size: clamp(1.1rem, 2vw, 1.4rem);
+          font-weight: 400; letter-spacing: 2px;
+          color: #fff; margin: 0 0 8px; line-height: 1.2;
+        }
+
+        /* Inter — yt card desc */
+        .cpcp-yt-desc {
+          font-family: 'Inter', sans-serif;
+          font-size: clamp(0.7rem, 1.2vw, 0.78rem);
+          font-weight: 300; letter-spacing: 0.5px;
+          color: rgba(255,255,255,0.6); line-height: 1.75; margin: 0;
+        }
 
         /* ── MOBILE SCROLL + DOTS hidden by default ── */
         .cpcp-scroll-outer { display: none; }
@@ -413,7 +479,7 @@ const CreativeProducer = () => {
         }
         @media (max-width: 960px) {
           .cpcp-feature { grid-template-columns: 1fr; gap: 40px; text-align: center; margin-bottom: 80px; }
-          .cpcp-img-side { justify-content: center; }
+          .cpcp-img-side { justify-content: center; max-width: 380px; margin: 0 auto; }
           .cpcp-pre      { justify-content: center; }
           .cpcp-stats    { max-width: 420px; margin-left: auto; margin-right: auto; margin-bottom: 32px; }
           .cpcp-cta      { display: inline-flex; margin: 0 auto; }
@@ -423,7 +489,7 @@ const CreativeProducer = () => {
         }
 
         /* ════════════════════════════════════════
-           MOBILE ≤700px — full-width snap scroll
+           MOBILE ≤700px
         ════════════════════════════════════════ */
         @media (max-width: 700px) {
           .cpcp-header {
@@ -433,9 +499,14 @@ const CreativeProducer = () => {
           .cpcp-header-rule { display: none; }
           .cpcp-header-content { flex-direction: column; align-items: flex-start; gap: 10px; }
           .cpcp-header-icon { width: 30px; height: 30px; }
-          .cpcp-overline { font-size: 0.62rem; letter-spacing: 3px; white-space: normal; line-height: 1.6; }
-          .cpcp-heading  { font-size: clamp(1.4rem, 6vw, 2rem); }
           .cpcp-feature  { margin-bottom: 70px; }
+
+          /* Mobile: insta btn stretches full width of img side */
+          .cpcp-insta-btn {
+            left: 0; transform: none;
+            width: 100%; justify-content: center;
+            font-size: 0.52rem; padding: 10px 16px;
+          }
 
           .cpcp-stats {
             flex-direction: row; flex-wrap: nowrap;
@@ -443,22 +514,15 @@ const CreativeProducer = () => {
             padding: 12px 14px; margin-bottom: 24px;
           }
           .cpcp-stat-divider { display: block; margin: 0 10px; }
-          .cpcp-stat-num     { font-size: clamp(1.3rem, 6vw, 1.8rem); }
-          .cpcp-stat-label   { font-size: 0.52rem; letter-spacing: 1.5px; }
+          .cpcp-stat-num     { font-size: clamp(1.4rem, 6vw, 2rem); }
+          .cpcp-stat-label   { font-size: 0.5rem; letter-spacing: 1.5px; }
 
-          /* hide desktop grid */
           .cpcp-desktop-grid { display: none !important; }
 
-          /* ── OUTER wrapper: break out of .cpcp-inner's padding
-             by using negative margins equal to the inner padding,
-             then restore with padding on this element so it spans
-             the full viewport width exactly. ── */
           .cpcp-scroll-outer {
             display: block;
-            /* pull left & right to viewport edge */
             margin-left:  calc(-1 * clamp(20px, 6%, 60px));
             margin-right: calc(-1 * clamp(20px, 6%, 60px));
-            /* actual horizontal scroll container */
             overflow-x: auto;
             overflow-y: visible;
             scroll-snap-type: x mandatory;
@@ -468,20 +532,14 @@ const CreativeProducer = () => {
           }
           .cpcp-scroll-outer::-webkit-scrollbar { display: none; }
 
-          /* ── INNER track: flex row of cards.
-             Each card is 80vw wide (leaves peek of next card).
-             The track's total padding = (100vw - cardWidth) / 2 on each side
-             so card[0] starts centred and card[last] ends centred. ── */
           .cpcp-mobile-flex {
             display: flex;
             gap: 14px;
             align-items: flex-start;
-            /* (100vw - 80vw) / 2 = 10vw padding each side */
             padding: 0 10vw;
             width: max-content;
           }
 
-          /* ── Every card: fixed 80vw, snaps to centre ── */
           .cpcp-poster,
           .cpcp-reel-card,
           .cpcp-yt-card {
@@ -492,7 +550,6 @@ const CreativeProducer = () => {
           .cpcp-reel-card { width: 55vw; flex-basis: 55vw; }
           .cpcp-yt-card   { width: 80vw; flex-basis: 80vw; }
 
-          /* dots */
           .cpcp-dots {
             display: flex; justify-content: center; align-items: center;
             gap: 10px; margin-top: 18px; padding: 6px 0;
@@ -511,14 +568,13 @@ const CreativeProducer = () => {
           .cpcp-section { padding: 60px 0 70px; }
           .cpcp-inner   { padding: 0 16px; }
           .cpcp-tab-bar { width: 100%; }
-          .cpcp-tab { flex: 1; padding: 10px 4px; font-size: 0.55rem; letter-spacing: 1.5px; justify-content: center; gap: 5px; }
-          /* recompute scroll outer margin for 16px inner padding */
+          .cpcp-tab { flex: 1; padding: 10px 4px; font-size: 0.52rem; letter-spacing: 1.5px; justify-content: center; gap: 5px; }
           .cpcp-scroll-outer { margin-left: -16px; margin-right: -16px; }
           .cpcp-mobile-flex  { padding: 0 10vw; gap: 12px; }
         }
 
         @media (max-width: 400px) {
-          .cpcp-tab       { font-size: 0.48rem; letter-spacing: 1px; gap: 4px; }
+          .cpcp-tab       { font-size: 0.46rem; letter-spacing: 1px; gap: 4px; }
           .cpcp-poster    { width: 78vw; flex-basis: 78vw; }
           .cpcp-reel-card { width: 62vw; flex-basis: 62vw; }
           .cpcp-yt-card   { width: 84vw; flex-basis: 84vw; }
@@ -574,17 +630,18 @@ const CreativeProducer = () => {
               <motion.img
                 src={Images.madras} alt="Madras Motion Pictures"
                 className="cpcp-img"
-                whileHover={{ scale: 1.07, rotate: -1.5 }}
+                whileHover={{ scale: 1.04, rotate: -1 }}
                 transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
               />
-              <motion.a
+              {/* Instagram CTA — anchored below image */}
+              <a
                 href="https://www.instagram.com/madrasmotionpictures/"
                 target="_blank" rel="noreferrer"
                 className="cpcp-insta-btn"
-                whileHover={{ scale: 1.04 }}
               >
-                <Instagram size={13} /><span>INSTAGRAM</span>
-              </motion.a>
+                <Instagram size={13} />
+                <span>FOLLOW ON INSTAGRAM</span>
+              </a>
             </div>
 
             <div className="cpcp-content">
@@ -632,7 +689,7 @@ const CreativeProducer = () => {
                   transition={{ duration: 0.4 }}
                 />
                 <span className="cpcp-cta-label">VISIT INSTAGRAM</span>
-                <ExternalLink size={13} className="cpcp-cta-icon" />
+                <ExternalLink size={13} />
               </motion.a>
             </div>
           </motion.div>
@@ -661,7 +718,7 @@ const CreativeProducer = () => {
               ))}
             </div>
 
-            {/* ── DESKTOP GRID (>700px) ── */}
+            {/* ── DESKTOP GRID ── */}
             <AnimatePresence mode="wait">
               <motion.div
                 key={activeTab + "-desktop"}
@@ -700,11 +757,7 @@ const CreativeProducer = () => {
               </motion.div>
             </AnimatePresence>
 
-            {/* ── MOBILE SCROLL (≤700px) ──
-                .cpcp-scroll-outer breaks out of .cpcp-inner padding
-                with negative margins → full viewport width scroll track.
-                Each card is vw-based so it truly centres.
-            ── */}
+            {/* ── MOBILE SCROLL ── */}
             <div className="cpcp-scroll-outer" ref={scrollRef} onScroll={handleScroll}>
               <AnimatePresence mode="wait">
                 <motion.div
@@ -745,14 +798,13 @@ const CreativeProducer = () => {
               </AnimatePresence>
             </div>
 
-            {/* ── DOTS (mobile only via CSS) ── */}
+            {/* ── DOTS ── */}
             <div className="cpcp-dots">
               {currentList.map((_, i) => (
                 <div
                   key={i}
                   className={`cpcp-dot ${scrollIndex === i ? "cpcp-dot--active" : ""}`}
                   onClick={() => scrollToCard(i)}
-                  title={`Go to item ${i + 1}`}
                 />
               ))}
             </div>

@@ -19,10 +19,10 @@ const Director = () => {
   return (
     <>
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;0,800;1,600;1,700;1,800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;700;900&display=swap');
 
         /* ══════════════════════════════════════════
-           SECTION — exact cpcp-section
+           SECTION
         ══════════════════════════════════════════ */
         .dir-section {
           background: #000;
@@ -52,7 +52,7 @@ const Director = () => {
         }
 
         /* ══════════════════════════════════════════
-           HEADER — exact cpcp-header
+           HEADER
         ══════════════════════════════════════════ */
         .dir-header {
           display: flex; align-items: center; gap: 20px;
@@ -72,33 +72,34 @@ const Director = () => {
         .dir-header-content {
           display: flex; align-items: center; gap: 14px; flex-shrink: 0;
         }
-        /* icon — exact cpcp-header-icon */
         .dir-header-icon {
           width: 36px; height: 36px;
           border: 1px solid rgba(253,224,71,0.3);
           display: flex; align-items: center; justify-content: center;
           color: #fde047; flex-shrink: 0;
         }
-        /* overline — bumped from invisible: 0.62rem / rgba(white,0.55) */
+
+        /* Inter — overline */
         .dir-overline {
-          font-family: 'Courier New', monospace;
-          font-size: 0.62rem; letter-spacing: 5px;
+          font-family: 'Inter', sans-serif;
+          font-size: clamp(0.48rem, 1.5vw, 0.6rem);
+          font-weight: 400; letter-spacing: 6px;
           color: rgba(255,255,255,0.55);
           text-transform: uppercase;
-          display: block; margin-bottom: 4px;
+          display: block; margin-bottom: 5px;
         }
-        /* heading — exact cpcp-heading */
+
+        /* Bebas Neue — section heading */
         .dir-heading {
-          font-family: 'Cormorant Garamond', Georgia, serif;
-          font-size: clamp(1.6rem, 3.5vw, 2.8rem);
-          font-weight: 800; font-style: italic;
+          font-family: 'Bebas Neue', sans-serif;
+          font-size: clamp(1.8rem, 4.5vw, 3.2rem);
+          font-weight: 400; letter-spacing: 3px;
           color: #fff; line-height: 1; margin: 0;
-          letter-spacing: -0.5px;
         }
-        .dir-heading-yellow { color: #fde047; font-style: normal; }
+        .dir-heading-yellow { color: #fde047; }
 
         /* ══════════════════════════════════════════
-           FEATURE CARD — exact cpcp-feature grid
+           FEATURE CARD
         ══════════════════════════════════════════ */
         .dir-card {
           display: grid;
@@ -134,8 +135,6 @@ const Director = () => {
           display: flex; align-items: center; justify-content: center;
           cursor: pointer;
         }
-
-        /* corner marks — exact cpcp-corner */
         .dir-corner { position: absolute; width: 20px; height: 20px; pointer-events: none; z-index: 5; }
         .dir-corner--tl { top:-8px; left:-8px; border-top:1px solid rgba(253,224,71,0.5); border-left:1px solid rgba(253,224,71,0.5); }
         .dir-corner--tr { top:-8px; right:-8px; border-top:1px solid rgba(253,224,71,0.5); border-right:1px solid rgba(253,224,71,0.5); }
@@ -169,34 +168,19 @@ const Director = () => {
           background: rgba(253,224,71,0.25); flex-shrink: 0;
         }
 
-        /* format badge — bumped: 0.58rem / rgba(white,0.7) */
+        /* Inter — format badge */
         .dir-format-badge {
           position: absolute; bottom: 10px; left: 26px; z-index: 6;
           display: flex; align-items: center; gap: 6px;
-          font-family: 'Courier New', monospace;
-          font-size: 0.58rem; letter-spacing: 3px;
+          font-family: 'Inter', sans-serif;
+          font-size: clamp(0.44rem, 1vw, 0.54rem);
+          font-weight: 400; letter-spacing: 3px;
           color: rgba(255,255,255,0.7);
           background: rgba(0,0,0,0.78); backdrop-filter: blur(8px);
           border: 1px solid rgba(255,255,255,0.12);
           padding: 5px 12px; text-transform: uppercase;
         }
         .dir-format-sep { color: #fde047; }
-
-        /* instagram btn — exact cpcp-insta-btn */
-        .cpcp-insta-btn {
-          position: absolute; bottom: -14px; left: 50%;
-          transform: translateX(-50%);
-          display: flex; align-items: center; gap: 8px;
-          font-family: 'Courier New', monospace;
-          font-size: 0.54rem; letter-spacing: 3px;
-          color: rgba(255,255,255,0.75);
-          background: rgba(0,0,0,0.82); backdrop-filter: blur(10px);
-          border: 1px solid rgba(255,255,255,0.12);
-          padding: 9px 18px; text-decoration: none;
-          white-space: nowrap; z-index: 8;
-          transition: border-color 0.3s, color 0.3s;
-        }
-        .cpcp-insta-btn:hover { border-color: #fde047; color: #fde047; }
 
         /* scan line */
         .dir-img-scan {
@@ -209,68 +193,71 @@ const Director = () => {
         /* ── CONTENT SIDE ── */
         .dir-content { display: flex; flex-direction: column; gap: 20px; }
 
-        /* pre-label — bumped: 0.6rem / rgba(yellow,0.7) */
+        /* Inter — pre-label */
         .dir-pre { display: flex; align-items: center; gap: 12px; }
         .dir-pre-line { width: 28px; height: 1px; background: #fde047; opacity: 0.5; transform-origin: left; }
         .dir-pre-text {
-          font-family: 'Courier New', monospace;
-          font-size: 0.6rem; letter-spacing: 5px;
+          font-family: 'Inter', sans-serif;
+          font-size: clamp(0.48rem, 1.2vw, 0.6rem);
+          font-weight: 400; letter-spacing: 6px;
           color: rgba(253,224,71,0.7); text-transform: uppercase;
         }
 
-        /* title chars */
+        /* Bebas Neue — animated title chars */
         .dir-title-block {
           display: flex; align-items: baseline;
           flex-wrap: nowrap; line-height: 0.88; gap: 0;
-          white-space: nowrap;
-          overflow: visible;
+          white-space: nowrap; overflow: visible;
         }
         .dir-title-char {
-          font-family: 'Cormorant Garamond', Georgia, serif;
-          font-size: clamp(2.4rem, 6.5vw, 6.5rem);
-          font-weight: 800; font-style: italic;
+          font-family: 'Bebas Neue', sans-serif;
+          font-size: clamp(3rem, 7vw, 7rem);
+          font-weight: 400; letter-spacing: 4px;
           color: #fff; line-height: 0.9;
-          letter-spacing: -2px; display: inline-block;
+          display: inline-block;
         }
         .dir-title-char--yellow { color: #fde047; }
         .dir-title-space { display: inline-block; width: 0.25em; }
 
-        /* genre — bumped: 0.58rem / rgba(cyan,0.8) */
+        /* Inter — genre tag */
         .dir-genre {
-          font-family: 'Courier New', monospace;
-          font-size: 0.58rem; letter-spacing: 4px;
+          font-family: 'Inter', sans-serif;
+          font-size: clamp(0.48rem, 1.2vw, 0.6rem);
+          font-weight: 400; letter-spacing: 4px;
           color: rgba(50,197,244,0.8);
           text-transform: uppercase; margin: 0;
         }
 
-        /* rule */
         .dir-rule {
           width: 100%; height: 1px;
           background: linear-gradient(90deg, rgba(253,224,71,0.3), rgba(50,197,244,0.2), transparent);
           transform-origin: left;
         }
 
-        /* description */
+        /* Inter — description */
         .dir-desc {
-          font-family: 'Cormorant Garamond', Georgia, serif;
-          font-size: clamp(0.95rem, 1.4vw, 1.08rem);
+          font-family: 'Inter', sans-serif;
+          font-size: clamp(0.82rem, 1.2vw, 0.95rem);
+          font-weight: 300;
           color: rgba(255,255,255,0.58);
           line-height: 1.85; margin: 0;
         }
         .dir-mention { color: #32c5f4; font-weight: 700; text-shadow: 0 0 12px rgba(50,197,244,0.2); }
 
-        /* crew — bumped labels */
+        /* crew */
         .dir-crew { display: flex; flex-direction: column; gap: 10px; }
         .dir-crew-label {
-          font-family: 'Courier New', monospace;
-          font-size: 0.6rem; letter-spacing: 5px;
+          font-family: 'Inter', sans-serif;
+          font-size: clamp(0.44rem, 1vw, 0.54rem);
+          font-weight: 400; letter-spacing: 5px;
           color: rgba(255,255,255,0.5);
           text-transform: uppercase; display: block;
         }
         .dir-crew-tags { display: flex; flex-wrap: wrap; gap: 8px; }
         .dir-crew-tag {
-          font-family: 'Courier New', monospace;
-          font-size: 0.54rem; letter-spacing: 2px;
+          font-family: 'Inter', sans-serif;
+          font-size: clamp(0.42rem, 1vw, 0.52rem);
+          font-weight: 300; letter-spacing: 2px;
           color: rgba(255,255,255,0.6);
           background: rgba(255,255,255,0.03);
           border: 1px solid rgba(255,255,255,0.1);
@@ -279,15 +266,16 @@ const Director = () => {
         }
         .dir-crew-tag:hover { border-color: rgba(253,224,71,0.35); color: rgba(253,224,71,0.85); }
 
-        /* CTA — exact cpcp-cta fill-sweep */
+        /* Inter — CTA button */
         .dir-cta {
           position: relative; overflow: hidden;
           display: inline-flex; align-items: center; gap: 10px;
           padding: 14px 28px;
           border: 1px solid #fde047;
           color: #fde047; text-decoration: none;
-          font-family: 'Courier New', monospace;
-          font-size: 0.56rem; letter-spacing: 4px; text-transform: uppercase;
+          font-family: 'Inter', sans-serif;
+          font-size: clamp(0.44rem, 1.2vw, 0.56rem);
+          font-weight: 700; letter-spacing: 4px; text-transform: uppercase;
           transition: color 0.4s;
         }
         .dir-cta-bg {
@@ -327,12 +315,12 @@ const Director = () => {
           .dir-inner    { padding: 0 16px; }
           .dir-card     { padding: 20px 16px 32px; gap: 32px; }
           .dir-filmstrip { display: none; }
-          .dir-title-char { font-size: clamp(2rem, 10vw, 3rem); }
+          .dir-title-char { font-size: clamp(2.2rem, 11vw, 3.2rem); }
           .dir-crew-tag   { font-size: 0.5rem; padding: 4px 8px; }
           .dir-format-badge { font-size: 0.5rem; left: 10px; }
         }
         @media (max-width: 400px) {
-          .dir-title-char { font-size: 1.8rem; }
+          .dir-title-char { font-size: 2rem; }
           .dir-crew-tag   { font-size: 0.46rem; }
         }
       `}</style>
@@ -407,17 +395,6 @@ const Director = () => {
                 <span className="dir-format-sep">·</span>
                 <span>காமம்</span>
               </div>
-
-              <motion.a
-                href="https://www.instagram.com/p/C3XNjxgIdgo/"
-                target="_blank" rel="noopener noreferrer"
-                className="cpcp-insta-btn"
-                animate={{ opacity: imgHover ? 1 : 0, y: imgHover ? 0 : 6 }}
-                transition={{ duration: 0.25 }}
-              >
-                <Instagram size={14} />
-                <span>VIEW ON INSTAGRAM</span>
-              </motion.a>
 
               <motion.div
                 className="dir-img-scan"

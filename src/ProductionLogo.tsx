@@ -42,7 +42,7 @@ const ProductionLogo: React.FC = () => {
   return (
     <>
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,700;0,800;1,700;1,800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&display=swap');
 
         /* ─── SECTION ─────────────────────────────── */
         .cp-prod-section {
@@ -56,7 +56,6 @@ const ProductionLogo: React.FC = () => {
           align-items: center;
         }
 
-        /* top hairline */
         .cp-prod-section::before {
           content: '';
           position: absolute;
@@ -66,7 +65,6 @@ const ProductionLogo: React.FC = () => {
           pointer-events: none;
         }
 
-        /* kanji watermark */
         .cp-prod-section::after {
           content: '映';
           position: absolute;
@@ -100,7 +98,6 @@ const ProductionLogo: React.FC = () => {
           margin-bottom: 65px;
         }
 
-        /* pre-label row */
         .cp-prod-pre {
           display: inline-flex;
           align-items: center;
@@ -113,30 +110,27 @@ const ProductionLogo: React.FC = () => {
           opacity: 0.5;
         }
         .cp-prod-pre-text {
-  font-family: 'Courier New', monospace;
-  font-size: 0.7rem;
-  letter-spacing: 5px;
-  color: rgba(253,224,71,0.85);
-  text-transform: uppercase;
-}
+          font-family: 'Inter', sans-serif;
+          font-size: 0.65rem;
+          font-weight: 600;
+          letter-spacing: 5px;
+          color: rgba(253,224,71,0.85);
+          text-transform: uppercase;
+        }
 
-        /* main heading */
         .cp-prod-title {
-          font-family: 'Cormorant Garamond', Georgia, serif;
-          font-size: clamp(2.2rem, 7.5vw, 4.8rem);
-          font-weight: 800;
-          font-style: italic;
+          font-family: 'Bebas Neue', sans-serif;
+          font-size: clamp(3rem, 9vw, 6.5rem);
+          font-weight: 400;
           color: #fff;
           margin: 0 0 18px;
-          line-height: 1;
-          letter-spacing: -0.5px;
+          line-height: 0.95;
+          letter-spacing: 3px;
         }
         .cp-prod-title-yellow {
           color: #fde047;
-          font-style: normal;
         }
 
-        /* gradient rule */
         .cp-prod-rule {
           width: 130px; height: 1px;
           background: linear-gradient(90deg, #32c5f4, #fde047);
@@ -158,7 +152,6 @@ const ProductionLogo: React.FC = () => {
           overflow: hidden;
         }
 
-        /* sprocket holes */
         .cp-sprockets {
           position: absolute;
           inset: 0;
@@ -171,7 +164,6 @@ const ProductionLogo: React.FC = () => {
           background-repeat: repeat-x;
         }
 
-        /* scan line across the strip */
         .cp-film-strip::before {
           content: '';
           position: absolute;
@@ -184,7 +176,6 @@ const ProductionLogo: React.FC = () => {
           z-index: 1;
         }
 
-        /* drag track */
         .cp-logo-track {
           display: flex;
           align-items: center;
@@ -197,7 +188,6 @@ const ProductionLogo: React.FC = () => {
         }
         .cp-logo-track:active { cursor: grabbing; }
 
-        /* logo cell */
         .cp-logo-cell {
           flex: 0 0 160px;
           height: 110px;
@@ -209,7 +199,6 @@ const ProductionLogo: React.FC = () => {
         }
         .cp-logo-cell:hover { transform: scale(1.1); }
 
-        /* corner marks on each logo cell */
         .cp-logo-cell::before,
         .cp-logo-cell::after {
           content: '';
@@ -245,7 +234,6 @@ const ProductionLogo: React.FC = () => {
                   drop-shadow(0 8px 18px rgba(0,0,0,0.9));
         }
 
-        /* edge vignettes */
         .cp-vignette {
           position: absolute;
           top: 0; bottom: 0;
@@ -277,12 +265,13 @@ const ProductionLogo: React.FC = () => {
           background: linear-gradient(90deg, #32c5f4, #fde047);
         }
         .cp-prod-hint-text {
-  font-family: 'Courier New', monospace;
-  font-size: 0.65rem;
-  letter-spacing: 4px;
-  text-transform: uppercase;
-  color: rgba(255,255,255,0.5);
-}
+          font-family: 'Inter', sans-serif;
+          font-size: 0.6rem;
+          font-weight: 600;
+          letter-spacing: 4px;
+          text-transform: uppercase;
+          color: rgba(255,255,255,0.5);
+        }
 
         /* ─── RESPONSIVE ──────────────────────────── */
         @media (max-width: 768px) {
@@ -290,7 +279,6 @@ const ProductionLogo: React.FC = () => {
           .cp-logo-track { gap: 65px; }
           .cp-film-strip { height: 170px; }
           .cp-sprockets  { background-size: 50px 17px; }
-          .cp-prod-title { font-size: clamp(2rem, 9vw, 3rem); }
         }
         @media (max-width: 480px) {
           .cp-prod-section { padding: 70px 0 80px; }
@@ -322,13 +310,11 @@ const ProductionLogo: React.FC = () => {
         {/* ── FILM STRIP ──────────────────────────── */}
         <div className="cp-film-strip">
 
-          {/* animated sprocket holes */}
           <motion.div
             className="cp-sprockets"
             style={{ backgroundPositionX: bgX }}
           />
 
-          {/* logo track */}
           <motion.div
             className="cp-logo-track"
             style={{ x }}
@@ -345,7 +331,6 @@ const ProductionLogo: React.FC = () => {
             ))}
           </motion.div>
 
-          {/* edge fades */}
           <div className="cp-vignette cp-vignette--left" />
           <div className="cp-vignette cp-vignette--right" />
         </div>

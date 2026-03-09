@@ -26,7 +26,7 @@ const Munai: React.FC = () => {
   return (
     <>
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;0,800;1,600;1,700;1,800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&display=swap');
 
         /* ═══════════════════════════════════════════
            WRAPPER
@@ -48,7 +48,6 @@ const Munai: React.FC = () => {
           overflow: hidden;
         }
 
-        /* top/bottom hairlines */
         .cp-mn-header::before,
         .cp-mn-header::after {
           content: '';
@@ -60,7 +59,6 @@ const Munai: React.FC = () => {
         .cp-mn-header::before { top: 28px; }
         .cp-mn-header::after  { bottom: 28px; }
 
-        /* kanji watermark */
         .cp-mn-kanji {
           position: absolute;
           left: 50%; top: 50%;
@@ -72,7 +70,6 @@ const Munai: React.FC = () => {
           z-index: 0;
         }
 
-        /* pre-label */
         .cp-mn-header-pre {
           display: inline-flex; align-items: center; gap: 12px;
           margin-bottom: 18px; position: relative; z-index: 2;
@@ -82,33 +79,35 @@ const Munai: React.FC = () => {
           background: #fde047; opacity: 0.5;
         }
         .cp-mn-header-pre-text {
-  font-family: 'Courier New', monospace;
-  font-size: 0.7rem; letter-spacing: 5px;
-  color: rgba(253,224,71,0.85); text-transform: uppercase;
-}
+          font-family: 'Inter', sans-serif;
+          font-size: 0.65rem;
+          font-weight: 600;
+          letter-spacing: 5px;
+          color: rgba(253,224,71,0.85); text-transform: uppercase;
+        }
 
         /* giant display title */
         .cp-mn-logo {
-          font-family: 'Cormorant Garamond', Georgia, serif;
+          font-family: 'Bebas Neue', sans-serif;
           font-size: clamp(72px, 14vw, 170px);
-          font-weight: 800; font-style: italic;
+          font-weight: 400;
           color: #fde047;
-          letter-spacing: -4px; line-height: 0.9;
+          letter-spacing: 8px; line-height: 0.9;
           text-shadow: 0 0 80px rgba(253,224,71,0.12);
           position: relative; z-index: 2;
           margin: 0 0 14px;
         }
 
-        /* meta line */
         .cp-mn-meta {
-  font-family: 'Courier New', monospace;
-  font-size: 0.7rem; letter-spacing: 6px;
-  color: rgba(255,255,255,0.65);
-  text-transform: uppercase;
-  position: relative; z-index: 2;
-}
+          font-family: 'Inter', sans-serif;
+          font-size: 0.65rem;
+          font-weight: 500;
+          letter-spacing: 6px;
+          color: rgba(255,255,255,0.65);
+          text-transform: uppercase;
+          position: relative; z-index: 2;
+        }
 
-        /* gradient rule */
         .cp-mn-header-rule {
           width: 120px; height: 1px;
           background: linear-gradient(90deg, transparent, #32c5f4, #fde047, transparent);
@@ -135,7 +134,6 @@ const Munai: React.FC = () => {
         .cp-mn-section.row         { flex-direction: row; }
         .cp-mn-section.row-reverse { flex-direction: row-reverse; }
 
-        /* section top hairline */
         .cp-mn-section::before {
           content: '';
           position: absolute;
@@ -148,11 +146,13 @@ const Munai: React.FC = () => {
         /* section number watermark */
         .cp-mn-section-num {
           position: absolute;
-          font-family: 'Cormorant Garamond', Georgia, serif;
-          font-size: 18rem; font-weight: 800; font-style: italic;
+          font-family: 'Bebas Neue', sans-serif;
+          font-size: 18rem;
+          font-weight: 400;
           color: rgba(255,255,255,0.018);
           line-height: 1; pointer-events: none; user-select: none;
           z-index: 0;
+          letter-spacing: 5px;
         }
         .cp-mn-section.row         .cp-mn-section-num { right: 5%; bottom: -40px; }
         .cp-mn-section.row-reverse .cp-mn-section-num { left: 5%;  bottom: -40px; }
@@ -163,7 +163,6 @@ const Munai: React.FC = () => {
           position: relative; z-index: 2;
         }
 
-        /* pre-label */
         .cp-mn-text-pre {
           display: flex; align-items: center; gap: 12px;
           margin-bottom: 16px;
@@ -173,34 +172,36 @@ const Munai: React.FC = () => {
           background: #fde047; opacity: 0.4;
         }
         .cp-mn-text-pre-txt {
-  font-family: 'Courier New', monospace;
-  font-size: 0.7rem; letter-spacing: 5px;
-  color: rgba(253,224,71,0.85); text-transform: uppercase;
-}
+          font-family: 'Inter', sans-serif;
+          font-size: 0.65rem;
+          font-weight: 600;
+          letter-spacing: 5px;
+          color: rgba(253,224,71,0.85); text-transform: uppercase;
+        }
 
         /* section title */
         .cp-mn-title {
-          font-family: 'Cormorant Garamond', Georgia, serif;
-          font-size: clamp(2.6rem, 5.5vw, 4.8rem);
-          font-weight: 800; font-style: italic;
+          font-family: 'Bebas Neue', sans-serif;
+          font-size: clamp(3rem, 6vw, 6rem);
+          font-weight: 400;
           color: #fff; line-height: 0.92;
-          letter-spacing: -1px; margin: 0 0 14px;
+          letter-spacing: 3px; margin: 0 0 14px;
         }
 
-        /* gradient rule */
         .cp-mn-rule {
           width: 100%; height: 1px;
           background: linear-gradient(90deg, rgba(50,197,244,0.35), rgba(253,224,71,0.2), transparent);
           margin-bottom: 22px;
         }
 
-        /* description */
         .cp-mn-desc {
-  font-family: 'Courier New', monospace;
-  font-size: 0.7rem; letter-spacing: 5px;
-  color: rgba(255,255,255,0.7); text-transform: uppercase;
-  line-height: 2;
-}
+          font-family: 'Inter', sans-serif;
+          font-size: 0.65rem;
+          font-weight: 500;
+          letter-spacing: 5px;
+          color: rgba(255,255,255,0.7); text-transform: uppercase;
+          line-height: 2;
+        }
 
         /* CTA link */
         .cp-mn-section-cta {
@@ -211,8 +212,10 @@ const Munai: React.FC = () => {
           border: 1px solid rgba(253,224,71,0.25);
           color: rgba(253,224,71,0.9);
           text-decoration: none;
-          font-family: 'Courier New', monospace;
-          font-size: 0.7rem; letter-spacing: 4px;
+          font-family: 'Inter', sans-serif;
+          font-size: 0.65rem;
+          font-weight: 600;
+          letter-spacing: 4px;
           text-transform: uppercase;
           transition: color 0.4s;
         }
@@ -233,12 +236,10 @@ const Munai: React.FC = () => {
           position: relative; z-index: 2;
         }
 
-        /* outer frame — cp-corner style */
         .cp-mn-img-frame {
           position: relative; display: inline-block;
         }
 
-        /* TL corner */
         .cp-mn-img-frame::before {
           content: '';
           position: absolute; top: -8px; left: -8px;
@@ -247,7 +248,6 @@ const Munai: React.FC = () => {
           border-left: 1px solid rgba(253,224,71,0.4);
           z-index: 5; pointer-events: none;
         }
-        /* BR corner */
         .cp-mn-img-frame::after {
           content: '';
           position: absolute; bottom: -8px; right: -8px;
@@ -257,19 +257,19 @@ const Munai: React.FC = () => {
           z-index: 5; pointer-events: none;
         }
 
-        /* image tag */
         .cp-mn-img-tag {
-  position: absolute;
-  top: 10px; right: 10px;
-  font-family: 'Courier New', monospace;
-  font-size: 0.65rem; letter-spacing: 3px;
-  color: #000; background: #fde047;
-  padding: 3px 8px; z-index: 6;
-  text-transform: uppercase;
-  pointer-events: none;
-}
+          position: absolute;
+          top: 10px; right: 10px;
+          font-family: 'Inter', sans-serif;
+          font-size: 0.58rem;
+          font-weight: 600;
+          letter-spacing: 3px;
+          color: #000; background: #fde047;
+          padding: 3px 8px; z-index: 6;
+          text-transform: uppercase;
+          pointer-events: none;
+        }
 
-        /* image */
         .cp-mn-img {
           max-width: 100%; max-height: 78vh;
           width: auto; height: auto;
@@ -280,7 +280,6 @@ const Munai: React.FC = () => {
         }
         .cp-mn-img-frame:hover .cp-mn-img { transform: scale(1.015); }
 
-        /* cyan scan line sweep on hover */
         .cp-mn-img-scan {
           position: absolute; bottom: 0; left: 0; right: 0;
           height: 2px;
@@ -305,8 +304,10 @@ const Munai: React.FC = () => {
           background: #fde047;
           color: #000;
           text-decoration: none;
-          font-family: 'Courier New', monospace;
-          font-size: 0.7rem; letter-spacing: 4px;
+          font-family: 'Inter', sans-serif;
+          font-size: 0.65rem;
+          font-weight: 700;
+          letter-spacing: 4px;
           text-transform: uppercase;
           opacity: 0; transform: translateY(20px);
           transition: opacity 0.5s cubic-bezier(0.22,1,0.36,1),
@@ -343,13 +344,12 @@ const Munai: React.FC = () => {
         }
         @media (max-width: 768px) {
           .cp-mn-cta {
-  bottom: 16px; right: 16px;
-  padding: 10px 16px; font-size: 0.65rem;
-}
+            bottom: 16px; right: 16px;
+            padding: 10px 16px; font-size: 0.6rem;
+          }
         }
         @media (max-width: 480px) {
           .cp-mn-logo  { font-size: 72px; }
-          .cp-mn-title { font-size: 2.4rem; }
           .cp-mn-cta   { bottom: 12px; right: 12px; padding: 9px 12px; }
         }
       `}</style>
@@ -396,10 +396,8 @@ const Munai: React.FC = () => {
               className={`cp-mn-section ${i % 2 === 0 ? 'row' : 'row-reverse'}`}
               style={{ backgroundColor: item.bg }}
             >
-              {/* ghost section number */}
               <span className="cp-mn-section-num">{String(i + 1).padStart(2, '0')}</span>
 
-              {/* text */}
               <motion.div
                 className="cp-mn-text"
                 initial={{ opacity: 0, x: i % 2 === 0 ? -30 : 30 }}
@@ -427,7 +425,6 @@ const Munai: React.FC = () => {
                 </a>
               </motion.div>
 
-              {/* image */}
               <motion.div
                 className="cp-mn-img-block"
                 initial={{ opacity: 0, scale: 0.97 }}

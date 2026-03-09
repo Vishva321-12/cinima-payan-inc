@@ -30,6 +30,11 @@ const projects = [
 
 const duplicatedProjects = [...projects, ...projects];
 
+/* ─── FONT TOKENS ───────────────────────────────────────────────────────────
+   Display  → 'Bebas Neue'  (bold condensed caps — titles & card headings)
+   Body     → 'Inter'       (clean sans-serif — labels, tags, hint text)
+─────────────────────────────────────────────────────────────────────────── */
+
 const Work: React.FC = () => {
   const baseX = useMotionValue(0);
 
@@ -40,9 +45,9 @@ const Work: React.FC = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, [scrollY]);
 
-  const scrollVelocity  = useVelocity(scrollY);
-  const smoothVelocity  = useSpring(scrollVelocity, { damping: 50, stiffness: 400 });
-  const velocityFactor  = useTransform(smoothVelocity, [0, 1000], [0, 2], { clamp: false });
+  const scrollVelocity = useVelocity(scrollY);
+  const smoothVelocity = useSpring(scrollVelocity, { damping: 50, stiffness: 400 });
+  const velocityFactor = useTransform(smoothVelocity, [0, 1000], [0, 2], { clamp: false });
 
   useAnimationFrame((_t, delta) => {
     let moveBy = -0.005 * (delta / 16);
@@ -57,9 +62,15 @@ const Work: React.FC = () => {
 
   return (
     <>
-      {/* ── INLINE STYLES ── injected once into <head> ── */}
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;0,800;1,600;1,700;1,800&display=swap');
+        /* ── FONT IMPORTS ── */
+        @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600&display=swap');
+
+        /* ── FONT TOKENS ── */
+        :root {
+          --font-display : 'Bebas Neue', sans-serif;
+          --font-body    : 'Inter', sans-serif;
+        }
 
         /* ─── SECTION ─────────────────────────────── */
         .cp-work-section {
@@ -73,7 +84,6 @@ const Work: React.FC = () => {
           justify-content: center;
           position: relative;
         }
-        /* top hairline */
         .cp-work-section::before {
           content: '';
           position: absolute;
@@ -89,7 +99,7 @@ const Work: React.FC = () => {
           margin-bottom: 50px;
         }
 
-        /* pre-label */
+        /* pre-label — Inter */
         .cp-work-pre {
           display: flex;
           align-items: center;
@@ -103,28 +113,32 @@ const Work: React.FC = () => {
           flex-shrink: 0;
         }
         .cp-work-pre-text {
-  font-family: 'Courier New', monospace;
-  font-size: 0.7rem;
-  letter-spacing: 5px;
-  color: rgba(253,224,71,0.85);
-  text-transform: uppercase;
-}
+          font-family: var(--font-body);
+          font-size: 0.65rem;
+          font-weight: 500;
+          letter-spacing: 5px;
+          color: rgba(253,224,71,0.85);
+          text-transform: uppercase;
+        }
 
-        /* main title */
+        /* main title — Bebas Neue */
         .cp-work-title {
-          font-family: 'Cormorant Garamond', Georgia, serif;
-          font-size: clamp(2.8rem, 9.5vw, 7.5rem);
-          font-weight: 800;
-          font-style: italic;
+          font-family: var(--font-display);
+          font-size: clamp(3.5rem, 11vw, 9rem);
+          font-weight: 400;
+          font-style: normal;
           color: #fff;
           line-height: 0.92;
-          letter-spacing: -1px;
+          letter-spacing: 2px;
           margin: 0 0 16px;
         }
         .cp-work-title-stroke {
+          font-family: var(--font-display);
+          font-weight: 400;
+          font-style: normal;
           -webkit-text-stroke: 1.5px #32c5f4;
           color: transparent;
-          font-style: normal;
+          letter-spacing: 2px;
         }
 
         /* gradient rule */
@@ -135,15 +149,16 @@ const Work: React.FC = () => {
           margin-bottom: 16px;
         }
 
-        /* partner tag */
+        /* partner tag — Inter */
         .cp-work-tag {
-  font-family: 'Courier New', monospace;
-  font-size: 0.7rem;
-  letter-spacing: 5px;
-  color: rgba(253,224,71,0.75);
-  text-transform: uppercase;
-  margin: 0;
-}
+          font-family: var(--font-body);
+          font-size: 0.65rem;
+          font-weight: 500;
+          letter-spacing: 5px;
+          color: rgba(253,224,71,0.75);
+          text-transform: uppercase;
+          margin: 0;
+        }
 
         /* ─── MARQUEE ─────────────────────────────── */
         .cp-marquee-wrapper {
@@ -190,7 +205,6 @@ const Work: React.FC = () => {
           box-shadow: 0 14px 44px rgba(0,0,0,0.7);
         }
 
-        /* TL corner mark */
         .cp-img-box::before {
           content: '';
           position: absolute;
@@ -201,7 +215,6 @@ const Work: React.FC = () => {
           z-index: 4;
           pointer-events: none;
         }
-        /* BR corner mark */
         .cp-img-box::after {
           content: '';
           position: absolute;
@@ -221,13 +234,12 @@ const Work: React.FC = () => {
           transition: transform 1.1s cubic-bezier(0.16,1,0.3,1);
           pointer-events: none;
           user-select: none;
-          filter: none;
         }
         .cp-film-card:hover .cp-img-box img {
           transform: scale(1.06);
         }
 
-        /* overlay gradient */
+        /* overlay */
         .cp-card-overlay {
           position: absolute;
           inset: 0;
@@ -243,8 +255,6 @@ const Work: React.FC = () => {
           padding: 26px;
           z-index: 2;
         }
-
-        /* cyan hover tint */
         .cp-card-overlay::before {
           content: '';
           position: absolute;
@@ -256,26 +266,27 @@ const Work: React.FC = () => {
         }
         .cp-film-card:hover .cp-card-overlay::before { opacity: 1; }
 
-        /* promo label */
+        /* promo label — Inter */
         .cp-card-label {
-  font-family: 'Courier New', monospace;
-  font-size: 0.65rem;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  color: rgba(50,197,244,0.95);
-  margin-bottom: 8px;
-  display: block;
-}
+          font-family: var(--font-body);
+          font-size: 0.6rem;
+          font-weight: 500;
+          letter-spacing: 3px;
+          text-transform: uppercase;
+          color: rgba(50,197,244,0.95);
+          margin-bottom: 6px;
+          display: block;
+        }
 
-        /* film title */
+        /* film title — Bebas Neue */
         .cp-card-title {
-          font-family: 'Cormorant Garamond', Georgia, serif;
-          font-size: clamp(1.6rem, 3vw, 2.4rem);
-          font-weight: 800;
-          font-style: italic;
+          font-family: var(--font-display);
+          font-size: clamp(1.8rem, 3vw, 2.8rem);
+          font-weight: 400;
+          font-style: normal;
           color: #fff;
           margin: 0;
-          letter-spacing: -0.5px;
+          letter-spacing: 1.5px;
           line-height: 1;
           transition: color 0.35s;
         }
@@ -303,13 +314,15 @@ const Work: React.FC = () => {
           background: linear-gradient(90deg, #32c5f4, #fde047);
         }
 
+        /* hint text — Inter */
         .cp-hint-text {
-  font-family: 'Courier New', monospace;
-  font-size: 0.65rem;
-  letter-spacing: 4px;
-  text-transform: uppercase;
-  color: rgba(255,255,255,0.5);
-}
+          font-family: var(--font-body);
+          font-size: 0.6rem;
+          font-weight: 400;
+          letter-spacing: 4px;
+          text-transform: uppercase;
+          color: rgba(255,255,255,0.5);
+        }
 
         /* ─── RESPONSIVE ──────────────────────────── */
         @media (max-width: 1024px) {
@@ -318,13 +331,12 @@ const Work: React.FC = () => {
         @media (max-width: 600px) {
           .cp-work-section { padding: 70px 0 80px; }
           .cp-film-card { flex: 0 0 240px; height: 350px; }
-          .cp-work-title { font-size: 2.8rem; }
+          .cp-work-title { font-size: 3.5rem; }
           .cp-card-overlay { padding: 18px; }
-          .cp-card-title { font-size: 1.4rem; }
+          .cp-card-title { font-size: 1.6rem; }
         }
       `}</style>
 
-      {/* ── MARKUP ───────────────────────────────── */}
       <section className="cp-work-section">
 
         {/* Header */}

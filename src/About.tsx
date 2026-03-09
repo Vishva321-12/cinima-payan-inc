@@ -15,7 +15,7 @@ const About = forwardRef<HTMLDivElement>((props, ref) => {
   return (
     <>
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;0,800;1,600;1,700;1,800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;700;900&display=swap');
 
         /* ═══════════════════════════════════════════
            SECTION
@@ -60,26 +60,26 @@ const About = forwardRef<HTMLDivElement>((props, ref) => {
         }
 
         /* ═══════════════════════════════════════════
-           BACKGROUND LOGO TRAIN
+           BACKGROUND LOGO TRAIN — slightly visible
         ═══════════════════════════════════════════ */
         .cp-ab-train-wrap {
-  position: absolute;
-  top: 15%; left: 0;
-  width: 100%; height: 200px;
-  opacity: 0.07;
-  z-index: 1;
-  pointer-events: none;
-  display: flex; align-items: center;
-  overflow: hidden;
-  filter: grayscale(100%) brightness(1.8);
-}
+          position: absolute;
+          top: 15%; left: 0;
+          width: 100%; height: 200px;
+          opacity: 0.18;           /* was 0.07 — now clearly visible */
+          z-index: 1;
+          pointer-events: none;
+          display: flex; align-items: center;
+          overflow: hidden;
+          filter: grayscale(100%) brightness(2.2);
+        }
 
         .cp-ab-train-track {
           display: flex;
           width: max-content;
           animation: cpAbTrain 38s linear infinite;
           will-change: transform;
-     }
+        }
 
         @keyframes cpAbTrain {
           0%   { transform: translateX(0); }
@@ -87,10 +87,10 @@ const About = forwardRef<HTMLDivElement>((props, ref) => {
         }
 
         .cp-ab-train-logo {
-  height: 100px;
-  margin-right: 80px;
-  object-fit: contain;
-}
+          height: 100px;
+          margin-right: 80px;
+          object-fit: contain;
+        }
 
         /* ═══════════════════════════════════════════
            MAIN LAYOUT
@@ -107,7 +107,6 @@ const About = forwardRef<HTMLDivElement>((props, ref) => {
         /* ─── VISUAL SIDE ───────────────────────── */
         .cp-ab-visual { position: relative; }
 
-        /* TL corner mark — larger than card marks */
         .cp-ab-visual::before {
           content: '';
           position: absolute;
@@ -118,7 +117,6 @@ const About = forwardRef<HTMLDivElement>((props, ref) => {
           pointer-events: none; z-index: 10;
         }
 
-        /* BR corner mark */
         .cp-ab-visual::after {
           content: '';
           position: absolute;
@@ -130,22 +128,25 @@ const About = forwardRef<HTMLDivElement>((props, ref) => {
         }
 
         .cp-ab-img {
-  width: 100%;
-  max-width: 480px;
-  height: auto;
-  display: block;
-  box-shadow: 0 20px 60px rgba(0,0,0,0.9);
-  transition: transform 0.6s ease;
-}
+          width: 100%;
+          max-width: 480px;
+          height: auto;
+          display: block;
+          box-shadow: 0 20px 60px rgba(0,0,0,0.9);
+          transition: transform 0.6s ease;
+        }
         .cp-ab-visual:hover .cp-ab-img { transform: scale(1.015); }
 
-        /* status badge — cp-insta-btn style */
+        /* status badge */
         .cp-ab-badge {
           position: absolute;
           top: 20px; left: -18px;
           display: flex; align-items: center; gap: 9px;
-          font-family: 'Courier New', monospace;
-          font-size: 0.58rem; letter-spacing: 3px;
+          /* Inter — badge label */
+          font-family: 'Inter', sans-serif;
+          font-size: 0.52rem;
+          font-weight: 400;
+          letter-spacing: 4px;
           color: rgba(255,255,255,0.8);
           background: rgba(0,0,0,0.72);
           backdrop-filter: blur(14px);
@@ -187,22 +188,25 @@ const About = forwardRef<HTMLDivElement>((props, ref) => {
           width: 32px; height: 1px;
           background: #fde047; opacity: 0.7;
         }
+        /* Inter — pre-label (same as h3-pre-txt) */
         .cp-ab-pre-text {
-          font-family: 'Courier New', monospace;
-          font-size: 0.62rem; letter-spacing: 5px;
+          font-family: 'Inter', sans-serif;
+          font-size: 0.6rem;
+          font-weight: 400;
+          letter-spacing: 6px;
           color: rgba(253,224,71,0.85); text-transform: uppercase;
         }
 
-        /* main heading */
+        /* Bebas Neue — main heading */
         .cp-ab-title {
-          font-family: 'Cormorant Garamond', Georgia, serif;
-          font-size: clamp(3.2rem, 7.5vw, 7rem);
-          font-weight: 800; font-style: italic;
+          font-family: 'Bebas Neue', sans-serif;
+          font-size: clamp(3.8rem, 9vw, 8rem);
+          font-weight: 400;
           color: #fff;
-          line-height: 0.9; letter-spacing: -2px;
+          line-height: 0.92; letter-spacing: 4px;
           margin: 0 0 10px;
         }
-        .cp-ab-title-yellow { color: #fde047; font-style: normal; }
+        .cp-ab-title-yellow { color: #fde047; }
 
         /* gradient rule */
         .cp-ab-rule {
@@ -211,27 +215,31 @@ const About = forwardRef<HTMLDivElement>((props, ref) => {
           margin-bottom: 26px;
         }
 
-        /* lead */
+        /* Inter — lead paragraph */
         .cp-ab-lead {
-          font-family: 'Cormorant Garamond', Georgia, serif;
-          font-size: clamp(1rem, 1.5vw, 1.2rem);
-          color: rgba(255,255,255,0.95);
-          line-height: 1.7; margin: 0 0 14px;
+          font-family: 'Inter', sans-serif;
+          font-size: clamp(0.9rem, 1.4vw, 1.05rem);
+          font-weight: 400;
+          color: rgba(255,255,255,0.9);
+          line-height: 1.75; margin: 0 0 14px;
         }
-        .cp-ab-lead-cyan { color: #32c5f4; font-weight: 700; text-shadow: 0 0 18px rgba(50,197,244,0.3); }
+        .cp-ab-lead-cyan {
+          color: #32c5f4; font-weight: 700;
+          text-shadow: 0 0 18px rgba(50,197,244,0.3);
+        }
 
-        /* philosophy */
+        /* Inter — philosophy paragraph */
         .cp-ab-philosophy {
-          font-family: 'Cormorant Garamond', Georgia, serif;
-          font-size: clamp(0.95rem, 1.3vw, 1.05rem);
-          font-style: italic;
-          color: rgba(255,255,255,0.65);
+          font-family: 'Inter', sans-serif;
+          font-size: clamp(0.82rem, 1.2vw, 0.95rem);
+          font-weight: 300;
+          color: rgba(255,255,255,0.6);
           line-height: 1.9; max-width: 520px;
           margin: 0;
         }
         .cp-ab-philosophy-hl {
           color: #fff;
-          font-style: normal; font-weight: 700;
+          font-weight: 700;
           border-bottom: 1px solid rgba(253,224,71,0.4);
         }
 
@@ -257,16 +265,20 @@ const About = forwardRef<HTMLDivElement>((props, ref) => {
           margin: 0 22px; align-self: stretch;
         }
 
+        /* Bebas Neue — stat numbers */
         .cp-ab-stat-num {
-          font-family: 'Cormorant Garamond', Georgia, serif;
-          font-size: clamp(1.8rem, 3.5vw, 2.8rem);
-          font-weight: 700; color: #32c5f4;
-          line-height: 1;
+          font-family: 'Bebas Neue', sans-serif;
+          font-size: clamp(2rem, 3.5vw, 2.8rem);
+          font-weight: 400; color: #32c5f4;
+          line-height: 1; letter-spacing: 2px;
         }
 
+        /* Inter — stat labels */
         .cp-ab-stat-label {
-          font-family: 'Courier New', monospace;
-          font-size: 0.56rem; letter-spacing: 3px;
+          font-family: 'Inter', sans-serif;
+          font-size: clamp(0.44rem, 1vw, 0.54rem);
+          font-weight: 400;
+          letter-spacing: 3px;
           color: rgba(255,255,255,0.6);
           text-transform: uppercase; line-height: 1.5;
         }
@@ -290,12 +302,11 @@ const About = forwardRef<HTMLDivElement>((props, ref) => {
         @media (max-width: 768px) {
           .cp-ab-section  { padding: 70px 5% 80px; }
           .cp-ab-train-logo { height: 65px; margin-right: 40px; }
-          .cp-ab-title    { font-size: 3.5rem; }
         }
         @media (max-width: 480px) {
           .cp-ab-section  { padding: 60px 4% 70px; }
-          .cp-ab-title    { font-size: clamp(2.2rem, 9vw, 2.8rem); }
-          .cp-ab-stat-num { font-size: 1.8rem; }
+          .cp-ab-title    { font-size: clamp(3rem, 16vw, 4.5rem); }
+          .cp-ab-stat-num { font-size: 2rem; }
           .cp-ab-stat-label { font-size: 0.5rem; }
         }
       `}</style>
@@ -374,7 +385,7 @@ const About = forwardRef<HTMLDivElement>((props, ref) => {
               opportunity to redefine what cinema can be.
             </p>
 
-            {/* stats strip — exact cp-stats pattern */}
+            {/* stats strip */}
             <div className="cp-ab-stats">
               <div className="cp-ab-stat">
                 <span className="cp-ab-stat-num">

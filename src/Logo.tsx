@@ -1,13 +1,24 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { motion, useSpring, useMotionValue } from 'framer-motion';
-import { Images } from './assets/assets';
+import React, { useState, useEffect, useRef } from "react";
+import { motion, useSpring, useMotionValue } from "framer-motion";
+import { Images } from "./assets/assets";
+
+// ── Inject Google Fonts into <head> ──
+const injectFonts = () => {
+  const id = "cp-font-link";
+  if (document.getElementById(id)) return;
+  const link = document.createElement("link");
+  link.id = id;
+  link.rel = "stylesheet";
+  link.href =
+    "https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600&display=swap";
+  document.head.appendChild(link);
+};
 
 const Logo: React.FC = () => {
-  const [scrolled,    setScrolled]    = useState(false);
-  const [pulse,       setPulse]       = useState(false);
-  const [frameCount,  setFrameCount]  = useState(0);
+  const [scrolled, setScrolled] = useState(false);
+  const [pulse, setPulse] = useState(false);
+  const [frameCount, setFrameCount] = useState(0);
 
-  // magnetic follow
   const mx = useMotionValue(0);
   const my = useMotionValue(0);
   const sx = useSpring(mx, { stiffness: 120, damping: 18 });
@@ -15,33 +26,33 @@ const Logo: React.FC = () => {
 
   const containerRef = useRef<HTMLDivElement>(null);
 
-  // scroll detection
+  useEffect(() => {
+    injectFonts();
+  }, []);
+
   useEffect(() => {
     const onScroll = () => {
       setScrolled(window.scrollY > 60);
-      // flash scan pulse on scroll
       setPulse(true);
       const t = setTimeout(() => setPulse(false), 400);
       return () => clearTimeout(t);
     };
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // live timecode-style frame counter
   useEffect(() => {
-    const id = setInterval(() => setFrameCount(f => (f + 1) % 24), 42);
+    const id = setInterval(() => setFrameCount((f) => (f + 1) % 24), 42);
     return () => clearInterval(id);
   }, []);
 
-  // magnetic mouse follow (desktop)
   useEffect(() => {
     const onMove = (e: MouseEvent) => {
       const el = containerRef.current;
       if (!el) return;
       const rect = el.getBoundingClientRect();
-      const cx = rect.left + rect.width  / 2;
-      const cy = rect.top  + rect.height / 2;
+      const cx = rect.left + rect.width / 2;
+      const cy = rect.top + rect.height / 2;
       const dx = e.clientX - cx;
       const dy = e.clientY - cy;
       const dist = Math.sqrt(dx * dx + dy * dy);
@@ -49,22 +60,25 @@ const Logo: React.FC = () => {
         mx.set(dx * 0.18);
         my.set(dy * 0.18);
       } else {
-        mx.set(0); my.set(0);
+        mx.set(0);
+        my.set(0);
       }
     };
-    window.addEventListener('mousemove', onMove);
-    return () => window.removeEventListener('mousemove', onMove);
+    window.addEventListener("mousemove", onMove);
+    return () => window.removeEventListener("mousemove", onMove);
   }, [mx, my]);
 
-  const pad2 = (n: number) => String(n).padStart(2, '0');
-
-  // 8 tick marks around the ring
+  const pad2 = (n: number) => String(n).padStart(2, "0");
   const ticks = Array.from({ length: 12 });
 
   return (
     <>
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,700&display=swap');
+        /* ── Font base reset ── */
+        .cp-logo-wrap,
+        .cp-logo-wrap * {
+          font-family: 'Inter', sans-serif;
+        }
 
         .cp-logo-wrap {
           position: fixed;
@@ -73,7 +87,7 @@ const Logo: React.FC = () => {
           cursor: pointer;
         }
 
-        /* outer ring — spins slowly, pauses on hover */
+        /* outer ring */
         .cp-logo-ring {
           position: absolute;
           inset: -10px;
@@ -87,11 +101,9 @@ const Logo: React.FC = () => {
         @keyframes cpLogoSpin {
           to { transform: rotate(360deg); }
         }
-
-        /* ring SVG */
         .cp-logo-ring svg { width: 100%; height: 100%; }
 
-        /* scan line that sweeps across on scroll pulse */
+        /* scan line */
         .cp-logo-scan {
           position: absolute;
           inset: 0; border-radius: 50%;
@@ -110,16 +122,13 @@ const Logo: React.FC = () => {
         /* image */
         .cp-logo-img {
           display: block;
-          height: 64px;
-          width:  64px;
+          height: 64px; width: 64px;
           object-fit: contain;
           border-radius: 50%;
           border: 1px solid rgba(253,224,71,0.22);
           background: rgba(0,0,0,0.65);
           backdrop-filter: blur(8px);
-          transition:
-            border-color 0.35s,
-            box-shadow 0.35s;
+          transition: border-color 0.35s, box-shadow 0.35s;
           position: relative; z-index: 2;
         }
         .cp-logo-wrap:hover .cp-logo-img {
@@ -128,20 +137,20 @@ const Logo: React.FC = () => {
             0 0 0 2px rgba(50,197,244,0.12),
             0 0 22px rgba(50,197,244,0.25);
         }
-
-        /* scrolled state — shrinks */
         .cp-logo-img.scrolled {
           height: 48px; width: 48px;
           border-color: rgba(50,197,244,0.3);
         }
 
-        /* timecode label below the logo */
+        /* timecode — Inter */
         .cp-logo-tc {
           position: absolute;
           bottom: -18px; left: 50%;
           transform: translateX(-50%);
-          font-family: 'Courier New', monospace;
-          font-size: 0.28rem; letter-spacing: 2px;
+          font-family: 'Inter', sans-serif;
+          font-size: 0.28rem;
+          font-weight: 400;
+          letter-spacing: 2px;
           color: rgba(50,197,244,0.45);
           white-space: nowrap;
           pointer-events: none;
@@ -149,20 +158,22 @@ const Logo: React.FC = () => {
           transition: opacity 0.4s;
         }
 
-        /* CP badge — top right corner of img */
+        /* CP badge — Bebas Neue */
         .cp-logo-badge {
           position: absolute;
           top: -3px; right: -8px;
-          font-family: 'Courier New', monospace;
-          font-size: 0.28rem; letter-spacing: 1.5px;
-          color: #000; background: #fde047;
-          padding: 2px 5px;
+          font-family: 'Bebas Neue', sans-serif;
+          font-size: 0.6rem;
+          letter-spacing: 1.5px;
+          color: #000;
+          background: #fde047;
+          padding: 1px 5px;
           z-index: 5;
           pointer-events: none;
           white-space: nowrap;
         }
 
-        /* REC dot */
+        /* REC — Inter */
         .cp-logo-rec {
           position: absolute;
           bottom: -3px; left: -3px;
@@ -177,8 +188,10 @@ const Logo: React.FC = () => {
           animation: cpRecBlink 1s step-end infinite;
         }
         .cp-logo-rec-text {
-          font-family: 'Courier New', monospace;
-          font-size: 0.24rem; letter-spacing: 1.5px;
+          font-family: 'Inter', sans-serif;
+          font-size: 0.24rem;
+          font-weight: 500;
+          letter-spacing: 1.5px;
           color: rgba(255,51,51,0.7);
         }
         @keyframes cpRecBlink {
@@ -203,70 +216,80 @@ const Logo: React.FC = () => {
         className="cp-logo-wrap"
         style={{ x: sx, y: sy }}
         whileTap={{ scale: 0.92 }}
-        onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+        onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
         title="Back to top"
       >
-        {/* ── spinning ring with tick marks ── */}
+        {/* spinning ring */}
         <div className="cp-logo-ring">
-          <svg viewBox="0 0 84 84" fill="none" xmlns="http://www.w3.org/2000/svg">
-            {/* base ring */}
+          <svg
+            viewBox="0 0 84 84"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
             <circle
-              cx="42" cy="42" r="40"
+              cx="42"
+              cy="42"
+              r="40"
               stroke="rgba(253,224,71,0.18)"
               strokeWidth="0.8"
               strokeDasharray="3 4"
             />
-            {/* cyan accent arc */}
             <circle
-              cx="42" cy="42" r="40"
+              cx="42"
+              cy="42"
+              r="40"
               stroke="rgba(50,197,244,0.25)"
               strokeWidth="1"
               strokeDasharray="60 192"
               strokeDashoffset="20"
             />
-            {/* tick marks */}
             {ticks.map((_, i) => {
               const angle = (i / ticks.length) * 360;
-              const rad   = (angle - 90) * (Math.PI / 180);
-              const r1    = 38, r2 = i % 3 === 0 ? 33 : 35;
-              const x1    = 42 + r1 * Math.cos(rad);
-              const y1    = 42 + r1 * Math.sin(rad);
-              const x2    = 42 + r2 * Math.cos(rad);
-              const y2    = 42 + r2 * Math.sin(rad);
+              const rad = (angle - 90) * (Math.PI / 180);
+              const r1 = 38,
+                r2 = i % 3 === 0 ? 33 : 35;
+              const x1 = 42 + r1 * Math.cos(rad);
+              const y1 = 42 + r1 * Math.sin(rad);
+              const x2 = 42 + r2 * Math.cos(rad);
+              const y2 = 42 + r2 * Math.sin(rad);
               return (
                 <line
                   key={i}
-                  x1={x1} y1={y1} x2={x2} y2={y2}
-                  stroke={i % 3 === 0 ? 'rgba(253,224,71,0.5)' : 'rgba(255,255,255,0.12)'}
-                  strokeWidth={i % 3 === 0 ? '1.2' : '0.7'}
+                  x1={x1}
+                  y1={y1}
+                  x2={x2}
+                  y2={y2}
+                  stroke={
+                    i % 3 === 0
+                      ? "rgba(253,224,71,0.5)"
+                      : "rgba(255,255,255,0.12)"
+                  }
+                  strokeWidth={i % 3 === 0 ? "1.2" : "0.7"}
                 />
               );
             })}
           </svg>
         </div>
 
-        {/* ── scan pulse overlay ── */}
-        <div className={`cp-logo-scan ${pulse ? 'active' : ''}`} />
+        <div className={`cp-logo-scan ${pulse ? "active" : ""}`} />
 
-        {/* ── logo image ── */}
         <img
           src={Images.logo}
           alt="CinemaPayyan"
-          className={`cp-logo-img ${scrolled ? 'scrolled' : ''}`}
+          className={`cp-logo-img ${scrolled ? "scrolled" : ""}`}
         />
 
-        {/* ── CP badge ── */}
         <div className="cp-logo-badge">CP</div>
 
-        {/* ── REC indicator ── */}
         <div className="cp-logo-rec">
           <div className="cp-logo-rec-dot" />
           <span className="cp-logo-rec-text">REC</span>
         </div>
 
-        {/* ── live timecode ── */}
         <div className="cp-logo-tc">
-          {`00:00:${pad2(Math.floor(frameCount / 24) % 60)}:${pad2(frameCount)}`}
+          {`00:00:${pad2(Math.floor(frameCount / 24) % 60)}:${pad2(
+            frameCount
+          )}`}
         </div>
       </motion.div>
     </>

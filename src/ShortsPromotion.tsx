@@ -61,7 +61,7 @@ const ShortsPromotion: React.FC = () => {
   return (
     <>
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;0,800;1,600;1,700;1,800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&display=swap');
 
         /* ═══════════════════════════════════════════
            SECTION
@@ -109,18 +109,20 @@ const ShortsPromotion: React.FC = () => {
           background: #fde047; opacity: 0.5;
         }
         .cp-sp-pre-text {
-  font-family: 'Courier New', monospace;
-  font-size: 0.7rem; letter-spacing: 5px;
-  color: rgba(253,224,71,0.85); text-transform: uppercase;
-}
-        .cp-sp-title {
-          font-family: 'Cormorant Garamond', Georgia, serif;
-          font-size: clamp(2.4rem, 7.5vw, 5rem);
-          font-weight: 800; font-style: italic;
-          color: #fff; line-height: 0.95;
-          letter-spacing: -1px; margin: 0 0 18px;
+          font-family: 'Inter', sans-serif;
+          font-size: 0.65rem;
+          font-weight: 600;
+          letter-spacing: 5px;
+          color: rgba(253,224,71,0.85); text-transform: uppercase;
         }
-        .cp-sp-title-yellow { color: #fde047; font-style: normal; }
+        .cp-sp-title {
+          font-family: 'Bebas Neue', sans-serif;
+          font-size: clamp(3rem, 9vw, 6.5rem);
+          font-weight: 400;
+          color: #fff; line-height: 0.95;
+          letter-spacing: 3px; margin: 0 0 18px;
+        }
+        .cp-sp-title-yellow { color: #fde047; }
         .cp-sp-rule {
           width: 80px; height: 1px;
           background: linear-gradient(90deg, #32c5f4, #fde047);
@@ -128,7 +130,7 @@ const ShortsPromotion: React.FC = () => {
         }
 
         /* ═══════════════════════════════════════════
-           SECTION LABEL (reused above each grid)
+           SECTION LABEL
         ═══════════════════════════════════════════ */
         .cp-sp-label-row {
           display: flex; align-items: center; gap: 12px;
@@ -142,10 +144,12 @@ const ShortsPromotion: React.FC = () => {
           background: #fde047; opacity: 0.4;
         }
         .cp-sp-label-text {
-  font-family: 'Courier New', monospace;
-  font-size: 0.7rem; letter-spacing: 5px;
-  color: rgba(253,224,71,0.8); text-transform: uppercase;
-}
+          font-family: 'Inter', sans-serif;
+          font-size: 0.65rem;
+          font-weight: 600;
+          letter-spacing: 5px;
+          color: rgba(253,224,71,0.8); text-transform: uppercase;
+        }
 
         /* ═══════════════════════════════════════════
            YT GRID
@@ -160,7 +164,6 @@ const ShortsPromotion: React.FC = () => {
           position: relative; z-index: 5;
         }
 
-        /* card */
         .cp-sp-yt-card {
           display: flex; flex-direction: column;
           background: #080808;
@@ -173,13 +176,11 @@ const ShortsPromotion: React.FC = () => {
           box-shadow: 0 14px 44px rgba(0,0,0,0.65);
         }
 
-        /* thumbnail */
         .cp-sp-thumb {
           position: relative;
           width: 100%; aspect-ratio: 16/9;
           background: #0a0a0a; overflow: hidden;
         }
-        /* TL corner */
         .cp-sp-thumb::before {
           content: '';
           position: absolute;
@@ -189,7 +190,6 @@ const ShortsPromotion: React.FC = () => {
           border-left: 1px solid rgba(253,224,71,0.4);
           z-index: 4; pointer-events: none;
         }
-        /* BR corner */
         .cp-sp-thumb::after {
           content: '';
           position: absolute;
@@ -207,25 +207,22 @@ const ShortsPromotion: React.FC = () => {
         }
         .cp-sp-yt-card:hover .cp-sp-vid { transform: scale(1.04); }
 
-        /* gradient overlay on thumb */
         .cp-sp-thumb-grad {
           position: absolute; inset: 0;
           background: linear-gradient(to bottom, transparent 40%, rgba(0,0,0,0.5) 100%);
           z-index: 2; pointer-events: none;
         }
 
-        /* YT label tag */
         .cp-sp-yt-tag {
-  position: absolute;
-  top: 10px; right: 10px;
-  font-family: 'Courier New', monospace;
-  font-size: 0.65rem; letter-spacing: 3px;
-  color: #000; background: #fde047;
-  padding: 3px 8px; z-index: 5;
-  text-transform: uppercase;
-}
+          position: absolute;
+          top: 10px; right: 10px;
+          font-family: 'Bebas Neue', sans-serif;
+          font-size: 0.8rem; letter-spacing: 3px;
+          color: #000; background: #fde047;
+          padding: 3px 8px; z-index: 5;
+          text-transform: uppercase;
+        }
 
-        /* hover overlay */
         .cp-sp-hover-overlay {
           position: absolute; inset: 0;
           background: rgba(0,0,0,0.72);
@@ -239,36 +236,36 @@ const ShortsPromotion: React.FC = () => {
         .cp-sp-large-card:hover .cp-sp-hover-overlay { opacity: 1; }
 
         .cp-sp-hover-label {
-  font-family: 'Courier New', monospace;
-  font-size: 0.65rem; letter-spacing: 4px;
-  color: #000; background: #fde047;
-  padding: 8px 18px; text-transform: uppercase;
-  transform: translateY(6px);
-  transition: transform 0.3s;
-}
+          font-family: 'Inter', sans-serif;
+          font-size: 0.6rem;
+          font-weight: 600;
+          letter-spacing: 4px;
+          color: #000; background: #fde047;
+          padding: 8px 18px; text-transform: uppercase;
+          transform: translateY(6px);
+          transition: transform 0.3s;
+        }
         .cp-sp-yt-card:hover .cp-sp-hover-label,
         .cp-sp-reel-card:hover .cp-sp-hover-label,
         .cp-sp-large-card:hover .cp-sp-hover-label { transform: translateY(0); }
 
-        /* card info */
         .cp-sp-yt-info {
           padding: 16px 18px 20px;
           border-top: 1px solid rgba(255,255,255,0.04);
         }
         .cp-sp-yt-title {
-          font-family: 'Cormorant Garamond', Georgia, serif;
-          font-size: clamp(0.95rem, 1.6vw, 1.15rem);
-          font-weight: 700; letter-spacing: 0.5px;
+          font-family: 'Inter', sans-serif;
+          font-size: clamp(0.8rem, 1.3vw, 0.95rem);
+          font-weight: 500;
+          letter-spacing: 0.3px;
           color: rgba(255,255,255,0.85); margin: 0;
-          line-height: 1.4;
+          line-height: 1.5;
           transition: color 0.3s;
-          /* left accent line */
           border-left: 2px solid rgba(253,224,71,0.3);
           padding-left: 10px;
         }
         .cp-sp-yt-card:hover .cp-sp-yt-title { color: #fff; }
 
-        /* scan line on hover — cp-yt-scan style */
         .cp-sp-scan {
           position: absolute; bottom: 0; left: 0; right: 0;
           height: 2px;
@@ -290,7 +287,6 @@ const ShortsPromotion: React.FC = () => {
           position: relative; z-index: 5;
         }
 
-        /* reel card */
         .cp-sp-reel-card {
           flex: 0 0 240px;
           aspect-ratio: 9/16;
@@ -305,7 +301,6 @@ const ShortsPromotion: React.FC = () => {
           transform: translateY(-8px);
         }
 
-        /* reel corner marks */
         .cp-sp-reel-tl, .cp-sp-reel-br {
           position: absolute; z-index: 4;
           width: 10px; height: 10px; pointer-events: none;
@@ -322,7 +317,6 @@ const ShortsPromotion: React.FC = () => {
         .cp-sp-reel-br::after  { width:1px; height:100%; bottom:0; right:0; }
         .cp-sp-reel-br { bottom:7px; right:7px; transform: scale(-1); }
 
-        /* reel gradient */
         .cp-sp-reel-grad {
           position: absolute; inset: 0;
           background: linear-gradient(to bottom, transparent 55%, rgba(0,0,0,0.7) 100%);
@@ -353,17 +347,19 @@ const ShortsPromotion: React.FC = () => {
           background: #fde047; opacity: 0.5;
         }
         .cp-sp-brand-pre-text {
-  font-family: 'Courier New', monospace;
-  font-size: 0.7rem; letter-spacing: 5px;
-  color: rgba(253,224,71,0.85); text-transform: uppercase;
-}
+          font-family: 'Inter', sans-serif;
+          font-size: 0.65rem;
+          font-weight: 600;
+          letter-spacing: 5px;
+          color: rgba(253,224,71,0.85); text-transform: uppercase;
+        }
 
         .cp-sp-brand-title {
-          font-family: 'Cormorant Garamond', Georgia, serif;
-          font-size: clamp(1.4rem, 2.5vw, 2rem);
-          font-weight: 800; font-style: italic;
+          font-family: 'Bebas Neue', sans-serif;
+          font-size: clamp(1.8rem, 3vw, 2.8rem);
+          font-weight: 400;
           color: #fde047;
-          margin: 0 0 14px; letter-spacing: -0.5px; line-height: 1;
+          margin: 0 0 14px; letter-spacing: 3px; line-height: 1;
         }
 
         .cp-sp-brand-rule {
@@ -373,15 +369,16 @@ const ShortsPromotion: React.FC = () => {
         }
 
         .cp-sp-brand-desc {
-          font-family: 'Cormorant Garamond', Georgia, serif;
-          font-size: clamp(0.9rem, 1.3vw, 1.05rem);
+          font-family: 'Inter', sans-serif;
+          font-size: clamp(0.8rem, 1.2vw, 0.9rem);
+          font-weight: 300;
           color: rgba(255,255,255,0.45);
           line-height: 1.8; margin: 0;
         }
         .cp-sp-brand-desc strong {
           display: block; margin-top: 14px;
-          color: #fde047; font-weight: 700;
-          font-size: 1.1em; letter-spacing: 2px;
+          color: #fde047; font-weight: 600;
+          font-size: 1em; letter-spacing: 4px;
           text-transform: uppercase;
           animation: cpPulse 2s infinite ease-in-out;
         }
@@ -401,7 +398,6 @@ const ShortsPromotion: React.FC = () => {
           margin-top: 20px;
           position: relative; z-index: 5;
         }
-        /* top separator */
         .cp-sp-special::before {
           content: '';
           position: absolute;
@@ -418,7 +414,6 @@ const ShortsPromotion: React.FC = () => {
 
         .cp-sp-special-video { flex: 1.2; position: relative; }
 
-        /* large video card — cp-yt-card style */
         .cp-sp-large-card {
           display: block; position: relative;
           border: 1px solid rgba(255,255,255,0.06);
@@ -435,8 +430,6 @@ const ShortsPromotion: React.FC = () => {
           transition: transform 0.5s ease;
         }
         .cp-sp-large-card:hover video { transform: scale(1.03); }
-
-        /* TL / BR corners on large card */
         .cp-sp-large-card::before {
           content: '';
           position: absolute; top:8px; left:8px;
@@ -454,17 +447,17 @@ const ShortsPromotion: React.FC = () => {
           z-index:5; pointer-events:none;
         }
 
-        /* prime badge */
         .cp-sp-prime-badge {
-  position: absolute; top: 12px; left: 12px;
-  font-family: 'Courier New', monospace;
-  font-size: 0.65rem; letter-spacing: 3px;
-  color: #000; background: #00A8E1;
-  padding: 4px 10px; z-index: 15;
-  text-transform: uppercase;
-}
+          position: absolute; top: 12px; left: 12px;
+          font-family: 'Inter', sans-serif;
+          font-size: 0.58rem;
+          font-weight: 600;
+          letter-spacing: 3px;
+          color: #000; background: #00A8E1;
+          padding: 4px 10px; z-index: 15;
+          text-transform: uppercase;
+        }
 
-        /* scan line */
         .cp-sp-large-scan {
           position: absolute; bottom:0; left:0; right:0;
           height: 2px;
@@ -472,7 +465,6 @@ const ShortsPromotion: React.FC = () => {
           transform-origin: left; z-index: 6;
         }
 
-        /* special text side */
         .cp-sp-special-text { flex: 0.8; }
 
         .cp-sp-special-pre {
@@ -484,17 +476,19 @@ const ShortsPromotion: React.FC = () => {
           background: #fde047; opacity: 0.5;
         }
         .cp-sp-special-pre-txt {
-  font-family: 'Courier New', monospace;
-  font-size: 0.7rem; letter-spacing: 5px;
-  color: rgba(253,224,71,0.85); text-transform: uppercase;
-}
+          font-family: 'Inter', sans-serif;
+          font-size: 0.65rem;
+          font-weight: 600;
+          letter-spacing: 5px;
+          color: rgba(253,224,71,0.85); text-transform: uppercase;
+        }
 
         .cp-sp-special-title {
-          font-family: 'Cormorant Garamond', Georgia, serif;
-          font-size: clamp(1.8rem, 3.5vw, 3rem);
-          font-weight: 800; font-style: italic;
+          font-family: 'Bebas Neue', sans-serif;
+          font-size: clamp(2.2rem, 4vw, 3.8rem);
+          font-weight: 400;
           color: #32c5f4; margin: 0 0 14px;
-          letter-spacing: -0.5px; line-height: 1.05;
+          letter-spacing: 3px; line-height: 1.05;
         }
 
         .cp-sp-special-rule {
@@ -504,8 +498,9 @@ const ShortsPromotion: React.FC = () => {
         }
 
         .cp-sp-special-body {
-          font-family: 'Cormorant Garamond', Georgia, serif;
-          font-size: clamp(0.9rem, 1.3vw, 1.05rem);
+          font-family: 'Inter', sans-serif;
+          font-size: clamp(0.8rem, 1.2vw, 0.9rem);
+          font-weight: 300;
           line-height: 1.85; color: rgba(255,255,255,0.4);
           margin-bottom: 32px;
         }
@@ -517,8 +512,10 @@ const ShortsPromotion: React.FC = () => {
           padding: 13px 28px;
           border: 1px solid #fde047;
           color: #fde047; text-decoration: none;
-          font-family: 'Courier New', monospace;
-          font-size: 0.7rem; letter-spacing: 4px;
+          font-family: 'Inter', sans-serif;
+          font-size: 0.65rem;
+          font-weight: 600;
+          letter-spacing: 4px;
           text-transform: uppercase;
           transition: color 0.4s;
         }
@@ -551,8 +548,7 @@ const ShortsPromotion: React.FC = () => {
         }
         @media (max-width: 480px) {
           .cp-sp-section { padding: 70px 0 80px; }
-          .cp-sp-title { font-size: 2.6rem; }
-          .cp-sp-special-title { font-size: 1.8rem; }
+          .cp-sp-special-title { font-size: 2.2rem; }
         }
       `}</style>
 
@@ -592,10 +588,7 @@ const ShortsPromotion: React.FC = () => {
             >
               <div className="cp-sp-thumb">
                 <video autoPlay muted loop playsInline className="cp-sp-vid">
-                  <source
-                    src={VideoAssets.vjPreviews[vid.id]}
-                    type="video/mp4"
-                  />
+                  <source src={VideoAssets.vjPreviews[vid.id]} type="video/mp4" />
                 </video>
                 <div className="cp-sp-thumb-grad" />
                 <div className="cp-sp-yt-tag">YT</div>
@@ -626,22 +619,10 @@ const ShortsPromotion: React.FC = () => {
             className="cp-sp-reel-card"
           >
             <video
-              autoPlay
-              muted
-              loop
-              playsInline
-              className="cp-sp-vid"
-              style={{
-                width: "100%",
-                height: "100%",
-                objectFit: "cover",
-                display: "block",
-              }}
+              autoPlay muted loop playsInline className="cp-sp-vid"
+              style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
             >
-              <source
-                src={VideoAssets.vjPreviews[middleReels[0].id]}
-                type="video/mp4"
-              />
+              <source src={VideoAssets.vjPreviews[middleReels[0].id]} type="video/mp4" />
             </video>
             <div className="cp-sp-reel-grad" />
             <div className="cp-sp-reel-tl" />
@@ -653,11 +634,7 @@ const ShortsPromotion: React.FC = () => {
 
           {/* Brand center */}
           <div className="cp-sp-brand-center">
-            <img
-              src={Images.logo}
-              alt="CinemaPayyan"
-              className="cp-sp-brand-logo"
-            />
+            <img src={Images.logo} alt="CinemaPayyan" className="cp-sp-brand-logo" />
             <div className="cp-sp-brand-pre">
               <div className="cp-sp-brand-pre-line" />
               <span className="cp-sp-brand-pre-text">SIGNATURE FORMAT</span>
@@ -679,22 +656,10 @@ const ShortsPromotion: React.FC = () => {
             className="cp-sp-reel-card"
           >
             <video
-              autoPlay
-              muted
-              loop
-              playsInline
-              className="cp-sp-vid"
-              style={{
-                width: "100%",
-                height: "100%",
-                objectFit: "cover",
-                display: "block",
-              }}
+              autoPlay muted loop playsInline className="cp-sp-vid"
+              style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
             >
-              <source
-                src={VideoAssets.vjPreviews[middleReels[1].id]}
-                type="video/mp4"
-              />
+              <source src={VideoAssets.vjPreviews[middleReels[1].id]} type="video/mp4" />
             </video>
             <div className="cp-sp-reel-grad" />
             <div className="cp-sp-reel-tl" />
@@ -722,10 +687,7 @@ const ShortsPromotion: React.FC = () => {
             >
               <div className="cp-sp-thumb">
                 <video autoPlay muted loop playsInline className="cp-sp-vid">
-                  <source
-                    src={VideoAssets.vjPreviews[vid.id]}
-                    type="video/mp4"
-                  />
+                  <source src={VideoAssets.vjPreviews[vid.id]} type="video/mp4" />
                 </video>
                 <div className="cp-sp-thumb-grad" />
                 <div className="cp-sp-yt-tag">YT</div>
@@ -758,14 +720,9 @@ const ShortsPromotion: React.FC = () => {
                 className="cp-sp-large-card"
               >
                 <video autoPlay muted loop playsInline>
-                  <source
-                    src={VideoAssets.vjPreviews[specialPromo.id]}
-                    type="video/mp4"
-                  />
+                  <source src={VideoAssets.vjPreviews[specialPromo.id]} type="video/mp4" />
                 </video>
-                <div className="cp-sp-prime-badge">
-                  AMAZON PRIME ASSOCIATION
-                </div>
+                <div className="cp-sp-prime-badge">AMAZON PRIME ASSOCIATION</div>
                 <div className="cp-sp-hover-overlay">
                   <span className="cp-sp-hover-label">WATCH FULL PROMO</span>
                 </div>
@@ -777,14 +734,10 @@ const ShortsPromotion: React.FC = () => {
             <div className="cp-sp-special-text">
               <div className="cp-sp-special-pre">
                 <div className="cp-sp-special-pre-line" />
-                <span className="cp-sp-special-pre-txt">
-                  SPECIAL COLLABORATION
-                </span>
+                <span className="cp-sp-special-pre-txt">SPECIAL COLLABORATION</span>
               </div>
               <h2 className="cp-sp-special-title">
-                CINEMAPAYYAN
-                <br />
-                SPECIAL PROMOTION
+                CINEMAPAYYAN<br />SPECIAL PROMOTION
               </h2>
               <div className="cp-sp-special-rule" />
               <p className="cp-sp-special-body">

@@ -8,7 +8,7 @@ const Footer: React.FC = () => {
   return (
     <>
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;0,800;1,600;1,700;1,800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&display=swap');
 
         /* ═══════════════════════════════════════════
            FOOTER
@@ -21,7 +21,6 @@ const Footer: React.FC = () => {
           overflow: hidden;
         }
 
-        /* top gradient accent */
         .cp-ft-footer::before {
           content: '';
           position: absolute;
@@ -35,7 +34,6 @@ const Footer: React.FC = () => {
           );
         }
 
-        /* kanji watermark */
         .cp-ft-footer::after {
           content: '終';
           position: absolute;
@@ -56,9 +54,6 @@ const Footer: React.FC = () => {
         }
 
         /* ─── BRAND ────────────────────────────── */
-        .cp-ft-brand {}
-
-        /* pre-label */
         .cp-ft-brand-pre {
           display: flex; align-items: center; gap: 10px;
           margin-bottom: 12px;
@@ -68,39 +63,39 @@ const Footer: React.FC = () => {
           background: #fde047; opacity: 0.5;
         }
         .cp-ft-brand-pre-text {
-  font-family: 'Courier New', monospace;
-  font-size: 0.7rem; letter-spacing: 4px;
-  color: rgba(253,224,71,0.85); text-transform: uppercase;
-}
+          font-family: 'Inter', sans-serif;
+          font-size: 0.6rem;
+          font-weight: 600;
+          letter-spacing: 4px;
+          color: rgba(253,224,71,0.85); text-transform: uppercase;
+        }
 
-        /* logo */
         .cp-ft-logo {
-          font-family: 'Cormorant Garamond', Georgia, serif;
-          font-size: clamp(1.5rem, 2.5vw, 2rem);
-          font-weight: 800; font-style: italic;
+          font-family: 'Bebas Neue', sans-serif;
+          font-size: clamp(1.8rem, 3vw, 2.6rem);
+          font-weight: 400;
           color: #fde047;
-          letter-spacing: -0.5px; line-height: 1;
+          letter-spacing: 3px; line-height: 1;
           margin: 0 0 12px;
         }
 
-        /* rule */
         .cp-ft-brand-rule {
           width: 100%; height: 1px;
           background: linear-gradient(90deg, rgba(253,224,71,0.2), rgba(50,197,244,0.15), transparent);
           margin-bottom: 14px;
         }
 
-        /* tagline */
         .cp-ft-tagline {
-  font-family: 'Courier New', monospace;
-  font-size: 0.7rem; letter-spacing: 4px;
-  color: rgba(255,255,255,0.6);
-  text-transform: uppercase;
-  max-width: 240px; line-height: 1.8;
-  margin: 0;
-}
+          font-family: 'Inter', sans-serif;
+          font-size: 0.6rem;
+          font-weight: 500;
+          letter-spacing: 4px;
+          color: rgba(255,255,255,0.6);
+          text-transform: uppercase;
+          max-width: 240px; line-height: 1.8;
+          margin: 0;
+        }
 
-        /* social icons */
         .cp-ft-socials {
           display: flex; gap: 14px; margin-top: 22px;
         }
@@ -130,21 +125,24 @@ const Footer: React.FC = () => {
         }
 
         .cp-ft-col h4 {
-  font-family: 'Courier New', monospace;
-  font-size: 0.7rem; letter-spacing: 5px;
-  color: rgba(253,224,71,0.85); text-transform: uppercase;
-  margin: 0 0 20px; font-weight: normal;
-}
+          font-family: 'Inter', sans-serif;
+          font-size: 0.6rem;
+          font-weight: 600;
+          letter-spacing: 5px;
+          color: rgba(253,224,71,0.85); text-transform: uppercase;
+          margin: 0 0 20px;
+        }
 
         .cp-ft-col a {
-  display: block; text-decoration: none;
-  font-family: 'Cormorant Garamond', Georgia, serif;
-  font-size: 1rem; font-weight: 600;
-  color: rgba(255,255,255,0.65);
-  margin-bottom: 10px;
-  transition: color 0.3s, padding-left 0.3s;
-  position: relative;
-}
+          display: block; text-decoration: none;
+          font-family: 'Inter', sans-serif;
+          font-size: 0.875rem;
+          font-weight: 400;
+          color: rgba(255,255,255,0.65);
+          margin-bottom: 10px;
+          transition: color 0.3s, padding-left 0.3s;
+          position: relative;
+        }
         .cp-ft-col a::before {
           content: '';
           position: absolute; left: -12px;
@@ -154,25 +152,26 @@ const Footer: React.FC = () => {
           opacity: 0;
           transition: opacity 0.3s;
         }
-        .cp-ft-col a:hover { color: rgba(255,255,255,0.8); padding-left: 10px; }
+        .cp-ft-col a:hover { color: rgba(255,255,255,0.9); padding-left: 10px; }
         .cp-ft-col a:hover::before { opacity: 1; }
 
         /* ─── CONTACT ───────────────────────────── */
-        .cp-ft-contact {}
-
         .cp-ft-contact h4 {
-  font-family: 'Courier New', monospace;
-  font-size: 0.7rem; letter-spacing: 5px;
-  color: rgba(253,224,71,0.85); text-transform: uppercase;
-  margin: 0 0 20px; font-weight: normal;
-}
+          font-family: 'Inter', sans-serif;
+          font-size: 0.6rem;
+          font-weight: 600;
+          letter-spacing: 5px;
+          color: rgba(253,224,71,0.85); text-transform: uppercase;
+          margin: 0 0 20px;
+        }
 
         .cp-ft-contact p {
-  font-family: 'Cormorant Garamond', Georgia, serif;
-  font-size: 0.95rem;
-  color: rgba(255,255,255,0.65);
-  margin: 0 0 10px; line-height: 1.6;
-}
+          font-family: 'Inter', sans-serif;
+          font-size: 0.85rem;
+          font-weight: 300;
+          color: rgba(255,255,255,0.65);
+          margin: 0 0 10px; line-height: 1.7;
+        }
 
         /* ─── BOTTOM BAR ────────────────────────── */
         .cp-ft-bottom {
@@ -187,12 +186,13 @@ const Footer: React.FC = () => {
           display: flex; gap: 20px; flex-wrap: wrap;
         }
         .cp-ft-legal span {
-  font-family: 'Courier New', monospace;
-  font-size: 0.65rem; letter-spacing: 2px;
-  color: rgba(255,255,255,0.55); text-transform: uppercase;
-}
+          font-family: 'Inter', sans-serif;
+          font-size: 0.6rem;
+          font-weight: 400;
+          letter-spacing: 2px;
+          color: rgba(255,255,255,0.4); text-transform: uppercase;
+        }
 
-        /* scroll-top button — cp-cta style */
         .cp-ft-scroll-btn {
           position: relative; overflow: hidden;
           display: inline-flex; align-items: center; gap: 10px;
@@ -200,8 +200,10 @@ const Footer: React.FC = () => {
           border: 1px solid rgba(255,255,255,0.1);
           background: transparent;
           color: rgba(255,255,255,0.65);
-          font-family: 'Courier New', monospace;
-          font-size: 0.65rem; letter-spacing: 4px;
+          font-family: 'Inter', sans-serif;
+          font-size: 0.6rem;
+          font-weight: 600;
+          letter-spacing: 4px;
           text-transform: uppercase; cursor: pointer;
           transition: color 0.4s, border-color 0.4s;
         }
@@ -236,7 +238,6 @@ const Footer: React.FC = () => {
         }
         @media (max-width: 480px) {
           .cp-ft-footer { padding: 65px 5% 32px; }
-          .cp-ft-logo   { font-size: 1.5rem; }
         }
       `}</style>
 

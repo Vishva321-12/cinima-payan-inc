@@ -14,7 +14,7 @@ interface HeaderProps {
 }
 
 function Header({ onScrollRequest, refs, isMenuOpen, setIsMenuOpen }: HeaderProps) {
-  const [active,    setActive]    = useState('HOME');
+  const [active,     setActive]     = useState('HOME');
   const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
@@ -52,7 +52,7 @@ function Header({ onScrollRequest, refs, isMenuOpen, setIsMenuOpen }: HeaderProp
   return (
     <>
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,700;0,800;1,700;1,800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&display=swap');
 
         /* ═══════════════════════════════════════════
            DESKTOP HEADER
@@ -68,7 +68,6 @@ function Header({ onScrollRequest, refs, isMenuOpen, setIsMenuOpen }: HeaderProp
         }
         .cp-hd-fixed.scrolled { padding-top: 8px; }
 
-        /* pill container */
         .cp-hd-bar {
           background: rgba(0,0,0,0.35);
           backdrop-filter: blur(18px);
@@ -76,10 +75,7 @@ function Header({ onScrollRequest, refs, isMenuOpen, setIsMenuOpen }: HeaderProp
           border: 1px solid rgba(255,255,255,0.07);
           box-shadow: 0 8px 32px rgba(0,0,0,0.4);
           display: flex;
-          transition:
-            background 0.5s,
-            border-color 0.5s,
-            box-shadow 0.5s;
+          transition: background 0.5s, border-color 0.5s, box-shadow 0.5s;
         }
         .cp-hd-fixed.scrolled .cp-hd-bar {
           background: rgba(0,0,0,0.94);
@@ -97,7 +93,6 @@ function Header({ onScrollRequest, refs, isMenuOpen, setIsMenuOpen }: HeaderProp
           transition: background 0.3s;
         }
 
-        /* fill sweep on hover — cp-cta style */
         .cp-hd-fill {
           position: absolute; inset: 0;
           background: rgba(253,224,71,0.06);
@@ -107,23 +102,23 @@ function Header({ onScrollRequest, refs, isMenuOpen, setIsMenuOpen }: HeaderProp
         }
         .cp-hd-item:hover .cp-hd-fill { transform: scaleX(1); }
 
-        /* label */
         .cp-hd-label {
-  position: relative; z-index: 5;
-  font-family: 'Courier New', monospace;
-  font-size: 0.7rem; letter-spacing: 4px;
-  color: rgba(255,255,255,0.85);
-  text-transform: uppercase;
-  transition: color 0.3s, letter-spacing 0.3s;
-  white-space: nowrap;
-}
+          position: relative; z-index: 5;
+          font-family: 'Inter', sans-serif;
+          font-size: 0.65rem;
+          font-weight: 600;
+          letter-spacing: 4px;
+          color: rgba(255,255,255,0.85);
+          text-transform: uppercase;
+          transition: color 0.3s, letter-spacing 0.3s;
+          white-space: nowrap;
+        }
         .cp-hd-item:hover .cp-hd-label {
           color: #fde047;
           letter-spacing: 5px;
         }
         .cp-hd-item.active .cp-hd-label { color: #fde047; }
 
-        /* bottom active bar */
         .cp-hd-active-bar {
           position: absolute;
           bottom: 0; left: 15%;
@@ -132,7 +127,6 @@ function Header({ onScrollRequest, refs, isMenuOpen, setIsMenuOpen }: HeaderProp
           z-index: 10;
         }
 
-        /* separator between items */
         .cp-hd-sep {
           width: 1px;
           background: rgba(255,255,255,0.06);
@@ -151,7 +145,6 @@ function Header({ onScrollRequest, refs, isMenuOpen, setIsMenuOpen }: HeaderProp
           backdrop-filter: blur(20px);
         }
 
-        /* kanji watermark behind mobile menu */
         .cp-hd-overlay::before {
           content: '映';
           position: absolute;
@@ -163,7 +156,6 @@ function Header({ onScrollRequest, refs, isMenuOpen, setIsMenuOpen }: HeaderProp
           line-height: 1;
         }
 
-        /* top hairline in overlay */
         .cp-hd-overlay::after {
           content: '';
           position: absolute;
@@ -181,7 +173,6 @@ function Header({ onScrollRequest, refs, isMenuOpen, setIsMenuOpen }: HeaderProp
           width: 100%; padding: 0 8%;
         }
 
-        /* mobile item row */
         .cp-hd-mobile-item {
           width: 100%; max-width: 480px;
           display: flex; align-items: center;
@@ -192,43 +183,43 @@ function Header({ onScrollRequest, refs, isMenuOpen, setIsMenuOpen }: HeaderProp
           position: relative; overflow: hidden;
         }
 
-        /* number */
         .cp-hd-mobile-num {
-  font-family: 'Courier New', monospace;
-  font-size: 0.65rem; letter-spacing: 3px;
-  color: rgba(253,224,71,0.7);
-}
+          font-family: 'Inter', sans-serif;
+          font-size: 0.6rem;
+          font-weight: 600;
+          letter-spacing: 3px;
+          color: rgba(253,224,71,0.7);
+        }
 
-        /* label */
         .cp-hd-mobile-label {
-  font-family: 'Cormorant Garamond', Georgia, serif;
-  font-size: clamp(2.4rem, 7vw, 4rem);
-  font-weight: 800; font-style: italic;
-  color: rgba(255,255,255,0.85);
-  letter-spacing: -1px; line-height: 1;
-  transition: color 0.3s, letter-spacing 0.3s;
-  position: relative; z-index: 2;
-}
+          font-family: 'Bebas Neue', sans-serif;
+          font-size: clamp(2.8rem, 8vw, 5rem);
+          font-weight: 400;
+          color: rgba(255,255,255,0.85);
+          letter-spacing: 3px; line-height: 1;
+          transition: color 0.3s, letter-spacing 0.3s;
+          position: relative; z-index: 2;
+        }
         .cp-hd-mobile-item:hover .cp-hd-mobile-label,
         .cp-hd-mobile-item.active .cp-hd-mobile-label {
           color: #fde047;
-          letter-spacing: -0.5px;
+          letter-spacing: 4px;
         }
 
-        /* arrow */
         .cp-hd-mobile-arrow {
-  font-family: 'Courier New', monospace;
-  font-size: 0.7rem; letter-spacing: 2px;
-  color: rgba(255,255,255,0.55);
-  transition: color 0.3s, transform 0.3s;
-}
+          font-family: 'Inter', sans-serif;
+          font-size: 0.7rem;
+          font-weight: 500;
+          letter-spacing: 2px;
+          color: rgba(255,255,255,0.55);
+          transition: color 0.3s, transform 0.3s;
+        }
         .cp-hd-mobile-item:hover .cp-hd-mobile-arrow,
         .cp-hd-mobile-item.active .cp-hd-mobile-arrow {
           color: rgba(50,197,244,0.5);
           transform: translateX(6px);
         }
 
-        /* fill sweep on mobile item */
         .cp-hd-mobile-fill {
           position: absolute; inset: 0;
           background: rgba(253,224,71,0.03);
@@ -238,13 +229,11 @@ function Header({ onScrollRequest, refs, isMenuOpen, setIsMenuOpen }: HeaderProp
         }
         .cp-hd-mobile-item:hover .cp-hd-mobile-fill { transform: scaleX(1); }
 
-        /* active yellow bar on left edge */
         .cp-hd-mobile-active-bar {
           position: absolute; left: 0; top: 0; bottom: 0;
           width: 2px; background: #fde047; z-index: 5;
         }
 
-        /* bottom bar inside overlay */
         .cp-hd-mobile-bottom {
           margin-top: 32px;
           display: flex; align-items: center; gap: 12px;
@@ -255,10 +244,13 @@ function Header({ onScrollRequest, refs, isMenuOpen, setIsMenuOpen }: HeaderProp
           background: rgba(255,255,255,0.05);
         }
         .cp-hd-mobile-bottom-text {
-  font-family: 'Courier New', monospace;
-  font-size: 0.65rem; letter-spacing: 4px;
-  color: rgba(255,255,255,0.55); text-transform: uppercase;
-}
+          font-family: 'Inter', sans-serif;
+          font-size: 0.6rem;
+          font-weight: 600;
+          letter-spacing: 4px;
+          color: rgba(255,255,255,0.55);
+          text-transform: uppercase;
+        }
 
         /* ─── RESPONSIVE ────────────────────────── */
         @media (max-width: 1024px) {
@@ -331,7 +323,6 @@ function Header({ onScrollRequest, refs, isMenuOpen, setIsMenuOpen }: HeaderProp
                 </motion.div>
               ))}
 
-              {/* bottom branding row */}
               <div className="cp-hd-mobile-bottom">
                 <div className="cp-hd-mobile-bottom-line" />
                 <span className="cp-hd-mobile-bottom-text">CINEMAPAYYAN INC</span>

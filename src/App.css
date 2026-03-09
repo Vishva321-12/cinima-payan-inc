@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;600;700;800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700;800&display=swap");
 
 /* =========================================================
    GLOBAL VARIABLES & RESET
@@ -20,6 +20,9 @@
   --yellow-glow: rgba(253, 224, 71, 0.15);
   --transition: 0.4s cubic-bezier(0.23, 1, 0.32, 1);
   --transition-smooth: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  --font-display: 'Bebas Neue', sans-serif;
+  --font-body: 'Inter', sans-serif;
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
 }
 
 *, *::before, *::after {
@@ -37,6 +40,7 @@ body {
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-family: inherit;
 }
 
 /* Structural zero-radius overrides */
@@ -54,10 +58,6 @@ header, nav, .prof-nav-item, .hero-container, .about-section,
   position: relative;
   overflow-x: hidden;
 }
-
-/* =========================================================
-   LOGO
-   ========================================================= */
 
 
 
@@ -77,7 +77,6 @@ header, nav, .prof-nav-item, .hero-container, .about-section,
   position: relative;
 }
 
-/* Decorative rule lines */
 .gazette-header::before,
 .gazette-header::after {
   content: '';
@@ -91,7 +90,7 @@ header, nav, .prof-nav-item, .hero-container, .about-section,
 .gazette-header::after  { bottom: 30px; }
 
 .gazette-logo {
-  font-family: "Bebas Neue", sans-serif;
+  font-family: var(--font-display);
   font-size: clamp(72px, 14vw, 170px);
   color: var(--yellow);
   letter-spacing: 12px;
@@ -100,9 +99,10 @@ header, nav, .prof-nav-item, .hero-container, .about-section,
 }
 
 .gazette-meta {
-  font-family: "Inter", sans-serif;
+  font-family: var(--font-body);
   letter-spacing: 7px;
   font-size: 0.72rem;
+  font-weight: 500;
   color: rgba(255, 255, 255, 0.35);
   margin-top: 14px;
   text-transform: uppercase;
@@ -120,7 +120,6 @@ header, nav, .prof-nav-item, .hero-container, .about-section,
   position: relative;
 }
 
-/* Subtle alternating section tint */
 .gazette-section:nth-child(even) {
   background: rgba(255, 255, 255, 0.012);
 }
@@ -134,7 +133,7 @@ header, nav, .prof-nav-item, .hero-container, .about-section,
 }
 
 .gazette-title {
-  font-family: "Bebas Neue", sans-serif;
+  font-family: var(--font-display);
   font-size: clamp(3rem, 5.5vw, 5rem);
   color: #fff;
   line-height: 0.9;
@@ -151,8 +150,9 @@ header, nav, .prof-nav-item, .hero-container, .about-section,
 }
 
 .gazette-desc {
-  font-family: "Inter", sans-serif;
+  font-family: var(--font-body);
   font-size: 0.78rem;
+  font-weight: 400;
   letter-spacing: 4px;
   color: rgba(255, 255, 255, 0.5);
   text-transform: uppercase;
@@ -197,7 +197,7 @@ header, nav, .prof-nav-item, .hero-container, .about-section,
   background: var(--yellow);
   color: #000;
   padding: 18px 40px;
-  font-family: "Bebas Neue", sans-serif;
+  font-family: var(--font-display);
   font-size: 1.2rem;
   text-decoration: none;
   z-index: 1000;
@@ -236,7 +236,6 @@ header, nav, .prof-nav-item, .hero-container, .about-section,
   background-color: #000;
 }
 
-/* Film frame top/bottom bars */
 .container1::before,
 .container1::after {
   content: '';
@@ -275,17 +274,8 @@ header, nav, .prof-nav-item, .hero-container, .about-section,
 
 /* ============================================
    CINEMAPAYYAN — WORK SECTION
-   Colors: --cyan #32c5f4 | --yellow #fde047
-           --black #000000 | --white #ffffff
    ============================================ */
 
-   :root {
-    --cyan: #32c5f4;
-    --yellow: #fde047;
-    --black: #000000;
-    --white: #ffffff;
-  }
-  
   /* ── SECTION ─────────────────────────────────── */
   .work-section {
     background: var(--black);
@@ -350,23 +340,23 @@ header, nav, .prof-nav-item, .hero-container, .about-section,
     gap: 2px;
   }
   .cinema-overline {
-    font-family: 'Courier New', monospace;
+    font-family: var(--font-body);
     font-size: 0.44rem;
+    font-weight: 500;
     letter-spacing: 5px;
     color: rgba(255,255,255,0.22);
     text-transform: uppercase;
   }
   .cinema-heading {
-    font-family: 'Cormorant Garamond', 'Playfair Display', Georgia, serif;
+    font-family: var(--font-display);
     font-size: clamp(2rem, 5vw, 3.5rem);
-    font-weight: 700;
-    font-style: italic;
+    font-weight: 400;
     letter-spacing: 2px;
     line-height: 1;
     margin: 0;
   }
-  .text-yellow { color: var(--yellow); font-style: normal; }
-  .text-cyan   { color: var(--cyan);   font-style: normal; }
+  .text-yellow { color: var(--yellow); }
+  .text-cyan   { color: var(--cyan);   }
   
   .cinema-header-count {
     display: flex;
@@ -377,29 +367,24 @@ header, nav, .prof-nav-item, .hero-container, .about-section,
     padding-left: 18px;
   }
   .cinema-header-count span:first-child {
-    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-family: var(--font-display);
     font-size: 1.6rem;
-    font-weight: 700;
+    font-weight: 400;
     color: var(--yellow);
     line-height: 1;
   }
   .count-label {
-    font-family: 'Courier New', monospace;
+    font-family: var(--font-body);
     font-size: 0.38rem;
+    font-weight: 500;
     letter-spacing: 3px;
     color: rgba(255,255,255,0.2);
     margin-top: 2px;
   }
   
-  /* ══════════════════════════════════════════════
-     VJ SLIDER
-     ══════════════════════════════════════════════ */
+  /* ── VJ SLIDER ── */
+  .vj-slider-wrap { position: relative; }
   
-  .vj-slider-wrap {
-    position: relative;
-  }
-  
-  /* Fade edges */
   .slider-fade-left,
   .slider-fade-right {
     position: absolute;
@@ -411,7 +396,6 @@ header, nav, .prof-nav-item, .hero-container, .about-section,
   .slider-fade-left  { left: 0;  background: linear-gradient(90deg,  var(--black), transparent); }
   .slider-fade-right { right: 0; background: linear-gradient(270deg, var(--black), transparent); }
   
-  /* Scrollable track — center snap */
   .vj-slider {
     display: flex;
     gap: 16px;
@@ -419,22 +403,16 @@ header, nav, .prof-nav-item, .hero-container, .about-section,
     scroll-snap-type: x mandatory;
     scroll-behavior: smooth;
     -webkit-overflow-scrolling: touch;
-    /* Padding ensures first & last card can snap to center */
     padding: 10px 0 24px;
   }
   .vj-slider::-webkit-scrollbar { display: none; }
   
-  /* ── VJ CARD ──────────────────────────────────── */
   .vj-card {
-    /* Each card takes up a fixed width;
-       first/last get offset via padding-inline on parent scroll */
     flex: 0 0 clamp(240px, 30vw, 320px);
-    scroll-snap-align: center;   /* ← always snap to center */
+    scroll-snap-align: center;
     cursor: pointer;
   }
   
-  /* Dynamic leading / trailing space so first and last card
-     can also reach the center snap point */
   .vj-card:first-child { margin-left: calc(50% - clamp(240px, 30vw, 320px) / 2); }
   .vj-card:last-child  { margin-right: calc(50% - clamp(240px, 30vw, 320px) / 2); }
   
@@ -450,7 +428,6 @@ header, nav, .prof-nav-item, .hero-container, .about-section,
     box-shadow: 0 16px 50px rgba(0,0,0,0.7), 0 0 0 1px rgba(50,197,244,0.08);
   }
   
-  /* Media */
   .vj-media {
     position: relative;
     width: 100%;
@@ -492,8 +469,9 @@ header, nav, .prof-nav-item, .hero-container, .about-section,
     z-index: 5;
   }
   .vj-badge-num {
-    font-family: 'Courier New', monospace;
+    font-family: var(--font-body);
     font-size: 0.5rem;
+    font-weight: 500;
     letter-spacing: 2px;
     color: rgba(253, 224, 71, 0.7);
     background: rgba(0,0,0,0.6);
@@ -529,16 +507,17 @@ header, nav, .prof-nav-item, .hero-container, .about-section,
   .vj-info-left { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
   
   .vj-session-label {
-    font-family: 'Courier New', monospace;
+    font-family: var(--font-body);
     font-size: 0.42rem;
+    font-weight: 500;
     letter-spacing: 3px;
     color: var(--yellow);
     opacity: 0.8;
   }
   .vj-title {
-    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-family: var(--font-display);
     font-size: clamp(0.9rem, 1.8vw, 1.15rem);
-    font-weight: 600;
+    font-weight: 400;
     letter-spacing: 1px;
     margin: 0;
     white-space: nowrap;
@@ -550,8 +529,9 @@ header, nav, .prof-nav-item, .hero-container, .about-section,
   .vj-card:hover .vj-title { color: var(--white); }
   
   .vj-role {
-    font-family: 'Courier New', monospace;
+    font-family: var(--font-body);
     font-size: 0.38rem;
+    font-weight: 400;
     letter-spacing: 2px;
     color: rgba(255,255,255,0.22);
     text-transform: uppercase;
@@ -566,9 +546,9 @@ header, nav, .prof-nav-item, .hero-container, .about-section,
     transform-origin: left;
   }
   
-  /* ── DOT INDICATORS ─────────────────────────── */
+  /* ── DOT INDICATORS ── */
   .vj-dots {
-    display: none;               /* hidden on desktop */
+    display: none;
     justify-content: center;
     align-items: center;
     gap: 7px;
@@ -577,8 +557,7 @@ header, nav, .prof-nav-item, .hero-container, .about-section,
   }
   
   .vj-dot {
-    width: 6px;
-    height: 6px;
+    width: 6px; height: 6px;
     border-radius: 50%;
     border: none;
     background: rgba(255,255,255,0.18);
@@ -587,8 +566,6 @@ header, nav, .prof-nav-item, .hero-container, .about-section,
     transition: background 0.3s ease, transform 0.3s ease, width 0.3s ease;
     flex-shrink: 0;
   }
-  
-  /* Active dot: stretches into a pill + yellow */
   .vj-dot--active {
     background: var(--yellow);
     width: 20px;
@@ -596,10 +573,7 @@ header, nav, .prof-nav-item, .hero-container, .about-section,
     transform: none;
   }
   
-  /* ══════════════════════════════════════════════
-     RJ ARCHIVES
-     ══════════════════════════════════════════════ */
-  
+  /* ── RJ ARCHIVES ── */
   .rj-stage {
     display: flex;
     align-items: center;
@@ -645,8 +619,9 @@ header, nav, .prof-nav-item, .hero-container, .about-section,
   }
   .rj-strip-left { display: flex; align-items: center; gap: 6px; }
   .rj-strip-label {
-    font-family: 'Courier New', monospace;
+    font-family: var(--font-body);
     font-size: 0.42rem;
+    font-weight: 500;
     letter-spacing: 3px;
     color: var(--cyan);
   }
@@ -661,8 +636,8 @@ header, nav, .prof-nav-item, .hero-container, .about-section,
     50%       { opacity: 0.2; }
   }
   .rj-strip-title {
-    font-family: 'Cormorant Garamond', Georgia, serif;
-    font-size: 0.75rem;
+    font-family: var(--font-display);
+    font-size: 0.85rem;
     letter-spacing: 3px;
     color: rgba(255,255,255,0.7);
     flex: 1;
@@ -688,16 +663,17 @@ header, nav, .prof-nav-item, .hero-container, .about-section,
     color: var(--white);
   }
   .rj-overlay-cta {
-    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-family: var(--font-display);
     font-size: 1.1rem;
-    font-weight: 700;
+    font-weight: 400;
     letter-spacing: 4px;
     color: var(--black);
     text-transform: uppercase;
   }
   .rj-overlay-sub {
-    font-family: 'Courier New', monospace;
+    font-family: var(--font-body);
     font-size: 0.44rem;
+    font-weight: 400;
     letter-spacing: 4px;
     color: rgba(0,0,0,0.55);
     text-transform: uppercase;
@@ -740,26 +716,22 @@ header, nav, .prof-nav-item, .hero-container, .about-section,
   }
   .rj-meta-divider { height: 1px; background: rgba(255,255,255,0.05); }
   .rj-meta-num {
-    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-family: var(--font-display);
     font-size: clamp(1.6rem, 3vw, 2.2rem);
-    font-weight: 700;
+    font-weight: 400;
     color: var(--cyan);
     line-height: 1;
   }
   .rj-meta-plus { font-size: 0.65em; vertical-align: super; }
   .rj-meta-label {
-    font-family: 'Courier New', monospace;
+    font-family: var(--font-body);
     font-size: 0.4rem;
+    font-weight: 500;
     letter-spacing: 3px;
     color: rgba(255,255,255,0.2);
     text-transform: uppercase;
   }
   
-  /* ══════════════════════════════════════════════
-     RESPONSIVE
-     ══════════════════════════════════════════════ */
-  
-  /* Show dots only on mobile / tablet */
   @media (max-width: 1024px) {
     .vj-dots { display: flex; }
   }
@@ -785,12 +757,9 @@ header, nav, .prof-nav-item, .hero-container, .about-section,
     .cinema-header-content { gap: 12px; padding: 0 16px; }
     .cinema-heading { font-size: 2rem; }
     .cinema-header-count { display: none; }
-  
-    /* Narrower cards on mobile → more visible peek of next card */
     .vj-card { flex: 0 0 clamp(200px, 78vw, 280px); }
     .vj-card:first-child { margin-left: calc(50% - clamp(200px, 78vw, 280px) / 2); }
     .vj-card:last-child  { margin-right: calc(50% - clamp(200px, 78vw, 280px) / 2); }
-  
     .slider-fade-left, .slider-fade-right { width: 28px; }
   }
   
@@ -808,13 +777,7 @@ header, nav, .prof-nav-item, .hero-container, .about-section,
 /* =========================================================
    FILM CRITIC SECTION
    ========================================================= */
-/* ============================================
-   CINEMAPAYYAN — FILM CRITIC SECTION
-   Colors: --cyan #32c5f4 | --yellow #fde047
-           --black #000000 | --white #ffffff
-   ============================================ */
 
-/* ── SECTION ─────────────────────────────────── */
 .fc-section {
   background: var(--black);
   padding: 100px 0 0;
@@ -823,10 +786,6 @@ header, nav, .prof-nav-item, .hero-container, .about-section,
   position: relative;
 }
 
-/* Reuse the shared header classes from AboutWork.css:
-   .cinema-section-header, .cinema-header-rule, etc.
-   (already declared globally — no repeat needed)        */
-
 .fc-inner {
   max-width: 1200px;
   margin: 0 auto;
@@ -834,7 +793,6 @@ header, nav, .prof-nav-item, .hero-container, .about-section,
   padding-bottom: 0;
 }
 
-/* ── HERO BANNER ─────────────────────────────── */
 .fc-hero {
   position: relative;
   width: 100%;
@@ -853,7 +811,6 @@ header, nav, .prof-nav-item, .hero-container, .about-section,
   transition: transform 0.7s ease;
 }
 
-/* Cinematic bottom-to-top vignette */
 .fc-hero-vignette {
   position: absolute; inset: 0;
   background: linear-gradient(
@@ -866,7 +823,6 @@ header, nav, .prof-nav-item, .hero-container, .about-section,
   z-index: 2;
 }
 
-/* Film-frame corner marks */
 .fc-corner {
   position: absolute;
   width: 20px; height: 20px;
@@ -897,7 +853,6 @@ header, nav, .prof-nav-item, .hero-container, .about-section,
 .fc-corner--br::before { bottom: 0; right: 0; }
 .fc-corner--br::after  { bottom: 0; right: 0; }
 
-/* Bottom info bar */
 .fc-hero-bar {
   position: absolute;
   bottom: 0; left: 0; right: 0;
@@ -922,18 +877,18 @@ header, nav, .prof-nav-item, .hero-container, .about-section,
   display: block;
 }
 .fc-hero-live {
-  font-family: 'Courier New', monospace;
+  font-family: var(--font-body);
   font-size: 0.42rem;
+  font-weight: 500;
   letter-spacing: 4px;
   color: var(--yellow);
   text-transform: uppercase;
 }
 
 .fc-hero-title {
-  font-family: 'Cormorant Garamond', 'Playfair Display', Georgia, serif;
+  font-family: var(--font-display);
   font-size: clamp(1rem, 2.5vw, 1.5rem);
-  font-weight: 700;
-  font-style: italic;
+  font-weight: 400;
   letter-spacing: 4px;
   color: rgba(255,255,255,0.9);
   text-transform: uppercase;
@@ -941,10 +896,10 @@ header, nav, .prof-nav-item, .hero-container, .about-section,
   left: 50%; transform: translateX(-50%);
 }
 
-.fc-hero-bar-right {}
 .fc-hero-tag {
-  font-family: 'Courier New', monospace;
+  font-family: var(--font-body);
   font-size: 0.4rem;
+  font-weight: 400;
   letter-spacing: 3px;
   color: rgba(255,255,255,0.3);
   text-transform: uppercase;
@@ -952,7 +907,6 @@ header, nav, .prof-nav-item, .hero-container, .about-section,
   padding: 4px 8px;
 }
 
-/* Scan line on hover */
 .fc-hero-scan {
   position: absolute;
   bottom: 52px; left: 0; right: 0;
@@ -963,7 +917,6 @@ header, nav, .prof-nav-item, .hero-container, .about-section,
   pointer-events: none;
 }
 
-/* ── REVIEW GRID ─────────────────────────────── */
 .fc-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -971,7 +924,6 @@ header, nav, .prof-nav-item, .hero-container, .about-section,
   margin-bottom: 70px;
 }
 
-/* ── CRITIC CARD ─────────────────────────────── */
 .critic-card {
   display: block;
   text-decoration: none;
@@ -988,7 +940,6 @@ header, nav, .prof-nav-item, .hero-container, .about-section,
   box-shadow: 0 14px 44px rgba(0,0,0,0.6), 0 0 0 1px rgba(253,224,71,0.06);
 }
 
-/* Media */
 .critic-card-media {
   position: relative;
   width: 100%;
@@ -1014,12 +965,12 @@ header, nav, .prof-nav-item, .hero-container, .about-section,
   pointer-events: none;
 }
 
-/* Tag badge */
 .critic-card-tag {
   position: absolute;
   top: 10px; left: 10px;
-  font-family: 'Courier New', monospace;
+  font-family: var(--font-body);
   font-size: 0.4rem;
+  font-weight: 500;
   letter-spacing: 3px;
   color: rgba(0,0,0,0.85);
   background: var(--yellow);
@@ -1028,7 +979,6 @@ header, nav, .prof-nav-item, .hero-container, .about-section,
   text-transform: uppercase;
 }
 
-/* Play button */
 .critic-card-play {
   position: absolute;
   inset: 0;
@@ -1044,7 +994,6 @@ header, nav, .prof-nav-item, .hero-container, .about-section,
   box-shadow: 0 4px 20px rgba(253,224,71,0.4);
 }
 
-/* Bottom accent line */
 .critic-card-scan {
   position: absolute;
   bottom: 0; left: 0; right: 0;
@@ -1054,7 +1003,6 @@ header, nav, .prof-nav-item, .hero-container, .about-section,
   z-index: 6;
 }
 
-/* Info bar */
 .critic-card-info {
   display: flex;
   align-items: center;
@@ -1066,17 +1014,18 @@ header, nav, .prof-nav-item, .hero-container, .about-section,
   display: flex; align-items: baseline; gap: 10px;
 }
 .critic-card-num {
-  font-family: 'Courier New', monospace;
+  font-family: var(--font-body);
   font-size: 0.5rem;
+  font-weight: 500;
   letter-spacing: 2px;
   color: var(--yellow);
   opacity: 0.7;
   flex-shrink: 0;
 }
 .critic-card-title {
-  font-family: 'Cormorant Garamond', 'Playfair Display', Georgia, serif;
+  font-family: var(--font-display);
   font-size: clamp(0.95rem, 1.8vw, 1.2rem);
-  font-weight: 600;
+  font-weight: 400;
   letter-spacing: 1px;
   margin: 0;
   color: rgba(255,255,255,0.88);
@@ -1088,7 +1037,6 @@ header, nav, .prof-nav-item, .hero-container, .about-section,
 .critic-card:hover .critic-card-title { color: var(--white); }
 .critic-card-ext { color: var(--yellow); flex-shrink: 0; }
 
-/* ── CHANNEL FOOTER ──────────────────────────── */
 .fc-footer {
   padding-bottom: 80px;
 }
@@ -1108,7 +1056,6 @@ header, nav, .prof-nav-item, .hero-container, .about-section,
   flex-wrap: wrap;
 }
 
-/* Logo with rotating ring */
 .fc-footer-logo-wrap {
   position: relative;
   width: 86px; height: 86px;
@@ -1135,7 +1082,6 @@ header, nav, .prof-nav-item, .hero-container, .about-section,
   z-index: 1;
 }
 
-/* Channel meta */
 .fc-footer-meta {
   display: flex;
   flex-direction: column;
@@ -1144,31 +1090,31 @@ header, nav, .prof-nav-item, .hero-container, .about-section,
   min-width: 160px;
 }
 .fc-footer-overline {
-  font-family: 'Courier New', monospace;
+  font-family: var(--font-body);
   font-size: 0.42rem;
+  font-weight: 500;
   letter-spacing: 4px;
   color: rgba(255,255,255,0.2);
   text-transform: uppercase;
 }
 .fc-footer-name {
-  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-family: var(--font-display);
   font-size: clamp(1.4rem, 3vw, 2rem);
-  font-weight: 700;
-  font-style: italic;
+  font-weight: 400;
   letter-spacing: 3px;
   color: var(--white);
   margin: 0;
   line-height: 1.1;
 }
 .fc-footer-sub {
-  font-family: 'Courier New', monospace;
+  font-family: var(--font-body);
   font-size: 0.42rem;
+  font-weight: 500;
   letter-spacing: 5px;
   color: rgba(253,224,71,0.5);
   text-transform: uppercase;
 }
 
-/* Social buttons */
 .fc-footer-socials {
   display: flex;
   gap: 10px;
@@ -1187,10 +1133,6 @@ header, nav, .prof-nav-item, .hero-container, .about-section,
   color: var(--yellow);
   background: rgba(253,224,71,0.05);
 }
-
-/* ══════════════════════════════════════════════
-   RESPONSIVE
-   ══════════════════════════════════════════════ */
 
 @media (max-width: 900px) {
   .fc-grid { grid-template-columns: repeat(2, 1fr); }
@@ -1211,16 +1153,12 @@ header, nav, .prof-nav-item, .hero-container, .about-section,
   .fc-footer-name { font-size: 1.3rem; }
   .fc-social-btn { width: 38px; height: 38px; }
 }
+
+
 /* =========================================================
    HOST SECTION
    ========================================================= */
-/* ============================================
-   CINEMAPAYYAN — THE HOST SECTION
-   Colors: --cyan #32c5f4 | --yellow #fde047
-           --black #000000 | --white #ffffff
-   ============================================ */
 
-/* ── SECTION ─────────────────────────────────── */
 .host-section {
   background: var(--black);
   padding: 100px 0 120px;
@@ -1236,14 +1174,12 @@ header, nav, .prof-nav-item, .hero-container, .about-section,
   background: linear-gradient(90deg, transparent, rgba(255,255,255,0.06) 50%, transparent);
 }
 
-/* Inner container */
 .host-inner {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 clamp(20px, 6%, 60px);
 }
 
-/* ── HERO BANNER ─────────────────────────────── */
 .host-hero {
   position: relative;
   width: 100%;
@@ -1273,7 +1209,6 @@ header, nav, .prof-nav-item, .hero-container, .about-section,
   z-index: 2;
 }
 
-/* Corner marks */
 .host-hero-corner {
   position: absolute;
   width: 20px; height: 20px;
@@ -1304,7 +1239,6 @@ header, nav, .prof-nav-item, .hero-container, .about-section,
 .host-hero-corner--br::before { bottom:0; right:0; }
 .host-hero-corner--br::after  { bottom:0; right:0; }
 
-/* Bottom bar */
 .host-hero-bar {
   position: absolute;
   bottom: 0; left: 0; right: 0;
@@ -1329,17 +1263,17 @@ header, nav, .prof-nav-item, .hero-container, .about-section,
   flex-shrink: 0;
 }
 .host-hero-live {
-  font-family: 'Courier New', monospace;
+  font-family: var(--font-body);
   font-size: 0.42rem;
+  font-weight: 500;
   letter-spacing: 4px;
   color: var(--yellow);
   text-transform: uppercase;
 }
 .host-hero-title {
-  font-family: 'Cormorant Garamond', 'Playfair Display', Georgia, serif;
+  font-family: var(--font-display);
   font-size: clamp(1rem, 2.5vw, 1.5rem);
-  font-weight: 700;
-  font-style: italic;
+  font-weight: 400;
   letter-spacing: 4px;
   color: rgba(255,255,255,0.9);
   text-transform: uppercase;
@@ -1347,8 +1281,9 @@ header, nav, .prof-nav-item, .hero-container, .about-section,
   left: 50%; transform: translateX(-50%);
 }
 .host-hero-tag {
-  font-family: 'Courier New', monospace;
+  font-family: var(--font-body);
   font-size: 0.4rem;
+  font-weight: 400;
   letter-spacing: 3px;
   color: rgba(255,255,255,0.3);
   text-transform: uppercase;
@@ -1356,7 +1291,6 @@ header, nav, .prof-nav-item, .hero-container, .about-section,
   padding: 4px 8px;
 }
 
-/* Hover scan line */
 .host-hero-scan {
   position: absolute;
   bottom: 52px; left: 0; right: 0;
@@ -1367,14 +1301,12 @@ header, nav, .prof-nav-item, .hero-container, .about-section,
   pointer-events: none;
 }
 
-/* ── PROJECT GRID ─────────────────────────────── */
 .host-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 24px;
 }
 
-/* ── HOST CARD ───────────────────────────────── */
 .host-card {
   display: flex;
   flex-direction: column;
@@ -1390,7 +1322,6 @@ header, nav, .prof-nav-item, .hero-container, .about-section,
   box-shadow: 0 16px 50px rgba(0,0,0,0.65), 0 0 0 1px rgba(50,197,244,0.06);
 }
 
-/* ── CARD MEDIA ────── */
 .host-card-media {
   position: relative;
   width: 100%;
@@ -1414,7 +1345,6 @@ header, nav, .prof-nav-item, .hero-container, .about-section,
   pointer-events: none;
 }
 
-/* Corner marks on card */
 .hc-corner {
   position: absolute;
   width: 14px; height: 14px;
@@ -1445,12 +1375,12 @@ header, nav, .prof-nav-item, .hero-container, .about-section,
 .hc-corner--br::before { bottom:0; right:0; }
 .hc-corner--br::after  { bottom:0; right:0; }
 
-/* Episode tag */
 .host-card-tag {
   position: absolute;
   top: 10px; left: 10px;
-  font-family: 'Courier New', monospace;
+  font-family: var(--font-body);
   font-size: 0.4rem;
+  font-weight: 500;
   letter-spacing: 3px;
   color: rgba(0,0,0,0.85);
   background: var(--cyan);
@@ -1459,14 +1389,12 @@ header, nav, .prof-nav-item, .hero-container, .about-section,
   text-transform: uppercase;
 }
 
-/* Large index watermark */
 .host-card-index {
   position: absolute;
   bottom: 10px; right: 14px;
-  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-family: var(--font-display);
   font-size: 4.5rem;
-  font-weight: 800;
-  font-style: italic;
+  font-weight: 400;
   color: rgba(255,255,255,0.05);
   line-height: 1;
   z-index: 3;
@@ -1474,7 +1402,6 @@ header, nav, .prof-nav-item, .hero-container, .about-section,
   user-select: none;
 }
 
-/* External link play button */
 .host-card-play {
   position: absolute;
   inset: 0;
@@ -1492,7 +1419,6 @@ header, nav, .prof-nav-item, .hero-container, .about-section,
 }
 .host-card-play:hover > svg { background: var(--yellow); }
 
-/* Bottom scan line */
 .host-card-scanline {
   position: absolute;
   bottom: 0; left: 0; right: 0;
@@ -1502,7 +1428,6 @@ header, nav, .prof-nav-item, .hero-container, .about-section,
   z-index: 8;
 }
 
-/* ── CARD BODY ─────── */
 .host-card-body {
   display: flex;
   flex-direction: column;
@@ -1511,12 +1436,12 @@ header, nav, .prof-nav-item, .hero-container, .about-section,
   flex: 1;
 }
 
-/* Title block */
 .host-card-titles { display: flex; flex-direction: column; gap: 3px; }
 
 .host-card-subtitle {
-  font-family: 'Courier New', monospace;
+  font-family: var(--font-body);
   font-size: 0.44rem;
+  font-weight: 500;
   letter-spacing: 5px;
   color: var(--cyan);
   text-transform: uppercase;
@@ -1524,10 +1449,9 @@ header, nav, .prof-nav-item, .hero-container, .about-section,
 }
 
 .host-card-title {
-  font-family: 'Cormorant Garamond', 'Playfair Display', Georgia, serif;
+  font-family: var(--font-display);
   font-size: clamp(1.1rem, 2vw, 1.5rem);
-  font-weight: 700;
-  font-style: italic;
+  font-weight: 400;
   letter-spacing: 1px;
   color: var(--yellow);
   margin: 0;
@@ -1541,25 +1465,23 @@ header, nav, .prof-nav-item, .hero-container, .about-section,
   transform-origin: left;
 }
 
-/* Description */
 .host-card-desc {
-  font-family: 'Cormorant Garamond', Georgia, serif;
-  font-size: clamp(0.85rem, 1.3vw, 1rem);
+  font-family: var(--font-body);
+  font-size: clamp(0.75rem, 1.1vw, 0.88rem);
+  font-weight: 400;
   line-height: 1.75;
   color: rgba(255,255,255,0.5);
   margin: 0;
   flex: 1;
 }
 
-/* Credit strip */
 .host-card-credits {
   display: flex;
   align-items: stretch;
-  gap: 0;
+  gap: 16px;
   border: 1px solid rgba(255,255,255,0.06);
   background: rgba(255,255,255,0.02);
   padding: 12px 16px;
-  gap: 16px;
 }
 
 .host-credit-divider {
@@ -1576,24 +1498,21 @@ header, nav, .prof-nav-item, .hero-container, .about-section,
 }
 
 .host-credit-label {
-  font-family: 'Courier New', monospace;
+  font-family: var(--font-body);
   font-size: 0.38rem;
+  font-weight: 500;
   letter-spacing: 4px;
   color: rgba(255,255,255,0.2);
   text-transform: uppercase;
 }
 
 .host-credit-value {
-  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-family: var(--font-body);
   font-size: 0.82rem;
   font-weight: 600;
   letter-spacing: 1px;
   color: rgba(255,255,255,0.75);
 }
-
-/* ══════════════════════════════════════════════
-   RESPONSIVE
-   ══════════════════════════════════════════════ */
 
 @media (max-width: 900px) {
   .host-grid { grid-template-columns: 1fr; }
@@ -1615,13 +1534,7 @@ header, nav, .prof-nav-item, .hero-container, .about-section,
 /* =========================================================
    DIRECTOR SECTION
    ========================================================= */
-/* ============================================
-   CINEMAPAYYAN — THE DIRECTOR SECTION
-   Colors: --cyan #32c5f4 | --yellow #fde047
-           --black #000000 | --white #ffffff
-   ============================================ */
 
-/* ── SECTION ─────────────────────────────────── */
 .dir-section {
   background: var(--black);
   padding: 100px 0 120px;
@@ -1637,14 +1550,12 @@ header, nav, .prof-nav-item, .hero-container, .about-section,
   background: linear-gradient(90deg, transparent, rgba(255,255,255,0.06) 50%, transparent);
 }
 
-/* Inner wrapper */
 .dir-inner {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 clamp(20px, 6%, 60px);
 }
 
-/* ── FEATURE CARD ────────────────────────────── */
 .dir-card {
   display: flex;
   border: 1px solid rgba(255,255,255,0.06);
@@ -1657,7 +1568,6 @@ header, nav, .prof-nav-item, .hero-container, .about-section,
   box-shadow: 0 30px 80px rgba(0,0,0,0.7), 0 0 0 1px rgba(50,197,244,0.06);
 }
 
-/* ── IMAGE SIDE ──────────────────────────────── */
 .dir-img-side {
   flex: 1;
   position: relative;
@@ -1673,7 +1583,6 @@ header, nav, .prof-nav-item, .hero-container, .about-section,
   display: block;
 }
 
-/* Gradient vignette */
 .dir-img-vignette {
   position: absolute; inset: 0;
   background:
@@ -1683,7 +1592,6 @@ header, nav, .prof-nav-item, .hero-container, .about-section,
   pointer-events: none;
 }
 
-/* Film strip holes on the left edge */
 .dir-filmstrip {
   position: absolute;
   left: 0; top: 0; bottom: 0;
@@ -1704,7 +1612,6 @@ header, nav, .prof-nav-item, .hero-container, .about-section,
   flex-shrink: 0;
 }
 
-/* Corner marks */
 .dir-corner {
   position: absolute;
   width: 18px; height: 18px;
@@ -1735,13 +1642,13 @@ header, nav, .prof-nav-item, .hero-container, .about-section,
 .dir-corner--br::before { bottom:0; right:0; }
 .dir-corner--br::after  { bottom:0; right:0; }
 
-/* Format badge bottom-left */
 .dir-format-badge {
   position: absolute;
   bottom: 18px; left: 30px;
   display: flex; align-items: center; gap: 6px;
-  font-family: 'Courier New', monospace;
+  font-family: var(--font-body);
   font-size: 0.42rem;
+  font-weight: 400;
   letter-spacing: 3px;
   color: rgba(255,255,255,0.4);
   background: rgba(0,0,0,0.6);
@@ -1753,7 +1660,6 @@ header, nav, .prof-nav-item, .hero-container, .about-section,
 }
 .dir-format-sep { color: var(--yellow); opacity: 0.5; }
 
-/* Instagram hover button */
 .dir-insta-btn {
   position: absolute;
   top: 16px; right: 16px;
@@ -1773,7 +1679,6 @@ header, nav, .prof-nav-item, .hero-container, .about-section,
   color: var(--yellow);
 }
 
-/* Hover scan line */
 .dir-img-scan {
   position: absolute;
   bottom: 52px; left: 0; right: 0;
@@ -1784,7 +1689,6 @@ header, nav, .prof-nav-item, .hero-container, .about-section,
   pointer-events: none;
 }
 
-/* ── CONTENT SIDE ────────────────────────────── */
 .dir-content {
   flex: 1.15;
   padding: clamp(32px, 5vw, 60px) clamp(28px, 5vw, 56px);
@@ -1797,7 +1701,6 @@ header, nav, .prof-nav-item, .hero-container, .about-section,
   overflow: hidden;
 }
 
-/* subtle background watermark */
 .dir-content::before {
   content: '導';
   position: absolute;
@@ -1810,7 +1713,6 @@ header, nav, .prof-nav-item, .hero-container, .about-section,
   user-select: none;
 }
 
-/* Pre-title */
 .dir-pre {
   display: flex;
   align-items: center;
@@ -1824,24 +1726,23 @@ header, nav, .prof-nav-item, .hero-container, .about-section,
   opacity: 0.6;
 }
 .dir-pre-text {
-  font-family: 'Courier New', monospace;
+  font-family: var(--font-body);
   font-size: 0.44rem;
+  font-weight: 500;
   letter-spacing: 6px;
   color: rgba(253,224,71,0.55);
   text-transform: uppercase;
 }
 
-/* Movie title — letter-by-letter */
 .dir-title-block {
   display: flex;
   align-items: baseline;
   flex-wrap: nowrap;
-  font-family: 'Cormorant Garamond', 'Playfair Display', Georgia, serif;
+  font-family: var(--font-display);
   font-size: clamp(3.2rem, 7vw, 6rem);
-  font-weight: 800;
-  font-style: italic;
+  font-weight: 400;
   line-height: 1;
-  letter-spacing: -1px;
+  letter-spacing: 2px;
   margin-bottom: 10px;
 }
 .dir-title-char {
@@ -1851,16 +1752,15 @@ header, nav, .prof-nav-item, .hero-container, .about-section,
 .dir-title-char--yellow { color: var(--yellow); }
 .dir-title-space { display: inline-block; width: 0.25em; }
 
-/* Genre */
 .dir-genre {
-  font-family: 'Cormorant Garamond', Georgia, serif;
-  font-size: clamp(0.85rem, 1.4vw, 1.1rem);
+  font-family: var(--font-body);
+  font-size: clamp(0.75rem, 1.2vw, 0.9rem);
+  font-weight: 400;
   font-style: italic;
   color: rgba(255,255,255,0.3);
   margin: 0 0 22px;
 }
 
-/* Divider */
 .dir-rule {
   width: 100%;
   height: 1px;
@@ -1869,10 +1769,10 @@ header, nav, .prof-nav-item, .hero-container, .about-section,
   transform-origin: left;
 }
 
-/* Description */
 .dir-desc {
-  font-family: 'Cormorant Garamond', Georgia, serif;
-  font-size: clamp(0.88rem, 1.3vw, 1.05rem);
+  font-family: var(--font-body);
+  font-size: clamp(0.8rem, 1.2vw, 0.9rem);
+  font-weight: 400;
   line-height: 1.8;
   color: rgba(255,255,255,0.45);
   margin: 0 0 26px;
@@ -1882,7 +1782,6 @@ header, nav, .prof-nav-item, .hero-container, .about-section,
   font-weight: 600;
 }
 
-/* Crew */
 .dir-crew {
   display: flex;
   flex-direction: column;
@@ -1890,8 +1789,9 @@ header, nav, .prof-nav-item, .hero-container, .about-section,
   margin-bottom: 34px;
 }
 .dir-crew-label {
-  font-family: 'Courier New', monospace;
+  font-family: var(--font-body);
   font-size: 0.4rem;
+  font-weight: 500;
   letter-spacing: 5px;
   color: rgba(255,255,255,0.2);
   text-transform: uppercase;
@@ -1902,8 +1802,9 @@ header, nav, .prof-nav-item, .hero-container, .about-section,
   gap: 6px;
 }
 .dir-crew-tag {
-  font-family: 'Courier New', monospace;
+  font-family: var(--font-body);
   font-size: 0.5rem;
+  font-weight: 400;
   letter-spacing: 1px;
   color: rgba(255,255,255,0.35);
   background: rgba(255,255,255,0.03);
@@ -1918,7 +1819,6 @@ header, nav, .prof-nav-item, .hero-container, .about-section,
   background: rgba(50,197,244,0.04);
 }
 
-/* CTA button — fill-sweep style */
 .dir-cta {
   display: inline-flex;
   align-items: center;
@@ -1929,8 +1829,9 @@ header, nav, .prof-nav-item, .hero-container, .about-section,
   border: 1px solid var(--yellow);
   color: var(--yellow);
   text-decoration: none;
-  font-family: 'Courier New', monospace;
+  font-family: var(--font-body);
   font-size: 0.6rem;
+  font-weight: 500;
   letter-spacing: 4px;
   text-transform: uppercase;
   transition: color 0.4s ease;
@@ -1953,10 +1854,6 @@ header, nav, .prof-nav-item, .hero-container, .about-section,
 .dir-cta:hover .dir-cta-icon {
   color: var(--black);
 }
-
-/* ══════════════════════════════════════════════
-   RESPONSIVE
-   ══════════════════════════════════════════════ */
 
 @media (max-width: 1024px) {
   .dir-content { padding: 36px 32px; }
@@ -1983,16 +1880,11 @@ header, nav, .prof-nav-item, .hero-container, .about-section,
   .dir-filmstrip { display: none; }
   .dir-corner--tl, .dir-corner--bl { left: 14px; }
 }
+
 /* =========================================================
    CREATIVE PRODUCER SECTION
    ========================================================= */
-/* ============================================
-   CINEMAPAYYAN — CREATIVE PRODUCER SECTION
-   Colors: --cyan #32c5f4 | --yellow #fde047
-           --black #000000 | --white #ffffff
-   ============================================ */
 
-/* ── SECTION ─────────────────────────────────── */
 .cp-section {
   background: var(--black);
   padding: 100px 0 120px;
@@ -2014,7 +1906,6 @@ header, nav, .prof-nav-item, .hero-container, .about-section,
   padding: 0 clamp(20px, 6%, 60px);
 }
 
-/* ── FEATURE CARD ────────────────────────────── */
 .cp-feature {
   display: flex;
   border: 1px solid rgba(255,255,255,0.06);
@@ -2028,7 +1919,6 @@ header, nav, .prof-nav-item, .hero-container, .about-section,
   box-shadow: 0 30px 80px rgba(0,0,0,0.65), 0 0 0 1px rgba(253,224,71,0.04);
 }
 
-/* Image side */
 .cp-img-side {
   flex: 1;
   position: relative;
@@ -2049,7 +1939,6 @@ header, nav, .prof-nav-item, .hero-container, .about-section,
   display: block;
 }
 
-/* Radial glow behind logo */
 .cp-img-glow {
   position: absolute;
   width: 60%; height: 60%;
@@ -2066,7 +1955,6 @@ header, nav, .prof-nav-item, .hero-container, .about-section,
   100% { opacity: 0.9; transform: translate(-50%,-50%) scale(1.2); }
 }
 
-/* Corner marks on image side */
 .cp-corner {
   position: absolute;
   width: 18px; height: 18px;
@@ -2096,13 +1984,13 @@ header, nav, .prof-nav-item, .hero-container, .about-section,
 .cp-corner--br::before { bottom:0; right:0; }
 .cp-corner--br::after  { bottom:0; right:0; }
 
-/* Instagram badge */
 .cp-insta-btn {
   position: absolute;
   bottom: 18px; left: 50%; transform: translateX(-50%);
   display: flex; align-items: center; gap: 7px;
-  font-family: 'Courier New', monospace;
+  font-family: var(--font-body);
   font-size: 0.42rem;
+  font-weight: 400;
   letter-spacing: 3px;
   color: rgba(255,255,255,0.45);
   background: rgba(0,0,0,0.6);
@@ -2116,7 +2004,6 @@ header, nav, .prof-nav-item, .hero-container, .about-section,
 }
 .cp-insta-btn:hover { border-color: var(--yellow); color: var(--yellow); }
 
-/* Content side */
 .cp-content {
   flex: 1.2;
   padding: clamp(32px, 5vw, 58px) clamp(28px, 5vw, 54px);
@@ -2149,26 +2036,30 @@ header, nav, .prof-nav-item, .hero-container, .about-section,
   background: var(--yellow); opacity: 0.5;
 }
 .cp-pre-text {
-  font-family: 'Courier New', monospace;
-  font-size: 0.44rem; letter-spacing: 6px;
-  color: rgba(253,224,71,0.55); text-transform: uppercase;
+  font-family: var(--font-body);
+  font-size: 0.44rem;
+  font-weight: 500;
+  letter-spacing: 6px;
+  color: rgba(253,224,71,0.55);
+  text-transform: uppercase;
 }
 
 .cp-title {
-  font-family: 'Cormorant Garamond', 'Playfair Display', Georgia, serif;
+  font-family: var(--font-display);
   font-size: clamp(2.4rem, 5.5vw, 4.2rem);
-  font-weight: 800;
-  font-style: italic;
+  font-weight: 400;
   line-height: 1.05;
-  letter-spacing: -0.5px;
+  letter-spacing: 2px;
   color: var(--white);
   margin: 0 0 10px;
 }
-.cp-title--yellow { color: var(--yellow); font-style: normal; }
+.cp-title--yellow { color: var(--yellow); }
 
 .cp-tagline {
-  font-family: 'Courier New', monospace;
-  font-size: 0.44rem; letter-spacing: 4px;
+  font-family: var(--font-body);
+  font-size: 0.44rem;
+  font-weight: 400;
+  letter-spacing: 4px;
   color: rgba(255,255,255,0.22);
   text-transform: uppercase;
   margin: 0 0 22px;
@@ -2181,15 +2072,15 @@ header, nav, .prof-nav-item, .hero-container, .about-section,
 }
 
 .cp-desc {
-  font-family: 'Cormorant Garamond', Georgia, serif;
-  font-size: clamp(0.9rem, 1.3vw, 1.05rem);
+  font-family: var(--font-body);
+  font-size: clamp(0.8rem, 1.2vw, 0.9rem);
+  font-weight: 400;
   line-height: 1.8;
   color: rgba(255,255,255,0.45);
   margin: 0 0 28px;
 }
 .cp-highlight { color: var(--yellow); font-weight: 600; }
 
-/* Stats strip */
 .cp-stats {
   display: flex;
   align-items: stretch;
@@ -2207,26 +2098,32 @@ header, nav, .prof-nav-item, .hero-container, .about-section,
   margin: 0 20px; align-self: stretch;
 }
 .cp-stat-num {
-  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-family: var(--font-display);
   font-size: clamp(1.4rem, 2.5vw, 1.9rem);
-  font-weight: 700; color: var(--cyan); line-height: 1;
+  font-weight: 400;
+  color: var(--cyan);
+  line-height: 1;
 }
 .cp-stat-plus { font-size: 0.6em; vertical-align: super; }
 .cp-stat-label {
-  font-family: 'Courier New', monospace;
-  font-size: 0.38rem; letter-spacing: 3px;
-  color: rgba(255,255,255,0.2); text-transform: uppercase;
+  font-family: var(--font-body);
+  font-size: 0.38rem;
+  font-weight: 500;
+  letter-spacing: 3px;
+  color: rgba(255,255,255,0.2);
+  text-transform: uppercase;
 }
 
-/* CTA fill-sweep */
 .cp-cta {
   display: inline-flex; align-items: center; gap: 10px;
   position: relative; overflow: hidden;
   padding: 13px 28px;
   border: 1px solid var(--yellow);
   color: var(--yellow); text-decoration: none;
-  font-family: 'Courier New', monospace;
-  font-size: 0.58rem; letter-spacing: 4px;
+  font-family: var(--font-body);
+  font-size: 0.58rem;
+  font-weight: 500;
+  letter-spacing: 4px;
   text-transform: uppercase;
   width: fit-content;
 }
@@ -2242,7 +2139,6 @@ header, nav, .prof-nav-item, .hero-container, .about-section,
 .cp-cta:hover .cp-cta-label,
 .cp-cta:hover .cp-cta-icon { color: var(--black); }
 
-/* ── TAB BAR ─────────────────────────────────── */
 .cp-tabs-wrap {}
 
 .cp-tab-bar {
@@ -2260,8 +2156,10 @@ header, nav, .prof-nav-item, .hero-container, .about-section,
   padding: 12px 24px;
   background: transparent; border: none;
   color: rgba(255,255,255,0.3);
-  font-family: 'Courier New', monospace;
-  font-size: 0.5rem; letter-spacing: 4px;
+  font-family: var(--font-body);
+  font-size: 0.5rem;
+  font-weight: 500;
+  letter-spacing: 4px;
   text-transform: uppercase; cursor: pointer;
   transition: color 0.3s ease;
   overflow: hidden;
@@ -2277,15 +2175,9 @@ header, nav, .prof-nav-item, .hero-container, .about-section,
   position: relative; z-index: 1;
 }
 
-/* ── MEDIA SCROLL WRAPPER ───────────────────── */
-.cp-media-scroll {
-  overflow: visible;
-}
+.cp-media-scroll { overflow: visible; }
 
-/* ── MEDIA GRIDS ─────────────────────────────── */
 .cp-grid { display: grid; gap: 16px; width: 100%; }
-
-/* Images — 5-column poster grid */
 .cp-grid--images { grid-template-columns: repeat(5, 1fr); }
 
 .cp-poster {
@@ -2312,7 +2204,6 @@ header, nav, .prof-nav-item, .hero-container, .about-section,
   background: rgba(50,197,244,0.06);
   pointer-events: none; z-index: 2;
 }
-/* Mini corner marks on each poster */
 .cp-poster-tl, .cp-poster-br {
   position: absolute; z-index: 3;
   width: 10px; height: 10px;
@@ -2331,7 +2222,6 @@ header, nav, .prof-nav-item, .hero-container, .about-section,
 .cp-poster-br::after  { width: 1px; height: 100%; bottom:0; right:0; }
 .cp-poster-br { bottom: 7px; right: 7px; transform: scale(-1); }
 
-/* Reels — 4-column 9:16 */
 .cp-grid--reels { grid-template-columns: repeat(4, 1fr); }
 
 .cp-reel {
@@ -2358,18 +2248,22 @@ header, nav, .prof-nav-item, .hero-container, .about-section,
   z-index: 3;
 }
 .cp-reel-tag span:first-child {
-  font-family: 'Courier New', monospace;
-  font-size: 0.4rem; letter-spacing: 3px;
-  color: rgba(0,0,0,0.85); background: var(--yellow);
+  font-family: var(--font-body);
+  font-size: 0.4rem;
+  font-weight: 500;
+  letter-spacing: 3px;
+  color: rgba(0,0,0,0.85);
+  background: var(--yellow);
   padding: 3px 7px;
 }
 .cp-reel-num {
-  font-family: 'Courier New', monospace;
-  font-size: 0.4rem; letter-spacing: 2px;
+  font-family: var(--font-body);
+  font-size: 0.4rem;
+  font-weight: 400;
+  letter-spacing: 2px;
   color: rgba(255,255,255,0.3);
 }
 
-/* YouTube — 3-column */
 .cp-grid--youtube { grid-template-columns: repeat(3, 1fr); }
 
 .cp-yt-card {
@@ -2404,9 +2298,12 @@ header, nav, .prof-nav-item, .hero-container, .about-section,
 
 .cp-yt-tag {
   position: absolute; top: 10px; left: 10px;
-  font-family: 'Courier New', monospace;
-  font-size: 0.4rem; letter-spacing: 3px;
-  color: rgba(0,0,0,0.85); background: var(--yellow);
+  font-family: var(--font-body);
+  font-size: 0.4rem;
+  font-weight: 500;
+  letter-spacing: 3px;
+  color: rgba(0,0,0,0.85);
+  background: var(--yellow);
   padding: 3px 8px; z-index: 4; text-transform: uppercase;
 }
 
@@ -2441,17 +2338,20 @@ header, nav, .prof-nav-item, .hero-container, .about-section,
 .cp-yt-info { padding: 18px 18px 20px; flex: 1; display: flex; flex-direction: column; gap: 6px; }
 
 .cp-yt-title {
-  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-family: var(--font-display);
   font-size: clamp(1rem, 1.8vw, 1.25rem);
-  font-weight: 700; letter-spacing: 1px;
+  font-weight: 400;
+  letter-spacing: 1px;
   color: rgba(255,255,255,0.88); margin: 0;
   transition: color 0.3s;
 }
 .cp-yt-card:hover .cp-yt-title { color: var(--white); }
 
 .cp-yt-desc {
-  font-family: 'Cormorant Garamond', Georgia, serif;
-  font-size: 0.88rem; line-height: 1.6;
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  font-weight: 400;
+  line-height: 1.6;
   color: rgba(255,255,255,0.35); margin: 0;
   display: -webkit-box;
   -webkit-line-clamp: 3;
@@ -2459,7 +2359,6 @@ header, nav, .prof-nav-item, .hero-container, .about-section,
   overflow: hidden;
 }
 
-/* ── DOTS ────────────────────────────────────── */
 .cp-dots { display: none; justify-content: center; gap: 7px; margin-top: 22px; }
 .cp-dot {
   width: 6px; height: 6px; border-radius: 50%;
@@ -2467,10 +2366,6 @@ header, nav, .prof-nav-item, .hero-container, .about-section,
   transition: background 0.3s, width 0.3s, border-radius 0.3s;
 }
 .cp-dot--active { background: var(--yellow); width: 20px; border-radius: 3px; }
-
-/* ══════════════════════════════════════════════
-   RESPONSIVE
-   ══════════════════════════════════════════════ */
 
 @media (max-width: 1024px) {
   .cp-grid--images   { grid-template-columns: repeat(3, 1fr); }
@@ -2484,8 +2379,6 @@ header, nav, .prof-nav-item, .hero-container, .about-section,
   .cp-img { width: 44%; }
   .cp-content { padding: 28px 24px 32px; }
   .cp-title { font-size: clamp(2rem, 9vw, 3rem); }
-
-  /* Mobile slider */
   .cp-dots { display: flex; }
   .cp-media-scroll {
     overflow-x: auto;
@@ -2511,7 +2404,6 @@ header, nav, .prof-nav-item, .hero-container, .about-section,
   }
   .cp-grid .cp-reel { width: 58vw; }
   .cp-grid .cp-poster { height: auto; }
-
   .cp-tab-bar { width: 100%; }
   .cp-tab { flex: 1; justify-content: center; padding: 11px 8px; font-size: 0.44rem; }
 }
@@ -2534,12 +2426,10 @@ header, nav, .prof-nav-item, .hero-container, .about-section,
    ACCELERATOR SECTION
    ========================================================= */
 
-
-/* ── UTILITY ─────────────────────────────────── */
 .acc-universe-v4 {
   background: #000;
   color: #fff;
-  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-family: var(--font-body);
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   position: relative;
@@ -2550,9 +2440,6 @@ header, nav, .prof-nav-item, .hero-container, .about-section,
 .gold-bg    { background: #fde047; }
 .cyan-bg    { background: #32c5f4; }
 
-/* ══════════════════════════════════════════════
-   HERO
-   ══════════════════════════════════════════════ */
 .acc-hero-parallax {
   height: 65vh;
   min-height: 420px;
@@ -2568,7 +2455,6 @@ header, nav, .prof-nav-item, .hero-container, .about-section,
   overflow: hidden;
 }
 
-/* Scanline texture */
 .acc-hero-parallax::after {
   content: '';
   position: absolute;
@@ -2601,13 +2487,13 @@ header, nav, .prof-nav-item, .hero-container, .about-section,
   padding: 0 16px;
 }
 
-/* Pre-title */
 .acc-pre-title {
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  font-family: 'Courier New', monospace;
+  font-family: var(--font-body);
   font-size: clamp(0.38rem, 1.8vw, 0.44rem);
+  font-weight: 500;
   letter-spacing: 5px;
   color: rgba(253,224,71,0.6);
   text-transform: uppercase;
@@ -2623,14 +2509,12 @@ header, nav, .prof-nav-item, .hero-container, .about-section,
   flex-shrink: 0;
 }
 
-/* ── MAIN TITLE — FIXED MOBILE VISIBILITY ──── */
 .acc-main-title {
-  font-family: 'Cormorant Garamond', 'Playfair Display', Georgia, serif;
+  font-family: var(--font-display);
   font-size: clamp(2.6rem, 10vw, 8.5rem);
-  font-weight: 500;
-  font-style: italic;
+  font-weight: 400;
   line-height: 0.92;
-  letter-spacing: -1px;
+  letter-spacing: 2px;
   margin: 0;
   color: #fff;
   overflow: visible;
@@ -2638,12 +2522,10 @@ header, nav, .prof-nav-item, .hero-container, .about-section,
 }
 
 .acc-main-title-accent {
-  font-style: normal;
   color: #fde047;
   display: inline-block;
 }
 
-/* ── CREDO TRAIN ─────────────────────────────── */
 .acc-credo-train {
   position: absolute;
   bottom: 0; width: 100%;
@@ -2665,8 +2547,8 @@ header, nav, .prof-nav-item, .hero-container, .about-section,
 .acc-track-item { display: flex; flex-shrink: 0; }
 
 .acc-track-item span {
-  font-family: 'Courier New', monospace;
-  font-weight: 700;
+  font-family: var(--font-body);
+  font-weight: 600;
   font-size: clamp(0.38rem, 1.5vw, 0.44rem);
   color: rgba(253,224,71,0.6);
   padding-right: 48px;
@@ -2680,18 +2562,12 @@ header, nav, .prof-nav-item, .hero-container, .about-section,
   100% { transform: translate3d(-50%,0,0); }
 }
 
-/* ══════════════════════════════════════════════
-   WRAPPER
-   ══════════════════════════════════════════════ */
 .acc-wrapper {
   max-width: 1240px;
   margin: 0 auto;
   padding: 0 clamp(20px, 6%, 60px);
 }
 
-/* ══════════════════════════════════════════════
-   MISSION HUB
-   ══════════════════════════════════════════════ */
 .acc-mission-hub {
   display: grid;
   grid-template-columns: 1fr 1.2fr;
@@ -2708,7 +2584,6 @@ header, nav, .prof-nav-item, .hero-container, .about-section,
   background: linear-gradient(90deg, transparent, rgba(255,255,255,0.06) 50%, transparent);
 }
 
-/* ── PORTRAIT ────────────────────────────────── */
 .acc-visual-side { position: relative; }
 
 .acc-visual-side::before {
@@ -2758,18 +2633,16 @@ header, nav, .prof-nav-item, .hero-container, .about-section,
   pointer-events: none; z-index: 1;
   animation: cpGlowPulse 5s ease-in-out infinite alternate;
 }
-@keyframes cpGlowPulse {
-  0%   { opacity: 0.4; transform: translate(-50%,-50%) scale(1); }
-  100% { opacity: 0.9; transform: translate(-50%,-50%) scale(1.2); }
-}
 
 .acc-status-tag {
   position: absolute;
   bottom: 18px; left: 50%;
   transform: translateX(-50%);
   display: flex; align-items: center; gap: 8px;
-  font-family: 'Courier New', monospace;
-  font-size: 0.42rem; letter-spacing: 3px;
+  font-family: var(--font-body);
+  font-size: 0.42rem;
+  font-weight: 400;
+  letter-spacing: 3px;
   color: rgba(255,255,255,0.45);
   background: rgba(0,0,0,0.65);
   backdrop-filter: blur(10px);
@@ -2781,7 +2654,6 @@ header, nav, .prof-nav-item, .hero-container, .about-section,
 }
 .acc-status-tag:hover { border-color: #fde047; color: #fde047; }
 
-/* ── TEXT SIDE ───────────────────────────────── */
 .acc-text-side {
   display: flex; flex-direction: column;
   align-items: flex-start; text-align: left;
@@ -2799,8 +2671,10 @@ header, nav, .prof-nav-item, .hero-container, .about-section,
 
 .acc-pill-label {
   display: inline-flex; align-items: center; gap: 10px;
-  font-family: 'Courier New', monospace;
-  font-size: 0.44rem; letter-spacing: 5px;
+  font-family: var(--font-body);
+  font-size: 0.44rem;
+  font-weight: 500;
+  letter-spacing: 5px;
   color: rgba(253,224,71,0.55);
   text-transform: uppercase;
   padding: 0; margin-bottom: 18px;
@@ -2814,13 +2688,14 @@ header, nav, .prof-nav-item, .hero-container, .about-section,
 }
 
 .acc-heading {
-  font-family: 'Cormorant Garamond', 'Playfair Display', Georgia, serif;
+  font-family: var(--font-display);
   font-size: clamp(2.2rem, 5vw, 4.2rem);
-  font-weight: 800; font-style: italic;
-  line-height: 1.05; letter-spacing: -0.5px;
+  font-weight: 400;
+  line-height: 1.05;
+  letter-spacing: 2px;
   color: #fff; margin: 0 0 10px; text-align: left;
 }
-.acc-heading-accent { font-style: normal; }
+.acc-heading-accent { }
 
 .acc-heading-rule {
   width: 100%; height: 1px;
@@ -2829,15 +2704,15 @@ header, nav, .prof-nav-item, .hero-container, .about-section,
 }
 
 .acc-body {
-  font-family: 'Cormorant Garamond', Georgia, serif;
-  font-size: clamp(0.9rem, 1.3vw, 1.05rem);
+  font-family: var(--font-body);
+  font-size: clamp(0.8rem, 1.2vw, 0.9rem);
+  font-weight: 400;
   line-height: 1.8;
   color: rgba(255,255,255,0.45);
   margin: 0 0 28px; max-width: 520px;
 }
 .acc-body strong { color: #fde047; font-weight: 700; }
 
-/* ── FEATURE CARDS ───────────────────────────── */
 .acc-feature-stack {
   width: 100%; display: flex;
   flex-direction: column; gap: 14px;
@@ -2867,30 +2742,34 @@ header, nav, .prof-nav-item, .hero-container, .about-section,
   justify-content: center; flex-shrink: 0;
 }
 .acc-feature-text h4 {
-  font-family: 'Cormorant Garamond', Georgia, serif;
-  font-size: 1.1rem; font-weight: 700;
-  letter-spacing: 0.5px; margin: 0 0 5px;
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 400;
+  letter-spacing: 1px;
+  margin: 0 0 5px;
 }
 .acc-feature-text p {
-  font-family: 'Courier New', monospace;
-  font-size: 0.42rem; letter-spacing: 2px;
+  font-family: var(--font-body);
+  font-size: 0.42rem;
+  font-weight: 400;
+  letter-spacing: 2px;
   color: rgba(255,255,255,0.3); margin: 0;
   line-height: 1.7; text-transform: uppercase;
 }
 
-/* ── CTA ─────────────────────────────────────── */
 .acc-cta {
   position: relative; overflow: hidden;
   display: inline-flex; align-items: center; gap: 10px;
   padding: 13px 28px;
   border: 1px solid #fde047;
   color: #fde047; text-decoration: none;
-  font-family: 'Courier New', monospace;
-  font-size: 0.58rem; letter-spacing: 4px;
+  font-family: var(--font-body);
+  font-size: 0.58rem;
+  font-weight: 500;
+  letter-spacing: 4px;
   text-transform: uppercase;
   width: fit-content; margin-top: 4px;
   background: transparent; border-radius: 0;
-  font-weight: normal;
   transition: color 0.4s ease;
 }
 .acc-cta::before {
@@ -2908,9 +2787,6 @@ header, nav, .prof-nav-item, .hero-container, .about-section,
   transition: color 0.4s;
 }
 
-/* ══════════════════════════════════════════════
-   LEGACY REEL — INTERACTIVE SLIDER
-   ══════════════════════════════════════════════ */
 .acc-legacy-reel {
   padding: 90px 0 100px;
   position: relative;
@@ -2923,7 +2799,6 @@ header, nav, .prof-nav-item, .hero-container, .about-section,
   background: linear-gradient(90deg, transparent, rgba(255,255,255,0.06) 50%, transparent);
 }
 
-/* Title */
 .acc-reel-title { text-align: center; margin-bottom: 50px; }
 .acc-reel-pre {
   display: flex; align-items: center;
@@ -2935,26 +2810,27 @@ header, nav, .prof-nav-item, .hero-container, .about-section,
   background: #fde047; opacity: 0.5;
 }
 .acc-reel-pre-text {
-  font-family: 'Courier New', monospace;
-  font-size: 0.44rem; letter-spacing: 6px;
+  font-family: var(--font-body);
+  font-size: 0.44rem;
+  font-weight: 500;
+  letter-spacing: 6px;
   color: rgba(253,224,71,0.55); text-transform: uppercase;
 }
 .acc-reel-title h4 {
-  font-family: 'Cormorant Garamond', 'Playfair Display', Georgia, serif;
+  font-family: var(--font-display);
   font-size: clamp(2.2rem, 5vw, 4rem);
-  font-weight: 800; font-style: italic;
-  line-height: 1.05; letter-spacing: -0.5px;
+  font-weight: 400;
+  line-height: 1.05;
+  letter-spacing: 2px;
   color: #fff; margin: 0;
 }
 
-/* ── SLIDER WRAP ─────────────────────────────── */
 .acc-slider-wrap {
   position: relative;
   mask-image: linear-gradient(to right, transparent, black 6%, black 94%, transparent);
   -webkit-mask-image: linear-gradient(to right, transparent, black 6%, black 94%, transparent);
 }
 
-/* Arrow buttons */
 .acc-slider-arrow {
   position: absolute;
   top: 50%; transform: translateY(-50%);
@@ -2978,7 +2854,6 @@ header, nav, .prof-nav-item, .hero-container, .about-section,
 .acc-slider-arrow--right { right: 12px; }
 .acc-slider-arrow--hidden { opacity: 0; pointer-events: none; }
 
-/* ── DRAG TRACK ──────────────────────────────── */
 .acc-slider-track {
   display: flex;
   gap: 16px;
@@ -2993,7 +2868,6 @@ header, nav, .prof-nav-item, .hero-container, .about-section,
 .acc-slider-track::-webkit-scrollbar { display: none; }
 .acc-slider-track:active { cursor: grabbing; }
 
-/* ── SLIDE CARD ──────────────────────────────── */
 .acc-slide-card {
   flex-shrink: 0;
   width: 300px;
@@ -3001,7 +2875,6 @@ header, nav, .prof-nav-item, .hero-container, .about-section,
 }
 .acc-slide-card:hover { transform: translateY(-10px); }
 
-/* Card inner — full colour, NO grayscale */
 .acc-card-inner {
   width: 100%;
   height: 420px;
@@ -3016,7 +2889,6 @@ header, nav, .prof-nav-item, .hero-container, .about-section,
   box-shadow: 0 10px 35px rgba(0,0,0,0.6);
 }
 
-/* Image — always full colour */
 .acc-card-inner img {
   width: 100%; height: 100%;
   object-fit: cover; display: block;
@@ -3026,14 +2898,12 @@ header, nav, .prof-nav-item, .hero-container, .about-section,
 }
 .acc-slide-card:hover .acc-card-inner img { transform: scale(1.05); }
 
-/* Overlay */
 .acc-card-overlay {
   position: absolute; inset: 0;
   background: rgba(50,197,244,0.04);
   pointer-events: none; z-index: 2;
 }
 
-/* Corner marks */
 .acc-card-corner-tl,
 .acc-card-corner-br {
   position: absolute; z-index: 4;
@@ -3052,14 +2922,15 @@ header, nav, .prof-nav-item, .hero-container, .about-section,
 .acc-card-corner-br::after  { width:1px; height:100%; bottom:0; right:0; }
 .acc-card-corner-br { bottom:7px; right:7px; transform:scale(-1); }
 
-/* Badge */
 .acc-legacy-badge {
   position: absolute;
   bottom: 14px; left: 50%;
   transform: translateX(-50%) translateY(12px);
   display: flex; align-items: center; gap: 7px;
-  font-family: 'Courier New', monospace;
-  font-size: 0.4rem; letter-spacing: 3px;
+  font-family: var(--font-body);
+  font-size: 0.4rem;
+  font-weight: 400;
+  letter-spacing: 3px;
   color: rgba(255,255,255,0.5);
   background: rgba(0,0,0,0.72);
   backdrop-filter: blur(10px);
@@ -3074,7 +2945,6 @@ header, nav, .prof-nav-item, .hero-container, .about-section,
   transform: translateX(-50%) translateY(0);
 }
 
-/* ── DOTS ────────────────────────────────────── */
 .acc-slider-dots {
   display: flex; justify-content: center;
   gap: 7px; margin-top: 26px;
@@ -3086,17 +2956,15 @@ header, nav, .prof-nav-item, .hero-container, .about-section,
 }
 .acc-slider-dot--active { background: #fde047; width: 20px; border-radius: 3px; }
 
-/* Drag hint */
 .acc-drag-hint {
   text-align: center; margin-top: 14px;
-  font-family: 'Courier New', monospace;
-  font-size: 0.38rem; letter-spacing: 4px;
+  font-family: var(--font-body);
+  font-size: 0.38rem;
+  font-weight: 400;
+  letter-spacing: 4px;
   color: rgba(255,255,255,0.18); text-transform: uppercase;
 }
 
-/* ══════════════════════════════════════════════
-   RESPONSIVE
-   ══════════════════════════════════════════════ */
 @media (max-width: 1024px) {
   .acc-mission-hub { grid-template-columns: 1fr; padding: 75px 0; gap: 50px; }
   .acc-text-side { align-items: center; text-align: center; }
@@ -3128,11 +2996,3 @@ header, nav, .prof-nav-item, .hero-container, .about-section,
   .acc-feature-card { padding: 16px; gap: 12px; }
   .acc-feature-icon { width: 42px; height: 42px; }
 }
-
-
-
-
-
-
-
-

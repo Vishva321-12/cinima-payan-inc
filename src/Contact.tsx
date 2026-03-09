@@ -9,7 +9,6 @@ const BookingContact: React.FC = () => {
 
   const filmStrip = " • CINEMA PAYYAN • NOW BOOKING • ".repeat(20);
 
-  // ── REPLACE THE VALUE BELOW WITH YOUR WEB3FORMS ACCESS KEY ──
   const WEB3FORMS_KEY = "eb4aabc2-f58b-4521-a027-7295fa2c22e0";
 
   const sendEmail = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -51,7 +50,7 @@ const BookingContact: React.FC = () => {
   return (
     <>
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;0,800;1,600;1,700;1,800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&display=swap');
 
         /* ═══════════════════════════════════════════
            SECTION
@@ -69,7 +68,6 @@ const BookingContact: React.FC = () => {
           padding: 80px 0;
         }
 
-        /* radial glow */
         .cp-bk-section::before {
           content: '';
           position: absolute;
@@ -80,7 +78,6 @@ const BookingContact: React.FC = () => {
           pointer-events: none; z-index: 0;
         }
 
-        /* kanji */
         .cp-bk-section::after {
           content: '映';
           position: absolute;
@@ -107,9 +104,9 @@ const BookingContact: React.FC = () => {
 
         .cp-bk-band-text {
           white-space: nowrap;
-          font-family: 'Courier New', monospace;
-          font-weight: 900;
-          font-size: 0.75rem;
+          font-family: 'Inter', sans-serif;
+          font-weight: 700;
+          font-size: 0.7rem;
           letter-spacing: 5px;
           color: #000;
           text-transform: uppercase;
@@ -180,21 +177,25 @@ const BookingContact: React.FC = () => {
           background: rgba(0,0,0,0.35);
         }
         .cp-bk-ticket-pre-text {
-          font-family: 'Courier New', monospace;
-          font-size: 0.7rem; letter-spacing: 4px;
+          font-family: 'Inter', sans-serif;
+          font-size: 0.6rem;
+          font-weight: 600;
+          letter-spacing: 4px;
           color: rgba(0,0,0,0.7); text-transform: uppercase;
         }
 
         .cp-bk-ticket-title {
-          font-family: 'Cormorant Garamond', Georgia, serif;
-          font-size: clamp(2rem, 5vw, 3.2rem);
-          font-weight: 800; font-style: italic;
+          font-family: 'Bebas Neue', sans-serif;
+          font-size: clamp(2.5rem, 6vw, 4.2rem);
+          font-weight: 400;
           color: #000; margin: 0 0 4px;
-          letter-spacing: -0.5px; line-height: 1;
+          letter-spacing: 3px; line-height: 1;
         }
         .cp-bk-ticket-sub {
-          font-family: 'Courier New', monospace;
-          font-size: 0.7rem; letter-spacing: 4px;
+          font-family: 'Inter', sans-serif;
+          font-size: 0.65rem;
+          font-weight: 600;
+          letter-spacing: 4px;
           color: rgba(0,0,0,0.65); text-transform: uppercase;
           margin: 0;
         }
@@ -209,10 +210,11 @@ const BookingContact: React.FC = () => {
         .cp-bk-field--full { grid-column: span 2; }
 
         .cp-bk-label {
-          font-family: 'Courier New', monospace;
-          font-size: 0.65rem; letter-spacing: 4px;
+          font-family: 'Inter', sans-serif;
+          font-size: 0.6rem;
+          font-weight: 600;
+          letter-spacing: 4px;
           color: rgba(0,0,0,0.7); text-transform: uppercase;
-          font-weight: 700;
         }
 
         .cp-bk-input,
@@ -222,9 +224,9 @@ const BookingContact: React.FC = () => {
           border: none;
           border-bottom: 1px solid rgba(0,0,0,0.2);
           padding: 7px 0;
-          font-family: 'Cormorant Garamond', Georgia, serif;
-          font-weight: 700;
-          font-size: 1.05rem;
+          font-family: 'Inter', sans-serif;
+          font-weight: 500;
+          font-size: 0.95rem;
           color: #000;
           transition: border-color 0.25s;
           box-sizing: border-box;
@@ -233,6 +235,7 @@ const BookingContact: React.FC = () => {
         .cp-bk-textarea::placeholder {
           color: rgba(0,0,0,0.3);
           font-style: italic;
+          font-weight: 300;
         }
         .cp-bk-input:focus,
         .cp-bk-textarea:focus {
@@ -270,10 +273,12 @@ const BookingContact: React.FC = () => {
         }
 
         .cp-bk-stub-label {
-          font-family: 'Courier New', monospace;
-          font-size: 0.65rem; letter-spacing: 4px;
+          font-family: 'Inter', sans-serif;
+          font-size: 0.6rem;
+          font-weight: 600;
+          letter-spacing: 4px;
           color: rgba(0,0,0,0.7); text-transform: uppercase;
-          margin: 0 0 12px; font-weight: 700;
+          margin: 0 0 12px;
         }
 
         .cp-bk-icons {
@@ -295,8 +300,10 @@ const BookingContact: React.FC = () => {
           border: 1px solid rgba(0,0,0,0.3);
           background: transparent;
           color: #000; text-decoration: none;
-          font-family: 'Courier New', monospace;
-          font-size: 0.65rem; letter-spacing: 3px;
+          font-family: 'Inter', sans-serif;
+          font-size: 0.6rem;
+          font-weight: 600;
+          letter-spacing: 3px;
           text-transform: uppercase;
           position: relative; overflow: hidden;
           transition: color 0.35s;
@@ -318,10 +325,11 @@ const BookingContact: React.FC = () => {
           width: 100%; padding: 15px;
           border: 1px solid #000;
           background: #000; color: #fde047;
-          font-family: 'Courier New', monospace;
-          font-size: 0.7rem; letter-spacing: 4px;
-          text-transform: uppercase; cursor: pointer;
+          font-family: 'Inter', sans-serif;
+          font-size: 0.65rem;
           font-weight: 700;
+          letter-spacing: 4px;
+          text-transform: uppercase; cursor: pointer;
           transition: color 0.35s;
         }
         .cp-bk-confirm::before {
@@ -363,16 +371,18 @@ const BookingContact: React.FC = () => {
         }
 
         .cp-bk-success-title {
-          font-family: 'Cormorant Garamond', Georgia, serif;
-          font-size: clamp(3rem, 10vw, 6rem);
-          font-weight: 800; font-style: italic;
+          font-family: 'Bebas Neue', sans-serif;
+          font-size: clamp(4rem, 12vw, 8rem);
+          font-weight: 400;
           color: #000; margin: 0 0 10px;
-          letter-spacing: -1px; line-height: 1;
+          letter-spacing: 5px; line-height: 1;
         }
 
         .cp-bk-success-sub {
-          font-family: 'Courier New', monospace;
-          font-size: 0.7rem; letter-spacing: 5px;
+          font-family: 'Inter', sans-serif;
+          font-size: 0.65rem;
+          font-weight: 600;
+          letter-spacing: 5px;
           color: rgba(0,0,0,0.65); text-transform: uppercase;
           margin: 0 0 28px;
         }
@@ -388,10 +398,11 @@ const BookingContact: React.FC = () => {
           padding: 12px 32px;
           border: 1px solid #000;
           background: #000; color: #fde047;
-          font-family: 'Courier New', monospace;
-          font-size: 0.7rem; letter-spacing: 4px;
-          text-transform: uppercase; cursor: pointer;
+          font-family: 'Inter', sans-serif;
+          font-size: 0.65rem;
           font-weight: 700;
+          letter-spacing: 4px;
+          text-transform: uppercase; cursor: pointer;
           transition: color 0.35s;
         }
         .cp-bk-back::before {
@@ -434,10 +445,9 @@ const BookingContact: React.FC = () => {
 
         @media (max-width: 480px) {
           .cp-bk-section  { padding: 70px 0; }
-          .cp-bk-ticket-title { font-size: 2rem; }
           .cp-bk-stub     { flex-direction: column; align-items: flex-start; }
           .cp-bk-confirm  { width: 100%; }
-          .cp-bk-band-text { font-size: 0.65rem; }
+          .cp-bk-band-text { font-size: 0.6rem; }
         }
       `}</style>
 
@@ -469,7 +479,6 @@ const BookingContact: React.FC = () => {
               >
                 <form ref={formRef} className="cp-bk-form" onSubmit={sendEmail}>
 
-                  {/* Hidden Web3Forms fields */}
                   <input type="hidden" name="access_key" value={WEB3FORMS_KEY} />
                   <input type="hidden" name="subject"    value="New Booking — Cinema Payyan Productions" />
                   <input type="hidden" name="from_name"  value="Cinema Payyan Booking" />
