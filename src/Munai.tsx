@@ -377,7 +377,7 @@ const Munai: React.FC = () => {
             MUNAI
           </motion.h1>
 
-          <p className="cp-mn-meta">BY CINEMAPAYYAN &bull; THE WRITERS' ROOM</p>
+          <p className="cp-mn-meta">BY CINEMAPAYYAN INC PRODUCT  <br /> &bull; THE WRITERS' ROOM</p>
           <div className="cp-mn-header-rule" />
         </header>
 
