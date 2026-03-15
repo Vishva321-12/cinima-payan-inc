@@ -1,11 +1,17 @@
-import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Images, VideoAssets } from './assets/assets';
+import React, { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Images, VideoAssets } from "./assets/assets";
 
 const Comic: React.FC = () => {
   const comicPages = [
-    Images.ComicPag0, Images.ComicPag1, Images.ComicPag2, Images.ComicPag3,
-    Images.ComicPag4, Images.ComicPag5, Images.ComicPag6, Images.ComicPag7,
+    Images.ComicPag0,
+    Images.ComicPag1,
+    Images.ComicPag2,
+    Images.ComicPag3,
+    Images.ComicPag4,
+    Images.ComicPag5,
+    Images.ComicPag6,
+    Images.ComicPag7,
   ];
 
   const [currentPage, setCurrentPage] = useState(0);
@@ -413,21 +419,7 @@ const Comic: React.FC = () => {
         }
         .cp-vision-body strong { color: rgba(253,224,71,0.8); font-weight: 600; }
 
-        /* release badge */
-        .cp-release-badge {
-          display: block;
-          font-family: 'Inter', sans-serif;
-          font-size: 0.6rem;
-          font-weight: 600;
-          letter-spacing: 4px;
-          color: rgba(50,197,244,0.9);
-          text-transform: uppercase;
-          padding: 12px 18px;
-          border: 1px solid rgba(50,197,244,0.12);
-          background: rgba(50,197,244,0.03);
-          text-align: center;
-          margin-bottom: 30px;
-        }
+
 
         /* CTA */
         .cp-vision-cta {
@@ -628,8 +620,7 @@ const Comic: React.FC = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            RETRO{' '}
-            <span className="cp-comic-title-cyan">BTS</span>{' '}
+            RETRO <span className="cp-comic-title-cyan">BTS</span>{" "}
             <span className="cp-comic-title-yellow">COMIC</span>
           </motion.h1>
           <div className="cp-comic-rule" />
@@ -643,7 +634,11 @@ const Comic: React.FC = () => {
               <span>BEHIND THE SCENES</span>
             </div>
             <div className="cp-bts-img-wrap">
-              <img src={Images.ComicCOverimg} alt="BTS" className="cp-bts-img" />
+              <img
+                src={Images.ComicCOverimg}
+                alt="BTS"
+                className="cp-bts-img"
+              />
               <div className="cp-bts-vignette" />
             </div>
             <div className="cp-bts-corner-tl" />
@@ -653,7 +648,6 @@ const Comic: React.FC = () => {
 
         {/* ── COMIC GRID ──────────────────────────── */}
         <div className="cp-comic-grid">
-
           {/* Book viewer */}
           <div className="cp-book-wrap">
             <AnimatePresence mode="wait">
@@ -665,24 +659,39 @@ const Comic: React.FC = () => {
                 exit={{ opacity: 0, scale: 1.02 }}
                 transition={{ duration: 0.25 }}
               >
-                <img src={comicPages[currentPage]} alt="Comic Page" className="cp-comic-sheet-img" />
+                <img
+                  src={comicPages[currentPage]}
+                  alt="Comic Page"
+                  className="cp-comic-sheet-img"
+                />
                 <div className="cp-issue-tag">ISSUE.{currentPage + 1}</div>
               </motion.div>
             </AnimatePresence>
 
             {/* Nav bar */}
             <div className="cp-nav-bar">
-              <button className="cp-nav-btn" onClick={() => paginate(-1)} disabled={currentPage === 0}>
+              <button
+                className="cp-nav-btn"
+                onClick={() => paginate(-1)}
+                disabled={currentPage === 0}
+              >
                 <span>PREV</span>
               </button>
 
               <div className="cp-dots-row">
                 {comicPages.map((_, i) => (
-                  <span key={i} className={`cp-dot ${i === currentPage ? 'active' : ''}`} />
+                  <span
+                    key={i}
+                    className={`cp-dot ${i === currentPage ? "active" : ""}`}
+                  />
                 ))}
               </div>
 
-              <button className="cp-nav-btn" onClick={() => paginate(1)} disabled={currentPage === comicPages.length - 1}>
+              <button
+                className="cp-nav-btn"
+                onClick={() => paginate(1)}
+                disabled={currentPage === comicPages.length - 1}
+              >
                 <span>NEXT</span>
               </button>
             </div>
@@ -699,19 +708,18 @@ const Comic: React.FC = () => {
             <div className="cp-vision-rule" />
 
             <p className="cp-vision-lead">
-              A tribute to the golden era of storytelling, where the meticulous craft of cinema
-              converges with the bold, high-contrast aesthetic of classic graphic novels.
-            </p>
-            <p className="cp-vision-body">
-              Brought to life by the visionary artistry of <strong>Santhosh Narayanan</strong>,
-              every hand-crafted frame celebrates the creative synergy and raw energy of the{' '}
-              <strong>Cinema Payyan</strong> collective. This initiative is more than a promotion;
-              it is a serialized visual chronicle of the passion behind the lens.
+              Where the raw grit of cinema meets the electric pulse of ink — a
+              tribute to the golden era of visual storytelling, reimagined panel
+              by panel.
             </p>
 
-            <span className="cp-release-badge">
-              NEW CHRONICLES RELEASED EVERY MONDAY
-            </span>
+            <p className="cp-vision-body">
+              Conceived and crafted by the creative force of{" "}
+              <strong>Abishake Raja</strong>, every frame is a statement — bold
+              lines, deeper meaning. The <strong>Cinema Payyan</strong>{" "}
+              collective doesn't just make films; they leave marks. This is not
+              a behind-the-scenes — it's a front-row seat to obsession.
+            </p>
 
             <a
               href="https://www.instagram.com/cinemapayyan.inc/"
@@ -751,7 +759,6 @@ const Comic: React.FC = () => {
             <div className="cp-reel-side cp-reel-side--right" />
           </div>
         </footer>
-
       </section>
     </>
   );

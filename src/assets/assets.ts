@@ -94,6 +94,7 @@ import LCU from './LCU.jpg';
 
 
 
+
 // Video Imports
  import VP from './Venkatprabu.mp4';
  import TK from './Tk.E.mp4';
@@ -129,6 +130,10 @@ import RaghuThathaShort from './Ragutathashort.E.mp4';
 import RaghuThathaShort1 from './Raguthathashort1.E.mp4';
 import SnakeAndLaderShort from './Snakeladdershort.E.mp4';
 import MahveeranReel_E from './Maha_veeranreel_Short.E.mp4';
+import VPShort from './VPShort.mp4';
+import KRR1 from './KRR1.mp4';
+import KRR2 from './KRR2.mp4';
+import DearShort from './DEARSHORT.mp4';
 
 
 
@@ -187,6 +192,10 @@ export const VideoAssets = {
     RaghuThathaShort1,   // 31
     SnakeAndLaderShort,   // 32
     MahveeranReel_E,        //33
+    VPShort,              //34
+    KRR1,        //35
+    KRR2,        //36
+    DearShort,        //37
 
   ] as string[],
   criticMain: "/videos/critic-review.mp4",
