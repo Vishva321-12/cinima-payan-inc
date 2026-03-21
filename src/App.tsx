@@ -12,16 +12,14 @@ import ShortsPromotion from "./ShortsPromotion";
 import Contact from "./Contact";
 import Footer from "./Footer";
 import Munai from "./Munai";
-import AboutWork from "./VjSession";
-import Filmcritic from "./openpannaa";
-import RjArchives from "./RjArchives";
 import Host from "./Host";
 import Director from "./Director";
 import CreativeProducer from "./CreativeProducer";
 import Accelerator from "./Accelerator";
 import SectionDivider from "./Sectiondivider";
 import CinemaNavigator from "./RotaryNavigator";
-import InkbloodAndShadows from "./Inkbloodandshadows"; // ← merged section
+import InkbloodAndShadows from "./Inkbloodandshadows";
+import CinemaChannels from "./Cinemachannels";
 
 function App() {
   const [offset, setOffset] = useState<number>(0);
@@ -61,7 +59,6 @@ function App() {
           will-change: transform;
         }
 
-        /* ── Film Critic Identity Heading ── */
         .fci-heading-block {
           background: #000;
           padding: 72px clamp(20px, 6%, 60px) 64px;
@@ -81,28 +78,36 @@ function App() {
           font-weight: 400; letter-spacing: clamp(4px, 1vw, 10px);
           color: #fff; line-height: 0.92; margin: 0 0 16px;
         }
-        .fci-roles-row { display: flex; align-items: center; flex-wrap: wrap; justify-content: center; }
+        .fci-roles-row {
+          display: flex; align-items: center;
+          flex-wrap: wrap; justify-content: center;
+        }
         .fci-role {
           font-family: 'Bebas Neue', sans-serif;
           font-size: clamp(0.9rem, 2.2vw, 1.5rem);
           letter-spacing: clamp(3px, 0.6vw, 6px);
           color: rgba(255,255,255,0.4); text-transform: uppercase; white-space: nowrap;
         }
-        .fci-role-dot { color: #fde047; margin: 0 clamp(8px, 1.2vw, 16px); opacity: 0.55; font-size: 1.1rem; }
+        .fci-role-dot {
+          color: #fde047; margin: 0 clamp(8px, 1.2vw, 16px);
+          opacity: 0.55; font-size: 1.1rem;
+        }
         .fci-sub-item {
           font-family: 'Inter', sans-serif;
           font-size: clamp(0.48rem, 1.2vw, 0.6rem);
           font-weight: 400; letter-spacing: 4px;
           color: rgba(255,255,255,0.25); text-transform: uppercase; white-space: nowrap;
         }
-        .fci-sub-sep { color: rgba(50,197,244,0.4); margin: 0 clamp(6px, 1vw, 14px); font-size: 0.5rem; }
+        .fci-sub-sep {
+          color: rgba(50,197,244,0.4);
+          margin: 0 clamp(6px, 1vw, 14px); font-size: 0.5rem;
+        }
         .fci-heading-rule {
           width: clamp(80px, 20%, 180px); height: 1px;
           background: linear-gradient(90deg, transparent, rgba(253,224,71,0.35), rgba(50,197,244,0.2), transparent);
           margin-top: 22px;
         }
 
-        /* ── Banner purchase link ── */
         .banner-purchase-wrap { position: relative; }
         .banner-purchase-link {
           position: absolute; bottom: 24px; left: 50%;
@@ -146,7 +151,10 @@ function App() {
 
         @media (max-width: 600px) {
           .fci-heading-block { padding: 52px 16px 48px; }
-          .banner-purchase-link { bottom: 14px; padding: 8px 16px; font-size: 0.5rem; letter-spacing: 2.5px; }
+          .banner-purchase-link {
+            bottom: 14px; padding: 8px 16px;
+            font-size: 0.5rem; letter-spacing: 2.5px;
+          }
         }
       `}</style>
 
@@ -157,6 +165,7 @@ function App() {
           path="/"
           element={
             <>
+              {/* ══ HOME / HERO ══ */}
               <div className="App" id="home" ref={refs.homeRef}>
                 <Header
                   onScrollRequest={handleScrollRequest}
@@ -168,7 +177,7 @@ function App() {
                 <Hero onScrollRequest={handleScrollRequest} />
               </div>
 
-              {/* ── BANNER with purchase link ── */}
+              {/* ══ BANNER ══ */}
               <div className="container1 banner-purchase-wrap">
                 <div
                   className="cinenaPaitanBanner"
@@ -181,12 +190,17 @@ function App() {
                 </div>
                 <a
                   href="https://coveritup.com/collections/hoodies-sweatshirts"
-                  target="_blank" rel="noreferrer"
+                  target="_blank"
+                  rel="noreferrer"
                   className="banner-purchase-link"
                 >
                   <span className="banner-purchase-dot" />
                   <span className="banner-purchase-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" width="14" height="14">
+                    <svg
+                      viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                      strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
+                      width="14" height="14"
+                    >
                       <path d="M6 2 3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
                       <line x1="3" y1="6" x2="21" y2="6"/>
                       <path d="M16 10a4 4 0 01-8 0"/>
@@ -196,96 +210,79 @@ function App() {
                 </a>
               </div>
 
+              {/* ══ ABOUT ══ */}
               <SectionDivider variant="timecode" label="CUT TO — ABOUT" index={1} />
               <section id="about" ref={refs.aboutRef}>
                 <About />
               </section>
 
-              {/* ── FILM CRITIC IDENTITY HEADING ── */}
-              <SectionDivider variant="filmstrip" label="FILM CRITIC · REVIEWER · ANALYST" />
-              <div className="fci-heading-block">
-                <h2 className="fci-name-display">AR</h2>
-                <div className="fci-roles-row">
-                  {["Film Critic", "Film Director", "Industry Tracker"].map((r, i, arr) => (
-                    <span key={i}>
-                      <span className="fci-role">{r}</span>
-                      {i < arr.length - 1 && <span className="fci-role-dot">·</span>}
-                    </span>
-                  ))}
-                </div>
-                <div className="fci-heading-rule" />
-              </div>
-
-              {/* ══ 1. VJ SESSIONS ══ */}
-              <SectionDivider variant="filmstrip" label="VJ SESSION" />
-              <section id="vjsession">
-                <AboutWork />
+              {/* ══ CINEMA CHANNELS — VJ + Open Pannaa + RJ unified ══ */}
+              <SectionDivider variant="filmstrip" label="CINEMA CHANNELS" />
+              <section id="channels">
+                <CinemaChannels />
               </section>
 
-              {/* ══ 2. OPEN PANNAA ══ */}
-              <SectionDivider variant="slash" label="OPEN PANNAA" index={2} />
-              <section id="openpannaa">
-                <Filmcritic />
-              </section>
-
-              {/* ══ 3. RJ ARCHIVES ══ */}
-              <SectionDivider variant="reel" label="RJ ARCHIVES" index={3} />
-              <section id="rjarchives">
-                <RjArchives />
-              </section>
-
-              {/* ── remaining sections ── */}
+              {/* ══ HOST ══ */}
               <SectionDivider variant="scanline" label="HOST" />
               <section id="host">
                 <Host />
               </section>
 
+              {/* ══ DIRECTOR ══ */}
               <SectionDivider variant="scanline" label="DIRECTOR" index={5} />
               <section id="director">
                 <Director />
               </section>
 
+              {/* ══ CREATIVE PRODUCER ══ */}
               <SectionDivider variant="marquee" label="CINEMAPAYYAN • CREATIVE PRODUCER" />
               <section id="producer" ref={refs.promotionsRef}>
                 <CreativeProducer />
               </section>
 
+              {/* ══ ACCELERATOR ══ */}
               <SectionDivider variant="timecode" label="THE ACCELERATOR" index={7} />
               <section id="accelerator">
                 <Accelerator />
               </section>
 
-              <SectionDivider variant="filmstrip" label="FINISHED PROJECTS" />
-              <section id="work" ref={refs.workRef}>
-                <Work />
-              </section>
-
-              <SectionDivider variant="slash" label="TIE-UP PARTNERS" index={9} />
-              <section id="partners">
-                <ProductionLogo />
-              </section>
-
-              {/* ══ INKBLOOD & SHADOWS — Comic + Shadow Promotion merged ══ */}
+              {/* ══ INKBLOOD & SHADOWS ══ */}
               <SectionDivider variant="reel" label="INKBLOOD & SHADOWS" />
               <section id="inkblood">
                 <InkbloodAndShadows />
               </section>
 
+              {/* ══ SHORTS PROMOTION ══ */}
               <SectionDivider variant="scanline" label="SHORTS PROMOTION" index={11} />
               <section id="shorts">
                 <ShortsPromotion />
               </section>
 
+              {/* ══ FINISHED PROJECTS ══ */}
+              <SectionDivider variant="filmstrip" label="FINISHED PROJECTS" />
+              <section id="work" ref={refs.workRef}>
+                <Work />
+              </section>
+
+              {/* ══ TIE-UP PARTNERS ══ */}
+              <SectionDivider variant="slash" label="TIE-UP PARTNERS" index={9} />
+              <section id="partners">
+                <ProductionLogo />
+              </section>
+
+              {/* ══ CONTACT ══ */}
               <SectionDivider variant="timecode" label="BOOK A SESSION" index={13} />
               <section id="contact" ref={refs.contactRef}>
                 <Contact />
               </section>
 
+              {/* ══ FOOTER ══ */}
               <SectionDivider variant="slash" label="FIN" index={14} />
               <Footer />
             </>
           }
         />
+
         <Route path="/munai" element={<Munai />} />
       </Routes>
     </Router>

@@ -2016,7 +2016,7 @@ header, nav, .prof-nav-item, .hero-container, .about-section,
   overflow: hidden;
 }
 .cp-content::before {
-  content: '制';
+  content: 'AR';
   position: absolute;
   right: -10px; bottom: -30px;
   font-size: 16rem;
@@ -2660,7 +2660,7 @@ header, nav, .prof-nav-item, .hero-container, .about-section,
   position: relative; overflow: hidden;
 }
 .acc-text-side::before {
-  content: '速';
+  content: 'CP';
   position: absolute;
   right: -10px; bottom: -30px;
   font-size: 16rem;

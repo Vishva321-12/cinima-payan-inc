@@ -138,7 +138,6 @@ export default function Hero({ onScrollRequest }: HeroProps) {
           grid-template-rows: auto 1fr auto auto;
           align-items: stretch;
           overflow: hidden;
-          /* push all content below the fixed navbar */
           padding-top: var(--navbar-height, 64px);
         }
 
@@ -358,6 +357,18 @@ export default function Hero({ onScrollRequest }: HeroProps) {
           box-shadow: 0 0 12px rgba(50,197,244,0.6);
         }
 
+        /* ════ BOX — pulse hint ════ */
+        @keyframes h3Pulse {
+          0%, 100% {
+            box-shadow: 0 0 0px rgba(253,224,71,0);
+            border-color: rgba(255,255,255,0.1);
+          }
+          50% {
+            box-shadow: 0 0 20px rgba(253,224,71,0.25), 0 0 40px rgba(253,224,71,0.08);
+            border-color: rgba(253,224,71,0.4);
+          }
+        }
+
         .h3-box {
           position: relative; overflow: hidden;
           padding: clamp(10px,1.8vw,14px) clamp(16px,3.5vw,32px);
@@ -365,7 +376,17 @@ export default function Hero({ onScrollRequest }: HeroProps) {
           background: rgba(6,6,6,0.82);
           cursor: pointer;
           transition: border-color 0.35s, transform 0.35s, box-shadow 0.35s;
+          animation: h3Pulse 2.8s ease-in-out infinite;
         }
+
+        /* stagger so all three don't pulse in sync */
+        .h3-node:nth-child(1) .h3-box { animation-delay: 0s;   }
+        .h3-node:nth-child(2) .h3-box { animation-delay: 0.95s; }
+        .h3-node:nth-child(3) .h3-box { animation-delay: 1.9s;  }
+
+        /* stop pulsing on hover — hover state takes over */
+        .h3-node:hover .h3-box { animation: none; }
+
         .h3-box::before {
           content: ''; position: absolute; inset: 0;
           background: rgba(50,197,244,0.08);
@@ -386,6 +407,30 @@ export default function Hero({ onScrollRequest }: HeroProps) {
           border-left: 1px solid rgba(253,224,71,0.5);
           z-index: 5;
         }
+
+        /* ════ TAP HINT — bobbing arrow below each box ════ */
+        @keyframes h3TapBob {
+          0%, 100% { opacity: 0.28; transform: translateY(0px); }
+          50%       { opacity: 0.75; transform: translateY(4px); }
+        }
+
+        .h3-tap {
+          font-family: 'Inter', sans-serif;
+          font-size: 0.44rem;
+          letter-spacing: 3px;
+          color: rgba(253,224,71,0.5);
+          text-transform: uppercase;
+          margin-top: 6px;
+          user-select: none;
+          pointer-events: none;
+          animation: h3TapBob 1.8s ease-in-out infinite;
+        }
+        .h3-node:nth-child(1) .h3-tap { animation-delay: 0s;    }
+        .h3-node:nth-child(2) .h3-tap { animation-delay: 0.6s;  }
+        .h3-node:nth-child(3) .h3-tap { animation-delay: 1.2s;  }
+
+        /* hide tap hint while hovered */
+        .h3-node:hover .h3-tap { opacity: 0; transition: opacity 0.2s; }
 
         .h3-link {
           font-family: 'Bebas Neue', sans-serif;
@@ -545,6 +590,7 @@ export default function Hero({ onScrollRequest }: HeroProps) {
           .h3-box    { padding: 8px 12px; }
           .h3-link   { font-size: 0.82rem; letter-spacing: 2px; }
           .h3-stem   { height: 20px; }
+          .h3-tap    { font-size: 0.38rem; letter-spacing: 2px; }
 
           .h3-footer { flex-direction: column; align-items: center; text-align: center; gap: 8px; }
           .h3-byline { text-align: center; }
@@ -710,6 +756,8 @@ export default function Hero({ onScrollRequest }: HeroProps) {
                         : <Link to={b.path} className="h3-link">{b.title}</Link>
                       }
                     </div>
+                    {/* ── click hint ── */}
+                    <span className="h3-tap">▼ tap</span>
                   </motion.div>
                 ))}
               </div>

@@ -134,6 +134,8 @@ import VPShort from './VPShort.mp4';
 import KRR1 from './KRR1.mp4';
 import KRR2 from './KRR2.mp4';
 import DearShort from './DEARSHORT.mp4';
+import VPNEW from './VPNEW.mp4';
+import KKRCD from './KKRCD.mp4';
 
 
 
@@ -196,6 +198,9 @@ export const VideoAssets = {
     KRR1,        //35
     KRR2,        //36
     DearShort,        //37
+    VPNEW,     //38
+    KKRCD,    //39
+
 
   ] as string[],
   criticMain: "/videos/critic-review.mp4",

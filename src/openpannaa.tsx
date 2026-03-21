@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { motion, useInView } from 'framer-motion';
-import { Play, Film, Instagram, Facebook, Twitter, Youtube, ExternalLink } from 'lucide-react';
+import { Play, Instagram, Facebook, Twitter, Youtube, ExternalLink } from 'lucide-react';
 import { Images, VideoAssets } from './assets/assets';
 
 const criticPreviews = [
@@ -15,6 +15,18 @@ const socialLinks = [
   { icon: Facebook,  href: "https://facebook.com/OpenPannaa",  label: "Facebook"  },
   { icon: Twitter,   href: "https://x.com/OpenPannaa",         label: "Twitter"   },
 ];
+
+/* ── YouTube Play Button Icon ── */
+function YTIcon() {
+  return (
+    <svg viewBox="0 0 22 22" fill="none" width="18" height="18" aria-hidden="true">
+      {/* rounded rect */}
+      <rect x="1.5" y="4.5" width="19" height="13" rx="3.5" stroke="currentColor" strokeWidth="1.4"/>
+      {/* play triangle */}
+      <path d="M9 8l6 3.5-6 3.5V8z" fill="currentColor"/>
+    </svg>
+  );
+}
 
 function CriticCard({ item, index }: { item: typeof criticPreviews[0]; index: number }) {
   const [hovered, setHovered] = useState(false);
@@ -86,10 +98,6 @@ const Filmcritic = () => {
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;700;900&display=swap');
 
-        /* ══════════════════════════════════════════
-           SECTION SHELL — DEEP BURGUNDY / CINEMA RED
-           Red curtain screening room
-        ══════════════════════════════════════════ */
         .fcc-section {
           background: #130609;
           background: radial-gradient(ellipse at top center, #2a0c12 0%, #130609 55%, #0e0407 100%);
@@ -137,14 +145,14 @@ const Filmcritic = () => {
         .fcc-header-content {
           display: flex; align-items: center; gap: 14px; flex-shrink: 0;
         }
+        /* YouTube red icon border */
         .fcc-header-icon {
           width: 36px; height: 36px;
-          border: 1px solid rgba(253,224,71,0.3);
+          border: 1px solid rgba(255, 0, 0, 0.45);
           display: flex; align-items: center; justify-content: center;
-          color: #fde047; flex-shrink: 0;
+          color: #ff3c3c; flex-shrink: 0;
         }
 
-        /* Inter — overline */
         .fcc-overline {
           font-family: 'Inter', sans-serif;
           font-size: clamp(0.48rem, 1.5vw, 0.6rem);
@@ -155,7 +163,6 @@ const Filmcritic = () => {
           display: block; margin-bottom: 5px;
         }
 
-        /* Bebas Neue — section heading */
         .fcc-heading {
           font-family: 'Bebas Neue', sans-serif;
           font-size: clamp(1.8rem, 4.5vw, 3.2rem);
@@ -165,7 +172,6 @@ const Filmcritic = () => {
         }
         .fcc-heading-yellow { color: #fde047; }
 
-        /* Bebas Neue — episode count */
         .fcc-count {
           display: flex; flex-direction: column; align-items: center;
           margin-left: 14px; flex-shrink: 0;
@@ -176,7 +182,6 @@ const Filmcritic = () => {
           font-weight: 400; color: rgba(253,224,71,0.28); line-height: 1;
           letter-spacing: 2px;
         }
-        /* Inter — count label */
         .fcc-count-lbl {
           font-family: 'Inter', sans-serif;
           font-size: clamp(0.44rem, 1vw, 0.54rem);
@@ -224,7 +229,6 @@ const Filmcritic = () => {
           background: #ff3333; flex-shrink: 0;
           box-shadow: 0 0 8px rgba(255,51,51,0.8);
         }
-        /* Inter — CHANNEL label */
         .fcc-hero-live {
           font-family: 'Inter', sans-serif;
           font-size: clamp(0.44rem, 1.2vw, 0.56rem);
@@ -232,14 +236,12 @@ const Filmcritic = () => {
           letter-spacing: 4px;
           color: rgba(255,255,255,0.75); text-transform: uppercase;
         }
-        /* Bebas Neue — hero bar title */
         .fcc-hero-title {
           font-family: 'Bebas Neue', sans-serif;
           font-size: clamp(1rem, 2.8vw, 1.8rem);
           font-weight: 400; letter-spacing: 4px;
           color: #fff; flex: 1; text-align: center;
         }
-        /* Inter — hero tag badge */
         .fcc-hero-tag {
           font-family: 'Inter', sans-serif;
           font-size: clamp(0.44rem, 1vw, 0.54rem);
@@ -263,7 +265,6 @@ const Filmcritic = () => {
           margin-bottom: 56px;
         }
 
-        /* ── CARD — deep burgundy bg ── */
         .fcc-card {
           background: #1e0a0d;
           border: 1px solid rgba(253,224,71,0.07);
@@ -290,7 +291,6 @@ const Filmcritic = () => {
           background: linear-gradient(to bottom, transparent 40%, rgba(0,0,0,0.6) 100%);
           pointer-events: none; z-index: 2;
         }
-        /* Inter — card tag pill */
         .fcc-tag {
           position: absolute; top: 10px; left: 10px; z-index: 5;
           font-family: 'Inter', sans-serif;
@@ -325,7 +325,6 @@ const Filmcritic = () => {
           border-right: 1px solid rgba(50,197,244,0.4);
         }
 
-        /* ── card info — deep burgundy ── */
         .fcc-info {
           padding: 14px 16px;
           display: flex; align-items: center;
@@ -334,16 +333,12 @@ const Filmcritic = () => {
           border-top: 1px solid rgba(253,224,71,0.06);
         }
         .fcc-info-left { display: flex; align-items: center; gap: 12px; }
-
-        /* Bebas Neue — ghost number */
         .fcc-num {
           font-family: 'Bebas Neue', sans-serif;
           font-size: clamp(1.6rem, 2.5vw, 2rem);
           font-weight: 400; letter-spacing: 2px;
           color: rgba(253,224,71,0.22); line-height: 1; flex-shrink: 0;
         }
-
-        /* Inter — tag label above title */
         .fcc-tag-label {
           font-family: 'Inter', sans-serif;
           font-size: clamp(0.42rem, 1vw, 0.52rem);
@@ -352,8 +347,6 @@ const Filmcritic = () => {
           color: rgba(253,224,71,0.65); text-transform: uppercase;
           display: block; margin-bottom: 3px;
         }
-
-        /* Bebas Neue — card title */
         .fcc-title {
           font-family: 'Bebas Neue', sans-serif;
           font-size: clamp(1rem, 2vw, 1.25rem);
@@ -386,8 +379,6 @@ const Filmcritic = () => {
           border: 1px dashed rgba(253,224,71,0.3);
         }
         .fcc-footer-meta { flex: 1; min-width: 160px; }
-
-        /* Inter — footer overline */
         .fcc-footer-overline {
           display: block;
           font-family: 'Inter', sans-serif;
@@ -396,16 +387,12 @@ const Filmcritic = () => {
           letter-spacing: 5px;
           color: rgba(255,255,255,0.55); text-transform: uppercase; margin-bottom: 6px;
         }
-
-        /* Bebas Neue — channel name */
         .fcc-footer-name {
           font-family: 'Bebas Neue', sans-serif;
           font-size: clamp(1.6rem, 3.5vw, 2.4rem);
           font-weight: 400; letter-spacing: 4px;
           color: #fff; margin: 0 0 5px; line-height: 1;
         }
-
-        /* Inter — by-line */
         .fcc-footer-sub {
           font-family: 'Inter', sans-serif;
           font-size: clamp(0.44rem, 1vw, 0.54rem);
@@ -414,7 +401,6 @@ const Filmcritic = () => {
           color: rgba(255,255,255,0.5); text-transform: uppercase;
         }
 
-        /* ── SOCIAL BUTTONS ── */
         .fcc-socials { display: flex; gap: 10px; flex-wrap: wrap; flex-shrink: 0; }
         .fcc-social-btn {
           position: relative; overflow: hidden;
@@ -436,7 +422,6 @@ const Filmcritic = () => {
         .fcc-social-btn:hover { color: #000; }
         .fcc-social-btn svg { position: relative; z-index: 1; }
 
-        /* Inter — CTA button */
         .fcc-cta {
           position: relative; overflow: hidden;
           display: inline-flex; align-items: center; gap: 10px;
@@ -460,13 +445,10 @@ const Filmcritic = () => {
         .fcc-cta:hover { color: #000; }
         .fcc-cta span, .fcc-cta svg { position: relative; z-index: 1; }
 
-        /* ══════════════════════════════════════════
-           RESPONSIVE
-        ══════════════════════════════════════════ */
+        /* ── RESPONSIVE ── */
         @media (max-width: 900px) {
           .fcc-grid { grid-template-columns: repeat(2, 1fr); }
         }
-
         @media (max-width: 700px) {
           .fcc-header {
             flex-direction: column;
@@ -487,7 +469,6 @@ const Filmcritic = () => {
           .fcc-count-num { font-size: clamp(1.6rem, 8vw, 2.2rem); }
           .fcc-count-lbl { text-align: right; }
         }
-
         @media (max-width: 640px) {
           .fcc-section  { padding: 70px 0 80px; }
           .fcc-grid     { grid-template-columns: 1fr; }
@@ -518,9 +499,12 @@ const Filmcritic = () => {
             transition={{ delay: 0.3, duration: 0.6 }}
           >
             <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
-              <div className="fcc-header-icon"><Film size={18} /></div>
+              {/* ── YouTube icon ── */}
+              <div className="fcc-header-icon">
+                <YTIcon />
+              </div>
               <div>
-                <span className="fcc-overline">OPEN PANNAA</span>
+                <span className="fcc-overline">OPEN PANNAA · YOUTUBE</span>
                 <h2 className="fcc-heading">
                   FILM <span className="fcc-heading-yellow">CRITIC</span>
                 </h2>

@@ -1,7 +1,26 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
-import { Play, Mic2, ExternalLink } from "lucide-react";
+import { Play, ExternalLink } from "lucide-react";
 import { Images } from "./assets/assets";
+
+/* ── Radio microphone SVG icon ── */
+function RadioMicIcon() {
+  return (
+    <svg viewBox="0 0 22 22" fill="none" width="18" height="18" aria-hidden="true">
+      {/* mic body */}
+      <rect x="7.5" y="2" width="7" height="10" rx="3.5" stroke="currentColor" strokeWidth="1.4"/>
+      {/* arm curve */}
+      <path d="M4 10a7 7 0 0014 0" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round"/>
+      {/* stand */}
+      <path d="M11 17v3" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round"/>
+      {/* base */}
+      <path d="M7.5 20h7" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round"/>
+      {/* signal waves left + right */}
+      <path d="M2.5 7.5a10 10 0 000 7" stroke="currentColor" strokeWidth="1.1" strokeLinecap="round" opacity="0.55"/>
+      <path d="M19.5 7.5a10 10 0 010 7" stroke="currentColor" strokeWidth="1.1" strokeLinecap="round" opacity="0.55"/>
+    </svg>
+  );
+}
 
 const RjArchives = () => {
   const headerRef = useRef<HTMLDivElement>(null);
@@ -19,7 +38,6 @@ const RjArchives = () => {
           overflow: hidden;
           position: relative;
         }
-
 
         .rja-inner {
           max-width: 1200px;
@@ -178,9 +196,7 @@ const RjArchives = () => {
           color: rgba(255,255,255,0.45); text-transform: uppercase;
         }
 
-        /* ════════════════════════════════════
-           RESPONSIVE
-        ════════════════════════════════════ */
+        /* ════ RESPONSIVE ════ */
         @media (max-width: 900px) {
           .rja-stage { grid-template-columns: 1fr; gap: 32px; }
           .rja-meta  { flex-direction: row; }
@@ -212,9 +228,12 @@ const RjArchives = () => {
               animate={{ opacity: inView ? 1 : 0, y: inView ? 0 : 18 }}
               transition={{ delay: 0.3, duration: 0.6 }}
             >
-              <div className="rja-header-icon"><Mic2 size={18} /></div>
+              {/* ── Radio mic icon ── */}
+              <div className="rja-header-icon">
+                <RadioMicIcon />
+              </div>
               <div>
-                <span className="rja-overline">RJ </span>
+                <span className="rja-overline">RJ BROADCAST</span>
                 <h2 className="rja-heading">BROADCAST <span className="rja-heading-cyan">ARCHIVES</span></h2>
               </div>
             </motion.div>

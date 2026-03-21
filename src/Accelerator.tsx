@@ -7,6 +7,7 @@ import {
   Trophy,
   ArrowUpRight,
   Clapperboard,
+  Mail,
 } from "lucide-react";
 import "./App.css";
 
@@ -93,7 +94,6 @@ const Accelerator: React.FC = () => {
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;700;900&display=swap');
 
-        /* ── SITE FIXED PALETTE ── */
         :root {
           --cyan: #32c5f4;
           --yellow: #fde047;
@@ -107,23 +107,18 @@ const Accelerator: React.FC = () => {
         .gold-bg   { background: var(--yellow) !important; }
         .cyan-bg   { background: var(--cyan) !important; }
 
-        /* ── ROOT: Deep Midnight Blue ── */
         .acc-universe-v4 {
           background: var(--acc-bg);
           overflow: hidden;
           position: relative;
         }
-
-        /* Ambient glow layers — cyan top-left, yellow bottom-right */
         .acc-universe-v4::before {
           content: '';
-          position: absolute;
-          inset: 0;
+          position: absolute; inset: 0;
           background:
-            radial-gradient(ellipse at 0% 0%,    rgba(50, 197, 244, 0.07) 0%, transparent 55%),
-            radial-gradient(ellipse at 100% 100%, rgba(253, 224, 71, 0.05) 0%, transparent 55%);
-          pointer-events: none;
-          z-index: 0;
+            radial-gradient(ellipse at 0% 0%,    rgba(50,197,244,0.07) 0%, transparent 55%),
+            radial-gradient(ellipse at 100% 100%, rgba(253,224,71,0.05) 0%, transparent 55%);
+          pointer-events: none; z-index: 0;
         }
 
         /* ── HERO ── */
@@ -137,9 +132,9 @@ const Accelerator: React.FC = () => {
           position: absolute; inset: 0;
           background: linear-gradient(
             to bottom,
-            rgba(5, 13, 26, 0.25) 0%,
-            rgba(5, 13, 26, 0.58) 50%,
-            rgba(5, 13, 26, 0.97) 100%
+            rgba(5,13,26,0.25) 0%,
+            rgba(5,13,26,0.58) 50%,
+            rgba(5,13,26,0.97) 100%
           );
           pointer-events: none;
         }
@@ -148,21 +143,16 @@ const Accelerator: React.FC = () => {
           padding: clamp(24px,6%,60px) clamp(20px,6%,60px) 0;
           max-width: 1200px; margin: 0 auto; width: 100%; box-sizing: border-box;
         }
-
-        /* Inter — pre-title */
         .acc-pre-title {
           display: block;
           font-family: 'Inter', sans-serif;
-          font-size: clamp(0.48rem, 1.5vw, 0.62rem);
+          font-size: clamp(0.48rem,1.5vw,0.62rem);
           font-weight: 400; letter-spacing: 6px;
-          color: rgba(253, 224, 71, 0.85); text-transform: uppercase;
-          margin-bottom: 12px;
+          color: rgba(253,224,71,0.85); text-transform: uppercase; margin-bottom: 12px;
         }
-
-        /* Bebas Neue — hero main title */
         .acc-main-title {
           font-family: 'Bebas Neue', sans-serif;
-          font-size: clamp(3.5rem, 11vw, 8rem);
+          font-size: clamp(3.5rem,11vw,8rem);
           font-weight: 400; color: var(--white);
           line-height: 0.9; letter-spacing: 4px; margin: 0;
         }
@@ -172,10 +162,10 @@ const Accelerator: React.FC = () => {
         .acc-credo-train {
           position: relative; z-index: 2; overflow: hidden;
           margin-top: 40px;
-          border-top: 1px solid rgba(50, 197, 244, 0.12);
-          border-bottom: 1px solid rgba(50, 197, 244, 0.12);
+          border-top: 1px solid rgba(50,197,244,0.12);
+          border-bottom: 1px solid rgba(50,197,244,0.12);
           padding: 10px 0;
-          background: rgba(5, 13, 26, 0.6);
+          background: rgba(5,13,26,0.6);
         }
         .acc-train-track {
           display: flex; width: max-content;
@@ -188,17 +178,16 @@ const Accelerator: React.FC = () => {
         .acc-track-item { display: flex; white-space: nowrap; }
         .acc-track-item span {
           font-family: 'Inter', sans-serif;
-          font-size: clamp(0.48rem, 1.5vw, 0.62rem);
+          font-size: clamp(0.48rem,1.5vw,0.62rem);
           font-weight: 400; letter-spacing: 5px;
-          color: rgba(253, 224, 71, 0.75); text-transform: uppercase; padding: 0 4px;
+          color: rgba(253,224,71,0.75); text-transform: uppercase; padding: 0 4px;
         }
 
         /* ── WRAPPER ── */
         .acc-wrapper {
           max-width: 1200px; margin: 0 auto;
           padding: 0 clamp(20px,6%,60px) 100px;
-          box-sizing: border-box;
-          position: relative; z-index: 1;
+          box-sizing: border-box; position: relative; z-index: 1;
         }
 
         /* ── MISSION HUB ── */
@@ -216,7 +205,7 @@ const Accelerator: React.FC = () => {
         }
         .acc-img-glow {
           position: absolute; inset: -20px;
-          background: radial-gradient(circle at center, rgba(50, 197, 244, 0.10) 0%, transparent 65%);
+          background: radial-gradient(circle at center, rgba(50,197,244,0.10) 0%, transparent 65%);
           pointer-events: none;
         }
         .acc-portrait-img {
@@ -225,47 +214,58 @@ const Accelerator: React.FC = () => {
           box-shadow: 0 24px 60px rgba(0,0,0,0.95), 0 0 40px rgba(50,197,244,0.08);
         }
 
-        /* Inter — status tag */
+        /* ── STATUS TAG — now a clickable email link ── */
         .acc-status-tag {
-          position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
-          display: flex; align-items: center; gap: 7px;
+          position: absolute; bottom: 0; left: 50%;
+          transform: translateX(-50%);
+          display: inline-flex; align-items: center; gap: 7px;
           font-family: 'Inter', sans-serif;
-          font-size: clamp(0.44rem, 1.2vw, 0.56rem);
+          font-size: clamp(0.44rem,1.2vw,0.56rem);
           font-weight: 700; letter-spacing: 4px;
           color: var(--black); background: var(--cyan);
-          padding: 7px 16px; white-space: nowrap; z-index: 4; text-transform: uppercase;
+          padding: 7px 16px; white-space: nowrap; z-index: 4;
+          text-transform: uppercase;
+          text-decoration: none;
+          transition: background 0.3s, color 0.3s;
+          cursor: pointer;
+          overflow: hidden;
+          position: absolute;
         }
+        .acc-status-tag::before {
+          content: '';
+          position: absolute; inset: 0;
+          background: var(--yellow);
+          transform: scaleX(0); transform-origin: left; z-index: 0;
+          transition: transform 0.35s cubic-bezier(0.77,0,0.18,1);
+        }
+        .acc-status-tag:hover::before { transform: scaleX(1); }
+        .acc-status-tag > * { position: relative; z-index: 1; }
+        .acc-status-tag:hover { color: var(--black); }
 
         .acc-text-side { display: flex; flex-direction: column; gap: 22px; }
 
-        /* Inter — pill label */
         .acc-pill-label {
           display: inline-flex; align-items: center; gap: 8px;
           font-family: 'Inter', sans-serif;
-          font-size: clamp(0.44rem, 1.2vw, 0.58rem);
+          font-size: clamp(0.44rem,1.2vw,0.58rem);
           font-weight: 400; letter-spacing: 4px;
           color: rgba(255,255,255,0.7); text-transform: uppercase;
           border: 1px solid rgba(253,224,71,0.25); padding: 7px 14px; width: fit-content;
         }
-
-        /* Bebas Neue — section heading */
         .acc-heading {
           font-family: 'Bebas Neue', sans-serif;
-          font-size: clamp(2.2rem, 5vw, 4rem);
+          font-size: clamp(2.2rem,5vw,4rem);
           font-weight: 400; color: var(--white);
           line-height: 0.95; letter-spacing: 3px; margin: 0;
         }
         .acc-heading-accent { color: var(--cyan); }
-
         .acc-heading-rule {
           width: 100%; height: 1px;
           background: linear-gradient(90deg, rgba(253,224,71,0.35), rgba(50,197,244,0.2), transparent);
         }
-
-        /* Inter — body */
         .acc-body {
           font-family: 'Inter', sans-serif;
-          font-size: clamp(0.82rem, 1.2vw, 0.95rem);
+          font-size: clamp(0.82rem,1.2vw,0.95rem);
           font-weight: 300; color: rgba(255,255,255,0.60); line-height: 1.9; margin: 0;
         }
         .acc-body strong {
@@ -300,24 +300,24 @@ const Accelerator: React.FC = () => {
         .acc-feature-text { display: flex; flex-direction: column; gap: 5px; }
         .acc-feature-text h4 {
           font-family: 'Inter', sans-serif;
-          font-size: clamp(0.52rem, 1.2vw, 0.64rem);
+          font-size: clamp(0.52rem,1.2vw,0.64rem);
           font-weight: 700; letter-spacing: 3px; text-transform: uppercase;
           color: rgba(255,255,255,0.9); margin: 0;
         }
         .acc-feature-text p {
           font-family: 'Inter', sans-serif;
-          font-size: clamp(0.78rem, 1.1vw, 0.88rem);
+          font-size: clamp(0.78rem,1.1vw,0.88rem);
           font-weight: 300; color: rgba(255,255,255,0.60); margin: 0; line-height: 1.65;
         }
 
-        /* Inter — CTA */
+
         .acc-cta {
           position: relative; overflow: hidden;
           display: inline-flex; align-items: center; gap: 10px;
           padding: 14px 28px; border: 1px solid var(--yellow);
           color: var(--yellow); text-decoration: none;
           font-family: 'Inter', sans-serif;
-          font-size: clamp(0.44rem, 1.2vw, 0.56rem);
+          font-size: clamp(0.44rem,1.2vw,0.56rem);
           font-weight: 700; letter-spacing: 4px; text-transform: uppercase;
           transition: color 0.4s; width: fit-content;
         }
@@ -346,13 +346,13 @@ const Accelerator: React.FC = () => {
         }
         .acc-reel-pre-text {
           font-family: 'Inter', sans-serif;
-          font-size: clamp(0.44rem, 1.2vw, 0.58rem);
+          font-size: clamp(0.44rem,1.2vw,0.58rem);
           font-weight: 400; letter-spacing: 6px;
           color: rgba(253,224,71,0.85); text-transform: uppercase;
         }
         .acc-reel-title h4 {
           font-family: 'Bebas Neue', sans-serif;
-          font-size: clamp(2rem, 4.5vw, 3.2rem);
+          font-size: clamp(2rem,4.5vw,3.2rem);
           font-weight: 400; letter-spacing: 4px; color: var(--white); margin: 0;
         }
 
@@ -369,7 +369,7 @@ const Accelerator: React.FC = () => {
         .acc-card-inner {
           position: relative; width: 100%; aspect-ratio: 3/4;
           overflow: hidden;
-          border: 1px solid rgba(50, 197, 244, 0.08);
+          border: 1px solid rgba(50,197,244,0.08);
           background: #020810;
           transition: border-color 0.35s, transform 0.4s;
         }
@@ -402,17 +402,15 @@ const Accelerator: React.FC = () => {
           border-bottom: 1px solid rgba(50,197,244,0.4);
           border-right: 1px solid rgba(50,197,244,0.4);
         }
-
-        /* Inter — legacy badge */
         .acc-legacy-badge {
           position: absolute; bottom: 10px; left: 65px;
           display: flex; align-items: center; gap: 6px;
           font-family: 'Inter', sans-serif;
-          font-size: clamp(0.42rem, 1vw, 0.52rem);
+          font-size: clamp(0.42rem,1vw,0.52rem);
           font-weight: 400; letter-spacing: 3px;
           color: rgba(255,255,255,0.9);
-          background: rgba(5, 13, 26, 0.88);
-          border: 1px solid rgba(50, 197, 244, 0.15);
+          background: rgba(5,13,26,0.88);
+          border: 1px solid rgba(50,197,244,0.15);
           padding: 5px 10px; text-transform: uppercase; z-index: 5;
         }
 
@@ -422,7 +420,7 @@ const Accelerator: React.FC = () => {
         }
         .acc-progress-label {
           font-family: 'Inter', sans-serif;
-          font-size: clamp(0.44rem, 1vw, 0.54rem);
+          font-size: clamp(0.44rem,1vw,0.54rem);
           font-weight: 400; letter-spacing: 3px;
           color: rgba(255,255,255,0.35); text-transform: uppercase;
           white-space: nowrap; flex-shrink: 0;
@@ -455,11 +453,9 @@ const Accelerator: React.FC = () => {
           width: 1px; height: 4px;
           background: rgba(255,255,255,0.10); flex-shrink: 0;
         }
-
-        /* Inter — drag hint */
         .acc-drag-hint {
           font-family: 'Inter', sans-serif;
-          font-size: clamp(0.44rem, 1.2vw, 0.56rem);
+          font-size: clamp(0.44rem,1.2vw,0.56rem);
           font-weight: 400; letter-spacing: 5px;
           color: rgba(255,255,255,0.35); text-transform: uppercase;
           text-align: center; margin: 0;
@@ -498,6 +494,7 @@ const Accelerator: React.FC = () => {
       `}</style>
 
       <section className="acc-universe-v4">
+
         {/* ── HERO ── */}
         <div className="acc-hero-parallax" style={{ backgroundImage: `url(${Images.Bannerrr2})` }}>
           <div className="acc-hero-overlay" />
@@ -525,15 +522,24 @@ const Accelerator: React.FC = () => {
         {/* ── WRAPPER ── */}
         <div className="acc-wrapper">
           <div className="acc-mission-hub">
+
             {/* IMAGE SIDE */}
             <div className="acc-visual-side">
               <div className="acc-portrait-container">
                 <div className="acc-img-glow" />
                 <img src={Images.AbishakeWhite} alt="Abishek Raaja" className="acc-portrait-img" />
-                <div className="acc-status-tag">
-                  <Zap size={13} fill="currentColor" />
-                  <span>ACTIVE CONNECT</span>
-                </div>
+
+                {/* ── STATUS TAG — clickable email link ── */}
+                <a
+                  href="https://mail.google.com/mail/?view=cm&to=cinemapayyanproductions@gmail.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="acc-status-tag"
+                  title="Connect via Email"
+                >
+                  <Mail size={12} />
+                  <span>CONNECT WITH US</span>
+                </a>
               </div>
             </div>
 
@@ -558,6 +564,8 @@ const Accelerator: React.FC = () => {
               </p>
 
               <div className="acc-feature-stack">
+
+                {/* ── End-to-End Movie Marketing ── */}
                 <div className="acc-feature-card highlight-card">
                   <div className="acc-feature-icon cyan-bg">
                     <Clapperboard size={20} color="#000" />
@@ -567,15 +575,22 @@ const Accelerator: React.FC = () => {
                     <p>From pre-production buzz to post-release dominance.</p>
                   </div>
                 </div>
+
+                {/* ── Film Acceleration ── */}
                 <div className="acc-feature-card">
                   <div className="acc-feature-icon gold-bg">
                     <Rocket size={20} color="#000" />
                   </div>
                   <div className="acc-feature-text">
                     <h4>Film Acceleration</h4>
-                    <p>High-impact promotion cycles for Tier-1 cinema.</p>
+                    <p>
+                      Finding the <strong>right story</strong> for the{" "}
+                      <strong>right producer</strong> — connecting visionary
+                      filmmakers with decision-makers who greenlight and fund.
+                    </p>
                   </div>
                 </div>
+
               </div>
 
               <a
@@ -651,6 +666,7 @@ const Accelerator: React.FC = () => {
             <p className="acc-drag-hint">DRAG TO EXPLORE</p>
           </div>
         </div>
+
       </section>
     </>
   );

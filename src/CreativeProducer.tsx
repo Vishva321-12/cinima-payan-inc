@@ -6,7 +6,7 @@ import { Images } from "./assets/assets";
 /* ─── MAIN ──────────────────────────────────── */
 const CreativeProducer = () => {
   const headerRef = useRef<HTMLDivElement>(null);
-  const inView    = useInView(headerRef, { once: true, amount: 0.5 });
+  const inView = useInView(headerRef, { once: true, amount: 0.5 });
 
   return (
     <>
@@ -394,10 +394,10 @@ const CreativeProducer = () => {
       `}</style>
 
       <section className="cpcp-section">
-
         {/* ── SECTION HEADER ── */}
         <div className="cpcp-header" ref={headerRef}>
-          <motion.div className="cpcp-header-rule"
+          <motion.div
+            className="cpcp-header-rule"
             initial={{ scaleX: 0 }}
             animate={{ scaleX: inView ? 1 : 0 }}
             transition={{ duration: 0.8, ease: [0.76, 0, 0.24, 1] }}
@@ -408,23 +408,29 @@ const CreativeProducer = () => {
             animate={{ opacity: inView ? 1 : 0, y: inView ? 0 : 20 }}
             transition={{ delay: 0.3, duration: 0.6 }}
           >
-            <div className="cpcp-header-icon"><Clapperboard size={18} /></div>
+            <div className="cpcp-header-icon">
+              <Clapperboard size={18} />
+            </div>
             <div>
-              <span className="cpcp-overline">CAMPAIGN STRATEGY · CONTENT</span>
+              <span className="cpcp-overline">EVERY BET · A BLOCKBUSTER</span>
               <h2 className="cpcp-heading">
                 CREATIVE <span className="cpcp-heading-yellow">PRODUCER</span>
               </h2>
             </div>
           </motion.div>
-          <motion.div className="cpcp-header-rule cpcp-header-rule--r"
+          <motion.div
+            className="cpcp-header-rule cpcp-header-rule--r"
             initial={{ scaleX: 0 }}
             animate={{ scaleX: inView ? 1 : 0 }}
-            transition={{ delay: 0.15, duration: 0.8, ease: [0.76, 0, 0.24, 1] }}
+            transition={{
+              delay: 0.15,
+              duration: 0.8,
+              ease: [0.76, 0, 0.24, 1],
+            }}
           />
         </div>
 
         <div className="cpcp-inner">
-
           {/* ══ LOGO — top center ══ */}
           <motion.div
             className="cpcp-logo-block"
@@ -438,12 +444,17 @@ const CreativeProducer = () => {
               <div className="cpcp-logo-corner cpcp-logo-corner--tr" />
               <div className="cpcp-logo-corner cpcp-logo-corner--bl" />
               <div className="cpcp-logo-corner cpcp-logo-corner--br" />
-              <img src={Images.logo} alt="CinemaPayyan" className="cpcp-logo-img" />
+              <img
+                src={Images.logo}
+                alt="CinemaPayyan"
+                className="cpcp-logo-img"
+              />
             </div>
 
             <a
               href="https://www.instagram.com/cinemapayyan.inc/"
-              target="_blank" rel="noreferrer"
+              target="_blank"
+              rel="noreferrer"
               className="cpcp-logo-insta"
             >
               <Instagram size={13} />
@@ -457,7 +468,8 @@ const CreativeProducer = () => {
                 <div className="cpcp-pre-line" />
               </div>
               <h3 className="cpcp-title">
-                TURNING FRAMES&nbsp;<span className="cpcp-title-yellow">INTO FAME</span>
+                TURNING FRAMES&nbsp;
+                <span className="cpcp-title-yellow">INTO FAME</span>
               </h3>
               <div className="cpcp-tagline-pills">
                 <span className="cpcp-pill cpcp-pill--1">Industry Tracker</span>
@@ -466,8 +478,9 @@ const CreativeProducer = () => {
               </div>
               <div className="cpcp-rule" />
               <p className="cpcp-desc">
-                I specialise in engineering the digital heartbeat of modern cinema — executing
-                high-stakes reveal campaigns that transform raw cinematic footage into{" "}
+                I specialise in engineering the digital heartbeat of modern
+                cinema — executing high-stakes reveal campaigns that transform
+                raw cinematic footage into{" "}
                 <span className="cpcp-highlight">unavoidable content</span>.
               </p>
             </div>
@@ -475,7 +488,6 @@ const CreativeProducer = () => {
 
           {/* ══ TWO CARDS — left & right ══ */}
           <div className="cpcp-cards-grid">
-
             {/* LEFT — Madras Matinee */}
             <motion.div
               className="cpcp-lcu-card cpcp-lcu-card--cyan"
@@ -486,11 +498,22 @@ const CreativeProducer = () => {
             >
               {/* full poster — contain, centered, no crop */}
               <div className="cpcp-lcu-img-wrap cpcp-lcu-img-wrap--contain">
-                <img src={Images.madrasMatniee} alt="Madras Matinee" className="cpcp-lcu-img" />
+                <img
+                  src={Images.madrasMatniee}
+                  alt="Madras Matinee"
+                  className="cpcp-lcu-img"
+                />
                 <div className="cpcp-lcu-img-overlay" />
                 <div className="cpcp-lcu-img-tl" />
                 <div className="cpcp-lcu-img-br" />
-                <a href="https://www.instagram.com/madrasmotionpictures/" target="_blank" rel="noreferrer" className="cpcp-lcu-play"><ExternalLink size={13} color="#000" /></a>
+                <a
+                  href="https://www.instagram.com/madrasmotionpictures/"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="cpcp-lcu-play"
+                >
+                  <ExternalLink size={13} color="#000" />
+                </a>
               </div>
               <div className="cpcp-lcu-body">
                 <div className="cpcp-lcu-header">
@@ -507,20 +530,59 @@ const CreativeProducer = () => {
                   Madras <span className="cpcp-lcu-title-cyan">Matinee</span>
                 </h4>
                 <p className="cpcp-lcu-desc">
-                  <a href="https://www.instagram.com/DreamWarriorPictures/" target="_blank" rel="noreferrer" className="cpcp-lcu-mention">@dreamwarriorpictures</a>{" "}
+                  <a
+                    href="https://www.instagram.com/DreamWarriorPictures/"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="cpcp-lcu-mention"
+                  >
+                    @dreamwarriorpictures
+                  </a>{" "}
                   presents <em>#MadrasMatinee</em> — a{" "}
-                  <a href="https://www.instagram.com/madrasmotionpictures/" target="_blank" rel="noreferrer" className="cpcp-lcu-mention">@madrasmotionpictures</a>{" "}
-                  production 💥 A very special film from <em>@keyanmk</em> and team.
-                  My <em>first</em> as a creative producer ❤️
+                  <a
+                    href="https://www.instagram.com/madrasmotionpictures/"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="cpcp-lcu-mention"
+                  >
+                    @madrasmotionpictures
+                  </a>{" "}
+                  production 💥 A very special film from <em>@keyanmk</em> and
+                  team. My <em>first</em> as a creative producer ❤️
                 </p>
                 <div className="cpcp-lcu-footer">
                   <span className="cpcp-lcu-collab">
-                    <a href="https://www.instagram.com/DreamWarriorPictures/" target="_blank" rel="noreferrer" className="cpcp-lcu-collab-link"><strong>@dreamwarriorpictures</strong></a>
+                    <a
+                      href="https://www.instagram.com/DreamWarriorPictures/"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="cpcp-lcu-collab-link"
+                    >
+                      <strong>@dreamwarriorpictures</strong>
+                    </a>
                     {" × "}
-                    <a href="https://www.instagram.com/madrasmotionpictures/" target="_blank" rel="noreferrer" className="cpcp-lcu-collab-link"><strong>@madrasmotionpictures</strong></a>
+                    <a
+                      href="https://www.instagram.com/madrasmotionpictures/"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="cpcp-lcu-collab-link"
+                    >
+                      <strong>@madrasmotionpictures</strong>
+                    </a>
                   </span>
                   <span className="cpcp-lcu-cta cpcp-lcu-cta--cyan">
-                    <a href="https://www.instagram.com/madrasmotionpictures/" target="_blank" rel="noreferrer" style={{color:'inherit',textDecoration:'none',display:'flex',alignItems:'center',gap:5}}>
+                    <a
+                      href="https://www.instagram.com/madrasmotionpictures/"
+                      target="_blank"
+                      rel="noreferrer"
+                      style={{
+                        color: "inherit",
+                        textDecoration: "none",
+                        display: "flex",
+                        alignItems: "center",
+                        gap: 5,
+                      }}
+                    >
                       INSTAGRAM <ExternalLink size={10} />
                     </a>
                   </span>
@@ -537,11 +599,22 @@ const CreativeProducer = () => {
               transition={{ duration: 0.65, delay: 0.2 }}
             >
               <div className="cpcp-lcu-img-wrap cpcp-lcu-img-wrap--cover">
-                <img src={Images.LCU} alt="Origins of LCU" className="cpcp-lcu-img" />
+                <img
+                  src={Images.LCU}
+                  alt="Origins of LCU"
+                  className="cpcp-lcu-img"
+                />
                 <div className="cpcp-lcu-img-overlay" />
                 <div className="cpcp-lcu-img-tl" />
                 <div className="cpcp-lcu-img-br" />
-                <a href="https://www.instagram.com/p/DBjBOAWSI0X/?utm_source=ig_web_copy_link&igsh=NTc4MTIwNjQ2YQ==" target="_blank" rel="noreferrer" className="cpcp-lcu-play"><ExternalLink size={13} color="#000" /></a>
+                <a
+                  href="https://www.instagram.com/p/DBjBOAWSI0X/?utm_source=ig_web_copy_link&igsh=NTc4MTIwNjQ2YQ=="
+                  target="_blank"
+                  rel="noreferrer"
+                  className="cpcp-lcu-play"
+                >
+                  <ExternalLink size={13} color="#000" />
+                </a>
               </div>
               <div className="cpcp-lcu-body">
                 <div className="cpcp-lcu-header">
@@ -561,32 +634,58 @@ const CreativeProducer = () => {
                   A teaching exercise that led to a{" "}
                   <em>'10 minute Prelude to the Origins of LCU'</em>.{" "}
                   <em>#ChapterZeroFL</em> unlock 💥 — where filmmaking education
-                  collided with cinematic universe building in one explosive session.
+                  collided with cinematic universe building in one explosive
+                  session.
                 </p>
                 <div className="cpcp-lcu-footer">
                   <span className="cpcp-lcu-collab">
-                    <a href="https://www.instagram.com/gsquadoffl/" target="_blank" rel="noreferrer" className="cpcp-lcu-collab-link"><strong>@gsquadoffl</strong></a>
+                    <a
+                      href="https://www.instagram.com/gsquadoffl/"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="cpcp-lcu-collab-link"
+                    >
+                      <strong>@gsquadoffl</strong>
+                    </a>
                     {" × "}
                     <strong>@cinemapayyan.inc</strong>
                     {" × "}
-                    <a href="https://www.instagram.com/levelup_filmmaking/" target="_blank" rel="noreferrer" className="cpcp-lcu-collab-link"><strong>@levelup_filmmaking</strong></a>
+                    <a
+                      href="https://www.instagram.com/levelup_filmmaking/"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="cpcp-lcu-collab-link"
+                    >
+                      <strong>@levelup_filmmaking</strong>
+                    </a>
                   </span>
                   <span className="cpcp-lcu-cta">
-                    <a href="https://www.instagram.com/p/DBjBOAWSI0X/?utm_source=ig_web_copy_link&igsh=NTc4MTIwNjQ2YQ==" target="_blank" rel="noreferrer" style={{color:'inherit',textDecoration:'none',display:'flex',alignItems:'center',gap:5}}>
+                    <a
+                      href="https://www.instagram.com/p/DBjBOAWSI0X/?utm_source=ig_web_copy_link&igsh=NTc4MTIwNjQ2YQ=="
+                      target="_blank"
+                      rel="noreferrer"
+                      style={{
+                        color: "inherit",
+                        textDecoration: "none",
+                        display: "flex",
+                        alignItems: "center",
+                        gap: 5,
+                      }}
+                    >
                       INSTAGRAM <ExternalLink size={10} />
                     </a>
                   </span>
                 </div>
               </div>
             </motion.div>
-
           </div>
 
           {/* bottom CTA */}
           <div className="cpcp-cta-wrap">
             <motion.a
               href="https://www.instagram.com/cinemapayyan.inc/"
-              target="_blank" rel="noreferrer"
+              target="_blank"
+              rel="noreferrer"
               className="cpcp-cta"
               whileHover="hover"
             >
@@ -600,7 +699,6 @@ const CreativeProducer = () => {
               <ExternalLink size={13} />
             </motion.a>
           </div>
-
         </div>
       </section>
     </>
