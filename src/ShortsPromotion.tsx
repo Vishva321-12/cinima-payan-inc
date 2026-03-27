@@ -167,7 +167,7 @@ const ShortsPromotion: React.FC = () => {
 
   // Tab labels — first tab renamed
   const slides = [
-    { key: "Videos", label: "CINEMAPAYYAN SPECIALTY", sublabel: "Promo"         },
+    { key: "Videos", label: "Videos", sublabel: "Promo"         },
     { key: "events",    label: "EVENTS",                  sublabel: "LIVE & SPECIAL"  },
     { key: "countdown", label: "COUNTDOWN SPECIALTY",     sublabel: "SIGNATURE FORMAT"},
   ];
