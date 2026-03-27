@@ -87,7 +87,9 @@ import ScreenshotSTR from './ScreenshotSTR.png';
 import ScreenshotTK from './ScreenshotTK.png';
 import ScreenshotDQ from './ScreenshotDQ.png';
 import LCU from './LCU.jpg';
-
+import hostsnnew from './hostsnaddnew.jpg';
+import hostnew1 from './hostadd1.jpg';
+import hostnew2 from './hostadd2.jpg';
 
 
 
@@ -136,6 +138,13 @@ import KRR2 from './KRR2.mp4';
 import DearShort from './DEARSHORT.mp4';
 import VPNEW from './VPNEW.mp4';
 import KKRCD from './KKRCD.mp4';
+import hostnewadd1 from './hostaddnew1vid.mp4';
+import hostaddnew2 from './hostaddnew2vid.mp4';
+import hostaddnew3 from './hoastadd3vid.mp4';
+import hostnewadd4 from './hostaddvid.mp4';
+import chithavid from './Chithavid.mp4';
+import peresucricket from './peresuecricket.mp4';
+import MadrasMatnieevid from './Madras-logo.png';
 
 
 
@@ -155,7 +164,8 @@ export const Images: AssetStore = {
   Danush,Str,Tyagaraja,Keerthi,AnirutRavi,Prabas,Lokash,Bannerrr2,Angammal,Kumki2,
   Gevi,RetroImg,KadalReset,SnakeAndLader,Adipurshan,Ragut,Adiya,ComicCOverimg,ComicPag0,
   ComicPag1,ComicPag2,ComicPag3,ComicPag4,ComicPag5,ComicPag6,ComicPag7,ScreenshotVP,ScreenshotAR,
-  ScreenshotKH,ScreenshotAS,ScreenshotAD,ScreenshotVJS,ScreenshotGVM,ScreenshotSTR,ScreenshotTK,ScreenshotDQ,LCU
+  ScreenshotKH,ScreenshotAS,ScreenshotAD,ScreenshotVJS,ScreenshotGVM,ScreenshotSTR,ScreenshotTK,ScreenshotDQ,LCU,
+  hostnew2,hostnew1,hostsnnew,
 };
 
 export const VideoAssets = {
@@ -200,6 +210,13 @@ export const VideoAssets = {
     DearShort,        //37
     VPNEW,     //38
     KKRCD,    //39
+    hostnewadd1,  //40
+    hostaddnew2,  //41
+    hostaddnew3,  //42
+    hostnewadd4,  //43
+    chithavid,   //44
+    peresucricket, //45
+    MadrasMatnieevid //46
 
 
   ] as string[],

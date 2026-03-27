@@ -276,7 +276,7 @@ const Footer: React.FC = () => {
               <span className="cp-ft-brand-pre-text">EST. 2023</span>
             </div>
 
-            <h2 className="cp-ft-logo">CINEMA PAYYAN</h2>
+            <h2 className="cp-ft-logo">CINEMAPAYYAN</h2>
             <div className="cp-ft-brand-rule" />
             <p className="cp-ft-tagline">STORYTELLING THROUGH A CINEMATIC LENS.</p>
 
@@ -323,7 +323,7 @@ const Footer: React.FC = () => {
         {/* ── BOTTOM BAR ────────────────────────── */}
         <div className="cp-ft-bottom">
           <div className="cp-ft-legal">
-            <span>© 2026 Cinema Payyan Productions.</span>
+            <span>© 2026 CinemaPayyan Productions.</span>
             <span>All Rights Reserved.</span>
           </div>
 

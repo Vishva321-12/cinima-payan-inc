@@ -7,7 +7,7 @@ const BookingContact: React.FC = () => {
   const [isSending, setIsSending] = useState(false);
   const formRef = useRef<HTMLFormElement | null>(null);
 
-  const filmStrip = " • CINEMA PAYYAN • NOW BOOKING • ".repeat(20);
+  const filmStrip = " • CINEMAPAYYAN • NOW BOOKING • ".repeat(20);
 
   const WEB3FORMS_KEY = "eb4aabc2-f58b-4521-a027-7295fa2c22e0";
 
@@ -24,8 +24,8 @@ const BookingContact: React.FC = () => {
         headers: { "Content-Type": "application/json", "Accept": "application/json" },
         body: JSON.stringify({
           access_key: WEB3FORMS_KEY,
-          subject:    "New Booking — Cinema Payyan Productions",
-          from_name:  "Cinema Payyan Booking",
+          subject:    "New Booking — CinemaPayyan Productions",
+          from_name:  "CinemaPayyan Booking",
           name:       fd.get("name"),
           email:      fd.get("email"),
           phone:      fd.get("phone"),
@@ -500,15 +500,15 @@ const BookingContact: React.FC = () => {
                 <form ref={formRef} className="cp-bk-form" onSubmit={sendEmail}>
 
                   <input type="hidden" name="access_key" value={WEB3FORMS_KEY} />
-                  <input type="hidden" name="subject"    value="New Booking — Cinema Payyan Productions" />
-                  <input type="hidden" name="from_name"  value="Cinema Payyan Booking" />
+                  <input type="hidden" name="subject"    value="New Booking — CinemaPayyan Productions" />
+                  <input type="hidden" name="from_name"  value="CinemaPayyan Booking" />
 
                   {/* INFO SIDE */}
                   <div className="cp-bk-info">
                     <div className="cp-bk-ticket-header">
                       <div className="cp-bk-ticket-pre">
                         <div className="cp-bk-ticket-pre-line" />
-                        <span className="cp-bk-ticket-pre-text">CINEMA PAYYAN PRODUCTIONS</span>
+                        <span className="cp-bk-ticket-pre-text">CINEMAPAYYAN PRODUCTIONS</span>
                       </div>
                       <h2 className="cp-bk-ticket-title">ADMIT ONE</h2>
                       <p className="cp-bk-ticket-sub">OFFICIAL BOOKING TICKET</p>

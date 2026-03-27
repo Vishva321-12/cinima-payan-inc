@@ -137,39 +137,39 @@ const ShortsPromotion: React.FC = () => {
   const dir = activeSlide > prevSlide ? 1 : -1;
 
   /* ── DATA ── */
-  /* Shorts Promotion — top row YT, bottom row YT (RaguThatha removed) */
+
+  // Slide 0 — YT grid (Mood of Iraivan replaces Amazon Prime; Amazon Prime moved below)
   const topYT: CarouselItem[] = [
-    { id: 23, tag: "YT", title: "CUSTODY Game | CSK Vs SRH",              link: "https://youtu.be/aHxx-NtpAwQ?si=hoArL4w8_2clt2O7", aspect: "16/9" },
-    { id: 24, tag: "YT", title: "Venkat Prabhu ARRESTED - CUSTODY Promo", link: "https://youtu.be/2M-A_3U-Zmc?si=FPJ7TfFoZvRtPoZH", aspect: "16/9" },
-    { id: 25, tag: "YT", title: "Naga Chaitanya tests Venkat Prabhu",      link: "https://youtu.be/XbvzHgeK3VI?si=HeroAaf4kXPLaDLF", aspect: "16/9" },
-  ];
-  const bottomYT: CarouselItem[] = [
-    { id: 29, tag: "YT", title: "Mood Of Iraivan", link: "https://youtu.be/3IAV3UISk8U?si=ZwWgCxUeejVHDsqW", aspect: "16/9" },
+    { id: 25, tag: "YT", title: "Naga Chaitanya tests Venkat Prabhu", link: "https://youtu.be/XbvzHgeK3VI?si=HeroAaf4kXPLaDLF", aspect: "16/9" },
+    { id: 38, tag: "YT", title: "Venkat Parbu",                    link: "https://youtu.be/aHxx-NtpAwQ?si=hoArL4w8_2clt2O7 ", aspect: "16/9" },
+    { id: 23, tag: "YT", title: "CUSTODY Game | CSK Vs SRH",          link: "https://youtu.be/aHxx-NtpAwQ?si=hoArL4w8_2clt2O7", aspect: "16/9" },
   ];
 
-  /* Events: VP Forge + KRR 1 + KRR 2 */
+  // Events — removed KRR Countdown 2 (36); added 40, 41, 42
   const eventsReels: CarouselItem[] = [
-    { id: 34, tag: "VP",  title: "A Venkat Prabhu Forge", link: "https://www.instagram.com/reel/DB_VDkiPnQN/?igsh=MnRzeGhlanBnbm51",           aspect: "9/16" },
-    { id: 35, tag: "KRR", title: "KRR Countdown 1",        link: "https://www.instagram.com/reel/DVu87daiQWN/?igsh=cGFpYjFlb3E0ZGpk",           aspect: "9/16" },
-    { id: 36, tag: "KRR", title: "KRR Countdown 2",        link: "https://www.instagram.com/reel/DVnrPw1iUSU/?igsh=ZWUzd2hkYzh5bDE1",           aspect: "9/16" },
+    { id: 34, tag: "HOST",   title: "A Venkat Prabhu Forge",           link: "https://www.instagram.com/reel/DB_VDkiPnQN/?igsh=MnRzeGhlanBnbm51",          aspect: "9/16" },
+    { id: 35, tag: "HOST",  title: "Kadhal Reset Repeat",             link: "https://www.instagram.com/reel/DVu87daiQWN/?igsh=cGFpYjFlb3E0ZGpk",          aspect: "9/16" },
+    { id: 40, tag: "HOST", title: "Startda GVPrakash",               link: "https://www.instagram.com/reel/C3JxabMPy2y/?igsh=NmkyMTljMmQydGk4",           aspect: "9/16" },
+    { id: 41, tag: "HOST", title: "#arugevaa with @rseanroldan",      link: "https://www.instagram.com/reel/C9t027wCW5b/?igsh=MTJmeTV6NHBtMzl4YQ==",       aspect: "9/16" },
+    { id: 42, tag: "HOST", title: "#MoiVirundhu",                    link: "https://www.instagram.com/reel/DBEqOxGISiW/?igsh=MWE1a2NmNnhkdWQ0NQ==",       aspect: "9/16" },
+    { id: 46,  tag: "HOST", title: "Madras Matniee",               link: "https://www.instagram.com/reel/DHDBqnoTWmu/?igsh=b3N4dW15cTEydGh5",                             aspect: "9/16" },
+
   ];
 
-  /* Countdown Specialty: PersuShort + RaguThatha1 + Dear + KKRCD */
+  // Countdown — removed PERSU Short (26); added 44, 36, 45
   const countdownReels: CarouselItem[] = [
-    { id: 26, tag: "PERSU", title: "Persu Short",           link: "https://www.instagram.com/cinemapayyan.inc/",                                                     aspect: "9/16" },
-    { id: 31, tag: "RAGU",  title: "RaguThatha Countdown",  link: "https://www.instagram.com/reel/C-hRTVyIwLj/",                                                     aspect: "9/16" },
-    { id: 37, tag: "DEAR",  title: "Dear",                  link: "https://www.instagram.com/reel/C5aVNAay_nG/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==",  aspect: "9/16" },
-    { id: 39, tag: "KKR",   title: "KKRCD",                 link: "https://www.instagram.com/cinemapayyan.inc/",                                                     aspect: "9/16" },
+    { id: 31,  tag: "RaguThatha",   title: "RaguThatha Countdown", link: "https://www.instagram.com/reel/C-hRTVyIwLj/",                                                    aspect: "9/16" },
+    { id: 37,  tag: "DEAR",   title: "Dear",                 link: "https://www.instagram.com/reel/C5aVNAay_nG/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==", aspect: "9/16" },
+    { id: 44,  tag: "Chithha",     title: "Chithha",             link: "https://www.instagram.com/reel/CxnLHbMS1GU/?igsh=MWpscTNpZ3pyaXI4bQ%3D%3D",                    aspect: "9/16" },
+    { id: 36,  tag: "KRR",    title: "Kadhal Reset Repeat",  link: "https://www.instagram.com/reel/DVnrPw1iUSU/?igsh=ZWUzd2hkYzh5bDE1",                             aspect: "9/16" },
+    { id: 45,  tag: "PERUSU", title: "Perusu",               link: "https://www.instagram.com/reel/DHDBqnoTWmu/?igsh=b3N4dW15cTEydGh5",                             aspect: "9/16" },
   ];
 
-  /* Special promo — now uses VPNEW (38) */
-  const specialPromo = { id: 38, link: "https://youtu.be/aHxx-NtpAwQ?si=hoArL4w8_2clt2O7" };
-
-  /* 3 tabs now */
+  // Tab labels — first tab renamed
   const slides = [
-    { key: "shorts",    label: "SHORTS PROMOTION",    sublabel: "CINEMAPAYYAN DIGITAL" },
-    { key: "events",    label: "EVENTS",               sublabel: "LIVE & SPECIAL"       },
-    { key: "countdown", label: "COUNTDOWN SPECIALTY",  sublabel: "SIGNATURE FORMAT"     },
+    { key: "specialty", label: "CINEMAPAYYAN SPECIALTY", sublabel: "YouTube"         },
+    { key: "events",    label: "EVENTS",                  sublabel: "LIVE & SPECIAL"  },
+    { key: "countdown", label: "COUNTDOWN SPECIALTY",     sublabel: "SIGNATURE FORMAT"},
   ];
 
   return (
@@ -214,87 +214,7 @@ const ShortsPromotion: React.FC = () => {
         }
         .cp-sp-section a { text-decoration:none !important; color:inherit; }
 
-        /* ══ NEW FEATURED VIDEO — VPNEW ══ */
-        .cp-featured-wrap {
-          max-width:1180px; margin:0 auto 56px;
-          padding:0 clamp(20px,5%,40px);
-          position:relative; z-index:5;
-        }
-        .cp-featured-label-row {
-          display:flex; align-items:center; gap:14px; margin-bottom:16px;
-        }
-        .cp-featured-label-line { width:28px; height:1px; background:#fde047; opacity:0.5; flex-shrink:0; }
-        .cp-featured-label-text {
-          font-family:'Inter',sans-serif; font-size:clamp(0.48rem,1.3vw,0.62rem);
-          font-weight:600; letter-spacing:6px; color:rgba(253,224,71,0.85); text-transform:uppercase;
-        }
-        .cp-featured-card {
-          display:block; position:relative; width:100%;
-          aspect-ratio:16/9; overflow:hidden;
-          border:1px solid rgba(253,224,71,0.12);
-          background:#030710;
-          transition:border-color 0.4s, box-shadow 0.4s;
-        }
-        .cp-featured-card:hover {
-          border-color:rgba(253,224,71,0.30);
-          box-shadow:0 20px 60px rgba(0,0,0,0.8), 0 0 30px rgba(253,224,71,0.07);
-        }
-        .cp-featured-card video {
-          width:100%; height:100%; object-fit:cover; display:block;
-          transition:transform 0.55s cubic-bezier(0.16,1,0.3,1);
-        }
-        .cp-featured-card:hover video { transform:scale(1.03); }
-        .cp-featured-grad {
-          position:absolute; inset:0;
-          background:linear-gradient(to bottom,transparent 35%,rgba(6,10,15,0.65) 100%);
-          z-index:2; pointer-events:none;
-        }
-        .cp-featured-tag {
-          position:absolute; top:0; left:0;
-          font-family:'Inter',sans-serif; font-size:clamp(0.48rem,1.2vw,0.62rem);
-          font-weight:700; letter-spacing:4px; color:#000;
-          background:#fde047; padding:8px 18px; z-index:6; text-transform:uppercase;
-          display:flex; align-items:center; gap:8px;
-        }
-        .cp-featured-tag-dot {
-          width:7px; height:7px; border-radius:50%; background:#000;
-          animation:cpDot 1.2s step-end infinite;
-        }
-        @keyframes cpDot { 0%,100%{opacity:1} 50%{opacity:0.25} }
-        .cp-featured-overlay {
-          position:absolute; inset:0;
-          background:rgba(6,10,15,0.72);
-          display:flex; align-items:center; justify-content:center;
-          opacity:0; z-index:10; backdrop-filter:blur(4px); transition:opacity 0.3s;
-        }
-        .cp-featured-card:hover .cp-featured-overlay { opacity:1; }
-        .cp-featured-overlay-label {
-          font-family:'Inter',sans-serif; font-size:clamp(0.5rem,1.2vw,0.65rem);
-          font-weight:600; letter-spacing:5px; color:#000; background:#fde047;
-          padding:10px 24px; text-transform:uppercase;
-          transform:translateY(8px); transition:transform 0.3s;
-        }
-        .cp-featured-card:hover .cp-featured-overlay-label { transform:translateY(0); }
-        .cp-featured-corner {
-          position:absolute; z-index:5; width:16px; height:16px; pointer-events:none;
-        }
-        .cp-featured-corner::before, .cp-featured-corner::after {
-          content:''; position:absolute; background:rgba(253,224,71,0.5);
-        }
-        .cp-featured-tl { top:10px; left:10px; }
-        .cp-featured-tl::before { width:100%; height:1px; top:0; left:0; }
-        .cp-featured-tl::after  { width:1px; height:100%; top:0; left:0; }
-        .cp-featured-br { bottom:10px; right:10px; }
-        .cp-featured-br::before { width:100%; height:1px; bottom:0; right:0; }
-        .cp-featured-br::after  { width:1px; height:100%; bottom:0; right:0; }
-        .cp-featured-scan {
-          position:absolute; bottom:0; left:0; right:0; height:2px;
-          background:linear-gradient(90deg,#fde047,#32c5f4); transform-origin:left; z-index:6;
-          transform:scaleX(0); transition:transform 0.45s cubic-bezier(0.77,0,0.18,1);
-        }
-        .cp-featured-card:hover .cp-featured-scan { transform:scaleX(1); }
-
-        /* ══ TAB BAR — now 3 tabs ══ */
+        /* ══ TAB BAR ══ */
         .cp-tab-bar {
           display:flex; justify-content:center; gap:0;
           position:relative; z-index:20;
@@ -346,8 +266,6 @@ const ShortsPromotion: React.FC = () => {
           font-family:'Inter',sans-serif; font-size:0.65rem; font-weight:600;
           letter-spacing:5px; color:rgba(50,197,244,0.8); text-transform:uppercase; white-space:nowrap;
         }
-        .cp-sp-label-sep  { width:1px; height:14px; background:rgba(50,197,244,0.25); margin:0 18px; flex-shrink:0; }
-        .cp-sp-label-text--dim { color:rgba(50,197,244,0.50); }
         .cp-sp-label-spacer { flex:1; }
 
         /* ══ YT GRID ══ */
@@ -356,8 +274,6 @@ const ShortsPromotion: React.FC = () => {
           max-width:1180px; margin:0 auto 0;
           padding:0 clamp(20px,5%,40px); position:relative; z-index:5;
         }
-        .cp-sp-yt-grid--bottom { margin-top:20px; margin-bottom:70px; }
-        .cp-sp-yt-grid--top    { margin-bottom:0; }
         .cp-sp-yt-card {
           display:flex; flex-direction:column; background:#04080d;
           border:1px solid rgba(50,197,244,0.07); overflow:hidden;
@@ -402,8 +318,7 @@ const ShortsPromotion: React.FC = () => {
           opacity:0; z-index:10; backdrop-filter:blur(4px); transition:opacity 0.3s;
         }
         .cp-sp-yt-card:hover .cp-sp-hover-overlay,
-        .cp-sp-reel-card:hover .cp-sp-hover-overlay,
-        .cp-sp-large-card:hover .cp-sp-hover-overlay { opacity:1; }
+        .cp-sp-reel-card:hover .cp-sp-hover-overlay { opacity:1; }
         .cp-sp-hover-label {
           font-family:'Inter',sans-serif; font-size:0.6rem; font-weight:600;
           letter-spacing:4px; color:#000; background:#fde047;
@@ -411,8 +326,7 @@ const ShortsPromotion: React.FC = () => {
           transform:translateY(6px); transition:transform 0.3s;
         }
         .cp-sp-yt-card:hover .cp-sp-hover-label,
-        .cp-sp-reel-card:hover .cp-sp-hover-label,
-        .cp-sp-large-card:hover .cp-sp-hover-label { transform:translateY(0); }
+        .cp-sp-reel-card:hover .cp-sp-hover-label { transform:translateY(0); }
         .cp-sp-yt-info { padding:16px 18px 20px; border-top:1px solid rgba(50,197,244,0.06); }
         .cp-sp-yt-title {
           font-family:'Inter',sans-serif; font-size:clamp(0.8rem,1.3vw,0.95rem); font-weight:500;
@@ -424,10 +338,6 @@ const ShortsPromotion: React.FC = () => {
           position:absolute; bottom:0; left:0; right:0; height:2px;
           background:linear-gradient(90deg,#32c5f4,#fde047); transform-origin:left; z-index:6;
         }
-
-        /* thin divider */
-        .cp-grid-divider { max-width:1180px; margin:0 auto; padding:0 clamp(20px,5%,40px); position:relative; z-index:5; }
-        .cp-grid-divider-line { height:1px; background:linear-gradient(90deg,transparent,rgba(50,197,244,0.10) 50%,transparent); margin:18px 0; }
 
         /* ══ DUAL VIDEO ROW ══ */
         .cp-sp-dual-video-row {
@@ -452,62 +362,40 @@ const ShortsPromotion: React.FC = () => {
         }
         .cp-sp-dual-vid-tag--yellow { background:#fde047; }
         .cp-sp-dual-dot { width:7px; height:7px; border-radius:50%; background:#000; animation:cpDot 1.2s step-end infinite; }
-        .cp-sp-dual-right { display:flex; flex-direction:column; }
-        .cp-sp-dual-right .cp-sp-large-card { flex:1; min-height:0; aspect-ratio:16/9; }
-        .cp-sp-dual-info {
-          padding:20px 24px 24px;
-          background:rgba(6,10,15,0.98);
-          border-top:1px solid rgba(50,197,244,0.08);
-          flex-shrink:0;
+        @keyframes cpDot { 0%,100%{opacity:1} 50%{opacity:0.25} }
+        .cp-sp-large-scan {
+          position:absolute; bottom:0; left:0; right:0; height:2px;
+          background:linear-gradient(90deg,#32c5f4,#fde047); transform-origin:left; z-index:6;
         }
 
-        /* ══ COMPACT COUNTDOWN HEADER ══ */
-        .cp-cd-compact-header {
-          display:flex; align-items:center; gap:24px;
-          padding:22px 0 28px; margin-bottom:28px;
-          border-bottom:1px solid rgba(50,197,244,0.10);
-          position:relative;
-        }
-        .cp-cd-compact-logo { height:44px; flex-shrink:0; filter:drop-shadow(0 0 10px rgba(50,197,244,0.45)); }
-        .cp-cd-compact-text { flex:1; min-width:0; }
-        .cp-cd-compact-over {
-          font-family:'Inter',sans-serif; font-size:0.56rem; font-weight:600;
-          letter-spacing:5px; color:rgba(50,197,244,0.75); text-transform:uppercase;
-          display:block; margin-bottom:4px;
-        }
-        .cp-cd-compact-title {
-          font-family:'Bebas Neue',sans-serif; font-size:clamp(1.8rem,3.5vw,2.8rem);
-          font-weight:400; color:#fde047; margin:0; letter-spacing:3px; line-height:1;
-        }
-        .cp-cd-compact-desc {
-          font-family:'Inter',sans-serif; font-size:clamp(0.78rem,1.1vw,0.88rem);
-          font-weight:300; color:rgba(255,255,255,0.40); margin:6px 0 0; line-height:1.5;
-        }
-        .cp-cd-compact-desc strong { color:#fde047; font-weight:600; }
-        .cp-cd-compact-rule {
-          width:1px; height:60px; flex-shrink:0;
-          background:linear-gradient(to bottom,rgba(50,197,244,0.4),transparent);
-        }
-
-        /* ══ SPECIAL PROMO wrapper ══ */
-        .cp-sp-special {
-          max-width:1180px; margin:0 auto 50px;
+        /* ══ AMAZON PRIME ROW ══ */
+        .cp-sp-prime-row {
+          max-width:1180px; margin:20px auto 70px;
           padding:0 clamp(20px,5%,40px); position:relative; z-index:5;
         }
-        .cp-sp-special-inner {
-          display:flex; align-items:stretch; gap:0;
-          border:1px solid rgba(50,197,244,0.10); overflow:hidden;
-          background:rgba(50,197,244,0.02);
+        .cp-sp-prime-label-row {
+          display:flex; align-items:center; gap:14px; margin-bottom:14px;
         }
-        .cp-sp-special-video { flex:1.4; position:relative; }
-        .cp-sp-large-card {
-          display:block; position:relative; height:100%;
-          background:#030710; overflow:hidden;
+        .cp-sp-prime-label-line { width:28px; height:1px; background:#00A8E1; opacity:0.5; flex-shrink:0; }
+        .cp-sp-prime-label-text {
+          font-family:'Inter',sans-serif; font-size:0.65rem; font-weight:600;
+          letter-spacing:5px; color:rgba(0,168,225,0.85); text-transform:uppercase;
+        }
+        .cp-sp-prime-card {
+          display:block; position:relative; width:100%;
+          aspect-ratio:16/9; overflow:hidden;
+          border:1px solid rgba(0,168,225,0.18); background:#030710;
           transition:border-color 0.4s,box-shadow 0.4s;
         }
-        .cp-sp-large-card:hover { box-shadow:inset 0 0 0 1px rgba(50,197,244,0.25); }
-        .cp-sp-large-card video { width:100%; height:100%; min-height:220px; display:block; object-fit:cover; transition:transform 0.5s; }
-        .cp-sp-large-card:hover video { transform:scale(1.03); }
+        .cp-sp-prime-card:hover {
+          border-color:rgba(0,168,225,0.40);
+          box-shadow:0 20px 60px rgba(0,0,0,0.8),0 0 30px rgba(0,168,225,0.08);
+        }
+        .cp-sp-prime-card video {
+          width:100%; height:100%; object-fit:cover; display:block;
+          transition:transform 0.55s cubic-bezier(0.16,1,0.3,1);
+        }
+        .cp-sp-prime-card:hover video { transform:scale(1.03); }
         .cp-sp-prime-badge {
           position:absolute; top:0; left:0;
           font-family:'Inter',sans-serif; font-size:0.6rem; font-weight:700;
@@ -515,59 +403,42 @@ const ShortsPromotion: React.FC = () => {
           padding:7px 14px; z-index:15; text-transform:uppercase;
           display:flex; align-items:center; gap:7px;
         }
-        .cp-sp-prime-badge::before { content:''; width:7px; height:7px; border-radius:50%; background:#fff; opacity:0.85; flex-shrink:0; }
-        .cp-sp-large-scan {
-          position:absolute; bottom:0; left:0; right:0; height:2px;
-          background:linear-gradient(90deg,#32c5f4,#fde047); transform-origin:left; z-index:6;
+        .cp-sp-prime-badge::before {
+          content:''; width:7px; height:7px; border-radius:50%; background:#fff;
+          opacity:0.85; flex-shrink:0; animation:cpDot 1.2s step-end infinite;
         }
-        .cp-sp-special-text {
-          flex:0.8; padding:36px 32px;
-          display:flex; flex-direction:column; justify-content:center;
-          border-left:1px solid rgba(50,197,244,0.08);
+        .cp-sp-prime-hover-overlay {
+          position:absolute; inset:0; background:rgba(6,10,15,0.75);
+          display:flex; align-items:center; justify-content:center;
+          opacity:0; z-index:10; backdrop-filter:blur(4px); transition:opacity 0.3s;
         }
-        .cp-sp-special-pre  { display:flex; align-items:center; gap:12px; margin-bottom:12px; }
-        .cp-sp-special-pre-line { width:24px; height:1px; background:#32c5f4; opacity:0.5; }
-        .cp-sp-special-pre-txt {
+        .cp-sp-prime-card:hover .cp-sp-prime-hover-overlay { opacity:1; }
+        .cp-sp-prime-hover-label {
           font-family:'Inter',sans-serif; font-size:0.6rem; font-weight:600;
-          letter-spacing:5px; color:rgba(50,197,244,0.85); text-transform:uppercase;
+          letter-spacing:4px; color:#fff; background:#00A8E1;
+          padding:10px 24px; text-transform:uppercase;
+          transform:translateY(8px); transition:transform 0.3s;
         }
-        .cp-sp-special-title {
-          font-family:'Bebas Neue',sans-serif; font-size:clamp(1.8rem,3.5vw,3.2rem);
-          font-weight:400; color:#32c5f4; margin:0 0 12px; letter-spacing:3px; line-height:1.05;
+        .cp-sp-prime-card:hover .cp-sp-prime-hover-label { transform:translateY(0); }
+        .cp-sp-prime-scan {
+          position:absolute; bottom:0; left:0; right:0; height:2px;
+          background:linear-gradient(90deg,#00A8E1,#32c5f4); transform-origin:left; z-index:6;
+          transform:scaleX(0); transition:transform 0.45s cubic-bezier(0.77,0,0.18,1);
         }
-        .cp-sp-special-rule {
-          width:100%; height:1px;
-          background:linear-gradient(90deg,rgba(50,197,244,0.30),rgba(253,224,71,0.20),transparent);
-          margin-bottom:18px;
+        .cp-sp-prime-card:hover .cp-sp-prime-scan { transform:scaleX(1); }
+
+        /* ══ SPECIAL wrapper (kept for mobile) ══ */
+        .cp-sp-special {
+          max-width:1180px; margin:0 auto 50px;
+          padding:0 clamp(20px,5%,40px); position:relative; z-index:5;
         }
-        .cp-sp-special-body {
-          font-family:'Inter',sans-serif; font-size:clamp(0.78rem,1.1vw,0.88rem);
-          font-weight:300; line-height:1.85; color:rgba(255,255,255,0.40); margin-bottom:24px;
-        }
-        .cp-sp-cta {
-          position:relative; overflow:hidden;
-          display:inline-flex; align-items:center; gap:10px;
-          padding:12px 24px; border:1px solid #fde047; color:#fde047; align-self:flex-start;
-          font-family:'Inter',sans-serif; font-size:0.62rem; font-weight:600;
-          letter-spacing:4px; text-transform:uppercase; transition:color 0.4s;
-        }
-        .cp-sp-cta::before {
-          content:''; position:absolute; inset:0; background:#fde047;
-          transform:scaleX(0); transform-origin:left; z-index:0;
-          transition:transform 0.4s cubic-bezier(0.77,0,0.18,1);
-        }
-        .cp-sp-cta:hover::before { transform:scaleX(1); }
-        .cp-sp-cta:hover { color:#000; }
-        .cp-sp-cta span  { position:relative; z-index:1; }
 
         /* ══ EVENTS TAB ══ */
         .cp-events-wrap {
           max-width:1180px; margin:0 auto 70px;
           padding:0 clamp(20px,5%,40px); position:relative; z-index:5;
         }
-        .cp-events-header {
-          text-align:center; margin-bottom:40px;
-        }
+        .cp-events-header { text-align:center; margin-bottom:40px; }
         .cp-events-pre { display:inline-flex; align-items:center; gap:12px; margin-bottom:12px; }
         .cp-events-pre-line { width:32px; height:1px; background:#fde047; opacity:0.5; }
         .cp-events-pre-text {
@@ -585,6 +456,7 @@ const ShortsPromotion: React.FC = () => {
           background:linear-gradient(90deg,#fde047,#32c5f4);
           margin:0 auto; opacity:0.7;
         }
+        /* 5 items → 3+2 in 3-col grid */
         .cp-events-grid {
           display:grid; grid-template-columns:repeat(3,1fr); gap:20px;
         }
@@ -624,45 +496,34 @@ const ShortsPromotion: React.FC = () => {
           max-width:1180px; margin:0 auto 70px;
           padding:0 clamp(20px,5%,40px); position:relative; z-index:5;
         }
-        .cp-cd-brand-panel {
-          display:flex; flex-direction:column; align-items:center; text-align:center;
-          padding:60px 40px 50px; background:rgba(50,197,244,0.02);
-          border:1px solid rgba(50,197,244,0.08); border-top:2px solid rgba(50,197,244,0.30);
-          margin-bottom:50px; position:relative; overflow:hidden;
+        .cp-cd-compact-header {
+          display:flex; align-items:center; gap:24px;
+          padding:22px 0 28px; margin-bottom:28px;
+          border-bottom:1px solid rgba(50,197,244,0.10);
         }
-        .cp-cd-brand-panel::before {
-          content:'AR'; position:absolute; right:-20px; bottom:-40px;
-          font-size:18rem; color:rgba(50,197,244,0.025); font-family:serif; line-height:1;
-          pointer-events:none; user-select:none;
+        .cp-cd-compact-logo { height:44px; flex-shrink:0; filter:drop-shadow(0 0 10px rgba(50,197,244,0.45)); }
+        .cp-cd-compact-text { flex:1; min-width:0; }
+        .cp-cd-compact-over {
+          font-family:'Inter',sans-serif; font-size:0.56rem; font-weight:600;
+          letter-spacing:5px; color:rgba(50,197,244,0.75); text-transform:uppercase;
+          display:block; margin-bottom:4px;
         }
-        .cp-cd-brand-logo { height:65px; margin-bottom:24px; filter:drop-shadow(0 0 14px rgba(50,197,244,0.50)); }
-        .cp-cd-pre { display:flex; align-items:center; gap:12px; margin-bottom:12px; }
-        .cp-cd-pre-line { width:32px; height:1px; background:#32c5f4; opacity:0.5; }
-        .cp-cd-pre-text {
-          font-family:'Inter',sans-serif; font-size:0.65rem; font-weight:600;
-          letter-spacing:5px; color:rgba(50,197,244,0.85); text-transform:uppercase;
+        .cp-cd-compact-title {
+          font-family:'Bebas Neue',sans-serif; font-size:clamp(1.8rem,3.5vw,2.8rem);
+          font-weight:400; color:#fde047; margin:0; letter-spacing:3px; line-height:1;
         }
-        .cp-cd-title {
-          font-family:'Bebas Neue',sans-serif; font-size:clamp(2.8rem,6vw,5.5rem);
-          font-weight:400; color:#fde047; margin:0 0 16px; letter-spacing:4px; line-height:1;
+        .cp-cd-compact-desc {
+          font-family:'Inter',sans-serif; font-size:clamp(0.78rem,1.1vw,0.88rem);
+          font-weight:300; color:rgba(255,255,255,0.40); margin:6px 0 0; line-height:1.5;
         }
-        .cp-cd-rule {
-          width:100%; height:1px;
-          background:linear-gradient(90deg,transparent,rgba(50,197,244,0.3),rgba(253,224,71,0.2),transparent);
-          margin-bottom:20px;
+        .cp-cd-compact-desc strong { color:#fde047; font-weight:600; }
+        .cp-cd-compact-rule {
+          width:1px; height:60px; flex-shrink:0;
+          background:linear-gradient(to bottom,rgba(50,197,244,0.4),transparent);
         }
-        .cp-cd-desc {
-          font-family:'Inter',sans-serif; font-size:clamp(0.9rem,1.4vw,1.05rem);
-          font-weight:300; color:rgba(255,255,255,0.50); line-height:1.8; max-width:520px;
-        }
-        .cp-cd-desc strong {
-          display:block; margin-top:16px; color:#fde047; font-weight:600;
-          font-size:0.9em; letter-spacing:5px; text-transform:uppercase;
-          animation:cpPulse 2s infinite ease-in-out;
-        }
-        @keyframes cpPulse { 0%,100%{opacity:0.8;transform:scale(1);} 50%{opacity:1;transform:scale(1.03);} }
+        /* 6 cards → 3 cols × 2 rows */
         .cp-cd-reels-grid {
-          display:grid; grid-template-columns:repeat(4,1fr); gap:20px;
+          display:grid; grid-template-columns:repeat(3,1fr); gap:20px;
         }
 
         /* ══ MOBILE CAROUSEL ══ */
@@ -692,6 +553,7 @@ const ShortsPromotion: React.FC = () => {
         .cp-cd-mob-rule { width:100%; height:1px; background:linear-gradient(90deg,transparent,rgba(50,197,244,0.3),rgba(253,224,71,0.2),transparent); margin-bottom:12px; }
         .cp-cd-mob-desc { font-family:'Inter',sans-serif; font-size:0.8rem; font-weight:300; color:rgba(255,255,255,0.45); line-height:1.7; }
         .cp-cd-mob-desc strong { display:block; margin-top:10px; color:#fde047; font-weight:600; font-size:0.72rem; letter-spacing:4px; text-transform:uppercase; animation:cpPulse 2s infinite ease-in-out; }
+        @keyframes cpPulse { 0%,100%{opacity:0.8;transform:scale(1);} 50%{opacity:1;transform:scale(1.03);} }
 
         /* mobile special promo */
         .cp-sp-special-mob { display:block; margin:0 16px 28px; border:1px solid rgba(50,197,244,0.10); background:rgba(50,197,244,0.02); overflow:hidden; position:relative; }
@@ -703,21 +565,6 @@ const ShortsPromotion: React.FC = () => {
         .cp-sp-special-mob-title { font-family:'Bebas Neue',sans-serif; font-size:1.7rem; color:#32c5f4; letter-spacing:2px; margin:0 0 10px; line-height:1.1; }
         .cp-sp-special-mob-body { font-family:'Inter',sans-serif; font-size:0.78rem; font-weight:300; color:rgba(255,255,255,0.40); line-height:1.7; margin-bottom:14px; }
         .cp-sp-cta-mob { display:inline-flex; align-items:center; padding:9px 18px; border:1px solid #fde047; color:#fde047; font-family:'Inter',sans-serif; font-size:0.58rem; font-weight:600; letter-spacing:3px; text-transform:uppercase; }
-
-        /* mobile featured video */
-        .cp-featured-mob {
-          display:block; margin:0 16px 28px;
-          border:1px solid rgba(253,224,71,0.12); background:#030710; overflow:hidden; position:relative;
-        }
-        .cp-featured-mob video { width:100%; aspect-ratio:16/9; display:block; object-fit:cover; }
-        .cp-featured-mob-tag {
-          position:absolute; top:0; left:0;
-          font-family:'Inter',sans-serif; font-size:0.55rem; font-weight:700;
-          letter-spacing:3px; color:#000; background:#fde047;
-          padding:6px 12px; z-index:6; text-transform:uppercase;
-          display:flex; align-items:center; gap:6px;
-        }
-        .cp-featured-mob-tag-dot { width:6px; height:6px; border-radius:50%; background:#000; animation:cpDot 1.2s step-end infinite; }
 
         /* mobile events */
         .cp-events-mob-header { text-align:center; padding:0 16px 24px; }
@@ -739,9 +586,9 @@ const ShortsPromotion: React.FC = () => {
           .cp-slide-panel  { padding-bottom:60px; }
         }
         @media (min-width:769px) and (max-width:1024px) {
-          .cp-sp-yt-grid       { grid-template-columns:repeat(2,1fr); }
-          .cp-cd-reels-grid    { grid-template-columns:repeat(2,1fr); }
-          .cp-events-grid      { grid-template-columns:repeat(2,1fr); }
+          .cp-sp-yt-grid    { grid-template-columns:repeat(2,1fr); }
+          .cp-cd-reels-grid { grid-template-columns:repeat(2,1fr); }
+          .cp-events-grid   { grid-template-columns:repeat(2,1fr); }
           .cp-sp-dual-video-row { grid-template-columns:1fr; }
           .cp-sp-dual-vid-card  { border-right:none; border-bottom:1px solid rgba(50,197,244,0.10); aspect-ratio:16/9; }
         }
@@ -770,20 +617,23 @@ const ShortsPromotion: React.FC = () => {
         <div className="cp-slides-viewport">
           <AnimatePresence mode="wait" custom={dir}>
 
-            {/* ── SLIDE 0: SHORTS ── */}
+            {/* ── SLIDE 0: CINEMAPAYYAN SPECIALTY ── */}
             {activeSlide === 0 && (
-              <motion.div key="shorts" className="cp-slide-panel" custom={dir}
+              <motion.div key="specialty" className="cp-slide-panel" custom={dir}
                 initial={{ opacity:0, x: dir * -60 }} animate={{ opacity:1, x:0 }} exit={{ opacity:0, x: dir * 60 }}
                 transition={{ duration:0.38, ease:[0.16,1,0.3,1] }}
               >
                 {/* DESKTOP */}
                 <div className="cp-desktop-only">
-                  {/* ── DUAL VIDEO ROW: VPNEW (left) + Custody promo (right) ── */}
+
+                  {/* DUAL VIDEO ROW:
+                      LEFT  = id 38 · VPNEW latest review  (unchanged)
+                      RIGHT = id 24 · Venkat Prabhu Arrested / Custody Promo  (swapped in from YT grid)
+                  */}
                   <ScrollReveal>
                     <div className="cp-sp-special">
                       <div className="cp-sp-dual-video-row">
-
-                        {/* LEFT — VPNEW review video */}
+                        {/* LEFT — VPNEW */}
                         <a href="https://youtu.be/aHxx-NtpAwQ?si=hoArL4w8_2clt2O7" target="_blank" rel="noreferrer" className="cp-sp-dual-vid-card">
                           <video autoPlay muted loop playsInline>
                             <source src={VideoAssets.vjPreviews[38]} type="video/mp4" />
@@ -795,22 +645,22 @@ const ShortsPromotion: React.FC = () => {
                           <div className="cp-sp-large-scan" />
                         </a>
 
-                        {/* RIGHT — Amazon Prime special video */}
-                        <a href="https://youtu.be/tclNknwYTS0?si=6PeS3GpsiD7bqPJS" target="_blank" rel="noreferrer" className="cp-sp-dual-vid-card" style={{borderRight:"none"}}>
+                        {/* RIGHT — Custody Promo id 24 */}
+                        <a href="https://youtu.be/2M-A_3U-Zmc?si=FPJ7TfFoZvRtPoZH" target="_blank" rel="noreferrer" className="cp-sp-dual-vid-card" style={{borderRight:"none"}}>
                           <video autoPlay muted loop playsInline>
-                            <source src={VideoAssets.vjPreviews[32]} type="video/mp4" />
+                            <source src={VideoAssets.vjPreviews[24]} type="video/mp4" />
                           </video>
-                          <div className="cp-sp-dual-vid-tag" style={{background:"#00A8E1",color:"#fff"}}>
-                            <span className="cp-sp-dual-dot" style={{background:"#fff"}} />AMAZON PRIME
+                          <div className="cp-sp-dual-vid-tag cp-sp-dual-vid-tag--yellow">
+                            <span className="cp-sp-dual-dot" />CUSTODY PROMO
                           </div>
-                          <div className="cp-sp-hover-overlay"><span className="cp-sp-hover-label">WATCH FULL PROMO</span></div>
+                          <div className="cp-sp-hover-overlay"><span className="cp-sp-hover-label">WATCH NOW</span></div>
                           <div className="cp-sp-large-scan" />
                         </a>
-
                       </div>
                     </div>
                   </ScrollReveal>
 
+                  {/* YT FEATURES label */}
                   <ScrollReveal delay={0.05}>
                     <div className="cp-sp-dual-label-row">
                       <div className="cp-sp-label-line" />
@@ -819,12 +669,15 @@ const ShortsPromotion: React.FC = () => {
                     </div>
                   </ScrollReveal>
 
+                  {/* YT GRID: id 25, 29 (Mood of Iraivan), 23 */}
                   <ScrollReveal delay={0.08}>
-                    <div className="cp-sp-yt-grid cp-sp-yt-grid--top" style={{marginBottom:"70px"}}>
+                    <div className="cp-sp-yt-grid" style={{marginBottom:"0"}}>
                       {topYT.map((vid) => (
                         <a key={vid.id} href={vid.link} target="_blank" rel="noreferrer" className="cp-sp-yt-card">
                           <div className="cp-sp-thumb">
-                            <video autoPlay muted loop playsInline className="cp-sp-vid"><source src={VideoAssets.vjPreviews[vid.id]} type="video/mp4" /></video>
+                            <video autoPlay muted loop playsInline className="cp-sp-vid">
+                              <source src={VideoAssets.vjPreviews[vid.id]} type="video/mp4" />
+                            </video>
                             <div className="cp-sp-thumb-grad" />
                             <div className="cp-sp-yt-tag">YT</div>
                             <div className="cp-sp-hover-overlay"><span className="cp-sp-hover-label">WATCH NOW</span></div>
@@ -835,19 +688,48 @@ const ShortsPromotion: React.FC = () => {
                       ))}
                     </div>
                   </ScrollReveal>
+
+                  {/* AMAZON PRIME — full-width card below YT grid */}
+                  <ScrollReveal delay={0.10}>
+                    <div className="cp-sp-prime-row">
+                      <div className="cp-sp-prime-label-row">
+                        <div className="cp-sp-prime-label-line" />
+                        <span className="cp-sp-prime-label-text">AMAZON PRIME ASSOCIATION</span>
+                      </div>
+                      <a href="https://youtu.be/tclNknwYTS0?si=6PeS3GpsiD7bqPJS" target="_blank" rel="noreferrer" className="cp-sp-prime-card">
+                        <video autoPlay muted loop playsInline>
+                          <source src={VideoAssets.vjPreviews[32]} type="video/mp4" />
+                        </video>
+                        <div className="cp-sp-prime-badge">AMAZON PRIME</div>
+                        <div className="cp-sp-prime-hover-overlay">
+                          <span className="cp-sp-prime-hover-label">WATCH FULL PROMO</span>
+                        </div>
+                        <div className="cp-sp-prime-scan" />
+                      </a>
+                    </div>
+                  </ScrollReveal>
+
                 </div>
 
                 {/* MOBILE */}
                 <div className="cp-mobile-only">
-                  {/* VPNEW review video */}
-                  <a href="https://youtu.be/aHxx-NtpAwQ?si=hoArL4w8_2clt2O7" target="_blank" rel="noreferrer" className="cp-sp-special-mob" style={{marginBottom:"12px"}}>
-                    <video autoPlay muted loop playsInline><source src={VideoAssets.vjPreviews[38]} type="video/mp4" /></video>
+                  {/* VPNEW */}
+                  <a href="https://youtu.be/3IAV3UISk8U?si=ZwWgCxUeejVHDsqW" target="_blank" rel="noreferrer" className="cp-sp-special-mob" style={{marginBottom:"12px"}}>
+                    <video autoPlay muted loop playsInline><source src={VideoAssets.vjPreviews[29]} type="video/mp4" /></video>
                     <div className="cp-sp-special-mob-info">
                       <div className="cp-sp-special-mob-pre"><div className="cp-sp-special-mob-pre-line" /><span className="cp-sp-special-mob-pre-txt">REVIEW · FEATURED</span></div>
-                      <p className="cp-sp-special-mob-title" style={{color:"#fde047"}}>LATEST RELEASE</p>
+                      <p className="cp-sp-special-mob-title" style={{color:"#fde047"}}>Mood Of Iraivan</p>
                     </div>
                   </a>
-                  {/* Amazon Prime special video */}
+                  {/* Custody Promo id 24 */}
+                  <a href="https://youtu.be/2M-A_3U-Zmc?si=FPJ7TfFoZvRtPoZH" target="_blank" rel="noreferrer" className="cp-sp-special-mob" style={{marginBottom:"12px"}}>
+                    <video autoPlay muted loop playsInline><source src={VideoAssets.vjPreviews[24]} type="video/mp4" /></video>
+                    <div className="cp-sp-special-mob-info">
+                      <div className="cp-sp-special-mob-pre"><div className="cp-sp-special-mob-pre-line" /><span className="cp-sp-special-mob-pre-txt">CUSTODY PROMO</span></div>
+                      <p className="cp-sp-special-mob-title">Venkat Prabhu ARRESTED</p>
+                    </div>
+                  </a>
+                  {/* Amazon Prime id 32 */}
                   <a href="https://youtu.be/tclNknwYTS0?si=6PeS3GpsiD7bqPJS" target="_blank" rel="noreferrer" className="cp-sp-special-mob">
                     <video autoPlay muted loop playsInline><source src={VideoAssets.vjPreviews[32]} type="video/mp4" /></video>
                     <div className="cp-sp-special-mob-info">
@@ -920,7 +802,6 @@ const ShortsPromotion: React.FC = () => {
                 <div className="cp-desktop-only">
                   <div className="cp-countdown-hero">
                     <ScrollReveal>
-                      {/* compact inline header */}
                       <div className="cp-cd-compact-header">
                         <img src={Images.logo} alt="CinemaPayyan" className="cp-cd-compact-logo" />
                         <div className="cp-cd-compact-text">
@@ -932,6 +813,7 @@ const ShortsPromotion: React.FC = () => {
                       </div>
                     </ScrollReveal>
                     <ScrollReveal delay={0.1}>
+                      {/* 6 cards → 3 cols × 2 rows */}
                       <div className="cp-cd-reels-grid">
                         {countdownReels.map((reel) => (
                           <a key={reel.id} href={reel.link} target="_blank" rel="noreferrer" className="cp-sp-reel-card">

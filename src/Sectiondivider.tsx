@@ -102,7 +102,6 @@ const SHARED_CSS = `
   content:''; position:absolute; inset:0; pointer-events:none;
   background:radial-gradient(ellipse 60% 100% at 50% 50%,rgba(253,224,71,.04),transparent 70%);
 }
-/* frame boxes — shrink on mobile but never hide */
 .cpd-fs-box {
   flex-shrink:0; position:relative;
   width:clamp(18px,5.5vw,42px); height:clamp(14px,3.8vw,30px);
@@ -114,7 +113,6 @@ const SHARED_CSS = `
 .cpd-fs-box::before { content:''; position:absolute; inset:3px; border:1px solid rgba(253,224,71,.12); }
 .cpd-fs-box::after  { content:''; position:absolute; top:2px; left:2px; right:2px; height:1px; background:rgba(255,255,255,.06); }
 .cpd-fs-notch { position:absolute; bottom:0; right:0; width:5px; height:5px; border-top:1px solid rgba(253,224,71,.3); border-left:1px solid rgba(253,224,71,.3); }
-/* hide frame boxes only on the smallest screens (360px) since they add nothing at that size */
 @media(max-width:360px){ .cpd-fs-box{ display:none; } }
 
 .cpd-fs-mid {
@@ -133,7 +131,6 @@ const SHARED_CSS = `
   animation:cpdFlicker 9s ease-in-out infinite;
   position:relative; z-index:1;
 }
-/* vu bars — always visible, shrink gracefully */
 .cpd-fs-vu {
   position:absolute; bottom:3px; left:50%; transform:translateX(-50%);
   display:flex; gap:2px; align-items:flex-end;
@@ -166,7 +163,6 @@ const SHARED_CSS = `
   gap:clamp(5px,1.8vw,18px);
   min-height:52px; position:relative; z-index:1;
 }
-/* lens — scales down fluidly, never hidden */
 .cpd-scan-lens {
   flex-shrink:0; position:relative;
   width:clamp(24px,5.5vw,42px); height:clamp(24px,5.5vw,42px);
@@ -196,7 +192,6 @@ const SHARED_CSS = `
   box-shadow:0 0 8px rgba(50,197,244,.8),0 0 20px rgba(50,197,244,.3),inset 0 1px 0 rgba(255,255,255,.4);
   animation:cpdCorePulse 2s ease-in-out infinite;
 }
-/* vdivider — hide only below 360px */
 .cpd-scan-vdiv {
   width:1px; height:28px; flex-shrink:0;
   background:linear-gradient(180deg,transparent,rgba(50,197,244,.3),transparent);
@@ -211,7 +206,6 @@ const SHARED_CSS = `
 }
 .cpd-scan-lbl { color:rgba(255,255,255,.92); text-shadow:0 0 18px rgba(50,197,244,.35); }
 
-/* db bars — scale down, keep animating */
 .cpd-scan-db {
   display:flex; flex-direction:column; gap:2px; flex-shrink:0;
   width:clamp(14px,3.5vw,34px);
@@ -222,7 +216,6 @@ const SHARED_CSS = `
 .cpd-scan-db-bar:nth-child(2)::after { animation:cpdVuR 2.3s ease-in-out infinite .4s; }
 .cpd-scan-db-bar:nth-child(3)::after { animation:cpdVuM 1.7s ease-in-out infinite .9s; }
 
-/* signal dots — always visible, shrink on mobile */
 .cpd-scan-sig { display:flex; gap:clamp(3px,1vw,5px); align-items:center; flex-shrink:0; }
 .cpd-scan-dot {
   width:clamp(5px,1.5vw,7px); height:clamp(5px,1.5vw,7px); border-radius:50%;
@@ -231,7 +224,7 @@ const SHARED_CSS = `
 .cpd-scan-dot--on { background:#32c5f4; border-color:rgba(50,197,244,.8); animation:cpdDotOn 1.1s step-end infinite; }
 
 /* ══════════════════════════════════
-   3. REEL
+   3. REEL  (hub circle removed)
 ══════════════════════════════════ */
 .cpd-reel {
   background:linear-gradient(180deg,#0a0a08,#070705 50%,#0a0a08);
@@ -244,7 +237,6 @@ const SHARED_CSS = `
   padding:10px clamp(6px,4vw,44px);
   gap:clamp(6px,2vw,24px); min-height:54px;
 }
-/* rules — shrink gracefully */
 .cpd-reel-rule { flex:1; min-width:4px; display:flex; flex-direction:column; gap:4px; }
 .cpd-reel-rl { height:1px; }
 .cpd-reel-rule--l .cpd-reel-rl:nth-child(1){ background:linear-gradient(90deg,transparent,rgba(253,224,71,.55)); }
@@ -256,39 +248,6 @@ const SHARED_CSS = `
   .cpd-reel-rl:nth-child(2){ display:none; }
 }
 
-/* hub — always spinning, scales down */
-.cpd-reel-hub {
-  flex-shrink:0; position:relative;
-  width:clamp(28px,7vw,54px); height:clamp(28px,7vw,54px);
-  display:flex; align-items:center; justify-content:center;
-}
-.cpd-reel-outer-ring {
-  position:absolute; inset:0; border-radius:50%;
-  border:1px solid rgba(253,224,71,.18);
-  box-shadow:inset 0 0 12px rgba(0,0,0,.9),0 0 6px rgba(253,224,71,.1);
-  background:radial-gradient(circle at 35% 25%,rgba(253,224,71,.05),transparent 60%);
-}
-.cpd-reel-spokes { position:absolute; inset:0; border-radius:50%; }
-.cpd-reel-spoke {
-  position:absolute; top:50%; left:50%;
-  width:1.5px; height:calc(50% - 8px);
-  transform-origin:0 100%;
-  background:linear-gradient(to top,rgba(253,224,71,.65),rgba(253,224,71,.1));
-  margin-left:-.75px;
-}
-.cpd-reel-sprocket {
-  position:absolute; top:50%; left:50%;
-  width:clamp(3px,1vw,5px); height:clamp(3px,1vw,5px); border-radius:50%;
-  margin:-2.5px;
-  background:#050500; border:1px solid rgba(253,224,71,.35);
-}
-.cpd-reel-core {
-  width:clamp(10px,2.5vw,18px); height:clamp(10px,2.5vw,18px); border-radius:50%; z-index:3;
-  background:radial-gradient(circle at 35% 30%,rgba(80,60,0,.9),#1a1400 70%);
-  border:1.5px solid rgba(253,224,71,.65);
-  box-shadow:0 0 8px rgba(253,224,71,.3),0 0 20px rgba(253,224,71,.1),inset 0 1px 0 rgba(255,220,50,.3);
-  animation:cpdPulseGlow 3s ease-in-out infinite;
-}
 .cpd-reel-lbl { color:rgba(255,255,255,.88); text-shadow:0 0 14px rgba(253,224,71,.2); flex-shrink:1; min-width:0; overflow:hidden; text-overflow:ellipsis; }
 
 /* ══════════════════════════════════
@@ -300,7 +259,6 @@ const SHARED_CSS = `
   border-bottom:1px solid rgba(253,224,71,.22);
 }
 .cpd-tc-body { display:flex; align-items:stretch; min-height:52px; }
-/* clapper — shrinks, never hides */
 .cpd-tc-clap {
   flex-shrink:0; width:clamp(28px,8vw,66px);
   background:#0d0d0b; border-right:1px solid rgba(255,255,255,.06);
@@ -313,7 +271,6 @@ const SHARED_CSS = `
 .cpd-tc-stripe--k { background:linear-gradient(180deg,#1a1a18,#0d0d0b); }
 .cpd-tc-clap-base { flex:1; display:flex; align-items:center; justify-content:center; background:linear-gradient(180deg,#111,#0a0a0a); padding:3px 2px; }
 .cpd-tc-scn { font-family:'Bebas Neue',sans-serif; font-size:clamp(.44rem,1.8vw,.8rem); letter-spacing:2px; color:rgba(255,255,255,.38); text-shadow:0 1px 0 rgba(0,0,0,.8); }
-/* hide clapper only at 320px */
 @media(max-width:340px){ .cpd-tc-clap{ display:none; } }
 
 .cpd-tc-content {
@@ -326,13 +283,11 @@ const SHARED_CSS = `
   font-weight:300; letter-spacing:clamp(1px,.6vw,4px);
   color:rgba(253,224,71,.62); white-space:nowrap; flex-shrink:0;
 }
-/* hide SCENE XX label on small but keep label and REC */
 @media(max-width:420px){ .cpd-tc-seq{ display:none; } }
 .cpd-tc-slash { color:rgba(255,255,255,.14); font-size:1rem; flex-shrink:0; line-height:1; }
 @media(max-width:420px){ .cpd-tc-slash{ display:none; } }
 .cpd-tc-lbl { color:rgba(255,255,255,.92); text-shadow:0 0 16px rgba(253,224,71,.18); overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
 .cpd-tc-rule { flex:1; height:1px; min-width:6px; background:linear-gradient(90deg,rgba(253,224,71,.22),rgba(50,197,244,.15),transparent); }
-/* REC stays always — it's an animation */
 .cpd-tc-right { flex-shrink:0; display:flex; flex-direction:column; gap:3px; align-items:flex-end; }
 .cpd-tc-rec {
   font-family:'DM Mono',monospace; font-size:clamp(.42rem,1.3vw,.58rem);
@@ -378,7 +333,6 @@ const SHARED_CSS = `
 .cpd-slash-rule { height:1px; flex:1; min-width:4px; }
 .cpd-slash-rule--y { background:linear-gradient(90deg,rgba(253,224,71,.6),rgba(253,224,71,.05)); box-shadow:0 0 4px rgba(253,224,71,.1); }
 .cpd-slash-rule--c { background:linear-gradient(90deg,rgba(50,197,244,.05),rgba(50,197,244,.5)); }
-/* hide second rule on tiny screens */
 @media(max-width:380px){ .cpd-slash-rule--c{ display:none; } }
 .cpd-slash-lbl { color:rgba(255,255,255,.92); text-shadow:0 0 20px rgba(253,224,71,.14); flex-shrink:1; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
 .cpd-slash-aspect {
@@ -386,7 +340,6 @@ const SHARED_CSS = `
   letter-spacing:2px; color:rgba(50,197,244,.35); flex-shrink:0;
   border:1px solid rgba(50,197,244,.15); padding:2px 4px; border-radius:2px; white-space:nowrap;
 }
-/* aspect ratio hides at 400px — it's purely decorative */
 @media(max-width:400px){ .cpd-slash-aspect{ display:none; } }
 
 /* ══════════════════════════════════
@@ -405,7 +358,6 @@ const SHARED_CSS = `
   box-shadow:inset 0 -2px 6px rgba(0,0,0,.5);
 }
 .cpd-mq-bulbs--bot { border-top:1px solid rgba(0,0,0,.4); border-bottom:none; box-shadow:inset 0 2px 6px rgba(0,0,0,.5); }
-/* bulbs scale down but NEVER hide — they're the animation */
 .cpd-mq-bulb {
   width:clamp(3px,1.2vw,6px); height:clamp(3px,1.2vw,6px); border-radius:50%;
   background:radial-gradient(circle at 35% 30%,#fff8c0,#fde047 50%,#b8930a);
@@ -464,7 +416,6 @@ const ScanlineDivider = ({ label, index }: { label:string; index:number }) => (
   <div className="cpd-scan">
     <FilmPerfs color="#32c5f4" opacity={0.65} variant="c" />
     <div className="cpd-scan-body">
-      {/* lens — never hidden, scales with clamp */}
       <div className="cpd-scan-lens">
         <div className="cpd-scan-lens-outer" />
         <motion.div
@@ -484,17 +435,15 @@ const ScanlineDivider = ({ label, index }: { label:string; index:number }) => (
 
       <div className="cpd-scan-info">
         <span className="cpd-scan-seq">FRAME {pad(index)}</span>
-        <span className="cpd-lbl cpd-scan-lbl">{label}</span>
+        <span className="cpd-lbl cpd-scan-lbl">Cinemapayyan Specilitys</span>
       </div>
 
-      {/* db bars — always visible, always animating */}
       <div className="cpd-scan-db">
         <div className="cpd-scan-db-bar" />
         <div className="cpd-scan-db-bar" />
         <div className="cpd-scan-db-bar" />
       </div>
 
-      {/* signal dots — always visible */}
       <div className="cpd-scan-sig">
         <div className="cpd-scan-dot" />
         <div className="cpd-scan-dot" />
@@ -505,7 +454,7 @@ const ScanlineDivider = ({ label, index }: { label:string; index:number }) => (
   </div>
 );
 
-/* ══ 3. REEL ══ */
+/* ══ 3. REEL — hub circle removed ══ */
 const ReelDivider = ({ label }: { label:string }) => (
   <div className="cpd-reel">
     <FilmPerfs opacity={0.62} />
@@ -513,23 +462,7 @@ const ReelDivider = ({ label }: { label:string }) => (
       <div className="cpd-reel-rule cpd-reel-rule--l">
         <div className="cpd-reel-rl" /><div className="cpd-reel-rl" />
       </div>
-      {/* hub — always spinning, scales with clamp */}
-      <div className="cpd-reel-hub">
-        <div className="cpd-reel-outer-ring" />
-        <motion.div
-          className="cpd-reel-spokes"
-          animate={{ rotate:360 }}
-          transition={{ duration:7, repeat:Infinity, ease:'linear' }}
-        >
-          {Array.from({ length:6 }, (_,i) => (
-            <div key={i} className="cpd-reel-spoke" style={{ transform:`rotate(${i*60}deg)` }} />
-          ))}
-          {Array.from({ length:6 }, (_,i) => (
-            <div key={`sp${i}`} className="cpd-reel-sprocket" style={{ transform:`rotate(${i*60+30}deg) translateY(-21px)` }} />
-          ))}
-        </motion.div>
-        <div className="cpd-reel-core" />
-      </div>
+
       <span className="cpd-lbl cpd-reel-lbl">{label}</span>
       <div className="cpd-reel-rule cpd-reel-rule--r">
         <div className="cpd-reel-rl" /><div className="cpd-reel-rl" />
@@ -561,7 +494,6 @@ const TimecodeDivider = ({ label, index }: { label:string; index:number }) => (
           <span className="cpd-lbl cpd-tc-lbl">{label}</span>
         </div>
         <div className="cpd-tc-rule" />
-        {/* REC blink — always present */}
         <div className="cpd-tc-right">
           <span className="cpd-tc-rec">● REC</span>
           <span className="cpd-tc-fps">24 FPS</span>
@@ -575,7 +507,6 @@ const TimecodeDivider = ({ label, index }: { label:string; index:number }) => (
 /* ══ 5. SLASH ══ */
 const SlashDivider = ({ label, index }: { label:string; index:number }) => (
   <div className="cpd-slash-wrap">
-    {/* animated hatch edges — always visible, always moving */}
     <div className="cpd-slash-edge" />
     <div className="cpd-slash-main">
       <FilmPerfs opacity={0.55} />
@@ -597,7 +528,6 @@ const MarqueeDivider = ({ label }: { label:string }) => {
   const repeat = `${label} ★ `.repeat(18);
   return (
     <div className="cpd-mq">
-      {/* top bulbs — always animating */}
       <div className="cpd-mq-bulbs">
         {Array.from({ length:34 }, (_,i) => (
           <motion.div key={i} className="cpd-mq-bulb"
@@ -606,7 +536,6 @@ const MarqueeDivider = ({ label }: { label:string }) => {
           />
         ))}
       </div>
-      {/* scrolling text — always moving */}
       <div className="cpd-mq-row cpd-mq-row--fwd">
         <motion.span animate={{ x:['0%','-50%'] }} transition={{ duration:30, repeat:Infinity, ease:'linear' }}>
           {repeat}{repeat}
@@ -617,7 +546,6 @@ const MarqueeDivider = ({ label }: { label:string }) => {
           {repeat}{repeat}
         </motion.span>
       </div>
-      {/* bottom bulbs */}
       <div className="cpd-mq-bulbs cpd-mq-bulbs--bot">
         {Array.from({ length:34 }, (_,i) => (
           <motion.div key={i} className="cpd-mq-bulb"
