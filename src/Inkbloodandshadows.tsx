@@ -653,7 +653,7 @@ const InkbloodAndShadows: React.FC = () => {
               </p>
               <p className="ibs-vision-body">
                 Conceived and crafted by the creative force of{" "}
-                <strong>Abishake Raja</strong>, every frame is a statement — bold
+                <strong>Abishek  Raaja</strong>, every frame is a statement — bold
                 lines, deeper meaning. The <strong>CinemaPayyan</strong>{" "}
                 collective doesn't just make films; they leave marks. This is not
                 a behind-the-scenes — it's a front-row seat to obsession.

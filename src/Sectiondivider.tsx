@@ -435,7 +435,7 @@ const ScanlineDivider = ({ label, index }: { label:string; index:number }) => (
 
       <div className="cpd-scan-info">
         <span className="cpd-scan-seq">FRAME {pad(index)}</span>
-        <span className="cpd-lbl cpd-scan-lbl">Cinemapayyan Specilitys</span>
+        <span className="cpd-lbl cpd-scan-lbl">Cinemapayyan Digitals</span>
       </div>
 
       <div className="cpd-scan-db">

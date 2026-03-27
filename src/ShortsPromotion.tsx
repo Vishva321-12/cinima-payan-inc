@@ -147,12 +147,12 @@ const ShortsPromotion: React.FC = () => {
 
   // Events — removed KRR Countdown 2 (36); added 40, 41, 42
   const eventsReels: CarouselItem[] = [
-    { id: 34, tag: "HOST",   title: "A Venkat Prabhu Forge",           link: "https://www.instagram.com/reel/DB_VDkiPnQN/?igsh=MnRzeGhlanBnbm51",          aspect: "9/16" },
-    { id: 35, tag: "HOST",  title: "Kadhal Reset Repeat",             link: "https://www.instagram.com/reel/DVu87daiQWN/?igsh=cGFpYjFlb3E0ZGpk",          aspect: "9/16" },
-    { id: 40, tag: "HOST", title: "Startda GVPrakash",               link: "https://www.instagram.com/reel/C3JxabMPy2y/?igsh=NmkyMTljMmQydGk4",           aspect: "9/16" },
-    { id: 41, tag: "HOST", title: "#arugevaa with @rseanroldan",      link: "https://www.instagram.com/reel/C9t027wCW5b/?igsh=MTJmeTV6NHBtMzl4YQ==",       aspect: "9/16" },
-    { id: 42, tag: "HOST", title: "#MoiVirundhu",                    link: "https://www.instagram.com/reel/DBEqOxGISiW/?igsh=MWE1a2NmNnhkdWQ0NQ==",       aspect: "9/16" },
-    { id: 46,  tag: "HOST", title: "Madras Matniee",               link: "https://www.instagram.com/reel/DHDBqnoTWmu/?igsh=b3N4dW15cTEydGh5",                             aspect: "9/16" },
+    { id: 34, tag: "",   title: "A Venkat Prabhu Forge",           link: "https://www.instagram.com/reel/DB_VDkiPnQN/?igsh=MnRzeGhlanBnbm51",          aspect: "9/16" },
+    { id: 35, tag: "",  title: "Kadhal Reset Repeat",             link: "https://www.instagram.com/reel/DVu87daiQWN/?igsh=cGFpYjFlb3E0ZGpk",          aspect: "9/16" },
+    { id: 40, tag: "", title: "Startda GVPrakash",               link: "https://www.instagram.com/reel/C3JxabMPy2y/?igsh=NmkyMTljMmQydGk4",           aspect: "9/16" },
+    { id: 41, tag: "", title: "#arugevaa with @rseanroldan",      link: "https://www.instagram.com/reel/C9t027wCW5b/?igsh=MTJmeTV6NHBtMzl4YQ==",       aspect: "9/16" },
+    { id: 42, tag: "", title: "#MoiVirundhu",                    link: "https://www.instagram.com/reel/DBEqOxGISiW/?igsh=MWE1a2NmNnhkdWQ0NQ==",       aspect: "9/16" },
+    { id: 46,  tag: "", title: "Madras Matniee",               link: "https://www.instagram.com/reel/DHDBqnoTWmu/?igsh=b3N4dW15cTEydGh5",                             aspect: "9/16" },
 
   ];
 
@@ -167,7 +167,7 @@ const ShortsPromotion: React.FC = () => {
 
   // Tab labels — first tab renamed
   const slides = [
-    { key: "specialty", label: "CINEMAPAYYAN SPECIALTY", sublabel: "YouTube"         },
+    { key: "Videos", label: "CINEMAPAYYAN SPECIALTY", sublabel: "Promo"         },
     { key: "events",    label: "EVENTS",                  sublabel: "LIVE & SPECIAL"  },
     { key: "countdown", label: "COUNTDOWN SPECIALTY",     sublabel: "SIGNATURE FORMAT"},
   ];
